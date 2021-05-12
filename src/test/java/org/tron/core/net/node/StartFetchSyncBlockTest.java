@@ -1,4 +1,4 @@
-package org.tron.core.net.node;
+package org.litetokens.core.net.node;
 
 import com.google.common.cache.Cache;
 import java.io.File;
@@ -9,32 +9,32 @@ import java.util.concurrent.ExecutorService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.MapUtils;
 import org.junit.*;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.common.application.Application;
-import org.tron.common.application.ApplicationFactory;
-import org.tron.common.overlay.client.PeerClient;
-import org.tron.common.overlay.discover.node.Node;
-import org.tron.common.overlay.server.Channel;
-import org.tron.common.overlay.server.ChannelManager;
-import org.tron.common.overlay.server.SyncPool;
-import org.tron.common.utils.FileUtil;
-import org.tron.common.utils.ReflectUtils;
-import org.tron.common.utils.Sha256Hash;
-import org.tron.core.capsule.BlockCapsule;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.ByteArrayWrapper;
-import org.tron.core.db.Manager;
-import org.tron.core.net.message.BlockMessage;
-import org.tron.core.net.peer.PeerConnection;
-import org.tron.core.services.RpcApiService;
-import org.tron.core.services.WitnessService;
-import org.tron.protos.Protocol;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.common.application.Application;
+import org.litetokens.common.application.ApplicationFactory;
+import org.litetokens.common.overlay.client.PeerClient;
+import org.litetokens.common.overlay.discover.node.Node;
+import org.litetokens.common.overlay.server.Channel;
+import org.litetokens.common.overlay.server.ChannelManager;
+import org.litetokens.common.overlay.server.SyncPool;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.common.utils.ReflectUtils;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.core.capsule.BlockCapsule;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.ByteArrayWrapper;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.net.message.BlockMessage;
+import org.litetokens.core.net.peer.PeerConnection;
+import org.litetokens.core.services.RpcApiService;
+import org.litetokens.core.services.WitnessService;
+import org.litetokens.protos.Protocol;
 
 @Slf4j
 public class StartFetchSyncBlockTest {
 
-  private static TronApplicationContext context;
+  private static LitetokensApplicationContext context;
   private NodeImpl node;
   RpcApiService rpcApiService;
   PeerClient peerClient;
@@ -147,7 +147,7 @@ public class StartFetchSyncBlockTest {
         cfgArgs.setNeedSyncCheck(false);
         cfgArgs.setNodeExternalIp("127.0.0.1");
 
-        context = new TronApplicationContext(DefaultConfig.class);
+        context = new LitetokensApplicationContext(DefaultConfig.class);
 
         if (cfgArgs.isHelp()) {
           logger.info("Here is the help message.");

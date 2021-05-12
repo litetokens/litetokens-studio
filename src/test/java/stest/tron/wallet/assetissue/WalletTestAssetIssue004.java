@@ -1,4 +1,4 @@
-package stest.tron.wallet.assetissue;
+package stest.litetokens.wallet.assetissue;
 
 import com.google.protobuf.ByteString;
 import io.grpc.ManagedChannel;
@@ -14,21 +14,21 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
-import org.tron.api.GrpcAPI;
-import org.tron.api.GrpcAPI.NumberMessage;
-import org.tron.api.GrpcAPI.Return;
-import org.tron.api.WalletGrpc;
-import org.tron.common.crypto.ECKey;
-import org.tron.core.Wallet;
-import org.tron.protos.Contract;
-import org.tron.protos.Protocol.Account;
-import org.tron.protos.Protocol.Block;
-import org.tron.protos.Protocol.Transaction;
-import stest.tron.wallet.common.client.Configuration;
-import stest.tron.wallet.common.client.Parameter.CommonConstant;
-import stest.tron.wallet.common.client.utils.Base58;
-import stest.tron.wallet.common.client.utils.PublicMethed;
-import stest.tron.wallet.common.client.utils.TransactionUtils;
+import org.litetokens.api.GrpcAPI;
+import org.litetokens.api.GrpcAPI.NumberMessage;
+import org.litetokens.api.GrpcAPI.Return;
+import org.litetokens.api.WalletGrpc;
+import org.litetokens.common.crypto.ECKey;
+import org.litetokens.core.Wallet;
+import org.litetokens.protos.Contract;
+import org.litetokens.protos.Protocol.Account;
+import org.litetokens.protos.Protocol.Block;
+import org.litetokens.protos.Protocol.Transaction;
+import stest.litetokens.wallet.common.client.Configuration;
+import stest.litetokens.wallet.common.client.Parameter.CommonConstant;
+import stest.litetokens.wallet.common.client.utils.Base58;
+import stest.litetokens.wallet.common.client.utils.PublicMethed;
+import stest.litetokens.wallet.common.client.utils.TransactionUtils;
 
 @Slf4j
 public class WalletTestAssetIssue004 {
@@ -52,7 +52,7 @@ public class WalletTestAssetIssue004 {
   private static final String name = "testAssetIssue004_" + Long.toString(now);
   private static final long totalSupply = now;
   String description = "just-test";
-  String url = "https://github.com/tronprotocol/wallet-cli/";
+  String url = "https://gitub.com/litetokens/wallet-cli/";
 
   private ManagedChannel channelFull = null;
   private WalletGrpc.WalletBlockingStub blockingStubFull = null;
@@ -103,7 +103,7 @@ public class WalletTestAssetIssue004 {
       if (queryAssetIssueByAccount.get().getAssetIssue(j).getTotalSupply() == totalSupply) {
         Assert.assertTrue(queryAssetIssueByAccount.isPresent());
         //Assert.assertTrue(queryAssetIssueByAccount.get().getAssetIssue(j).getDecayRatio() > 0);
-        Assert.assertTrue(queryAssetIssueByAccount.get().getAssetIssue(j).getTrxNum() > 0);
+        Assert.assertTrue(queryAssetIssueByAccount.get().getAssetIssue(j).getXltNum() > 0);
         Assert.assertTrue(queryAssetIssueByAccount.get().getAssetIssue(j).getVoteScore() > 0);
         Assert.assertFalse(queryAssetIssueByAccount.get().getAssetIssue(j).getUrl().isEmpty());
         logger.info("TestGetAssetIssueByAccount ok!");
@@ -137,7 +137,7 @@ public class WalletTestAssetIssue004 {
     }
   }
 
-  public Boolean createAssetIssue(byte[] address, String name, Long totalSupply, Integer trxNum,
+  public Boolean createAssetIssue(byte[] address, String name, Long totalSupply, Integer xltNum,
       Integer icoNum, Long startTime, Long endTime,
       Integer voteScore, String description, String url, Long fronzenAmount, Long frozenDay,
       String priKey) {
@@ -155,7 +155,7 @@ public class WalletTestAssetIssue004 {
       builder.setOwnerAddress(ByteString.copyFrom(address));
       builder.setName(ByteString.copyFrom(name.getBytes()));
       builder.setTotalSupply(totalSupply);
-      builder.setTrxNum(trxNum);
+      builder.setXltNum(xltNum);
       builder.setNum(icoNum);
       builder.setStartTime(startTime);
       builder.setEndTime(endTime);

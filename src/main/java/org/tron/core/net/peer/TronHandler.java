@@ -1,16 +1,16 @@
-package org.tron.core.net.peer;
+package org.litetokens.core.net.peer;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.tron.common.overlay.server.Channel;
-import org.tron.common.overlay.server.MessageQueue;
-import org.tron.core.net.message.TronMessage;
+import org.litetokens.common.overlay.server.Channel;
+import org.litetokens.common.overlay.server.MessageQueue;
+import org.litetokens.core.net.message.LitetokensMessage;
 
 @Component
 @Scope("prototype")
-public class TronHandler extends SimpleChannelInboundHandler<TronMessage> {
+public class LitetokensHandler extends SimpleChannelInboundHandler<LitetokensMessage> {
 
   protected PeerConnection peer;
 
@@ -23,7 +23,7 @@ public class TronHandler extends SimpleChannelInboundHandler<TronMessage> {
   }
 
   @Override
-  public void channelRead0(final ChannelHandlerContext ctx, TronMessage msg) {
+  public void channelRead0(final ChannelHandlerContext ctx, LitetokensMessage msg) {
     msgQueue.receivedMessage(msg);
     peerDel.onMessage(peer, msg);
   }

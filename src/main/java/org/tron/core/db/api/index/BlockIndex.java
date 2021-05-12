@@ -1,4 +1,4 @@
-package org.tron.core.db.api.index;
+package org.litetokens.core.db.api.index;
 
 import com.googlecode.cqengine.attribute.Attribute;
 import com.googlecode.cqengine.attribute.SimpleAttribute;
@@ -8,13 +8,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.Sha256Hash;
-import org.tron.core.capsule.BlockCapsule;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.core.db.common.WrappedByteArray;
-import org.tron.core.db2.core.ITronChainBase;
-import org.tron.protos.Protocol.Block;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.core.capsule.BlockCapsule;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.core.db.common.WrappedByteArray;
+import org.litetokens.core.db2.core.ILitetokensChainBase;
+import org.litetokens.protos.Protocol.Block;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -37,7 +37,7 @@ public class BlockIndex extends AbstractIndex<BlockCapsule, Block> {
 
   @Autowired
   public BlockIndex(
-      @Qualifier("blockStore") final ITronChainBase<BlockCapsule> database) {
+      @Qualifier("blockStore") final ILitetokensChainBase<BlockCapsule> database) {
     super(database);
   }
 

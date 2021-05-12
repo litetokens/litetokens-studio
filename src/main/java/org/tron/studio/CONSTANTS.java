@@ -1,4 +1,4 @@
-package org.tron.studio;
+package org.litetokens.studio;
 
 public class CONSTANTS {
 

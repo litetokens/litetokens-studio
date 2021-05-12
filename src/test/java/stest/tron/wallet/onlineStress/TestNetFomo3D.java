@@ -1,6 +1,6 @@
-package stest.tron.wallet.onlineStress;
+package stest.litetokens.wallet.onlineStress;
 
-import static stest.tron.wallet.common.client.utils.PublicMethed.getTransactionInfoById;
+import static stest.litetokens.wallet.common.client.utils.PublicMethed.getTransactionInfoById;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -17,15 +17,15 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
-import org.tron.api.GrpcAPI.AccountResourceMessage;
-import org.tron.api.WalletGrpc;
-import org.tron.core.Wallet;
-import org.tron.protos.Protocol.Account;
-import org.tron.protos.Protocol.SmartContract;
-import org.tron.protos.Protocol.TransactionInfo;
-import stest.tron.wallet.common.client.Configuration;
-import stest.tron.wallet.common.client.Parameter.CommonConstant;
-import stest.tron.wallet.common.client.utils.PublicMethed;
+import org.litetokens.api.GrpcAPI.AccountResourceMessage;
+import org.litetokens.api.WalletGrpc;
+import org.litetokens.core.Wallet;
+import org.litetokens.protos.Protocol.Account;
+import org.litetokens.protos.Protocol.SmartContract;
+import org.litetokens.protos.Protocol.TransactionInfo;
+import stest.litetokens.wallet.common.client.Configuration;
+import stest.litetokens.wallet.common.client.Parameter.CommonConstant;
+import stest.litetokens.wallet.common.client.utils.PublicMethed;
 
 @Slf4j
 public class TestNetFomo3D {

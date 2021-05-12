@@ -1,4 +1,4 @@
-package stest.tron.wallet.common.client.utils;
+package stest.litetokens.wallet.common.client.utils;
 /*
  * Copyright (c) [2016] [ <ether.camp> ]
  * This file is part of the ethereumJ library.
@@ -20,7 +20,7 @@ package stest.tron.wallet.common.client.utils;
 import java.io.Serializable;
 import java.util.Arrays;
 import org.spongycastle.util.encoders.Hex;
-import org.tron.common.utils.FastByteComparisons;
+import org.litetokens.common.utils.FastByteComparisons;
 
 public class ByteArrayWrapper implements Comparable<ByteArrayWrapper>, Serializable {
 

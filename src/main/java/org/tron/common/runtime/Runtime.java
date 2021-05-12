@@ -1,21 +1,21 @@
-package org.tron.common.runtime;
+package org.litetokens.common.runtime;
 
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static org.apache.commons.lang3.ArrayUtils.getLength;
 import static org.apache.commons.lang3.ArrayUtils.isEmpty;
 import static org.apache.commons.lang3.ArrayUtils.isNotEmpty;
-import static org.tron.common.runtime.utils.MUtil.convertToTronAddress;
-import static org.tron.common.runtime.utils.MUtil.transfer;
-import static org.tron.common.runtime.vm.VMUtils.saveProgramTraceFile;
-import static org.tron.common.runtime.vm.VMUtils.zipAndEncode;
-import static org.tron.common.runtime.vm.program.InternalTransaction.ExecutorType.ET_NORMAL_TYPE;
-import static org.tron.common.runtime.vm.program.InternalTransaction.ExecutorType.ET_PRE_TYPE;
-import static org.tron.common.runtime.vm.program.InternalTransaction.ExecutorType.ET_UNKNOWN_TYPE;
-import static org.tron.common.runtime.vm.program.InternalTransaction.TrxType.TRX_CONTRACT_CALL_TYPE;
-import static org.tron.common.runtime.vm.program.InternalTransaction.TrxType.TRX_CONTRACT_CREATION_TYPE;
-import static org.tron.common.runtime.vm.program.InternalTransaction.TrxType.TRX_PRECOMPILED_TYPE;
-import static org.tron.common.runtime.vm.program.InternalTransaction.TrxType.TRX_UNKNOWN_TYPE;
+import static org.litetokens.common.runtime.utils.MUtil.convertToLitetokensAddress;
+import static org.litetokens.common.runtime.utils.MUtil.transfer;
+import static org.litetokens.common.runtime.vm.VMUtils.saveProgramTraceFile;
+import static org.litetokens.common.runtime.vm.VMUtils.zipAndEncode;
+import static org.litetokens.common.runtime.vm.program.InternalTransaction.ExecutorType.ET_NORMAL_TYPE;
+import static org.litetokens.common.runtime.vm.program.InternalTransaction.ExecutorType.ET_PRE_TYPE;
+import static org.litetokens.common.runtime.vm.program.InternalTransaction.ExecutorType.ET_UNKNOWN_TYPE;
+import static org.litetokens.common.runtime.vm.program.InternalTransaction.XltType.XLT_CONTRACT_CALL_TYPE;
+import static org.litetokens.common.runtime.vm.program.InternalTransaction.XltType.XLT_CONTRACT_CREATION_TYPE;
+import static org.litetokens.common.runtime.vm.program.InternalTransaction.XltType.XLT_PRECOMPILED_TYPE;
+import static org.litetokens.common.runtime.vm.program.InternalTransaction.XltType.XLT_UNKNOWN_TYPE;
 
 import com.google.protobuf.ByteString;
 import java.math.BigInteger;
@@ -28,55 +28,55 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.spongycastle.util.encoders.Hex;
-import org.tron.common.runtime.config.VMConfig;
-import org.tron.common.runtime.vm.DataWord;
-import org.tron.common.runtime.vm.EnergyCost;
-import org.tron.common.runtime.vm.PrecompiledContracts;
-import org.tron.common.runtime.vm.VM;
-import org.tron.common.runtime.vm.program.InternalTransaction;
-import org.tron.common.runtime.vm.program.InternalTransaction.ExecutorType;
-import org.tron.common.runtime.vm.program.Program;
-import org.tron.common.runtime.vm.program.Program.JVMStackOverFlowException;
-import org.tron.common.runtime.vm.program.Program.OutOfResourceException;
-import org.tron.common.runtime.vm.program.ProgramPrecompile;
-import org.tron.common.runtime.vm.program.ProgramResult;
-import org.tron.common.runtime.vm.program.invoke.ProgramInvoke;
-import org.tron.common.runtime.vm.program.invoke.ProgramInvokeFactory;
-import org.tron.common.storage.Deposit;
-import org.tron.common.storage.DepositImpl;
-import org.tron.core.Constant;
-import org.tron.core.Wallet;
-import org.tron.core.actuator.Actuator;
-import org.tron.core.actuator.ActuatorFactory;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.capsule.BlockCapsule;
-import org.tron.core.capsule.ContractCapsule;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.core.config.Parameter.ChainConstant;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.EnergyProcessor;
-import org.tron.core.db.StorageMarket;
-import org.tron.core.db.TransactionTrace;
-import org.tron.core.exception.BadTransactionException;
-import org.tron.core.exception.ContractExeException;
-import org.tron.core.exception.ContractValidateException;
-import org.tron.core.exception.VMIllegalException;
-import org.tron.protos.Contract;
-import org.tron.protos.Contract.CreateSmartContract;
-import org.tron.protos.Contract.TriggerSmartContract;
-import org.tron.protos.Protocol;
-import org.tron.protos.Protocol.Block;
-import org.tron.protos.Protocol.SmartContract;
-import org.tron.protos.Protocol.SmartContract.ABI;
-import org.tron.protos.Protocol.Transaction;
-import org.tron.protos.Protocol.Transaction.Contract.ContractType;
-import org.tron.protos.Protocol.Transaction.Result.contractResult;
+import org.litetokens.common.runtime.config.VMConfig;
+import org.litetokens.common.runtime.vm.DataWord;
+import org.litetokens.common.runtime.vm.EnergyCost;
+import org.litetokens.common.runtime.vm.PrecompiledContracts;
+import org.litetokens.common.runtime.vm.VM;
+import org.litetokens.common.runtime.vm.program.InternalTransaction;
+import org.litetokens.common.runtime.vm.program.InternalTransaction.ExecutorType;
+import org.litetokens.common.runtime.vm.program.Program;
+import org.litetokens.common.runtime.vm.program.Program.JVMStackOverFlowException;
+import org.litetokens.common.runtime.vm.program.Program.OutOfResourceException;
+import org.litetokens.common.runtime.vm.program.ProgramPrecompile;
+import org.litetokens.common.runtime.vm.program.ProgramResult;
+import org.litetokens.common.runtime.vm.program.invoke.ProgramInvoke;
+import org.litetokens.common.runtime.vm.program.invoke.ProgramInvokeFactory;
+import org.litetokens.common.storage.Deposit;
+import org.litetokens.common.storage.DepositImpl;
+import org.litetokens.core.Constant;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.actuator.Actuator;
+import org.litetokens.core.actuator.ActuatorFactory;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.capsule.BlockCapsule;
+import org.litetokens.core.capsule.ContractCapsule;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.core.config.Parameter.ChainConstant;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.EnergyProcessor;
+import org.litetokens.core.db.StorageMarket;
+import org.litetokens.core.db.TransactionTrace;
+import org.litetokens.core.exception.BadTransactionException;
+import org.litetokens.core.exception.ContractExeException;
+import org.litetokens.core.exception.ContractValidateException;
+import org.litetokens.core.exception.VMIllegalException;
+import org.litetokens.protos.Contract;
+import org.litetokens.protos.Contract.CreateSmartContract;
+import org.litetokens.protos.Contract.TriggerSmartContract;
+import org.litetokens.protos.Protocol;
+import org.litetokens.protos.Protocol.Block;
+import org.litetokens.protos.Protocol.SmartContract;
+import org.litetokens.protos.Protocol.SmartContract.ABI;
+import org.litetokens.protos.Protocol.Transaction;
+import org.litetokens.protos.Protocol.Transaction.Contract.ContractType;
+import org.litetokens.protos.Protocol.Transaction.Result.contractResult;
 
 @Slf4j(topic = "Runtime")
 public class Runtime {
   private VMConfig config = VMConfig.getInstance();
 
-  private Transaction trx;
+  private Transaction xlt;
   private BlockCapsule blockCap = null;
   private Deposit deposit;
   private ProgramInvokeFactory programInvokeFactory = null;
@@ -91,19 +91,19 @@ public class Runtime {
 
   @Getter
   @Setter
-  private InternalTransaction.TrxType trxType = TRX_UNKNOWN_TYPE;
+  private InternalTransaction.XltType xltType = XLT_UNKNOWN_TYPE;
   private ExecutorType executorType = ET_UNKNOWN_TYPE;
 
   //tx trace
   private TransactionTrace trace;
 
   /**
-   * For blockCap's trx run
+   * For blockCap's xlt run
    */
   public Runtime(TransactionTrace trace, BlockCapsule block, Deposit deposit,
       ProgramInvokeFactory programInvokeFactory) {
     this.trace = trace;
-    this.trx = trace.getTrx().getInstance();
+    this.xlt = trace.getXlt().getInstance();
 
     if (Objects.nonNull(block)) {
       this.blockCap = block;
@@ -116,22 +116,22 @@ public class Runtime {
     this.programInvokeFactory = programInvokeFactory;
     this.energyProcessor = new EnergyProcessor(deposit.getDbManager());
 
-    Transaction.Contract.ContractType contractType = this.trx.getRawData().getContract(0).getType();
+    Transaction.Contract.ContractType contractType = this.xlt.getRawData().getContract(0).getType();
     switch (contractType.getNumber()) {
       case ContractType.TriggerSmartContract_VALUE:
-        trxType = TRX_CONTRACT_CALL_TYPE;
+        xltType = XLT_CONTRACT_CALL_TYPE;
         break;
       case ContractType.CreateSmartContract_VALUE:
-        trxType = TRX_CONTRACT_CREATION_TYPE;
+        xltType = XLT_CONTRACT_CREATION_TYPE;
         break;
       default:
-        trxType = TRX_PRECOMPILED_TYPE;
+        xltType = XLT_PRECOMPILED_TYPE;
     }
   }
 
 
   /**
-   * For constant trx with latest blockCap.
+   * For constant xlt with latest blockCap.
    */
   private boolean isStaticCall = false;
   public Runtime(Transaction tx, BlockCapsule block, DepositImpl deposit,
@@ -142,7 +142,7 @@ public class Runtime {
 
   public Runtime(Transaction tx, BlockCapsule block, DepositImpl deposit,
       ProgramInvokeFactory programInvokeFactory) {
-    this.trx = tx;
+    this.xlt = tx;
     this.deposit = deposit;
     this.programInvokeFactory = programInvokeFactory;
     this.executorType = ET_PRE_TYPE;
@@ -151,21 +151,21 @@ public class Runtime {
     Transaction.Contract.ContractType contractType = tx.getRawData().getContract(0).getType();
     switch (contractType.getNumber()) {
       case Transaction.Contract.ContractType.TriggerSmartContract_VALUE:
-        trxType = TRX_CONTRACT_CALL_TYPE;
+        xltType = XLT_CONTRACT_CALL_TYPE;
         break;
       case Transaction.Contract.ContractType.CreateSmartContract_VALUE:
-        trxType = TRX_CONTRACT_CREATION_TYPE;
+        xltType = XLT_CONTRACT_CREATION_TYPE;
         break;
       default:
-        trxType = TRX_PRECOMPILED_TYPE;
+        xltType = XLT_PRECOMPILED_TYPE;
     }
   }
 
 
   public void precompiled() throws ContractValidateException, ContractExeException {
-    TransactionCapsule trxCap = new TransactionCapsule(trx);
+    TransactionCapsule xltCap = new TransactionCapsule(xlt);
     final List<Actuator> actuatorList = ActuatorFactory
-        .createActuator(trxCap, deposit.getDbManager());
+        .createActuator(xltCap, deposit.getDbManager());
 
     for (Actuator act : actuatorList) {
       act.validate();
@@ -193,14 +193,14 @@ public class Runtime {
 
   public void execute()
       throws ContractValidateException, ContractExeException, VMIllegalException {
-    switch (trxType) {
-      case TRX_PRECOMPILED_TYPE:
+    switch (xltType) {
+      case XLT_PRECOMPILED_TYPE:
         precompiled();
         break;
-      case TRX_CONTRACT_CREATION_TYPE:
+      case XLT_CONTRACT_CREATION_TYPE:
         create();
         break;
-      case TRX_CONTRACT_CALL_TYPE:
+      case XLT_CONTRACT_CALL_TYPE:
         call();
         break;
       default:
@@ -282,7 +282,7 @@ public class Runtime {
         thisTxCPULimitInUsRatio = 1.0;
       } else {
         // self witness 3, other witness 3, fullnode 2
-        if (trx.getRet(0).getContractRet() == contractResult.OUT_OF_TIME) {
+        if (xlt.getRet(0).getContractRet() == contractResult.OUT_OF_TIME) {
           thisTxCPULimitInUsRatio = Args.getInstance().getMinTimeRatio();
         } else {
           thisTxCPULimitInUsRatio = Args.getInstance().getMaxTimeRatio();
@@ -304,7 +304,7 @@ public class Runtime {
       throw new ContractValidateException("vm work is off, need to be opened by the committee");
     }
 
-    CreateSmartContract contract = ContractCapsule.getSmartContractFromTransaction(trx);
+    CreateSmartContract contract = ContractCapsule.getSmartContractFromTransaction(xlt);
     if (contract == null) {
       throw new ContractValidateException("Cannot get CreateSmartContract from transaction");
     }
@@ -314,7 +314,7 @@ public class Runtime {
       throw new VMIllegalException("OwnerAddress is not equals OriginAddress");
     }
     byte[] code = newSmartContract.getBytecode().toByteArray();
-    byte[] contractAddress = Wallet.generateContractAddress(trx);
+    byte[] contractAddress = Wallet.generateContractAddress(xlt);
     byte[] contractName = newSmartContract.getName().getBytes();
 
     if (contractName.length > 32) {
@@ -350,7 +350,7 @@ public class Runtime {
       long vmStartInUs = System.nanoTime() / 1000;
       long vmShouldEndInUs = vmStartInUs + thisTxCPULimitInUs;
 
-      long feeLimit = trx.getRawData().getFeeLimit();
+      long feeLimit = xlt.getRawData().getFeeLimit();
       if (feeLimit < 0 || feeLimit > VMConfig.MAX_FEE_LIMIT) {
         logger.warn("invalid feeLimit {}", feeLimit);
         throw new ContractValidateException(
@@ -359,14 +359,14 @@ public class Runtime {
 
       long energyLimit = getEnergyLimit(creator, feeLimit, callValue);
       byte[] ops = newSmartContract.getBytecode().toByteArray();
-      InternalTransaction internalTransaction = new InternalTransaction(trx);
+      InternalTransaction internalTransaction = new InternalTransaction(xlt);
 
       ProgramInvoke programInvoke = programInvokeFactory
-          .createProgramInvoke(TRX_CONTRACT_CREATION_TYPE, executorType, trx,
+          .createProgramInvoke(XLT_CONTRACT_CREATION_TYPE, executorType, xlt,
               blockCap.getInstance(), deposit, vmStartInUs, vmShouldEndInUs, energyLimit);
       this.vm = new VM(config);
       this.program = new Program(ops, programInvoke, internalTransaction, config, this.blockCap);
-      this.program.setRootTransactionId(new TransactionCapsule(trx).getTransactionId().getBytes());
+      this.program.setRootTransactionId(new TransactionCapsule(xlt).getTransactionId().getBytes());
       this.program.setRootCallConstant(isCallConstant());
     } catch (Exception e) {
       logger.error(e.getMessage());
@@ -401,7 +401,7 @@ public class Runtime {
       throw new ContractValidateException("VM work is off, need to be opened by the committee");
     }
 
-    Contract.TriggerSmartContract contract = ContractCapsule.getTriggerContractFromTransaction(trx);
+    Contract.TriggerSmartContract contract = ContractCapsule.getTriggerContractFromTransaction(xlt);
     if (contract == null) {
       return;
     }
@@ -433,7 +433,7 @@ public class Runtime {
       long vmStartInUs = System.nanoTime() / 1000;
       long vmShouldEndInUs = vmStartInUs + thisTxCPULimitInUs;
 
-      long feeLimit = trx.getRawData().getFeeLimit();
+      long feeLimit = xlt.getRawData().getFeeLimit();
       if (feeLimit < 0 || feeLimit > VMConfig.MAX_FEE_LIMIT) {
         logger.warn("invalid feeLimit {}", feeLimit);
         throw new ContractValidateException(
@@ -448,16 +448,16 @@ public class Runtime {
       }
 
       ProgramInvoke programInvoke = programInvokeFactory
-          .createProgramInvoke(TRX_CONTRACT_CALL_TYPE, executorType, trx,
+          .createProgramInvoke(XLT_CONTRACT_CALL_TYPE, executorType, xlt,
               blockCap.getInstance(), deposit, vmStartInUs, vmShouldEndInUs, energyLimit);
       if (isStaticCall) {
         programInvoke.setStaticCall();
       }
       this.vm = new VM(config);
-      InternalTransaction internalTransaction = new InternalTransaction(trx);
+      InternalTransaction internalTransaction = new InternalTransaction(xlt);
       this.program = new Program(null, code, programInvoke, internalTransaction, config,
           this.blockCap);
-      this.program.setRootTransactionId(new TransactionCapsule(trx).getTransactionId().getBytes());
+      this.program.setRootTransactionId(new TransactionCapsule(xlt).getTransactionId().getBytes());
       this.program.setRootCallConstant(isCallConstant());
     }
 
@@ -474,10 +474,10 @@ public class Runtime {
     try {
       if (vm != null) {
 
-        TransactionCapsule trxCap = new TransactionCapsule(trx);
-        if (null != blockCap && blockCap.generatedByMyself && null != trxCap.getContractRet()
+        TransactionCapsule xltCap = new TransactionCapsule(xlt);
+        if (null != blockCap && blockCap.generatedByMyself && null != xltCap.getContractRet()
             && contractResult.OUT_OF_TIME
-            .equals(trxCap.getContractRet())) {
+            .equals(xltCap.getContractRet())) {
           result = program.getResult();
           program.spendAllEnergy();
           runtimeError = "Haven Time Out";
@@ -489,14 +489,14 @@ public class Runtime {
         result = program.getResult();
 
         if (isCallConstant()) {
-          long callValue = TransactionCapsule.getCallValue(trx.getRawData().getContract(0));
+          long callValue = TransactionCapsule.getCallValue(xlt.getRawData().getContract(0));
           if (callValue > 0) {
             runtimeError = "constant cannot set call value.";
           }
           return;
         }
 
-        if (TRX_CONTRACT_CREATION_TYPE == trxType && !result.isRevert()) {
+        if (XLT_CONTRACT_CREATION_TYPE == xltType && !result.isRevert()) {
           byte[] code = program.getResult().getHReturn();
           long saveCodeEnergy = getLength(code) * EnergyCost.getInstance().getCREATE_DATA();
           long afterSpend = program.getEnergyLimitLeft().longValue() - saveCodeEnergy;
@@ -570,8 +570,8 @@ public class Runtime {
   public boolean isCallConstant() throws ContractValidateException {
 
     TriggerSmartContract triggerContractFromTransaction = ContractCapsule
-        .getTriggerContractFromTransaction(trx);
-    if (TRX_CONTRACT_CALL_TYPE.equals(trxType)) {
+        .getTriggerContractFromTransaction(xlt);
+    if (XLT_CONTRACT_CALL_TYPE.equals(xltType)) {
 
       ContractCapsule contract = deposit
           .getContract(triggerContractFromTransaction.getContractAddress().toByteArray());
@@ -592,9 +592,9 @@ public class Runtime {
 
   private boolean isCallConstant(byte[] address) throws ContractValidateException {
 
-    if (TRX_CONTRACT_CALL_TYPE.equals(trxType)) {
+    if (XLT_CONTRACT_CALL_TYPE.equals(xltType)) {
       ABI abi = deposit.getContract(address).getInstance().getAbi();
-      if (Wallet.isConstant(abi, ContractCapsule.getTriggerContractFromTransaction(trx))) {
+      if (Wallet.isConstant(abi, ContractCapsule.getTriggerContractFromTransaction(xlt))) {
         return true;
       }
     }
@@ -604,7 +604,7 @@ public class Runtime {
   public void finalization() {
     if (StringUtils.isEmpty(runtimeError)) {
       for (DataWord contract : result.getDeleteAccounts()) {
-        deposit.deleteContract(convertToTronAddress((contract.getLast20Bytes())));
+        deposit.deleteContract(convertToLitetokensAddress((contract.getLast20Bytes())));
       }
     }
 
@@ -618,7 +618,7 @@ public class Runtime {
         traceContent = zipAndEncode(traceContent);
       }
 
-      saveProgramTraceFile(config, trx, traceContent);
+      saveProgramTraceFile(config, xlt, traceContent);
     }
 
   }

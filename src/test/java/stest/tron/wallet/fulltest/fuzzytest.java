@@ -1,4 +1,4 @@
-package stest.tron.wallet.fulltest;
+package stest.litetokens.wallet.fulltest;
 
 import com.google.protobuf.ByteString;
 import io.grpc.ManagedChannel;
@@ -13,27 +13,27 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
-import org.tron.api.GrpcAPI;
-import org.tron.api.GrpcAPI.AccountPaginated;
-import org.tron.api.GrpcAPI.AssetIssueList;
-import org.tron.api.GrpcAPI.NumberMessage;
-import org.tron.api.GrpcAPI.PaginatedMessage;
-import org.tron.api.WalletExtensionGrpc;
-import org.tron.api.WalletGrpc;
-import org.tron.api.WalletSolidityGrpc;
-import org.tron.common.crypto.ECKey;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.Utils;
-import org.tron.core.Wallet;
-import org.tron.core.db.Manager;
-import org.tron.protos.Contract;
-import org.tron.protos.Protocol;
-import org.tron.protos.Protocol.Account;
-import org.tron.protos.Protocol.Block;
-import stest.tron.wallet.common.client.Configuration;
-import stest.tron.wallet.common.client.Parameter.CommonConstant;
-import stest.tron.wallet.common.client.utils.PublicMethed;
-import stest.tron.wallet.common.client.utils.TransactionUtils;
+import org.litetokens.api.GrpcAPI;
+import org.litetokens.api.GrpcAPI.AccountPaginated;
+import org.litetokens.api.GrpcAPI.AssetIssueList;
+import org.litetokens.api.GrpcAPI.NumberMessage;
+import org.litetokens.api.GrpcAPI.PaginatedMessage;
+import org.litetokens.api.WalletExtensionGrpc;
+import org.litetokens.api.WalletGrpc;
+import org.litetokens.api.WalletSolidityGrpc;
+import org.litetokens.common.crypto.ECKey;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.Utils;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.db.Manager;
+import org.litetokens.protos.Contract;
+import org.litetokens.protos.Protocol;
+import org.litetokens.protos.Protocol.Account;
+import org.litetokens.protos.Protocol.Block;
+import stest.litetokens.wallet.common.client.Configuration;
+import stest.litetokens.wallet.common.client.Parameter.CommonConstant;
+import stest.litetokens.wallet.common.client.utils.PublicMethed;
+import stest.litetokens.wallet.common.client.utils.TransactionUtils;
 
 @Slf4j
 public class fuzzytest {
@@ -158,7 +158,7 @@ public class fuzzytest {
   }
 
   public static Boolean createAssetIssue(byte[] address, String name, Long totalSupply,
-      Integer trxNum, Integer icoNum, Long startTime, Long endTime, Integer voteScore,
+      Integer xltNum, Integer icoNum, Long startTime, Long endTime, Integer voteScore,
       String description, String url, Long freeAssetNetLimit, Long publicFreeAssetNetLimit,
       Long fronzenAmount, Long frozenDay, String priKey,
       WalletGrpc.WalletBlockingStub blockingStubFull) {
@@ -177,7 +177,7 @@ public class fuzzytest {
       builder.setOwnerAddress(ByteString.copyFrom(address));
       builder.setName(ByteString.copyFrom(name.getBytes()));
       builder.setTotalSupply(totalSupply);
-      builder.setTrxNum(trxNum);
+      builder.setXltNum(xltNum);
       builder.setNum(icoNum);
       builder.setStartTime(startTime);
       builder.setEndTime(endTime);

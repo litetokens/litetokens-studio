@@ -15,17 +15,17 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.runtime.vm.trace;
+package org.litetokens.common.runtime.vm.trace;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import org.tron.common.runtime.vm.DataWord;
+import org.litetokens.common.runtime.vm.DataWord;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.tron.common.utils.ByteUtil.toHexString;
+import static org.litetokens.common.utils.ByteUtil.toHexString;
 
 public class OpActions {
 

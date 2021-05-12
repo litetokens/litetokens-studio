@@ -15,9 +15,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.runtime.vm.program.listener;
+package org.litetokens.common.runtime.vm.program.listener;
 
-import org.tron.common.runtime.vm.DataWord;
+import org.litetokens.common.runtime.vm.DataWord;
 
 import java.util.ArrayList;
 import java.util.List;

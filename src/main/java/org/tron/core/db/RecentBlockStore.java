@@ -1,15 +1,15 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.tron.core.capsule.BytesCapsule;
-import org.tron.core.exception.ItemNotFoundException;
+import org.litetokens.core.capsule.BytesCapsule;
+import org.litetokens.core.exception.ItemNotFoundException;
 
 @Component
-public class RecentBlockStore extends TronStoreWithRevoking<BytesCapsule> {
+public class RecentBlockStore extends LitetokensStoreWithRevoking<BytesCapsule> {
 
   @Autowired
   private RecentBlockStore(@Value("recent-block") String dbName) {

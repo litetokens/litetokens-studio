@@ -1,6 +1,6 @@
-package org.tron.core.exception;
+package org.litetokens.core.exception;
 
-public class TooBigTransactionException extends TronException {
+public class TooBigTransactionException extends LitetokensException {
 
     public TooBigTransactionException() { super(); }
 

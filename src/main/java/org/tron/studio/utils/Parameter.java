@@ -1,4 +1,4 @@
-package org.tron.studio.utils;
+package org.litetokens.studio.utils;
 
 public interface Parameter {
 

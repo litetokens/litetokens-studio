@@ -1,4 +1,4 @@
-package stest.tron.wallet.fulltest;
+package stest.litetokens.wallet.fulltest;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -18,12 +18,12 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
-import org.tron.common.crypto.ECKey;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.Utils;
-import org.tron.core.Wallet;
-import stest.tron.wallet.common.client.Parameter.CommonConstant;
-import stest.tron.wallet.common.client.utils.PublicMethed;
+import org.litetokens.common.crypto.ECKey;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.Utils;
+import org.litetokens.core.Wallet;
+import stest.litetokens.wallet.common.client.Parameter.CommonConstant;
+import stest.litetokens.wallet.common.client.utils.PublicMethed;
 
 @Slf4j
 public class createAddressAndKey {

@@ -15,19 +15,19 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.runtime.vm.program;
+package org.litetokens.common.runtime.vm.program;
 
 import static java.lang.Math.ceil;
 import static java.lang.Math.min;
 import static java.lang.String.format;
-import static org.tron.common.utils.ByteUtil.EMPTY_BYTE_ARRAY;
-import static org.tron.common.utils.ByteUtil.oneByteToHexString;
+import static org.litetokens.common.utils.ByteUtil.EMPTY_BYTE_ARRAY;
+import static org.litetokens.common.utils.ByteUtil.oneByteToHexString;
 
 import java.util.LinkedList;
 import java.util.List;
-import org.tron.common.runtime.vm.DataWord;
-import org.tron.common.runtime.vm.program.listener.ProgramListener;
-import org.tron.common.runtime.vm.program.listener.ProgramListenerAware;
+import org.litetokens.common.runtime.vm.DataWord;
+import org.litetokens.common.runtime.vm.program.listener.ProgramListener;
+import org.litetokens.common.runtime.vm.program.listener.ProgramListenerAware;
 
 public class Memory implements ProgramListenerAware {
 

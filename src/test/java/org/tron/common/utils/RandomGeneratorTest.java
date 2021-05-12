@@ -1,4 +1,4 @@
-package org.tron.common.utils;
+package org.litetokens.common.utils;
 
 import com.beust.jcommander.internal.Lists;
 import com.google.protobuf.ByteString;
@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.tron.core.capsule.WitnessCapsule;
+import org.litetokens.core.capsule.WitnessCapsule;
 
 @Slf4j
 @Ignore
@@ -25,7 +25,7 @@ public class RandomGeneratorTest {
 
   private List<WitnessCapsule> getWitnessList() {
     final List<WitnessCapsule> witnessCapsuleList = Lists.newArrayList();
-    final WitnessCapsule witnessTron = new WitnessCapsule(
+    final WitnessCapsule witnessLitetokens = new WitnessCapsule(
         ByteString.copyFrom("00000000001".getBytes()), 0, "");
     final WitnessCapsule witnessOlivier = new WitnessCapsule(
         ByteString.copyFrom("00000000003".getBytes()), 100, "");
@@ -33,7 +33,7 @@ public class RandomGeneratorTest {
         ByteString.copyFrom("00000000005".getBytes()), 200, "");
     final WitnessCapsule witnessSenaLiu = new WitnessCapsule(
         ByteString.copyFrom("00000000006".getBytes()), 300, "");
-    witnessCapsuleList.add(witnessTron);
+    witnessCapsuleList.add(witnessLitetokens);
     witnessCapsuleList.add(witnessOlivier);
     witnessCapsuleList.add(witnessVivider);
     witnessCapsuleList.add(witnessSenaLiu);

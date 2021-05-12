@@ -16,9 +16,9 @@
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.core.db;
+package org.litetokens.core.db;
 
-import org.tron.protos.Protocol.Block;
+import org.litetokens.protos.Protocol.Block;
 
 public interface BlockStoreInput {
 

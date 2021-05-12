@@ -1,12 +1,12 @@
-package org.tron.common.runtime.vm.program;
+package org.litetokens.common.runtime.vm.program;
 
 import static java.lang.System.arraycopy;
 import java.util.HashMap;
 import java.util.Map;
-import org.tron.common.crypto.Hash;
-import org.tron.common.runtime.vm.DataWord;
-import org.tron.core.capsule.StorageRowCapsule;
-import org.tron.core.db.StorageRowStore;
+import org.litetokens.common.crypto.Hash;
+import org.litetokens.common.runtime.vm.DataWord;
+import org.litetokens.core.capsule.StorageRowCapsule;
+import org.litetokens.core.db.StorageRowStore;
 
 public class Storage {
 

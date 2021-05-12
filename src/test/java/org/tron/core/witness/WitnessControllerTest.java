@@ -1,4 +1,4 @@
-package org.tron.core.witness;
+package org.litetokens.core.witness;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,24 +9,24 @@ import java.util.List;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.FileUtil;
-import org.tron.core.Constant;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
-import org.tron.core.config.args.Witness;
-import org.tron.core.db.Manager;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.core.Constant;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.config.args.Witness;
+import org.litetokens.core.db.Manager;
 
 public class WitnessControllerTest {
 
   private static Manager dbManager = new Manager();
-  private static TronApplicationContext context;
+  private static LitetokensApplicationContext context;
   private static String dbPath = "output_witness_controller_test";
 
   static {
     Args.setParam(new String[]{"-d", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new LitetokensApplicationContext(DefaultConfig.class);
   }
 
   @BeforeClass

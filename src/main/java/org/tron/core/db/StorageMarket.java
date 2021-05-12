@@ -1,8 +1,8 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
 import lombok.extern.slf4j.Slf4j;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.config.Parameter.ChainConstant;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.config.Parameter.ChainConstant;
 
 @Slf4j
 public class StorageMarket {
@@ -14,15 +14,15 @@ public class StorageMarket {
     this.dbManager = manager;
   }
 
-  private long exchange_to_supply(boolean isTRX, long quant) {
-    logger.info("isTRX: " + isTRX);
-    long balance = isTRX ? dbManager.getDynamicPropertiesStore().getTotalStoragePool() :
+  private long exchange_to_supply(boolean isXLT, long quant) {
+    logger.info("isXLT: " + isXLT);
+    long balance = isXLT ? dbManager.getDynamicPropertiesStore().getTotalStoragePool() :
         dbManager.getDynamicPropertiesStore().getTotalStorageReserved();
     logger.info("balance: " + balance);
     long newBalance = balance + quant;
     logger.info("balance + quant: " + (balance + quant));
 
-//    if (isTRX) {
+//    if (isXLT) {
 //      dbManager.getDynamicPropertiesStore().saveTotalStoragePool(newBalance);
 //    } else {
 //      dbManager.getDynamicPropertiesStore().saveTotalStorageReserved(newBalance);
@@ -36,15 +36,15 @@ public class StorageMarket {
     return out;
   }
 
-  private long exchange_to_supply2(boolean isTRX, long quant) {
-    logger.info("isTRX: " + isTRX);
-    long balance = isTRX ? dbManager.getDynamicPropertiesStore().getTotalStoragePool() :
+  private long exchange_to_supply2(boolean isXLT, long quant) {
+    logger.info("isXLT: " + isXLT);
+    long balance = isXLT ? dbManager.getDynamicPropertiesStore().getTotalStoragePool() :
         dbManager.getDynamicPropertiesStore().getTotalStorageReserved();
     logger.info("balance: " + balance);
     long newBalance = balance - quant;
     logger.info("balance - quant: " + (balance - quant));
 
-//    if (isTRX) {
+//    if (isXLT) {
 //      dbManager.getDynamicPropertiesStore().saveTotalStoragePool(newBalance);
 //    } else {
 //      dbManager.getDynamicPropertiesStore().saveTotalStorageReserved(newBalance);
@@ -58,8 +58,8 @@ public class StorageMarket {
     return out;
   }
 
-  private long exchange_from_supply(boolean isTRX, long supplyQuant) {
-    long balance = isTRX ? dbManager.getDynamicPropertiesStore().getTotalStoragePool() :
+  private long exchange_from_supply(boolean isXLT, long supplyQuant) {
+    long balance = isXLT ? dbManager.getDynamicPropertiesStore().getTotalStoragePool() :
         dbManager.getDynamicPropertiesStore().getTotalStorageReserved();
     supply -= supplyQuant;
 
@@ -69,7 +69,7 @@ public class StorageMarket {
     long out = (long) exchangeBalance;
     long newBalance = balance - out;
 
-    if (isTRX) {
+    if (isXLT) {
       out = Math.round(exchangeBalance / 100000) * 100000;
       logger.info("---out: " + out);
     }
@@ -77,9 +77,9 @@ public class StorageMarket {
     return out;
   }
 
-  public long exchange(long from, boolean isTRX) {
-    long relay = exchange_to_supply(isTRX, from);
-    return exchange_from_supply(!isTRX, relay);
+  public long exchange(long from, boolean isXLT) {
+    long relay = exchange_to_supply(isXLT, from);
+    return exchange_from_supply(!isXLT, relay);
   }
 
   public long calculateTax(long duration, long limit) {

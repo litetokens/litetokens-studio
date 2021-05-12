@@ -1,6 +1,6 @@
-package org.tron.core.exception;
+package org.litetokens.core.exception;
 
-public class BadTransactionException extends TronException {
+public class BadTransactionException extends LitetokensException {
 
   public BadTransactionException() {
     super();

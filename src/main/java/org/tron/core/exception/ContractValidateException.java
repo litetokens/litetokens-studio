@@ -1,6 +1,6 @@
-package org.tron.core.exception;
+package org.litetokens.core.exception;
 
-public class ContractValidateException extends TronException {
+public class ContractValidateException extends LitetokensException {
 
   public ContractValidateException() {
     super();

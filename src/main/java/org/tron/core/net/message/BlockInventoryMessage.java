@@ -1,14 +1,14 @@
-package org.tron.core.net.message;
+package org.litetokens.core.net.message;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.apache.commons.collections4.CollectionUtils;
-import org.tron.core.capsule.BlockCapsule.BlockId;
-import org.tron.protos.Protocol;
-import org.tron.protos.Protocol.BlockInventory;
+import org.litetokens.core.capsule.BlockCapsule.BlockId;
+import org.litetokens.protos.Protocol;
+import org.litetokens.protos.Protocol.BlockInventory;
 
-public class BlockInventoryMessage extends TronMessage {
+public class BlockInventoryMessage extends LitetokensMessage {
 
   protected BlockInventory blockInventory;
 

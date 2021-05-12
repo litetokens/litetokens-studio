@@ -1,4 +1,4 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
 import com.google.protobuf.ByteString;
 import java.io.File;
@@ -7,19 +7,19 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.common.utils.FileUtil;
-import org.tron.core.Constant;
-import org.tron.core.Wallet;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
-import org.tron.protos.Protocol.AccountType;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.core.Constant;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.protos.Protocol.AccountType;
 
 public class AccountIdIndexStoreTest {
 
   private static String dbPath = "output_AccountIndexStore_test";
-  private static TronApplicationContext context;
+  private static LitetokensApplicationContext context;
   private static AccountIdIndexStore accountIdIndexStore;
   private static final byte[] ACCOUNT_ADDRESS_ONE = randomBytes(16);
   private static final byte[] ACCOUNT_ADDRESS_TWO = randomBytes(16);
@@ -38,7 +38,7 @@ public class AccountIdIndexStoreTest {
   static {
     Args.setParam(new String[]{"--output-directory", dbPath},
         Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new LitetokensApplicationContext(DefaultConfig.class);
   }
 
   @AfterClass

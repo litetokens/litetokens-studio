@@ -1,4 +1,4 @@
-package org.tron.core;
+package org.litetokens.core;
 
 import com.google.protobuf.Any;
 import com.google.protobuf.ByteString;
@@ -9,30 +9,30 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.FileUtil;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.capsule.AssetIssueCapsule;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.core.capsule.TransactionResultCapsule;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.BandwidthProcessor;
-import org.tron.core.db.Manager;
-import org.tron.core.db.TransactionTrace;
-import org.tron.protos.Contract;
-import org.tron.protos.Contract.AssetIssueContract;
-import org.tron.protos.Contract.TransferAssetContract;
-import org.tron.protos.Protocol;
-import org.tron.protos.Protocol.AccountType;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.capsule.AssetIssueCapsule;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.core.capsule.TransactionResultCapsule;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.BandwidthProcessor;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.db.TransactionTrace;
+import org.litetokens.protos.Contract;
+import org.litetokens.protos.Contract.AssetIssueContract;
+import org.litetokens.protos.Contract.TransferAssetContract;
+import org.litetokens.protos.Protocol;
+import org.litetokens.protos.Protocol.AccountType;
 
 @Slf4j
 public class BandwidthProcessorTest {
 
   private static Manager dbManager;
   private static final String dbPath = "bandwidth_test";
-  private static TronApplicationContext context;
+  private static LitetokensApplicationContext context;
   private static final String ASSET_NAME;
   private static final String OWNER_ADDRESS;
   private static final String ASSET_ADDRESS;
@@ -40,7 +40,7 @@ public class BandwidthProcessorTest {
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new LitetokensApplicationContext(DefaultConfig.class);
     ASSET_NAME = "test_token";
     OWNER_ADDRESS = Wallet.getAddressPreFixString() + "548794500882809695a8a687866e76d4271a1abc";
     TO_ADDRESS = Wallet.getAddressPreFixString() + "abd4b9367799eaa3197fecb144eb71de1e049abc";
@@ -132,14 +132,14 @@ public class BandwidthProcessorTest {
   public void testCreateNewAccount() throws Exception {
     BandwidthProcessor processor = new BandwidthProcessor(dbManager);
     TransferAssetContract transferAssetContract = getTransferAssetContract();
-    TransactionCapsule trx = new TransactionCapsule(transferAssetContract);
+    TransactionCapsule xlt = new TransactionCapsule(transferAssetContract);
 
     String NOT_EXISTS_ADDRESS =
         Wallet.getAddressPreFixString() + "008794500882809695a8a687866e76d4271a1abc";
     transferAssetContract = transferAssetContract.toBuilder()
         .setToAddress(ByteString.copyFrom(ByteArray.fromHexString(NOT_EXISTS_ADDRESS))).build();
 
-    org.tron.protos.Protocol.Transaction.Contract contract = org.tron.protos.Protocol.Transaction.Contract
+    org.litetokens.protos.Protocol.Transaction.Contract contract = org.litetokens.protos.Protocol.Transaction.Contract
         .newBuilder()
         .setType(Protocol.Transaction.Contract.ContractType.TransferAssetContract).setParameter(
             Any.pack(transferAssetContract)).build();
@@ -153,7 +153,7 @@ public class BandwidthProcessorTest {
     ownerCapsule.setFrozen(10_000_000L, 0L);
 
     Assert.assertEquals(true, processor.contractCreateNewAccount(contract));
-    long bytes = trx.getSerializedSize();
+    long bytes = xlt.getSerializedSize();
     processor.consumeBandwidthForCreateNewAccount(ownerCapsule, bytes, 1526647838000L);
 
     AccountCapsule ownerCapsuleNew = dbManager.getAccountStore()
@@ -168,16 +168,16 @@ public class BandwidthProcessorTest {
 
     dbManager.getDynamicPropertiesStore().saveLatestBlockHeaderTimestamp(1526647838000L);
     TransferAssetContract contract = getTransferAssetContract();
-    TransactionCapsule trx = new TransactionCapsule(contract);
+    TransactionCapsule xlt = new TransactionCapsule(contract);
 
     AccountCapsule ownerCapsule = dbManager.getAccountStore()
         .get(ByteArray.fromHexString(OWNER_ADDRESS));
     dbManager.getAccountStore().put(ownerCapsule.getAddress().toByteArray(), ownerCapsule);
 
     TransactionResultCapsule ret = new TransactionResultCapsule();
-    TransactionTrace trace = new TransactionTrace(trx, dbManager);
+    TransactionTrace trace = new TransactionTrace(xlt, dbManager);
 
-    dbManager.consumeBandwidth(trx, trace);
+    dbManager.consumeBandwidth(xlt, trace);
 
     AccountCapsule ownerCapsuleNew = dbManager.getAccountStore()
         .get(ByteArray.fromHexString(OWNER_ADDRESS));
@@ -194,7 +194,7 @@ public class BandwidthProcessorTest {
 
     dbManager.getDynamicPropertiesStore().saveLatestBlockHeaderTimestamp(1526691038000L); // + 12h
 
-    dbManager.consumeBandwidth(trx, trace);
+    dbManager.consumeBandwidth(xlt, trace);
     ownerCapsuleNew = dbManager.getAccountStore()
         .get(ByteArray.fromHexString(OWNER_ADDRESS));
 
@@ -219,7 +219,7 @@ public class BandwidthProcessorTest {
         .saveTotalNetWeight(10_000_000L);//only assetAccount has frozen balance
 
     TransferAssetContract contract = getTransferAssetContract();
-    TransactionCapsule trx = new TransactionCapsule(contract);
+    TransactionCapsule xlt = new TransactionCapsule(contract);
 
     AccountCapsule ownerCapsule = dbManager.getAccountStore()
         .get(ByteArray.fromHexString(OWNER_ADDRESS));
@@ -230,8 +230,8 @@ public class BandwidthProcessorTest {
     dbManager.getAccountStore().put(assetCapsule.getAddress().toByteArray(), assetCapsule);
 
     TransactionResultCapsule ret = new TransactionResultCapsule();
-    TransactionTrace trace = new TransactionTrace(trx, dbManager);
-    dbManager.consumeBandwidth(trx, trace);
+    TransactionTrace trace = new TransactionTrace(xlt, dbManager);
+    dbManager.consumeBandwidth(xlt, trace);
 
     AccountCapsule ownerCapsuleNew = dbManager.getAccountStore()
         .get(ByteArray.fromHexString(OWNER_ADDRESS));
@@ -249,7 +249,7 @@ public class BandwidthProcessorTest {
 
     dbManager.getDynamicPropertiesStore().saveLatestBlockHeaderTimestamp(1526691038000L); // + 12h
 
-    dbManager.consumeBandwidth(trx, trace);
+    dbManager.consumeBandwidth(xlt, trace);
 
     ownerCapsuleNew = dbManager.getAccountStore()
         .get(ByteArray.fromHexString(OWNER_ADDRESS));
@@ -274,7 +274,7 @@ public class BandwidthProcessorTest {
         .saveTotalNetWeight(10_000_000L);//only owner has frozen balance
 
     TransferAssetContract contract = getTransferAssetContract();
-    TransactionCapsule trx = new TransactionCapsule(contract);
+    TransactionCapsule xlt = new TransactionCapsule(contract);
 
     AccountCapsule ownerCapsule = dbManager.getAccountStore()
         .get(ByteArray.fromHexString(OWNER_ADDRESS));
@@ -283,8 +283,8 @@ public class BandwidthProcessorTest {
     dbManager.getAccountStore().put(ownerCapsule.getAddress().toByteArray(), ownerCapsule);
 
     TransactionResultCapsule ret = new TransactionResultCapsule();
-    TransactionTrace trace = new TransactionTrace(trx, dbManager);
-    dbManager.consumeBandwidth(trx, trace);
+    TransactionTrace trace = new TransactionTrace(xlt, dbManager);
+    dbManager.consumeBandwidth(xlt, trace);
 
     AccountCapsule ownerCapsuleNew = dbManager.getAccountStore()
         .get(ByteArray.fromHexString(OWNER_ADDRESS));
@@ -300,7 +300,7 @@ public class BandwidthProcessorTest {
 
     dbManager.getDynamicPropertiesStore().saveLatestBlockHeaderTimestamp(1526691038000L); // + 12h
 
-    dbManager.consumeBandwidth(trx, trace);
+    dbManager.consumeBandwidth(xlt, trace);
 
     ownerCapsuleNew = dbManager.getAccountStore()
         .get(ByteArray.fromHexString(OWNER_ADDRESS));
@@ -331,7 +331,7 @@ public class BandwidthProcessorTest {
     dbManager.getDynamicPropertiesStore().saveFreeNetLimit(0L);
 
     TransferAssetContract contract = getTransferAssetContract();
-    TransactionCapsule trx = new TransactionCapsule(contract);
+    TransactionCapsule xlt = new TransactionCapsule(contract);
 
     AccountCapsule ownerCapsule = dbManager.getAccountStore()
         .get(ByteArray.fromHexString(OWNER_ADDRESS));
@@ -340,8 +340,8 @@ public class BandwidthProcessorTest {
     dbManager.getAccountStore().put(ownerCapsule.getAddress().toByteArray(), ownerCapsule);
 
     TransactionResultCapsule ret = new TransactionResultCapsule();
-    TransactionTrace trace = new TransactionTrace(trx, dbManager);
-    dbManager.consumeBandwidth(trx, trace);
+    TransactionTrace trace = new TransactionTrace(xlt, dbManager);
+    dbManager.consumeBandwidth(xlt, trace);
 
     AccountCapsule ownerCapsuleNew = dbManager.getAccountStore()
         .get(ByteArray.fromHexString(OWNER_ADDRESS));
@@ -357,7 +357,7 @@ public class BandwidthProcessorTest {
     Assert.assertEquals(transactionFee, trace.getReceipt().getNetFee());
 
     dbManager.getAccountStore().delete(ByteArray.fromHexString(TO_ADDRESS));
-    dbManager.consumeBandwidth(trx, trace);
+    dbManager.consumeBandwidth(xlt, trace);
 
 //    long createAccountFee = dbManager.getDynamicPropertiesStore().getCreateAccountFee();
 //    ownerCapsuleNew = dbManager.getAccountStore()

@@ -1,6 +1,6 @@
-package org.tron.core.exception;
+package org.litetokens.core.exception;
 
-public class UnLinkedBlockException extends TronException {
+public class UnLinkedBlockException extends LitetokensException {
 
   public UnLinkedBlockException() {
     super();

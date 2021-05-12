@@ -1,6 +1,6 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
-import static org.tron.core.config.Parameter.DatabaseConstants.ASSET_ISSUE_COUNT_LIMIT_MAX;
+import static org.litetokens.core.config.Parameter.DatabaseConstants.ASSET_ISSUE_COUNT_LIMIT_MAX;
 
 import java.util.List;
 import java.util.Map.Entry;
@@ -11,12 +11,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.capsule.AssetIssueCapsule;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.capsule.AssetIssueCapsule;
 
 @Slf4j
 @Component
-public class AssetIssueStore extends TronStoreWithRevoking<AssetIssueCapsule> {
+public class AssetIssueStore extends LitetokensStoreWithRevoking<AssetIssueCapsule> {
 
   @Autowired
   private AssetIssueStore(@Value("asset-issue") String dbName) {

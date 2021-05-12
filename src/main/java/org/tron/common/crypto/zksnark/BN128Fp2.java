@@ -15,11 +15,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.crypto.zksnark;
+package org.litetokens.common.crypto.zksnark;
 
 import java.math.BigInteger;
 
-import static org.tron.common.crypto.zksnark.Params.B_Fp2;
+import static org.litetokens.common.crypto.zksnark.Params.B_Fp2;
 
 /**
  * Definition of {@link BN128} over F_p2, where "p" equals {@link Params#P} <br/>

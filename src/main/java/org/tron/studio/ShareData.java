@@ -1,4 +1,4 @@
-package org.tron.studio;
+package org.litetokens.studio;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import org.w3c.dom.Document;
@@ -14,10 +14,10 @@ import javafx.scene.control.Tab;
 import lombok.Getter;
 import lombok.Setter;
 import org.spongycastle.util.encoders.Hex;
-import org.tron.studio.solc.SolidityCompiler;
+import org.litetokens.studio.solc.SolidityCompiler;
 import org.springframework.beans.factory.annotation.Value;
-import org.tron.studio.utils.FormatCode;
-import org.tron.studio.walletserver.WalletClient;
+import org.litetokens.studio.utils.FormatCode;
+import org.litetokens.studio.walletserver.WalletClient;
 import javafx.scene.Scene;
 import java.io.File;
 import java.nio.file.Path;
@@ -96,7 +96,7 @@ public class ShareData {
     public static String currentEnvironment = "Local TVM";
 
     public static Boolean enableOptimize = true;
-    public static long TRX_SUN_UNIT = 1_000_000;
+    public static long XLT_SUN_UNIT = 1_000_000;
 
     @Value("${studio.autocomplete}")
     public static boolean enableAutoComplete;
@@ -163,7 +163,7 @@ public class ShareData {
         saved_network.put("Test Net", new NetWorkEnvironment(testNetRpcIp,testNetRpcPort));
         saved_network.put("Main Net", new NetWorkEnvironment(mainNetRpcIp, mainNetRpcPort));
         try {
-            File fXmlFile = new File(Paths.get(System.getProperty("user.home"), "TronStudio", "record", "network.xml").toString());
+            File fXmlFile = new File(Paths.get(System.getProperty("user.home"), "LitetokensStudio", "record", "network.xml").toString());
             if( !fXmlFile.exists() ) return;
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();

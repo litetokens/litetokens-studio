@@ -1,4 +1,4 @@
-package org.tron.core.witness;
+package org.litetokens.core.witness;
 
 import com.google.protobuf.ByteString;
 import java.util.List;
@@ -6,9 +6,9 @@ import java.util.Map;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.tron.core.capsule.ProposalCapsule;
-import org.tron.core.db.Manager;
-import org.tron.protos.Protocol.Proposal.State;
+import org.litetokens.core.capsule.ProposalCapsule;
+import org.litetokens.core.db.Manager;
+import org.litetokens.protos.Protocol.Proposal.State;
 
 @Slf4j
 public class ProposalController {

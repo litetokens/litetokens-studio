@@ -1,4 +1,4 @@
-package org.tron.program;
+package org.litetokens.program;
 
 import java.io.File;
 import lombok.extern.slf4j.Slf4j;
@@ -6,21 +6,21 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.common.application.Application;
-import org.tron.common.application.ApplicationFactory;
-import org.tron.common.overlay.client.DatabaseGrpcClient;
-import org.tron.core.Constant;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
-import org.tron.core.services.RpcApiService;
-import org.tron.protos.Protocol.Block;
-import org.tron.protos.Protocol.DynamicProperties;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.common.application.Application;
+import org.litetokens.common.application.ApplicationFactory;
+import org.litetokens.common.overlay.client.DatabaseGrpcClient;
+import org.litetokens.core.Constant;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.services.RpcApiService;
+import org.litetokens.protos.Protocol.Block;
+import org.litetokens.protos.Protocol.DynamicProperties;
 
 @Slf4j
 public class SolidityNodeTest {
 
-  private static TronApplicationContext context;
+  private static LitetokensApplicationContext context;
 
   private static RpcApiService rpcApiService;
   private static Application appT;
@@ -28,7 +28,7 @@ public class SolidityNodeTest {
 
   static {
     Args.setParam(new String[]{"-d", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new LitetokensApplicationContext(DefaultConfig.class);
     Args.getInstance().setSolidityNode(true);
     appT = ApplicationFactory.create(context);
     rpcApiService = context.getBean(RpcApiService.class);

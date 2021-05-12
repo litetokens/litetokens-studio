@@ -1,8 +1,8 @@
-package org.tron.core.capsule;
+package org.litetokens.core.capsule;
 
 import com.google.protobuf.ByteString;
 import java.util.Arrays;
-import org.tron.common.utils.Sha256Hash;
+import org.litetokens.common.utils.Sha256Hash;
 
 public class BlockIdCapsule extends Sha256Hash implements ProtoCapsule {
 

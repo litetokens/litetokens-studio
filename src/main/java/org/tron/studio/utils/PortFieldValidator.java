@@ -1,4 +1,4 @@
-package org.tron.studio.utils;
+package org.litetokens.studio.utils;
 
 import com.jfoenix.validation.base.ValidatorBase;
 import javafx.beans.DefaultProperty;

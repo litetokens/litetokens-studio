@@ -1,27 +1,27 @@
-package org.tron.core.actuator;
+package org.litetokens.core.actuator;
 
-import static org.tron.core.actuator.ActuatorConstant.ACCOUNT_EXCEPTION_STR;
-import static org.tron.core.actuator.ActuatorConstant.NOT_EXIST_STR;
-import static org.tron.core.actuator.ActuatorConstant.PROPOSAL_EXCEPTION_STR;
-import static org.tron.core.actuator.ActuatorConstant.WITNESS_EXCEPTION_STR;
+import static org.litetokens.core.actuator.ActuatorConstant.ACCOUNT_EXCEPTION_STR;
+import static org.litetokens.core.actuator.ActuatorConstant.NOT_EXIST_STR;
+import static org.litetokens.core.actuator.ActuatorConstant.PROPOSAL_EXCEPTION_STR;
+import static org.litetokens.core.actuator.ActuatorConstant.WITNESS_EXCEPTION_STR;
 
 import com.google.protobuf.Any;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.StringUtil;
-import org.tron.core.Wallet;
-import org.tron.core.capsule.ProposalCapsule;
-import org.tron.core.capsule.TransactionResultCapsule;
-import org.tron.core.db.Manager;
-import org.tron.core.exception.ContractExeException;
-import org.tron.core.exception.ContractValidateException;
-import org.tron.core.exception.ItemNotFoundException;
-import org.tron.protos.Contract.ProposalApproveContract;
-import org.tron.protos.Protocol.Proposal.State;
-import org.tron.protos.Protocol.Transaction.Result.code;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.StringUtil;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.capsule.ProposalCapsule;
+import org.litetokens.core.capsule.TransactionResultCapsule;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.exception.ContractExeException;
+import org.litetokens.core.exception.ContractValidateException;
+import org.litetokens.core.exception.ItemNotFoundException;
+import org.litetokens.protos.Contract.ProposalApproveContract;
+import org.litetokens.protos.Protocol.Proposal.State;
+import org.litetokens.protos.Protocol.Transaction.Result.code;
 
 @Slf4j
 public class ProposalApproveActuator extends AbstractActuator {

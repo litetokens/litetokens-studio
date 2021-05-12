@@ -1,14 +1,14 @@
 syntax = "proto3";
 package protocol;
 
-import "core/Tron.proto";
+import "core/Litetokens.proto";
 import "core/Contract.proto";
 import "google/api/annotations.proto";
 
 
-option java_package = "org.tron.api"; //Specify the name of the package that generated the Java file
+option java_package = "org.litetokens.api"; //Specify the name of the package that generated the Java file
 option java_outer_classname = "GrpcAPI"; //Specify the class name of the generated Java file
-option go_package = "github.com/tronprotocol/grpc-gateway/api";
+option go_package = "gitub.com/litetokens/grpc-gateway/api";
 
 service Wallet {
 
@@ -698,7 +698,7 @@ service WalletExtension {
   }
 };
 
-// the api of tron's db
+// the api of litetokens's db
 service Database {
   // for tapos
   rpc getBlockReference (EmptyMessage) returns (BlockReference) {
@@ -740,7 +740,7 @@ message BlockReference {
   bytes block_hash = 2;
 }
 
-// the api of tron's network such as node list.
+// the api of litetokens's network such as node list.
 service Network {
 
 };

@@ -6,9 +6,9 @@ import "core/Discover.proto";
 package protocol;
 
 
-option java_package = "org.tron.protos"; //Specify the name of the package that generated the Java file
+option java_package = "org.litetokens.protos"; //Specify the name of the package that generated the Java file
 option java_outer_classname = "Protocol"; //Specify the class name of the generated Java file
-option go_package = "github.com/tronprotocol/grpc-gateway/core";
+option go_package = "gitub.com/litetokens/grpc-gateway/core";
 
 enum AccountType {
   Normal = 0;
@@ -70,7 +70,7 @@ message ChainParameters {
 message Account {
   /* frozen balance */
   message Frozen {
-    int64 frozen_balance = 1; // the frozen trx balance
+    int64 frozen_balance = 1; // the frozen xlt balance
     int64 expire_time = 2; // the expire time
   }
   // account nick name
@@ -78,7 +78,7 @@ message Account {
   AccountType type = 2;
   // the create address
   bytes address = 3;
-  // the trx balance
+  // the xlt balance
   int64 balance = 4;
   // the votes
   repeated Vote votes = 5;
@@ -368,7 +368,7 @@ message BlockInventory {
 
 message Inventory {
   enum InventoryType {
-    TRX = 0;
+    XLT = 0;
     BLOCK = 1;
   }
   InventoryType type = 1;
@@ -378,7 +378,7 @@ message Inventory {
 message Items {
   enum ItemType {
     ERR = 0;
-    TRX = 1;
+    XLT = 1;
     BLOCK = 2;
     BLOCKHEADER = 3;
   }

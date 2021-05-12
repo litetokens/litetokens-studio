@@ -6,7 +6,7 @@ testnet=(
 )
 stest_server=""
 for i in ${testnet[@]}; do
-  docker_num=`ssh -p 22008 -t java-tron@$i 'docker ps -a | wc -l'`
+  docker_num=`ssh -p 22008 -t java-litetokens@$i 'docker ps -a | wc -l'`
   echo $docker_num
   docker_num=`echo $docker_num | tr -d "\r"`
   echo $docker_num
@@ -31,18 +31,18 @@ echo "$TRAVIS_BRANCH"
 
 if [[ "$TRAVIS_BRANCH" = "develop" || "$TRAVIS_BRANCH" = "master" || "$TRAVIS_BRANCH" = "Odyssey_v3.2" ]];then
   echo "init env"
-  ssh java-tron@$stest_server -p 22008 sh /data/workspace/docker_workspace/stest.sh >$stestlogname 2>&1
+  ssh java-litetokens@$stest_server -p 22008 sh /data/workspace/docker_workspace/stest.sh >$stestlogname 2>&1
   if [[ `find $stestlogname -type f | xargs grep "Connection refused"` =~ "Connection refused" || `find $stestlogname -type f | xargs grep "stest FAILED"` =~ "stest FAILED" ]];
   then
     rm -f $stestlogname
     echo "first if"
-    ssh java-tron@$stest_server -p 22008 sh /data/workspace/docker_workspace/stest.sh >$stestlogname 2>&1
+    ssh java-litetokens@$stest_server -p 22008 sh /data/workspace/docker_workspace/stest.sh >$stestlogname 2>&1
   fi
   if [[ `find $stestlogname -type f | xargs grep "Connection refused"` =~ "Connection refused" || `find $stestlogname -type f | xargs grep "stest FAILED"` =~ "stest FAILED" ]];
   then
     rm -f $stestlogname
     echo "second if"
-    ssh java-tron@$stest_server -p 22008 sh /data/workspace/docker_workspace/stest.sh >$stestlogname 2>&1
+    ssh java-litetokens@$stest_server -p 22008 sh /data/workspace/docker_workspace/stest.sh >$stestlogname 2>&1
   fi
   echo "stest start"
   cat $stestlogname | grep "Stest result is:" -A 10000

@@ -1,4 +1,4 @@
-package org.tron.core;
+package org.litetokens.core;
 
 import com.google.protobuf.Any;
 import com.google.protobuf.ByteString;
@@ -9,17 +9,17 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.FileUtil;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.Parameter.ChainConstant;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.Manager;
-import org.tron.core.db.StorageMarket;
-import org.tron.protos.Contract;
-import org.tron.protos.Protocol.AccountType;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.Parameter.ChainConstant;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.db.StorageMarket;
+import org.litetokens.protos.Contract;
+import org.litetokens.protos.Protocol.AccountType;
 
 @Slf4j
 public class StorageMarketTest {
@@ -27,7 +27,7 @@ public class StorageMarketTest {
   private static Manager dbManager;
   private static StorageMarket storageMarket;
   private static final String dbPath = "output_buy_storage_test";
-  private static TronApplicationContext context;
+  private static LitetokensApplicationContext context;
   private static final String OWNER_ADDRESS;
   private static final String OWNER_ADDRESS_INVALID = "aaaa";
   private static final String OWNER_ACCOUNT_INVALID;
@@ -35,7 +35,7 @@ public class StorageMarketTest {
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new LitetokensApplicationContext(DefaultConfig.class);
     OWNER_ADDRESS = Wallet.getAddressPreFixString() + "548794500882809695a8a687866e76d4271a1abc";
     OWNER_ACCOUNT_INVALID =
         Wallet.getAddressPreFixString() + "548794500882809695a8a687866e76d4271a3456";
@@ -107,7 +107,7 @@ public class StorageMarketTest {
     AccountCapsule owner =
         dbManager.getAccountStore().get(ByteArray.fromHexString(OWNER_ADDRESS));
 
-    long quant = 2_000_000_000_000L; // 2 million trx
+    long quant = 2_000_000_000_000L; // 2 million xlt
     storageMarket.buyStorage(owner, quant);
 
     Assert.assertEquals(owner.getBalance(), initBalance - quant
@@ -130,7 +130,7 @@ public class StorageMarketTest {
     AccountCapsule owner =
         dbManager.getAccountStore().get(ByteArray.fromHexString(OWNER_ADDRESS));
 
-    long quant = 1_000_000_000_000L; // 1 million trx
+    long quant = 1_000_000_000_000L; // 1 million xlt
 
     storageMarket.buyStorage(owner, quant);
 
@@ -165,7 +165,7 @@ public class StorageMarketTest {
     AccountCapsule owner =
         dbManager.getAccountStore().get(ByteArray.fromHexString(OWNER_ADDRESS));
 
-    long bytes = 2694881440L; // 2 million trx
+    long bytes = 2694881440L; // 2 million xlt
     storageMarket.buyStorageBytes(owner, bytes);
 
     Assert.assertEquals(owner.getBalance(), initBalance - 2_000_000_000_000L
@@ -222,7 +222,7 @@ public class StorageMarketTest {
     AccountCapsule owner =
         dbManager.getAccountStore().get(ByteArray.fromHexString(OWNER_ADDRESS));
 
-    long quant = 2_000_000_000_000L; // 2 million trx
+    long quant = 2_000_000_000_000L; // 2 million xlt
     storageMarket.buyStorage(owner, quant);
 
     Assert.assertEquals(owner.getBalance(), initBalance - quant
@@ -255,7 +255,7 @@ public class StorageMarketTest {
     AccountCapsule owner =
         dbManager.getAccountStore().get(ByteArray.fromHexString(OWNER_ADDRESS));
 
-    long quant = 2_000_000_000_000L; // 2 million trx
+    long quant = 2_000_000_000_000L; // 2 million xlt
     storageMarket.buyStorage(owner, quant);
 
     Assert.assertEquals(owner.getBalance(), initBalance - quant
@@ -266,8 +266,8 @@ public class StorageMarketTest {
     Assert.assertEquals(currentPool + quant,
         dbManager.getDynamicPropertiesStore().getTotalStoragePool());
 
-    long bytes1 = 2694881440L - 1360781717L; // 1 million trx
-    long bytes2 = 1360781717L; // 1 million trx
+    long bytes1 = 2694881440L - 1360781717L; // 1 million xlt
+    long bytes2 = 1360781717L; // 1 million xlt
 
     storageMarket.sellStorage(owner, bytes1);
 

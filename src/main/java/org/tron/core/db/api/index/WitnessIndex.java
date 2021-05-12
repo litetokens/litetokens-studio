@@ -1,4 +1,4 @@
-package org.tron.core.db.api.index;
+package org.litetokens.core.db.api.index;
 
 import com.googlecode.cqengine.attribute.Attribute;
 import com.googlecode.cqengine.attribute.SimpleAttribute;
@@ -8,11 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import org.tron.common.utils.ByteArray;
-import org.tron.core.capsule.WitnessCapsule;
-import org.tron.core.db.common.WrappedByteArray;
-import org.tron.core.db2.core.ITronChainBase;
-import org.tron.protos.Protocol.Witness;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.core.capsule.WitnessCapsule;
+import org.litetokens.core.db.common.WrappedByteArray;
+import org.litetokens.core.db2.core.ILitetokensChainBase;
+import org.litetokens.protos.Protocol.Witness;
 
 import javax.annotation.PostConstruct;
 
@@ -28,7 +28,7 @@ public class WitnessIndex extends AbstractIndex<WitnessCapsule, Witness> {
 
   @Autowired
   public WitnessIndex(
-      @Qualifier("witnessStore") final ITronChainBase<WitnessCapsule> database) {
+      @Qualifier("witnessStore") final ILitetokensChainBase<WitnessCapsule> database) {
     super(database);
   }
 

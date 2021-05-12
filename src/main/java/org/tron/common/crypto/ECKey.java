@@ -16,10 +16,10 @@
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.common.crypto;
+package org.litetokens.common.crypto;
 
-import static org.tron.common.utils.BIUtil.isLessThan;
-import static org.tron.common.utils.ByteUtil.bigIntegerToBytes;
+import static org.litetokens.common.utils.BIUtil.isLessThan;
+import static org.litetokens.common.utils.ByteUtil.bigIntegerToBytes;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -69,12 +69,12 @@ import org.spongycastle.math.ec.ECPoint;
 import org.spongycastle.util.BigIntegers;
 import org.spongycastle.util.encoders.Base64;
 import org.spongycastle.util.encoders.Hex;
-import org.tron.common.crypto.jce.ECKeyAgreement;
-import org.tron.common.crypto.jce.ECKeyFactory;
-import org.tron.common.crypto.jce.ECKeyPairGenerator;
-import org.tron.common.crypto.jce.ECSignatureFactory;
-import org.tron.common.crypto.jce.TronCastleProvider;
-import org.tron.common.utils.ByteUtil;
+import org.litetokens.common.crypto.jce.ECKeyAgreement;
+import org.litetokens.common.crypto.jce.ECKeyFactory;
+import org.litetokens.common.crypto.jce.ECKeyPairGenerator;
+import org.litetokens.common.crypto.jce.ECSignatureFactory;
+import org.litetokens.common.crypto.jce.LitetokensCastleProvider;
+import org.litetokens.common.utils.ByteUtil;
 
 @Slf4j
 public class ECKey implements Serializable {
@@ -171,7 +171,7 @@ public class ECKey implements Serializable {
    * @param secureRandom -
    */
   public ECKey(SecureRandom secureRandom) {
-    this(TronCastleProvider.getInstance(), secureRandom);
+    this(LitetokensCastleProvider.getInstance(), secureRandom);
   }
 
   /**
@@ -207,7 +207,7 @@ public class ECKey implements Serializable {
    */
   public ECKey(@Nullable BigInteger priv, ECPoint pub) {
     this(
-        TronCastleProvider.getInstance(),
+        LitetokensCastleProvider.getInstance(),
         privateKeyFromBigInteger(priv),
         pub
     );
@@ -242,7 +242,7 @@ public class ECKey implements Serializable {
     } else {
       try {
         return ECKeyFactory
-            .getInstance(TronCastleProvider.getInstance())
+            .getInstance(LitetokensCastleProvider.getInstance())
             .generatePrivate(new ECPrivateKeySpec(priv,
                 CURVE_SPEC));
       } catch (InvalidKeySpecException ex) {

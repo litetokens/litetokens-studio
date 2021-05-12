@@ -1,16 +1,16 @@
-package org.tron.core.net.message;
+package org.litetokens.core.net.message;
 
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.tron.common.utils.Sha256Hash;
-import org.tron.protos.Protocol;
-import org.tron.protos.Protocol.Inventory;
-import org.tron.protos.Protocol.Inventory.InventoryType;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.protos.Protocol;
+import org.litetokens.protos.Protocol.Inventory;
+import org.litetokens.protos.Protocol.Inventory.InventoryType;
 
 
-public class InventoryMessage extends TronMessage {
+public class InventoryMessage extends LitetokensMessage {
 
   protected Inventory inv;
 
@@ -49,7 +49,7 @@ public class InventoryMessage extends TronMessage {
   }
 
   public MessageTypes getInvMessageType() {
-    return getInventoryType().equals(InventoryType.BLOCK) ? MessageTypes.BLOCK : MessageTypes.TRX;
+    return getInventoryType().equals(InventoryType.BLOCK) ? MessageTypes.BLOCK : MessageTypes.XLT;
 
   }
 

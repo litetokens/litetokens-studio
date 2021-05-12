@@ -1,10 +1,10 @@
 /*
- * java-tron is free software: you can redistribute it and/or modify
+ * java-litetokens is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * java-tron is distributed in the hope that it will be useful,
+ * java-litetokens is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -13,25 +13,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.core.actuator;
+package org.litetokens.core.actuator;
 
 import com.google.protobuf.Any;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.Arrays;
 import lombok.extern.slf4j.Slf4j;
-import org.tron.common.utils.ByteArray;
-import org.tron.core.Wallet;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.capsule.AssetIssueCapsule;
-import org.tron.core.capsule.TransactionResultCapsule;
-import org.tron.core.db.Manager;
-import org.tron.core.exception.ContractExeException;
-import org.tron.core.exception.ContractValidateException;
-import org.tron.protos.Contract;
-import org.tron.protos.Contract.ParticipateAssetIssueContract;
-import org.tron.protos.Protocol;
-import org.tron.protos.Protocol.Transaction.Result.code;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.capsule.AssetIssueCapsule;
+import org.litetokens.core.capsule.TransactionResultCapsule;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.exception.ContractExeException;
+import org.litetokens.core.exception.ContractValidateException;
+import org.litetokens.protos.Contract;
+import org.litetokens.protos.Contract.ParticipateAssetIssueContract;
+import org.litetokens.protos.Protocol;
+import org.litetokens.protos.Protocol.Transaction.Result.code;
 
 
 @Slf4j
@@ -61,7 +61,7 @@ public class ParticipateAssetIssueActuator extends AbstractActuator {
           this.dbManager.getAssetIssueStore()
               .get(participateAssetIssueContract.getAssetName().toByteArray());
       long exchangeAmount = Math.multiplyExact(cost, assetIssueCapsule.getNum());
-      exchangeAmount = Math.floorDiv(exchangeAmount, assetIssueCapsule.getTrxNum());
+      exchangeAmount = Math.floorDiv(exchangeAmount, assetIssueCapsule.getXltNum());
       ownerAccount.addAssetAmount(assetIssueCapsule.createDbKey(), exchangeAmount);
 
       //add to to_address
@@ -163,10 +163,10 @@ public class ParticipateAssetIssueActuator extends AbstractActuator {
         throw new ContractValidateException("No longer valid period!");
       }
 
-      int trxNum = assetIssueCapsule.getTrxNum();
+      int xltNum = assetIssueCapsule.getXltNum();
       int num = assetIssueCapsule.getNum();
       long exchangeAmount = Math.multiplyExact(amount, num);
-      exchangeAmount = Math.floorDiv(exchangeAmount, trxNum);
+      exchangeAmount = Math.floorDiv(exchangeAmount, xltNum);
       if (exchangeAmount <= 0) {
         throw new ContractValidateException("Can not process the exchange!");
       }

@@ -1,7 +1,7 @@
    
 # Protobuf protocol
 
-## The protocol of TRON is defined by Google Protobuf and contains a range of layers, from account, block to transfer.
+## The protocol of LITETOKENS is defined by Google Protobuf and contains a range of layers, from account, block to transfer.
 
 + There are 3 types of account—basic account, asset release account and contract account, and attributes included in each account are name, types, address, balance and related asset.
 + A basic account is able to apply to be a validation node, which has serval parameters, including extra attributes, public key, URL, voting statistics, history performance, etc.
@@ -19,7 +19,7 @@
      `type`: what type of this account is – e.g. _0_ stands for type `Normal`.  
      `balance`: balance of this account – e.g. _4213312_.  
      `votes`: received votes on this account – e.g. _{(“0x1b7w…9xj3”,323), (“0x8djq…j12m”,88),…,(“0x82nd…mx6i”,10001)}_.  
-     `asset`: other assets expect TRX in this account – e.g. _{<“WishToken”,66666>,<”Dogie”,233>}_.
+     `asset`: other assets expect XLT in this account – e.g. _{<“WishToken”,66666>,<”Dogie”,233>}_.
      `latest_operation_time`: the latest operation time of this account.
      
       // Account 
@@ -137,7 +137,7 @@
           }
      
      A `TransferContract` contains 3 parameters:  
-     `amount`: the amount of TRX – e.g. _12534_.  
+     `amount`: the amount of XLT – e.g. _12534_.  
      `to_address`: the receiver address – e.g. “_0xu82h…7237_”.  
      `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
 
@@ -210,19 +210,19 @@
      `owner_address`: the address for contract owner – e.g. “_0xu82h…7237_”.  
      `name`: the name for this contract – e.g. “Billscontract”.  
      `total_supply`: the maximum supply of this asset – e.g. _1000000000_.  
-     `trx_num`: the number of TRONIX – e.g._232241_.  
+     `xlt_num`: the number of LITETOKENS – e.g._232241_.  
      `num`: number of corresponding asset.  
      `start_time`: the starting date of this contract – e.g._20170312_.  
      `end_time`: the expiring date of this contract – e.g. _20170512_.  
      `vote_score`: the vote score of this contract received – e.g. _12343_.  
-     `description`: the description of this contract – e.g.”_trondada_”.  
+     `description`: the description of this contract – e.g.”_litetokensdada_”.  
      `url`: the url of this contract – e.g. “_https://www.noonetrust.com_”.
 
          message AssetIssueContract {   
            bytes owner_address = 1;   
            bytes name = 2;   
            int64 total_supply = 4;   
-           int32 trx_num = 6;   
+           int32 xlt_num = 6;   
            int32 num = 8;   
            int64 start_time = 9;   
            int64 end_time = 10;  
@@ -365,17 +365,17 @@ Input, transaction and head block all require signature.
 +	Inventory is mainly used to inform peer nodes the list of items.  
 
     `Inventory` contains `type` and `ids`.  
-    `type`: what type this `Inventory` is. – e.g. _0_ stands for `TRX`.  
+    `type`: what type this `Inventory` is. – e.g. _0_ stands for `XLT`.  
     `ids`: ID of things in this `Inventory`.
 
-    Two `Inventory` types: `TRX` and `BLOCK`.  
-    `TRX`: transaction.  
+    Two `Inventory` types: `XLT` and `BLOCK`.  
+    `XLT`: transaction.  
     `BLOCK`: block.
 
         // Inventory 
         message Inventory {   
           enum InventoryType {     
-            TRX = 0;     
+            XLT = 0;     
             BLOCK = 1;   
            }   
            InventoryType type = 1;   
@@ -383,21 +383,21 @@ Input, transaction and head block all require signature.
          }
 
     message `Items` contains 4 parameters:  
-    `type`: type of items – e.g. _1_ stands for `TRX`.  
+    `type`: type of items – e.g. _1_ stands for `XLT`.  
     `blocks`: blocks in `Items` if there is any.  
     `block_headers`: block headers if there is any.  
     `transactions`: transactions if there is any.
 
-    `Items` have four types: `ERR`, `TRX`, `BLOCK` and `BLOCKHEADER`.  
+    `Items` have four types: `ERR`, `XLT`, `BLOCK` and `BLOCKHEADER`.  
     `ERR`: error.  
-    `TRX`: transaction.  
+    `XLT`: transaction.  
     `BLOCK`: block.  
     `BLOCKHEADER`: block header.
 
         message Items {   
           enum ItemType {     
             ERR = 0;     
-            TRX = 1;    
+            XLT = 1;    
             BLOCK = 2;     
             BLOCKHEADER = 3;  
            }   

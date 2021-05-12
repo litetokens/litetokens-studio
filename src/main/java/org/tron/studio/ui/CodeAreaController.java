@@ -1,4 +1,4 @@
-package org.tron.studio.ui;
+package org.litetokens.studio.ui;
 
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
@@ -15,7 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.model.StyleSpansBuilder;
-import org.tron.studio.ShareData;
+import org.litetokens.studio.ShareData;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;

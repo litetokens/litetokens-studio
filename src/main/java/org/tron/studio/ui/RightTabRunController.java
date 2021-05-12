@@ -1,4 +1,4 @@
-package org.tron.studio.ui;
+package org.litetokens.studio.ui;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -25,23 +25,23 @@ import org.controlsfx.control.Notifications;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongycastle.util.encoders.Hex;
-import org.tron.abi.FunctionEncoder;
-import org.tron.abi.TypeReference;
-import org.tron.abi.datatypes.Function;
-import org.tron.abi.datatypes.Type;
-import org.tron.abi.datatypes.generated.AbiTypes;
-import org.tron.api.GrpcAPI.TransactionExtention;
-import org.tron.core.Wallet;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.core.services.http.Util;
-import org.tron.protos.Protocol.Transaction;
-import org.tron.studio.ShareData;
-import org.tron.studio.TransactionHistoryItem;
-import org.tron.studio.solc.CompilationResult;
-import org.tron.studio.solc.CompilationResult.ContractMetadata;
-import org.tron.studio.solc.SolidityCompiler;
-import org.tron.studio.utils.AbiUtil;
-import org.tron.studio.walletserver.WalletClient;
+import org.litetokens.abi.FunctionEncoder;
+import org.litetokens.abi.TypeReference;
+import org.litetokens.abi.datatypes.Function;
+import org.litetokens.abi.datatypes.Type;
+import org.litetokens.abi.datatypes.generated.AbiTypes;
+import org.litetokens.api.GrpcAPI.TransactionExtention;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.core.services.http.Util;
+import org.litetokens.protos.Protocol.Transaction;
+import org.litetokens.studio.ShareData;
+import org.litetokens.studio.TransactionHistoryItem;
+import org.litetokens.studio.solc.CompilationResult;
+import org.litetokens.studio.solc.CompilationResult.ContractMetadata;
+import org.litetokens.studio.solc.SolidityCompiler;
+import org.litetokens.studio.utils.AbiUtil;
+import org.litetokens.studio.walletserver.WalletClient;
 
 import java.io.IOException;
 import java.net.URL;
@@ -110,13 +110,13 @@ public class RightTabRunController implements Initializable {
 
 
         feeUnitComboBox.setItems(FXCollections.observableArrayList(
-                "trx",
+                "xlt",
                 "sun"
         ));
         feeUnitComboBox.getSelectionModel().selectFirst();
 
         valueUnitComboBox.setItems(FXCollections.observableArrayList(
-                "trx",
+                "xlt",
                 "sun"
         ));
         valueUnitComboBox.getSelectionModel().selectFirst();
@@ -245,16 +245,16 @@ public class RightTabRunController implements Initializable {
                 return;
             }
             if (valueUnitComboBox.getSelectionModel().getSelectedIndex() == 0) {
-                callValue *= ShareData.TRX_SUN_UNIT;
+                callValue *= ShareData.XLT_SUN_UNIT;
             }
 
             long feeLimit = Long.parseLong(feeLimitTextField.getText());
 
             if (feeUnitComboBox.getSelectionModel().getSelectedIndex() == 0) {
-                feeLimit *= ShareData.TRX_SUN_UNIT;
+                feeLimit *= ShareData.XLT_SUN_UNIT;
             }
-            if (feeLimit < 0 || feeLimit > 1000 * ShareData.TRX_SUN_UNIT) {
-                Notifications note = Notifications.create().title("Trigger Contract Failed").text("Fee limit should between 0 and 1000 trx or 1E9 Sun");
+            if (feeLimit < 0 || feeLimit > 1000 * ShareData.XLT_SUN_UNIT) {
+                Notifications note = Notifications.create().title("Trigger Contract Failed").text("Fee limit should between 0 and 1000 xlt or 1E9 Sun");
                 note.show();
                 return;
             }
@@ -524,11 +524,11 @@ public class RightTabRunController implements Initializable {
         public void handle(ActionEvent event) {
             long callValue = Long.parseLong(valueTextField.getText());
             if (valueUnitComboBox.getSelectionModel().getSelectedIndex() == 0) {
-                callValue *= ShareData.TRX_SUN_UNIT;
+                callValue *= ShareData.XLT_SUN_UNIT;
             }
             long feeLimit = Long.parseLong(feeLimitTextField.getText());
             if (feeUnitComboBox.getSelectionModel().getSelectedIndex() == 0) {
-                feeLimit *= ShareData.TRX_SUN_UNIT;
+                feeLimit *= ShareData.XLT_SUN_UNIT;
             }
             try {
                 byte[] data = Hex.decode(AbiUtil.parseMethod(methodStr, parameterText.getText().trim(), false));

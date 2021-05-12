@@ -1,13 +1,13 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.tron.core.capsule.VotesCapsule;
+import org.litetokens.core.capsule.VotesCapsule;
 
 @Component
-public class VotesStore extends TronStoreWithRevoking<VotesCapsule> {
+public class VotesStore extends LitetokensStoreWithRevoking<VotesCapsule> {
 
   @Autowired
   public VotesStore(@Value("votes") String dbName) {

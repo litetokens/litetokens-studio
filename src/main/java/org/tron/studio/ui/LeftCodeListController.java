@@ -1,4 +1,4 @@
-package org.tron.studio.ui;
+package org.litetokens.studio.ui;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
@@ -24,10 +24,10 @@ import org.fxmisc.richtext.CodeArea;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.FileCopyUtils;
-import org.tron.studio.MainApplication;
-import org.tron.studio.ShareData;
-import org.tron.studio.filesystem.SolidityFileUtil;
-import org.tron.studio.utils.FileNameFieldValidator;
+import org.litetokens.studio.MainApplication;
+import org.litetokens.studio.ShareData;
+import org.litetokens.studio.filesystem.SolidityFileUtil;
+import org.litetokens.studio.utils.FileNameFieldValidator;
 
 import java.io.BufferedWriter;
 import java.io.File;

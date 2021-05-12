@@ -1,4 +1,4 @@
-package org.tron.core.exception;
+package org.litetokens.core.exception;
 
 public class BadItemException extends StoreException {
 

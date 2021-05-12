@@ -1,15 +1,15 @@
-package org.tron.common.application;
+package org.litetokens.common.application;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.BlockStore;
-import org.tron.core.db.Manager;
-import org.tron.core.net.node.Node;
-import org.tron.core.net.node.NodeDelegate;
-import org.tron.core.net.node.NodeDelegateImpl;
-import org.tron.core.net.node.NodeImpl;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.BlockStore;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.net.node.Node;
+import org.litetokens.core.net.node.NodeDelegate;
+import org.litetokens.core.net.node.NodeDelegateImpl;
+import org.litetokens.core.net.node.NodeImpl;
 
 @Slf4j
 @Component

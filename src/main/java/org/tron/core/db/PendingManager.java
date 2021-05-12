@@ -1,11 +1,11 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.core.db.TransactionTrace.TimeResultType;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.core.db.TransactionTrace.TimeResultType;
 
 @Slf4j
 public class PendingManager implements AutoCloseable {
@@ -27,8 +27,8 @@ public class PendingManager implements AutoCloseable {
 
     for (TransactionCapsule tx : PendingManager.tmpTransactions) {
       try {
-        if (tx.getTrxTrace() != null &&
-            tx.getTrxTrace().getTimeResultType().equals(TimeResultType.NORMAL)) {
+        if (tx.getXltTrace() != null &&
+            tx.getXltTrace().getTimeResultType().equals(TimeResultType.NORMAL)) {
           dbManager.getRepushTransactions().put(tx);
         }
       } catch (InterruptedException e) {
@@ -40,8 +40,8 @@ public class PendingManager implements AutoCloseable {
 
     for (TransactionCapsule tx : dbManager.getPoppedTransactions()) {
       try {
-        if (tx.getTrxTrace() != null &&
-            tx.getTrxTrace().getTimeResultType().equals(TimeResultType.NORMAL)) {
+        if (tx.getXltTrace() != null &&
+            tx.getXltTrace().getTimeResultType().equals(TimeResultType.NORMAL)) {
           dbManager.getRepushTransactions().put(tx);
         }
       } catch (InterruptedException e) {

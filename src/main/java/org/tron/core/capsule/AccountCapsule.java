@@ -1,10 +1,10 @@
 /*
- * java-tron is free software: you can redistribute it and/or modify
+ * java-litetokens is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * java-tron is distributed in the hope that it will be useful,
+ * java-litetokens is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -13,7 +13,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.core.capsule;
+package org.litetokens.core.capsule;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -22,14 +22,14 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.List;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
-import org.tron.common.utils.ByteArray;
-import org.tron.protos.Contract.AccountCreateContract;
-import org.tron.protos.Contract.AccountUpdateContract;
-import org.tron.protos.Protocol.Account;
-import org.tron.protos.Protocol.Account.AccountResource;
-import org.tron.protos.Protocol.Account.Frozen;
-import org.tron.protos.Protocol.AccountType;
-import org.tron.protos.Protocol.Vote;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.protos.Contract.AccountCreateContract;
+import org.litetokens.protos.Contract.AccountUpdateContract;
+import org.litetokens.protos.Protocol.Account;
+import org.litetokens.protos.Protocol.Account.AccountResource;
+import org.litetokens.protos.Protocol.Account.Frozen;
+import org.litetokens.protos.Protocol.AccountType;
+import org.litetokens.protos.Protocol.Vote;
 
 @Slf4j
 public class AccountCapsule implements ProtoCapsule<Account>, Comparable<AccountCapsule> {
@@ -241,8 +241,8 @@ public class AccountCapsule implements ProtoCapsule<Account>, Comparable<Account
     }
   }
 
-  //tp:Tron_Power
-  public long getTronPower() {
+  //tp:Litetokens_Power
+  public long getLitetokensPower() {
     long tp = 0;
     //long now = Time.getCurrentMillis();
     for (int i = 0; i < account.getFrozenCount(); ++i) {

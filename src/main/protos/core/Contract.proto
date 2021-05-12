@@ -1,10 +1,10 @@
 /*
- * java-tron is free software: you can redistribute it and/or modify
+ * java-litetokens is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * java-tron is distributed in the hope that it will be useful,
+ * java-litetokens is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -17,11 +17,11 @@ syntax = "proto3";
 
 package protocol;
 
-option java_package = "org.tron.protos"; //Specify the name of the package that generated the Java file
+option java_package = "org.litetokens.protos"; //Specify the name of the package that generated the Java file
 option java_outer_classname = "Contract"; //Specify the class name of the generated Java file
-option go_package = "github.com/tronprotocol/grpc-gateway/core";
+option go_package = "gitub.com/litetokens/grpc-gateway/core";
 
-import "core/Tron.proto";
+import "core/Litetokens.proto";
 
 message AccountCreateContract {
   bytes owner_address = 1;
@@ -98,7 +98,7 @@ message AssetIssueContract {
   bytes abbr = 3;
   int64 total_supply = 4;
   repeated FrozenSupply frozen_supply = 5;
-  int32 trx_num = 6;
+  int32 xlt_num = 6;
   int32 num = 8;
   int64 start_time = 9;
   int64 end_time = 10;
@@ -185,7 +185,7 @@ message TriggerSmartContract {
 
 message BuyStorageContract {
   bytes owner_address = 1;
-  int64 quant = 2; // trx quantity for buy storage (sun)
+  int64 quant = 2; // xlt quantity for buy storage (sun)
 }
 
 message BuyStorageBytesContract {

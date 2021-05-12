@@ -1,4 +1,4 @@
-package org.tron.core.net.node;
+package org.litetokens.core.net.node;
 
 import com.google.protobuf.ByteString;
 import lombok.extern.slf4j.Slf4j;
@@ -6,27 +6,27 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.tron.common.application.Application;
-import org.tron.common.application.ApplicationFactory;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.common.crypto.ECKey;
-import org.tron.common.overlay.server.SyncPool;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.FileUtil;
-import org.tron.common.utils.Sha256Hash;
-import org.tron.core.Constant;
-import org.tron.core.capsule.BlockCapsule;
-import org.tron.core.capsule.BlockCapsule.BlockId;
-import org.tron.core.capsule.utils.BlockUtil;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.Parameter.NetConstants;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.Manager;
-import org.tron.core.net.message.BlockMessage;
-import org.tron.core.net.peer.PeerConnection;
-import org.tron.protos.Protocol.Block;
-import org.tron.protos.Protocol.BlockHeader;
-import org.tron.protos.Protocol.Inventory.InventoryType;
+import org.litetokens.common.application.Application;
+import org.litetokens.common.application.ApplicationFactory;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.common.crypto.ECKey;
+import org.litetokens.common.overlay.server.SyncPool;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.core.Constant;
+import org.litetokens.core.capsule.BlockCapsule;
+import org.litetokens.core.capsule.BlockCapsule.BlockId;
+import org.litetokens.core.capsule.utils.BlockUtil;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.Parameter.NetConstants;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.net.message.BlockMessage;
+import org.litetokens.core.net.peer.PeerConnection;
+import org.litetokens.protos.Protocol.Block;
+import org.litetokens.protos.Protocol.BlockHeader;
+import org.litetokens.protos.Protocol.Inventory.InventoryType;
 
 import java.io.File;
 import java.util.concurrent.ConcurrentHashMap;
@@ -38,7 +38,7 @@ import static org.junit.Assert.fail;
 @Slf4j
 public class NodeImplTest {
 
-  private static TronApplicationContext context;
+  private static LitetokensApplicationContext context;
 
   private static Application appT;
   private static String dbPath = "output_nodeimpl_test";
@@ -48,7 +48,7 @@ public class NodeImplTest {
 
   static {
     Args.setParam(new String[]{"-d", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new LitetokensApplicationContext(DefaultConfig.class);
     Args.getInstance().setSolidityNode(true);
     appT = ApplicationFactory.create(context);
   }
@@ -127,15 +127,15 @@ public class NodeImplTest {
     ConcurrentHashMap<BlockId, Long> syncBlockRequested2 = new ConcurrentHashMap<>();
     ConcurrentHashMap<BlockId, Long> syncBlockRequested3 = new ConcurrentHashMap<>();
 
-    advObjWeRequested1.put(new Item(new Sha256Hash(1, Sha256Hash.ZERO_HASH), InventoryType.TRX),
+    advObjWeRequested1.put(new Item(new Sha256Hash(1, Sha256Hash.ZERO_HASH), InventoryType.XLT),
         System.currentTimeMillis() - NetConstants.ADV_TIME_OUT);
     syncBlockRequested1.put(new BlockId(),
         System.currentTimeMillis());
-    advObjWeRequested2.put(new Item(new Sha256Hash(1, Sha256Hash.ZERO_HASH), InventoryType.TRX),
+    advObjWeRequested2.put(new Item(new Sha256Hash(1, Sha256Hash.ZERO_HASH), InventoryType.XLT),
         System.currentTimeMillis());
     syncBlockRequested2.put(new BlockId(),
         System.currentTimeMillis() - NetConstants.SYNC_TIME_OUT);
-    advObjWeRequested3.put(new Item(new Sha256Hash(1, Sha256Hash.ZERO_HASH), InventoryType.TRX),
+    advObjWeRequested3.put(new Item(new Sha256Hash(1, Sha256Hash.ZERO_HASH), InventoryType.XLT),
         System.currentTimeMillis());
     syncBlockRequested3.put(new BlockId(),
         System.currentTimeMillis());

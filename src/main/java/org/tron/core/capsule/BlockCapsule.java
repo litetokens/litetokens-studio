@@ -1,10 +1,10 @@
 /*
- * java-tron is free software: you can redistribute it and/or modify
+ * java-litetokens is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * java-tron is distributed in the hope that it will be useful,
+ * java-litetokens is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -13,7 +13,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.core.capsule;
+package org.litetokens.core.capsule;
 
 import com.google.common.primitives.Longs;
 import com.google.protobuf.ByteString;
@@ -27,18 +27,18 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
-import org.tron.common.crypto.ECKey;
-import org.tron.common.crypto.ECKey.ECDSASignature;
-import org.tron.common.utils.ByteUtil;
-import org.tron.common.utils.Sha256Hash;
-import org.tron.common.utils.Time;
-import org.tron.core.capsule.utils.MerkleTree;
-import org.tron.core.config.Parameter.ChainConstant;
-import org.tron.core.exception.BadItemException;
-import org.tron.core.exception.ValidateSignatureException;
-import org.tron.protos.Protocol.Block;
-import org.tron.protos.Protocol.BlockHeader;
-import org.tron.protos.Protocol.Transaction;
+import org.litetokens.common.crypto.ECKey;
+import org.litetokens.common.crypto.ECKey.ECDSASignature;
+import org.litetokens.common.utils.ByteUtil;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.common.utils.Time;
+import org.litetokens.core.capsule.utils.MerkleTree;
+import org.litetokens.core.config.Parameter.ChainConstant;
+import org.litetokens.core.exception.BadItemException;
+import org.litetokens.core.exception.ValidateSignatureException;
+import org.litetokens.protos.Protocol.Block;
+import org.litetokens.protos.Protocol.BlockHeader;
+import org.litetokens.protos.Protocol.Transaction;
 
 @Slf4j
 public class BlockCapsule implements ProtoCapsule<Block> {
@@ -160,7 +160,7 @@ public class BlockCapsule implements ProtoCapsule<Block> {
 
     // block
     Block.Builder blockBuild = Block.newBuilder();
-    transactionList.forEach(trx -> blockBuild.addTransactions(trx));
+    transactionList.forEach(xlt -> blockBuild.addTransactions(xlt));
     this.block = blockBuild.setBlockHeader(blockHeader).build();
     initTxs();
   }
@@ -179,9 +179,9 @@ public class BlockCapsule implements ProtoCapsule<Block> {
     }
   }
 
-  public void addTransaction(TransactionCapsule pendingTrx) {
-    this.block = this.block.toBuilder().addTransactions(pendingTrx.getInstance()).build();
-    getTransactions().add(pendingTrx);
+  public void addTransaction(TransactionCapsule pendingXlt) {
+    this.block = this.block.toBuilder().addTransactions(pendingXlt.getInstance()).build();
+    getTransactions().add(pendingXlt);
   }
 
   public List<TransactionCapsule> getTransactions() {
@@ -190,7 +190,7 @@ public class BlockCapsule implements ProtoCapsule<Block> {
 
   private void initTxs() {
     transactions = this.block.getTransactionsList().stream()
-        .map(trx -> new TransactionCapsule(trx))
+        .map(xlt -> new TransactionCapsule(xlt))
         .collect(Collectors.toList());
   }
 

@@ -1,9 +1,9 @@
-# protocol [![Build Status](https://travis-ci.org/tronprotocol/protocol.svg?branch=master)](https://travis-ci.org/tronprotocol/protocol)
+# protocol [![Build Status](https://travis-ci.org.litetokensprotocol/protocol.svg?branch=master)](https://travis-ci.org.litetokensprotocol/protocol)
 
 
-# The protocol of Tron including api and message.
+# The protocol of Litetokens including api and message.
 
-java-tron, wallet-cli and grpc-gateway
+java-litetokens, wallet-cli and grpc-gateway
 
 git subtree pull --prefix src/main/protos/ protocol master
 

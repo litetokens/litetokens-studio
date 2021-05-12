@@ -1,4 +1,4 @@
-package org.tron.core.db.api;
+package org.litetokens.core.db.api;
 
 import com.google.protobuf.Any;
 import com.google.protobuf.ByteString;
@@ -9,28 +9,28 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.FileUtil;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.capsule.AssetIssueCapsule;
-import org.tron.core.capsule.BlockCapsule;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.core.capsule.WitnessCapsule;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.Manager;
-import org.tron.core.exception.NonUniqueObjectException;
-import org.tron.protos.Contract.AssetIssueContract;
-import org.tron.protos.Contract.TransferContract;
-import org.tron.protos.Protocol.Account;
-import org.tron.protos.Protocol.Block;
-import org.tron.protos.Protocol.BlockHeader;
-import org.tron.protos.Protocol.BlockHeader.raw;
-import org.tron.protos.Protocol.Transaction;
-import org.tron.protos.Protocol.Transaction.Contract;
-import org.tron.protos.Protocol.Transaction.Contract.ContractType;
-import org.tron.protos.Protocol.Witness;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.capsule.AssetIssueCapsule;
+import org.litetokens.core.capsule.BlockCapsule;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.core.capsule.WitnessCapsule;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.exception.NonUniqueObjectException;
+import org.litetokens.protos.Contract.AssetIssueContract;
+import org.litetokens.protos.Contract.TransferContract;
+import org.litetokens.protos.Protocol.Account;
+import org.litetokens.protos.Protocol.Block;
+import org.litetokens.protos.Protocol.BlockHeader;
+import org.litetokens.protos.Protocol.BlockHeader.raw;
+import org.litetokens.protos.Protocol.Transaction;
+import org.litetokens.protos.Protocol.Transaction.Contract;
+import org.litetokens.protos.Protocol.Transaction.Contract.ContractType;
+import org.litetokens.protos.Protocol.Witness;
 
 
 public class StoreAPITest {
@@ -57,18 +57,18 @@ public class StoreAPITest {
   public static final String WITNESS_PUB_K_TWO = "878787a9cf";
   public static final String WITNESS_PUB_K_THREE = "767676a9cf";
   public static final String WITNESS_PUB_K_FOUR = "656565a9cf";
-  public static final String WITNESS_URL_ONE = "www.tron.cn";
-  public static final String WITNESS_URL_TWO = "www.tron-super.cn";
-  public static final String WITNESS_URL_THREE = "www.tron-plus.cn";
-  public static final String WITNESS_URL_FOUR = "www.tron-hk.cn";
+  public static final String WITNESS_URL_ONE = "www.litetokens.cn";
+  public static final String WITNESS_URL_TWO = "www.litetokens-super.cn";
+  public static final String WITNESS_URL_THREE = "www.litetokens-plus.cn";
+  public static final String WITNESS_URL_FOUR = "www.litetokens-hk.cn";
   public static final long WITNESS_COUNT_ONE = 100;
   public static final long WITNESS_COUNT_TWO = 200;
   public static final long WITNESS_COUNT_THREE = 300;
   public static final long WITNESS_COUNT_FOUR = 400;
-  public static final String ASSETISSUE_NAME_ONE = "www.tron.cn";
-  public static final String ASSETISSUE_NAME_TWO = "www.tron-super.cn";
-  public static final String ASSETISSUE_NAME_THREE = "www.tron-plus.cn";
-  public static final String ASSETISSUE_NAME_FOUR = "www.tron-hk.cn";
+  public static final String ASSETISSUE_NAME_ONE = "www.litetokens.cn";
+  public static final String ASSETISSUE_NAME_TWO = "www.litetokens-super.cn";
+  public static final String ASSETISSUE_NAME_THREE = "www.litetokens-plus.cn";
+  public static final String ASSETISSUE_NAME_FOUR = "www.litetokens-hk.cn";
   public static final long ASSETISSUE_START_ONE = DateTime.now().minusDays(2).getMillis();
   public static final long ASSETISSUE_END_ONE = DateTime.now().minusDays(1).getMillis();
   public static final long ASSETISSUE_START_TWO = DateTime.now().minusDays(1).getMillis();
@@ -98,13 +98,13 @@ public class StoreAPITest {
   public static AssetIssueContract assetIssue4;
   private static Manager dbManager;
   private static StoreAPI storeAPI;
-  private static TronApplicationContext context;
+  private static LitetokensApplicationContext context;
   private static String dbPath = "output_StoreAPI_test";
 
   static {
     Args.setParam(new String[]{"-d", dbPath, "-w"}, "config-test-index.conf");
     Args.getInstance().setSolidityNode(true);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new LitetokensApplicationContext(DefaultConfig.class);
   }
 
   @BeforeClass

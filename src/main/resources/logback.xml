@@ -16,11 +16,11 @@
 
   <!--<appender name="FILE"-->
     <!--class="ch.qos.logback.core.rolling.RollingFileAppender">-->
-    <!--<file>./logs/tron.log</file>-->
+    <!--<file>./logs/litetokens.log</file>-->
     <!--<rollingPolicy-->
       <!--class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">-->
       <!--&lt;!&ndash; rollover daily &ndash;&gt;-->
-      <!--<fileNamePattern>./logs/tron-%d{yyyy-MM-dd}.%i.log.tar.gz</fileNamePattern>-->
+      <!--<fileNamePattern>./logs/litetokens-%d{yyyy-MM-dd}.%i.log.tar.gz</fileNamePattern>-->
       <!--&lt;!&ndash; each file should be at most 500MB, keep 30 days worth of history, but at most 50GB &ndash;&gt;-->
       <!--<maxFileSize>500MB</maxFileSize>-->
       <!--<maxHistory>30</maxHistory>-->

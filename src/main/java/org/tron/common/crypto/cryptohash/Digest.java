@@ -16,7 +16,7 @@
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.common.crypto.cryptohash;
+package org.litetokens.common.crypto.cryptohash;
 
 /**
  * Copyright (c) 2007-2010  Projet RNRT SAPHIR

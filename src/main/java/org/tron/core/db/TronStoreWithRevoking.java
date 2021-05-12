@@ -1,4 +1,4 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Maps;
@@ -13,18 +13,18 @@ import javax.annotation.PostConstruct;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.tron.core.capsule.ProtoCapsule;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.api.IndexHelper;
-import org.tron.core.db2.common.IRevokingDB;
-import org.tron.core.db2.core.ITronChainBase;
-import org.tron.core.db2.core.RevokingDBWithCachingNewValue;
-import org.tron.core.db2.core.RevokingDBWithCachingOldValue;
-import org.tron.core.exception.BadItemException;
-import org.tron.core.exception.ItemNotFoundException;
+import org.litetokens.core.capsule.ProtoCapsule;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.api.IndexHelper;
+import org.litetokens.core.db2.common.IRevokingDB;
+import org.litetokens.core.db2.core.ILitetokensChainBase;
+import org.litetokens.core.db2.core.RevokingDBWithCachingNewValue;
+import org.litetokens.core.db2.core.RevokingDBWithCachingOldValue;
+import org.litetokens.core.exception.BadItemException;
+import org.litetokens.core.exception.ItemNotFoundException;
 
 @Slf4j
-public abstract class TronStoreWithRevoking<T extends ProtoCapsule> implements ITronChainBase<T> {
+public abstract class LitetokensStoreWithRevoking<T extends ProtoCapsule> implements ILitetokensChainBase<T> {
 
   protected IRevokingDB revokingDB;
   private TypeToken<T> token = new TypeToken<T>(getClass()) {};
@@ -35,7 +35,7 @@ public abstract class TronStoreWithRevoking<T extends ProtoCapsule> implements I
   @Getter
   private String dbName;
 
-  protected TronStoreWithRevoking(String dbName) {
+  protected LitetokensStoreWithRevoking(String dbName) {
     this.dbName = dbName;
     int dbVersion = Args.getInstance().getStorage().getDbVersion();
     if (dbVersion == 1) {
@@ -53,7 +53,7 @@ public abstract class TronStoreWithRevoking<T extends ProtoCapsule> implements I
   }
 
   // only for test
-  protected TronStoreWithRevoking(String dbName, RevokingDatabase revokingDatabase) {
+  protected LitetokensStoreWithRevoking(String dbName, RevokingDatabase revokingDatabase) {
       this.revokingDB = new RevokingDBWithCachingOldValue(dbName, (AbstractRevokingStore) revokingDatabase);
   }
 

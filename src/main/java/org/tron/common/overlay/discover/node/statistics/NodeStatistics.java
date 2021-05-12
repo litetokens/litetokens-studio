@@ -16,13 +16,13 @@
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.common.overlay.discover.node.statistics;
+package org.litetokens.common.overlay.discover.node.statistics;
 
 import java.util.concurrent.atomic.AtomicLong;
 import lombok.Getter;
-import org.tron.common.overlay.discover.node.Node;
-import org.tron.core.config.args.Args;
-import org.tron.protos.Protocol.ReasonCode;
+import org.litetokens.common.overlay.discover.node.Node;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.protos.Protocol.ReasonCode;
 
 public class NodeStatistics {
 
@@ -36,9 +36,9 @@ public class NodeStatistics {
   @Getter
   private int disconnectTimes = 0;
   @Getter
-  private ReasonCode tronLastRemoteDisconnectReason = null;
+  private ReasonCode litetokensLastRemoteDisconnectReason = null;
   @Getter
-  private ReasonCode tronLastLocalDisconnectReason = null;
+  private ReasonCode litetokensLastLocalDisconnectReason = null;
   private long lastDisconnectedTime = 0;
   private long firstDisconnectedTime = 0;
 
@@ -68,54 +68,54 @@ public class NodeStatistics {
   }
 
   public ReasonCode getDisconnectReason() {
-    if (tronLastLocalDisconnectReason != null) {
-      return tronLastLocalDisconnectReason;
+    if (litetokensLastLocalDisconnectReason != null) {
+      return litetokensLastLocalDisconnectReason;
     }
-    if (tronLastRemoteDisconnectReason != null) {
-      return tronLastRemoteDisconnectReason;
+    if (litetokensLastRemoteDisconnectReason != null) {
+      return litetokensLastRemoteDisconnectReason;
     }
     return ReasonCode.UNKNOWN;
   }
 
   public boolean isReputationPenalized() {
 
-    if (wasDisconnected() && tronLastRemoteDisconnectReason == ReasonCode.TOO_MANY_PEERS
+    if (wasDisconnected() && litetokensLastRemoteDisconnectReason == ReasonCode.TOO_MANY_PEERS
         && System.currentTimeMillis() - lastDisconnectedTime < TOO_MANY_PEERS_PENALIZE_TIMEOUT) {
       return true;
     }
 
-    if (wasDisconnected() && tronLastRemoteDisconnectReason == ReasonCode.DUPLICATE_PEER
+    if (wasDisconnected() && litetokensLastRemoteDisconnectReason == ReasonCode.DUPLICATE_PEER
         && System.currentTimeMillis() - lastDisconnectedTime < TOO_MANY_PEERS_PENALIZE_TIMEOUT) {
       return true;
     }
 
     if (firstDisconnectedTime > 0
         && (System.currentTimeMillis() - firstDisconnectedTime) > CLEAR_CYCLE_TIME) {
-      tronLastLocalDisconnectReason = null;
-      tronLastRemoteDisconnectReason = null;
+      litetokensLastLocalDisconnectReason = null;
+      litetokensLastRemoteDisconnectReason = null;
       disconnectTimes = 0;
       persistedReputation = 0;
       firstDisconnectedTime = 0;
     }
 
-    if (tronLastLocalDisconnectReason == ReasonCode.INCOMPATIBLE_PROTOCOL
-        || tronLastRemoteDisconnectReason == ReasonCode.INCOMPATIBLE_PROTOCOL
-        || tronLastLocalDisconnectReason == ReasonCode.BAD_PROTOCOL
-        || tronLastRemoteDisconnectReason == ReasonCode.BAD_PROTOCOL
-        || tronLastLocalDisconnectReason == ReasonCode.BAD_BLOCK
-        || tronLastRemoteDisconnectReason == ReasonCode.BAD_BLOCK
-        || tronLastLocalDisconnectReason == ReasonCode.BAD_TX
-        || tronLastRemoteDisconnectReason == ReasonCode.BAD_TX
-        || tronLastLocalDisconnectReason == ReasonCode.FORKED
-        || tronLastRemoteDisconnectReason == ReasonCode.FORKED
-        || tronLastLocalDisconnectReason == ReasonCode.UNLINKABLE
-        || tronLastRemoteDisconnectReason == ReasonCode.UNLINKABLE
-        || tronLastLocalDisconnectReason == ReasonCode.INCOMPATIBLE_CHAIN
-        || tronLastRemoteDisconnectReason == ReasonCode.INCOMPATIBLE_CHAIN
-        || tronLastRemoteDisconnectReason == ReasonCode.SYNC_FAIL
-        || tronLastLocalDisconnectReason == ReasonCode.SYNC_FAIL
-        || tronLastRemoteDisconnectReason == ReasonCode.INCOMPATIBLE_VERSION
-        || tronLastLocalDisconnectReason == ReasonCode.INCOMPATIBLE_VERSION) {
+    if (litetokensLastLocalDisconnectReason == ReasonCode.INCOMPATIBLE_PROTOCOL
+        || litetokensLastRemoteDisconnectReason == ReasonCode.INCOMPATIBLE_PROTOCOL
+        || litetokensLastLocalDisconnectReason == ReasonCode.BAD_PROTOCOL
+        || litetokensLastRemoteDisconnectReason == ReasonCode.BAD_PROTOCOL
+        || litetokensLastLocalDisconnectReason == ReasonCode.BAD_BLOCK
+        || litetokensLastRemoteDisconnectReason == ReasonCode.BAD_BLOCK
+        || litetokensLastLocalDisconnectReason == ReasonCode.BAD_TX
+        || litetokensLastRemoteDisconnectReason == ReasonCode.BAD_TX
+        || litetokensLastLocalDisconnectReason == ReasonCode.FORKED
+        || litetokensLastRemoteDisconnectReason == ReasonCode.FORKED
+        || litetokensLastLocalDisconnectReason == ReasonCode.UNLINKABLE
+        || litetokensLastRemoteDisconnectReason == ReasonCode.UNLINKABLE
+        || litetokensLastLocalDisconnectReason == ReasonCode.INCOMPATIBLE_CHAIN
+        || litetokensLastRemoteDisconnectReason == ReasonCode.INCOMPATIBLE_CHAIN
+        || litetokensLastRemoteDisconnectReason == ReasonCode.SYNC_FAIL
+        || litetokensLastLocalDisconnectReason == ReasonCode.SYNC_FAIL
+        || litetokensLastRemoteDisconnectReason == ReasonCode.INCOMPATIBLE_VERSION
+        || litetokensLastLocalDisconnectReason == ReasonCode.INCOMPATIBLE_VERSION) {
       persistedReputation = 0;
       return true;
     }
@@ -124,12 +124,12 @@ public class NodeStatistics {
 
   public void nodeDisconnectedRemote(ReasonCode reason) {
     lastDisconnectedTime = System.currentTimeMillis();
-    tronLastRemoteDisconnectReason = reason;
+    litetokensLastRemoteDisconnectReason = reason;
   }
 
   public void nodeDisconnectedLocal(ReasonCode reason) {
     lastDisconnectedTime = System.currentTimeMillis();
-    tronLastLocalDisconnectReason = reason;
+    litetokensLastLocalDisconnectReason = reason;
   }
 
   public void notifyDisconnect() {
@@ -137,7 +137,7 @@ public class NodeStatistics {
     if (firstDisconnectedTime <= 0) {
       firstDisconnectedTime = lastDisconnectedTime;
     }
-    if (tronLastLocalDisconnectReason == ReasonCode.RESET) {
+    if (litetokensLastLocalDisconnectReason == ReasonCode.RESET) {
       return;
     }
     disconnectTimes++;
@@ -172,11 +172,11 @@ public class NodeStatistics {
         + ((int) discoverMessageLatency.getAvrg()) + "ms"
         + ", p2p: " + p2pHandShake + "/" + messageStatistics.p2pInHello + "/"
         + messageStatistics.p2pOutHello + " "
-        + ", tron: " + messageStatistics.tronInMessage + "/" + messageStatistics.tronOutMessage
+        + ", litetokens: " + messageStatistics.litetokensInMessage + "/" + messageStatistics.litetokensOutMessage
         + " "
         + (wasDisconnected() ? "X " + disconnectTimes : "")
-        + (tronLastLocalDisconnectReason != null ? ("<=" + tronLastLocalDisconnectReason) : " ")
-        + (tronLastRemoteDisconnectReason != null ? ("=>" + tronLastRemoteDisconnectReason) : " ")
+        + (litetokensLastLocalDisconnectReason != null ? ("<=" + litetokensLastLocalDisconnectReason) : " ")
+        + (litetokensLastRemoteDisconnectReason != null ? ("=>" + litetokensLastRemoteDisconnectReason) : " ")
         + ", tcp flow: " + tcpFlow.getTotalCount();
   }
 

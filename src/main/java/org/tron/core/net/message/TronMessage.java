@@ -15,20 +15,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.core.net.message;
+package org.litetokens.core.net.message;
 
-import org.tron.common.overlay.message.Message;
+import org.litetokens.common.overlay.message.Message;
 
-public abstract class TronMessage extends Message {
+public abstract class LitetokensMessage extends Message {
 
-  public TronMessage() {
+  public LitetokensMessage() {
   }
 
-  public TronMessage(byte[] rawData) {
+  public LitetokensMessage(byte[] rawData) {
     super(rawData);
   }
 
-  public TronMessage(byte type, byte[] rawData) {
+  public LitetokensMessage(byte type, byte[] rawData) {
     super(type, rawData);
   }
 }

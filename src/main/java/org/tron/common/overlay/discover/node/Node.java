@@ -16,18 +16,18 @@
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.common.overlay.discover.node;
+package org.litetokens.common.overlay.discover.node;
 
-import static org.tron.common.crypto.Hash.sha3;
+import static org.litetokens.common.crypto.Hash.sha3;
 
 import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
 import org.apache.commons.lang3.StringUtils;
 import org.spongycastle.util.encoders.Hex;
-import org.tron.common.crypto.ECKey;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.Utils;
+import org.litetokens.common.crypto.ECKey;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.Utils;
 
 public class Node implements Serializable {
 

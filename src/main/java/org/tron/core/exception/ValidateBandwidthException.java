@@ -1,6 +1,6 @@
-package org.tron.core.exception;
+package org.litetokens.core.exception;
 
-public class ValidateBandwidthException extends TronException {
+public class ValidateBandwidthException extends LitetokensException {
 
   public ValidateBandwidthException() {
     super();

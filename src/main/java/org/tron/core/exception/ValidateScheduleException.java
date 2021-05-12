@@ -1,6 +1,6 @@
-package org.tron.core.exception;
+package org.litetokens.core.exception;
 
-public class ValidateScheduleException extends TronException {
+public class ValidateScheduleException extends LitetokensException {
 
   public ValidateScheduleException() {
     super();

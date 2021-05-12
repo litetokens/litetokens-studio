@@ -1,8 +1,8 @@
-package org.tron.common.overlay.message;
+package org.litetokens.common.overlay.message;
 
-import org.tron.core.net.message.MessageTypes;
-import org.tron.protos.Protocol;
-import org.tron.protos.Protocol.ReasonCode;
+import org.litetokens.core.net.message.MessageTypes;
+import org.litetokens.protos.Protocol;
+import org.litetokens.protos.Protocol.ReasonCode;
 
 public class DisconnectMessage extends P2pMessage {
 

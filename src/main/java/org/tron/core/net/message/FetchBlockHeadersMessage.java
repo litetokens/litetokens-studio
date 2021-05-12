@@ -1,6 +1,6 @@
-package org.tron.core.net.message;
+package org.litetokens.core.net.message;
 
-import org.tron.protos.Protocol;
+import org.litetokens.protos.Protocol;
 
 public class FetchBlockHeadersMessage extends InventoryMessage {
 

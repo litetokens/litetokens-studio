@@ -1,8 +1,8 @@
-package org.tron.core.net.node;
+package org.litetokens.core.net.node;
 
 import lombok.Getter;
-import org.tron.common.utils.Sha256Hash;
-import org.tron.protos.Protocol.Inventory.InventoryType;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.protos.Protocol.Inventory.InventoryType;
 
 @Getter
 public class Item {

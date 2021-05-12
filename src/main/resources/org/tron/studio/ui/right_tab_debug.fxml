@@ -4,7 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
 <HBox spacing="10" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.tron.studio.ui.RightTabDebugController">
+      fx:controller="org.litetokens.studio.ui.RightTabDebugController">
     <padding>
         <Insets top="10" right="10" bottom="10" left="10"/>
     </padding>

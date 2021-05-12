@@ -1,23 +1,23 @@
-package org.tron.common.application;
+package org.litetokens.common.application;
 
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.tron.core.db.Manager;
+import org.litetokens.core.db.Manager;
 
-public class TronApplicationContext extends AnnotationConfigApplicationContext {
+public class LitetokensApplicationContext extends AnnotationConfigApplicationContext {
 
-    public TronApplicationContext() {
+    public LitetokensApplicationContext() {
     }
 
-    public TronApplicationContext(DefaultListableBeanFactory beanFactory) {
+    public LitetokensApplicationContext(DefaultListableBeanFactory beanFactory) {
         super(beanFactory);
     }
 
-    public TronApplicationContext(Class<?>... annotatedClasses) {
+    public LitetokensApplicationContext(Class<?>... annotatedClasses) {
         super(annotatedClasses);
     }
 
-    public TronApplicationContext(String... basePackages) {
+    public LitetokensApplicationContext(String... basePackages) {
         super(basePackages);
     }
 

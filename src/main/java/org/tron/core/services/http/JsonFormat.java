@@ -1,4 +1,4 @@
-package org.tron.core.services.http;
+package org.litetokens.core.services.http;
 
 /*
   Copyright (c) 2009, Orbitz World Wide
@@ -50,7 +50,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
-import org.tron.common.utils.ByteArray;
+import org.litetokens.common.utils.ByteArray;
 
 
 /**

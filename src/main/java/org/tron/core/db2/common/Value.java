@@ -1,9 +1,9 @@
-package org.tron.core.db2.common;
+package org.litetokens.core.db2.common;
 
 import java.util.Arrays;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import org.tron.core.db.common.WrappedByteArray;
+import org.litetokens.core.db.common.WrappedByteArray;
 
 @EqualsAndHashCode(exclude = "operator")
 public final class Value {

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.runtime.vm.program;
+package org.litetokens.common.runtime.vm.program;
 
 import static java.lang.StrictMath.min;
 import static java.lang.String.format;
@@ -24,10 +24,10 @@ import static org.apache.commons.lang3.ArrayUtils.getLength;
 import static org.apache.commons.lang3.ArrayUtils.isEmpty;
 import static org.apache.commons.lang3.ArrayUtils.isNotEmpty;
 import static org.apache.commons.lang3.ArrayUtils.nullToEmpty;
-import static org.tron.common.runtime.utils.MUtil.convertToTronAddress;
-import static org.tron.common.runtime.utils.MUtil.transfer;
-import static org.tron.common.utils.BIUtil.isPositive;
-import static org.tron.common.utils.BIUtil.toBI;
+import static org.litetokens.common.runtime.utils.MUtil.convertToLitetokensAddress;
+import static org.litetokens.common.runtime.utils.MUtil.transfer;
+import static org.litetokens.common.utils.BIUtil.isPositive;
+import static org.litetokens.common.utils.BIUtil.toBI;
 
 import com.google.protobuf.ByteString;
 import java.io.ByteArrayOutputStream;
@@ -44,35 +44,35 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.spongycastle.util.encoders.Hex;
-import org.tron.common.runtime.config.VMConfig;
-import org.tron.common.runtime.vm.DataWord;
-import org.tron.common.runtime.vm.EnergyCost;
-import org.tron.common.runtime.vm.MessageCall;
-import org.tron.common.runtime.vm.OpCode;
-import org.tron.common.runtime.vm.PrecompiledContracts;
-import org.tron.common.runtime.vm.VM;
-import org.tron.common.runtime.vm.program.invoke.ProgramInvoke;
-import org.tron.common.runtime.vm.program.invoke.ProgramInvokeFactory;
-import org.tron.common.runtime.vm.program.invoke.ProgramInvokeFactoryImpl;
-import org.tron.common.runtime.vm.program.listener.CompositeProgramListener;
-import org.tron.common.runtime.vm.program.listener.ProgramListenerAware;
-import org.tron.common.runtime.vm.program.listener.ProgramStorageChangeListener;
-import org.tron.common.runtime.vm.trace.ProgramTrace;
-import org.tron.common.runtime.vm.trace.ProgramTraceListener;
-import org.tron.common.storage.Deposit;
-import org.tron.common.utils.ByteUtil;
-import org.tron.common.utils.FastByteComparisons;
-import org.tron.common.utils.Utils;
-import org.tron.core.Wallet;
-import org.tron.core.actuator.TransferActuator;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.capsule.BlockCapsule;
-import org.tron.core.capsule.ContractCapsule;
-import org.tron.core.config.args.Args;
-import org.tron.core.exception.ContractValidateException;
-import org.tron.core.exception.TronException;
-import org.tron.protos.Protocol;
-import org.tron.protos.Protocol.SmartContract;
+import org.litetokens.common.runtime.config.VMConfig;
+import org.litetokens.common.runtime.vm.DataWord;
+import org.litetokens.common.runtime.vm.EnergyCost;
+import org.litetokens.common.runtime.vm.MessageCall;
+import org.litetokens.common.runtime.vm.OpCode;
+import org.litetokens.common.runtime.vm.PrecompiledContracts;
+import org.litetokens.common.runtime.vm.VM;
+import org.litetokens.common.runtime.vm.program.invoke.ProgramInvoke;
+import org.litetokens.common.runtime.vm.program.invoke.ProgramInvokeFactory;
+import org.litetokens.common.runtime.vm.program.invoke.ProgramInvokeFactoryImpl;
+import org.litetokens.common.runtime.vm.program.listener.CompositeProgramListener;
+import org.litetokens.common.runtime.vm.program.listener.ProgramListenerAware;
+import org.litetokens.common.runtime.vm.program.listener.ProgramStorageChangeListener;
+import org.litetokens.common.runtime.vm.trace.ProgramTrace;
+import org.litetokens.common.runtime.vm.trace.ProgramTraceListener;
+import org.litetokens.common.storage.Deposit;
+import org.litetokens.common.utils.ByteUtil;
+import org.litetokens.common.utils.FastByteComparisons;
+import org.litetokens.common.utils.Utils;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.actuator.TransferActuator;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.capsule.BlockCapsule;
+import org.litetokens.core.capsule.ContractCapsule;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.exception.ContractValidateException;
+import org.litetokens.core.exception.LitetokensException;
+import org.litetokens.protos.Protocol;
+import org.litetokens.protos.Protocol.SmartContract;
 
 /**
  * @author Roman Mandeleil
@@ -393,8 +393,8 @@ public class Program {
 
   public void suicide(DataWord obtainerAddress) {
 
-    byte[] owner = convertToTronAddress(getOwnerAddress().getLast20Bytes());
-    byte[] obtainer = convertToTronAddress(obtainerAddress.getLast20Bytes());
+    byte[] owner = convertToLitetokensAddress(getOwnerAddress().getLast20Bytes());
+    byte[] obtainer = convertToLitetokensAddress(obtainerAddress.getLast20Bytes());
     long balance = getContractState().getBalance(owner);
 
     if (logger.isInfoEnabled()) {
@@ -432,7 +432,7 @@ public class Program {
       return;
     }
 
-    byte[] senderAddress = convertToTronAddress(this.getOwnerAddress().getLast20Bytes());
+    byte[] senderAddress = convertToLitetokensAddress(this.getOwnerAddress().getLast20Bytes());
 
     long endowment = value.value().longValueExact();
     if (getContractState().getBalance(senderAddress) < endowment) {
@@ -566,7 +566,7 @@ public class Program {
       refundEnergy(refundEnergy, "remain energy from the internal call");
       if (logger.isInfoEnabled()) {
         logger.info("The remaining energy is refunded, account: [{}], energy: [{}] ",
-            Hex.toHexString(convertToTronAddress(getOwnerAddress().getLast20Bytes())),
+            Hex.toHexString(convertToLitetokensAddress(getOwnerAddress().getLast20Bytes())),
             refundEnergy);
       }
     }
@@ -592,8 +592,8 @@ public class Program {
     byte[] data = memoryChunk(msg.getInDataOffs().intValue(), msg.getInDataSize().intValue());
 
     // FETCH THE SAVED STORAGE
-    byte[] codeAddress = convertToTronAddress(msg.getCodeAddress().getLast20Bytes());
-    byte[] senderAddress = convertToTronAddress(getOwnerAddress().getLast20Bytes());
+    byte[] codeAddress = convertToLitetokensAddress(msg.getCodeAddress().getLast20Bytes());
+    byte[] senderAddress = convertToLitetokensAddress(getOwnerAddress().getLast20Bytes());
     byte[] contextAddress = msg.getType().callIsStateless() ? senderAddress : codeAddress;
 
     if (logger.isInfoEnabled()) {
@@ -783,7 +783,7 @@ public class Program {
     DataWord keyWord = word1.clone();
     DataWord valWord = word2.clone();
     getContractState()
-        .putStorageValue(convertToTronAddress(getOwnerAddress().getLast20Bytes()), keyWord,
+        .putStorageValue(convertToLitetokensAddress(getOwnerAddress().getLast20Bytes()), keyWord,
             valWord);
   }
 
@@ -792,7 +792,7 @@ public class Program {
   }
 
   public byte[] getCodeAt(DataWord address) {
-    byte[] code = invoke.getDeposit().getCode(convertToTronAddress(address.getLast20Bytes()));
+    byte[] code = invoke.getDeposit().getCode(convertToLitetokensAddress(address.getLast20Bytes()));
     return nullToEmpty(code);
   }
 
@@ -819,7 +819,7 @@ public class Program {
   }
 
   public DataWord getBalance(DataWord address) {
-    long balance = getContractState().getBalance(convertToTronAddress(address.getLast20Bytes()));
+    long balance = getContractState().getBalance(convertToLitetokensAddress(address.getLast20Bytes()));
     return new DataWord(balance);
   }
 
@@ -882,7 +882,7 @@ public class Program {
 
   public DataWord storageLoad(DataWord key) {
     DataWord ret = getContractState()
-        .getStorageValue(convertToTronAddress(getOwnerAddress().getLast20Bytes()), key.clone());
+        .getStorageValue(convertToLitetokensAddress(getOwnerAddress().getLast20Bytes()), key.clone());
     return ret == null ? null : ret.clone();
   }
 
@@ -1245,8 +1245,8 @@ public class Program {
     // Repository track = getContractState().startTracking();
     Deposit deposit = getContractState().newDepositChild();
 
-    byte[] senderAddress = convertToTronAddress(this.getOwnerAddress().getLast20Bytes());
-    byte[] codeAddress = convertToTronAddress(msg.getCodeAddress().getLast20Bytes());
+    byte[] senderAddress = convertToLitetokensAddress(this.getOwnerAddress().getLast20Bytes());
+    byte[] codeAddress = convertToLitetokensAddress(msg.getCodeAddress().getLast20Bytes());
     byte[] contextAddress = msg.getType().callIsStateless() ? senderAddress : codeAddress;
 
     // todo: need check endowment > 0 and not exceed?? because of "senderBalance < endowment"
@@ -1281,7 +1281,7 @@ public class Program {
       // deposit.rollback();
     } else {
       // Delegate or not. if is delegated, we will use msg sender, otherwise use contract address
-      contract.setCallerAddress(convertToTronAddress(msg.getType().callIsDelegate() ?
+      contract.setCallerAddress(convertToLitetokensAddress(msg.getType().callIsDelegate() ?
           getCallerAddress().getLast20Bytes() : getOwnerAddress().getLast20Bytes()));
       // this is the depositImpl, not contractState as above
       contract.setDeposit(deposit);
@@ -1459,11 +1459,11 @@ public class Program {
       return new OutOfStorageException("Not enough ContractState resource");
     }
 
-    public static PrecompiledContractException contractValidateException(TronException e) {
+    public static PrecompiledContractException contractValidateException(LitetokensException e) {
       return new PrecompiledContractException(e.getMessage());
     }
 
-    public static PrecompiledContractException contractExecuteException(TronException e) {
+    public static PrecompiledContractException contractExecuteException(LitetokensException e) {
       return new PrecompiledContractException(e.getMessage());
     }
 

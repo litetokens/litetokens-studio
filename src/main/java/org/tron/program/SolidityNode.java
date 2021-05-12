@@ -1,4 +1,4 @@
-package org.tron.program;
+package org.litetokens.program;
 
 import ch.qos.logback.classic.Level;
 import java.util.concurrent.Executors;
@@ -9,38 +9,38 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.util.StringUtils;
-import org.tron.common.application.Application;
-import org.tron.common.application.ApplicationFactory;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.common.overlay.client.DatabaseGrpcClient;
-import org.tron.common.overlay.discover.DiscoverServer;
-import org.tron.common.overlay.discover.node.NodeManager;
-import org.tron.common.overlay.server.ChannelManager;
-import org.tron.core.Constant;
-import org.tron.core.capsule.BlockCapsule;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.core.capsule.TransactionInfoCapsule;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.Manager;
-import org.tron.core.exception.AccountResourceInsufficientException;
-import org.tron.core.exception.BadBlockException;
-import org.tron.core.exception.BadItemException;
-import org.tron.core.exception.ContractExeException;
-import org.tron.core.exception.ContractValidateException;
-import org.tron.core.exception.DupTransactionException;
-import org.tron.core.exception.ReceiptCheckErrException;
-import org.tron.core.exception.TaposException;
-import org.tron.core.exception.TooBigTransactionException;
-import org.tron.core.exception.TooBigTransactionResultException;
-import org.tron.core.exception.TransactionExpirationException;
-import org.tron.core.exception.VMIllegalException;
-import org.tron.core.exception.ValidateScheduleException;
-import org.tron.core.exception.ValidateSignatureException;
-import org.tron.core.services.RpcApiService;
-import org.tron.core.services.http.solidity.SolidityNodeHttpApiService;
-import org.tron.protos.Protocol.Block;
-import org.tron.protos.Protocol.DynamicProperties;
+import org.litetokens.common.application.Application;
+import org.litetokens.common.application.ApplicationFactory;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.common.overlay.client.DatabaseGrpcClient;
+import org.litetokens.common.overlay.discover.DiscoverServer;
+import org.litetokens.common.overlay.discover.node.NodeManager;
+import org.litetokens.common.overlay.server.ChannelManager;
+import org.litetokens.core.Constant;
+import org.litetokens.core.capsule.BlockCapsule;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.core.capsule.TransactionInfoCapsule;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.exception.AccountResourceInsufficientException;
+import org.litetokens.core.exception.BadBlockException;
+import org.litetokens.core.exception.BadItemException;
+import org.litetokens.core.exception.ContractExeException;
+import org.litetokens.core.exception.ContractValidateException;
+import org.litetokens.core.exception.DupTransactionException;
+import org.litetokens.core.exception.ReceiptCheckErrException;
+import org.litetokens.core.exception.TaposException;
+import org.litetokens.core.exception.TooBigTransactionException;
+import org.litetokens.core.exception.TooBigTransactionResultException;
+import org.litetokens.core.exception.TransactionExpirationException;
+import org.litetokens.core.exception.VMIllegalException;
+import org.litetokens.core.exception.ValidateScheduleException;
+import org.litetokens.core.exception.ValidateSignatureException;
+import org.litetokens.core.services.RpcApiService;
+import org.litetokens.core.services.http.solidity.SolidityNodeHttpApiService;
+import org.litetokens.protos.Protocol.Block;
+import org.litetokens.protos.Protocol.DynamicProperties;
 
 @Slf4j
 public class SolidityNode {
@@ -107,17 +107,17 @@ public class SolidityNode {
           BlockCapsule blockCapsule = new BlockCapsule(block);
           dbManager.pushVerifiedBlock(blockCapsule);
           //dbManager.pushBlock(blockCapsule);
-          for (TransactionCapsule trx : blockCapsule.getTransactions()) {
+          for (TransactionCapsule xlt : blockCapsule.getTransactions()) {
             TransactionInfoCapsule ret;
             try {
-              ret = dbManager.getTransactionHistoryStore().get(trx.getTransactionId().getBytes());
+              ret = dbManager.getTransactionHistoryStore().get(xlt.getTransactionId().getBytes());
             } catch (BadItemException ex) {
               logger.warn("", ex);
               continue;
             }
             ret.setBlockNumber(blockCapsule.getNum());
             ret.setBlockTimeStamp(blockCapsule.getTimeStamp());
-            dbManager.getTransactionHistoryStore().put(trx.getTransactionId().getBytes(), ret);
+            dbManager.getTransactionHistoryStore().put(xlt.getTransactionId().getBytes(), ret);
           }
           dbManager.getDynamicPropertiesStore()
               .saveLatestSolidifiedBlockNum(lastSolidityBlockNum + 1);
@@ -189,7 +189,7 @@ public class SolidityNode {
     }
     cfgArgs.setSolidityNode(true);
 
-    ApplicationContext context = new TronApplicationContext(DefaultConfig.class);
+    ApplicationContext context = new LitetokensApplicationContext(DefaultConfig.class);
 
     if (cfgArgs.isHelp()) {
       logger.info("Here is the help message.");

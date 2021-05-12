@@ -1,19 +1,19 @@
-package org.tron.program;
+package org.litetokens.program;
 
 import ch.qos.logback.classic.Level;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.tron.common.application.Application;
-import org.tron.common.application.ApplicationFactory;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.core.Constant;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
-import org.tron.core.services.RpcApiService;
-import org.tron.core.services.WitnessService;
-import org.tron.core.services.http.FullNodeHttpApiService;
+import org.litetokens.common.application.Application;
+import org.litetokens.common.application.ApplicationFactory;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.core.Constant;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.services.RpcApiService;
+import org.litetokens.core.services.WitnessService;
+import org.litetokens.core.services.http.FullNodeHttpApiService;
 
 @Slf4j
 public class FullNode {
@@ -42,8 +42,8 @@ public class FullNode {
 
     DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
     beanFactory.setAllowCircularReferences(false);
-    TronApplicationContext context =
-        new TronApplicationContext(beanFactory);
+    LitetokensApplicationContext context =
+        new LitetokensApplicationContext(beanFactory);
     context.register(DefaultConfig.class);
 
     context.refresh();

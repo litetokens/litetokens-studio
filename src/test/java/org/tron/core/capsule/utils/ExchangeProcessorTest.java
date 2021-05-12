@@ -1,4 +1,4 @@
-package org.tron.core.capsule.utils;
+package org.litetokens.core.capsule.utils;
 
 import java.io.File;
 import lombok.extern.slf4j.Slf4j;
@@ -6,19 +6,19 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.common.utils.FileUtil;
-import org.tron.core.Constant;
-import org.tron.core.Wallet;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.core.Constant;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
 
 @Slf4j
 public class ExchangeProcessorTest {
 
   private static ExchangeProcessor processor;
   private static final String dbPath = "output_buy_exchange_processor_test";
-  private static TronApplicationContext context;
+  private static LitetokensApplicationContext context;
   private static final String OWNER_ADDRESS;
   private static final String OWNER_ADDRESS_INVALID = "aaaa";
   private static final String OWNER_ACCOUNT_INVALID;
@@ -26,7 +26,7 @@ public class ExchangeProcessorTest {
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new LitetokensApplicationContext(DefaultConfig.class);
     OWNER_ADDRESS = Wallet.getAddressPreFixString() + "548794500882809695a8a687866e76d4271a1abc";
     OWNER_ACCOUNT_INVALID =
         Wallet.getAddressPreFixString() + "548794500882809695a8a687866e76d4271a3456";
@@ -63,7 +63,7 @@ public class ExchangeProcessorTest {
   public void testExchange() {
     long sellBalance = 100_000_000_000000L;
     long buyBalance = 128L * 1024 * 1024 * 1024;
-    long sellQuant = 2_000_000_000_000L; // 2 million trx
+    long sellQuant = 2_000_000_000_000L; // 2 million xlt
 
     long result = processor.exchange(sellBalance, buyBalance, sellQuant);
 
@@ -74,7 +74,7 @@ public class ExchangeProcessorTest {
   public void testExchange2() {
     long sellBalance = 100_000_000_000000L;
     long buyBalance = 128L * 1024 * 1024 * 1024;
-    long sellQuant = 1_000_000_000_000L; // 2 million trx
+    long sellQuant = 1_000_000_000_000L; // 2 million xlt
 
     long result = processor.exchange(sellBalance, buyBalance, sellQuant);
     Assert.assertEquals(1360781717L, result);
@@ -92,7 +92,7 @@ public class ExchangeProcessorTest {
   public void testSellAndBuy() {
     long sellBalance = 100_000_000_000000L;
     long buyBalance = 128L * 1024 * 1024 * 1024;
-    long sellQuant = 2_000_000_000_000L; // 2 million trx
+    long sellQuant = 2_000_000_000_000L; // 2 million xlt
 
     long result = processor.exchange(sellBalance, buyBalance, sellQuant);
     Assert.assertEquals(2694881440L, result);
@@ -109,7 +109,7 @@ public class ExchangeProcessorTest {
   public void testSellAndBuy2() {
     long sellBalance = 100_000_000_000000L;
     long buyBalance = 128L * 1024 * 1024 * 1024;
-    long sellQuant = 2_000_000_000_000L; // 2 million trx
+    long sellQuant = 2_000_000_000_000L; // 2 million xlt
 
     long result = processor.exchange(sellBalance, buyBalance, sellQuant);
     Assert.assertEquals(2694881440L, result);
@@ -135,7 +135,7 @@ public class ExchangeProcessorTest {
   public void testInject() {
     long sellBalance = 1_000_000_000000L;
     long buyBalance = 10_000_000L;
-    long sellQuant = 10_000_000L; // 10 trx
+    long sellQuant = 10_000_000L; // 10 xlt
 
     long result = processor.exchange(sellBalance, buyBalance, sellQuant);
     Assert.assertEquals(99L, result);
@@ -153,7 +153,7 @@ public class ExchangeProcessorTest {
   public void testWithdraw() {
     long sellBalance = 1_000_000_000000L;
     long buyBalance = 10_000_000L;
-    long sellQuant = 10_000_000L; // 10 trx
+    long sellQuant = 10_000_000L; // 10 xlt
 
     long result = processor.exchange(sellBalance, buyBalance, sellQuant);
     Assert.assertEquals(99L, result);

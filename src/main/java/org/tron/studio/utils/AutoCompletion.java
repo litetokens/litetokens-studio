@@ -1,4 +1,4 @@
-package org.tron.studio.utils;
+package org.litetokens.studio.utils;
 
 import com.jfoenix.controls.JFXPopup;
 import javafx.collections.FXCollections;
@@ -10,7 +10,7 @@ import javafx.scene.input.KeyEvent;
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.PopupAlignment;
-import org.tron.studio.ShareData;
+import org.litetokens.studio.ShareData;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

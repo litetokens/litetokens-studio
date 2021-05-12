@@ -1,11 +1,11 @@
-package org.tron.abi;
+package org.litetokens.abi;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 /**
  * Type wrapper to get around limitations of Java's type erasure.
- * This is so that we can pass around Typed {@link org.tron.abi.datatypes.Array} types.
+ * This is so that we can pass around Typed {@link org.litetokens.abi.datatypes.Array} types.
  *
  * <p>See <a href="http://gafter.blogspot.com.au/2006/12/super-type-tokens.html">this blog post</a>
  * for further details.
@@ -14,7 +14,7 @@ import java.lang.reflect.Type;
  * <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Type.html">Type</a> to
  * avoid working around this fundamental generics limitation.
  */
-public abstract class TypeReference<T extends org.tron.abi.datatypes.Type>
+public abstract class TypeReference<T extends org.litetokens.abi.datatypes.Type>
         implements Comparable<TypeReference<T>> {
 
     private final Type type;
@@ -65,7 +65,7 @@ public abstract class TypeReference<T extends org.tron.abi.datatypes.Type>
         }
     }
 
-    public static <T extends org.tron.abi.datatypes.Type> TypeReference<T> create(Class<T> cls) {
+    public static <T extends org.litetokens.abi.datatypes.Type> TypeReference<T> create(Class<T> cls) {
         return new TypeReference<T>() {
             @Override
             public Type getType() {
@@ -74,7 +74,7 @@ public abstract class TypeReference<T extends org.tron.abi.datatypes.Type>
         };
     }
 
-    public abstract static class StaticArrayTypeReference<T extends org.tron.abi.datatypes.Type>
+    public abstract static class StaticArrayTypeReference<T extends org.litetokens.abi.datatypes.Type>
             extends TypeReference<T> {
 
         private final int size;

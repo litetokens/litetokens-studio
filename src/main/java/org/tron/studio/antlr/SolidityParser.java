@@ -1,5 +1,5 @@
 // Generated from Solidity.g4 by ANTLR 4.7
-package org.tron.studio.antlr;
+package org.litetokens.studio.antlr;
 
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;

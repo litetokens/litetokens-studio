@@ -1,23 +1,23 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
 
-import static org.tron.protos.Protocol.Transaction.Contract.ContractType.TransferAssetContract;
+import static org.litetokens.protos.Protocol.Transaction.Contract.ContractType.TransferAssetContract;
 
 import com.google.protobuf.ByteString;
 import java.util.List;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
-import org.tron.common.utils.ByteArray;
-import org.tron.core.Constant;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.capsule.AssetIssueCapsule;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.core.exception.AccountResourceInsufficientException;
-import org.tron.core.exception.ContractValidateException;
-import org.tron.core.exception.TooBigTransactionResultException;
-import org.tron.protos.Contract.TransferAssetContract;
-import org.tron.protos.Contract.TransferContract;
-import org.tron.protos.Protocol.Transaction.Contract;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.core.Constant;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.capsule.AssetIssueCapsule;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.core.exception.AccountResourceInsufficientException;
+import org.litetokens.core.exception.ContractValidateException;
+import org.litetokens.core.exception.TooBigTransactionResultException;
+import org.litetokens.protos.Contract.TransferAssetContract;
+import org.litetokens.protos.Contract.TransferContract;
+import org.litetokens.protos.Protocol.Transaction.Contract;
 
 @Slf4j
 public class BandwidthProcessor extends ResourceProcessor {
@@ -49,18 +49,18 @@ public class BandwidthProcessor extends ResourceProcessor {
   }
 
   @Override
-  public void consume(TransactionCapsule trx, TransactionTrace trace)
+  public void consume(TransactionCapsule xlt, TransactionTrace trace)
       throws ContractValidateException, AccountResourceInsufficientException, TooBigTransactionResultException {
-    List<Contract> contracts = trx.getInstance().getRawData().getContractList();
-    if (trx.getResultSerializedSize() > Constant.MAX_RESULT_SIZE_IN_TX * contracts.size()) {
+    List<Contract> contracts = xlt.getInstance().getRawData().getContractList();
+    if (xlt.getResultSerializedSize() > Constant.MAX_RESULT_SIZE_IN_TX * contracts.size()) {
       throw new TooBigTransactionResultException();
     }
 
     long bytesSize;
     if (dbManager.getDynamicPropertiesStore().supportVM()) {
-      bytesSize = trx.getInstance().toBuilder().clearRet().build().getSerializedSize();
+      bytesSize = xlt.getInstance().toBuilder().clearRet().build().getSerializedSize();
     } else {
-      bytesSize = trx.getSerializedSize();
+      bytesSize = xlt.getSerializedSize();
     }
 
     for (Contract contract : contracts) {
@@ -68,7 +68,7 @@ public class BandwidthProcessor extends ResourceProcessor {
         bytesSize += Constant.MAX_RESULT_SIZE_IN_TX;
       }
 
-      logger.debug("trxId {},bandwidth cost :{}", trx.getTransactionId(), bytesSize);
+      logger.debug("xltId {},bandwidth cost :{}", xlt.getTransactionId(), bytesSize);
       trace.setNetBill(bytesSize, 0);
       byte[] address = TransactionCapsule.getOwner(contract);
       AccountCapsule accountCapsule = dbManager.getAccountStore().get(address);

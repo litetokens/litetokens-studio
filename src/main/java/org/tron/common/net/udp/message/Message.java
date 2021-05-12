@@ -1,16 +1,16 @@
-package org.tron.common.net.udp.message;
+package org.litetokens.common.net.udp.message;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.tron.common.net.udp.message.backup.KeepAliveMessage;
-import org.tron.common.net.udp.message.discover.FindNodeMessage;
-import org.tron.common.net.udp.message.discover.NeighborsMessage;
-import org.tron.common.net.udp.message.discover.PingMessage;
-import org.tron.common.net.udp.message.discover.PongMessage;
-import org.tron.common.overlay.discover.node.Node;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.Sha256Hash;
-import org.tron.core.exception.P2pException;
-import org.tron.protos.Discover.Endpoint;
+import org.litetokens.common.net.udp.message.backup.KeepAliveMessage;
+import org.litetokens.common.net.udp.message.discover.FindNodeMessage;
+import org.litetokens.common.net.udp.message.discover.NeighborsMessage;
+import org.litetokens.common.net.udp.message.discover.PingMessage;
+import org.litetokens.common.net.udp.message.discover.PongMessage;
+import org.litetokens.common.overlay.discover.node.Node;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.core.exception.P2pException;
+import org.litetokens.protos.Discover.Endpoint;
 
 public abstract class Message {
 

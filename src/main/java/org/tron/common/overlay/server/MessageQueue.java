@@ -1,4 +1,4 @@
-package org.tron.common.overlay.server;
+package org.litetokens.common.overlay.server;
 
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
@@ -14,9 +14,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.tron.common.overlay.message.Message;
-import org.tron.common.overlay.message.PingMessage;
-import org.tron.protos.Protocol.ReasonCode;
+import org.litetokens.common.overlay.message.Message;
+import org.litetokens.common.overlay.message.PingMessage;
+import org.litetokens.protos.Protocol.ReasonCode;
 
 @Component
 @Scope("prototype")

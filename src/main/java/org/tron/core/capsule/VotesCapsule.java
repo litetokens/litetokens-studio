@@ -1,12 +1,12 @@
-package org.tron.core.capsule;
+package org.litetokens.core.capsule;
 
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
-import org.tron.common.utils.ByteArray;
-import org.tron.protos.Protocol.Vote;
-import org.tron.protos.Protocol.Votes;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.protos.Protocol.Vote;
+import org.litetokens.protos.Protocol.Votes;
 
 @Slf4j
 public class VotesCapsule implements ProtoCapsule<Votes> {

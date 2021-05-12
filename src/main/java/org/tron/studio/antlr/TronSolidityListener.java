@@ -1,10 +1,10 @@
-package org.tron.studio.antlr;
+package org.litetokens.studio.antlr;
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
-public class TronSolidityListener implements SolidityListener{
+public class LitetokensSolidityListener implements SolidityListener{
     @Override
     public void enterSourceUnit(SolidityParser.SourceUnitContext ctx) {
         System.out.println("enterSourceUnit");

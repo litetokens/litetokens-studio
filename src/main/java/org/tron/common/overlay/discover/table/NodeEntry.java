@@ -15,9 +15,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.overlay.discover.table;
+package org.litetokens.common.overlay.discover.table;
 
-import org.tron.common.overlay.discover.node.Node;
+import org.litetokens.common.overlay.discover.node.Node;
 
 /**
  * Created by kest on 5/25/15.

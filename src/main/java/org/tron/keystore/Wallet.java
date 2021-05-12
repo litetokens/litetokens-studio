@@ -1,4 +1,4 @@
-package org.tron.keystore;
+package org.litetokens.keystore;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -18,9 +18,9 @@ import org.spongycastle.crypto.digests.SHA256Digest;
 import org.spongycastle.crypto.generators.PKCS5S2ParametersGenerator;
 import org.spongycastle.crypto.generators.SCrypt;
 import org.spongycastle.crypto.params.KeyParameter;
-import org.tron.common.crypto.ECKey;
-import org.tron.common.crypto.Hash;
-import org.tron.common.utils.ByteArray;
+import org.litetokens.common.crypto.ECKey;
+import org.litetokens.common.crypto.Hash;
+import org.litetokens.common.utils.ByteArray;
 
 /**
  * <p>Ethereum wallet file management. For reference, refer to <a href="https://github.com/ethereum/wiki/wiki/Web3-Secret-Storage-Definition">
@@ -93,7 +93,7 @@ public class Wallet {
       int n, int p) {
 
     WalletFile walletFile = new WalletFile();
-    walletFile.setAddress(org.tron.core.Wallet.encode58Check(ecKeyPair.getAddress()));
+    walletFile.setAddress(org.litetokens.core.Wallet.encode58Check(ecKeyPair.getAddress()));
 
     WalletFile.Crypto crypto = new WalletFile.Crypto();
     crypto.setCipher(CIPHER);

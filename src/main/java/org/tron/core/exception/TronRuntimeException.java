@@ -1,24 +1,24 @@
-package org.tron.core.exception;
+package org.litetokens.core.exception;
 
-public class TronRuntimeException extends RuntimeException {
+public class LitetokensRuntimeException extends RuntimeException {
 
-  public TronRuntimeException() {
+  public LitetokensRuntimeException() {
     super();
   }
 
-  public TronRuntimeException(String message) {
+  public LitetokensRuntimeException(String message) {
     super(message);
   }
 
-  public TronRuntimeException(String message, Throwable cause) {
+  public LitetokensRuntimeException(String message, Throwable cause) {
     super(message, cause);
   }
 
-  public TronRuntimeException(Throwable cause) {
+  public LitetokensRuntimeException(Throwable cause) {
     super(cause);
   }
 
-  protected TronRuntimeException(String message, Throwable cause,
+  protected LitetokensRuntimeException(String message, Throwable cause,
                              boolean enableSuppression,
                              boolean writableStackTrace) {
     super(message, cause, enableSuppression, writableStackTrace);

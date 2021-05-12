@@ -1,4 +1,4 @@
-package stest.tron.wallet.common.client;
+package stest.litetokens.wallet.common.client;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;

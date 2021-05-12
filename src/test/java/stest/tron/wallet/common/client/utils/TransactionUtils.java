@@ -1,12 +1,12 @@
-package stest.tron.wallet.common.client.utils;
+package stest.litetokens.wallet.common.client.utils;
 
 /*
- * java-tron is free software: you can redistribute it and/or modify
+ * java-litetokens is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * java-tron is distributed in the hope that it will be useful,
+ * java-litetokens is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -21,11 +21,11 @@ import java.util.Arrays;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.tron.common.crypto.ECKey;
-import org.tron.common.crypto.ECKey.ECDSASignature;
-import org.tron.common.utils.Sha256Hash;
-import org.tron.protos.Protocol.Transaction;
-import org.tron.protos.Protocol.Transaction.Contract;
+import org.litetokens.common.crypto.ECKey;
+import org.litetokens.common.crypto.ECKey.ECDSASignature;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.protos.Protocol.Transaction;
+import org.litetokens.protos.Protocol.Transaction.Contract;
 
 public class TransactionUtils {
 
@@ -45,39 +45,39 @@ public class TransactionUtils {
       switch (contract.getType()) {
         case AccountCreateContract:
           owner = contract.getParameter()
-              .unpack(org.tron.protos.Contract.AccountCreateContract.class).getOwnerAddress();
+              .unpack(org.litetokens.protos.Contract.AccountCreateContract.class).getOwnerAddress();
           break;
         case TransferContract:
-          owner = contract.getParameter().unpack(org.tron.protos.Contract.TransferContract.class)
+          owner = contract.getParameter().unpack(org.litetokens.protos.Contract.TransferContract.class)
               .getOwnerAddress();
           break;
         case TransferAssetContract:
           owner = contract.getParameter()
-              .unpack(org.tron.protos.Contract.TransferAssetContract.class).getOwnerAddress();
+              .unpack(org.litetokens.protos.Contract.TransferAssetContract.class).getOwnerAddress();
           break;
         case VoteAssetContract:
-          owner = contract.getParameter().unpack(org.tron.protos.Contract.VoteAssetContract.class)
+          owner = contract.getParameter().unpack(org.litetokens.protos.Contract.VoteAssetContract.class)
               .getOwnerAddress();
           break;
         case VoteWitnessContract:
-          owner = contract.getParameter().unpack(org.tron.protos.Contract.VoteWitnessContract.class)
+          owner = contract.getParameter().unpack(org.litetokens.protos.Contract.VoteWitnessContract.class)
               .getOwnerAddress();
           break;
         case WitnessCreateContract:
           owner = contract.getParameter()
-              .unpack(org.tron.protos.Contract.WitnessCreateContract.class).getOwnerAddress();
+              .unpack(org.litetokens.protos.Contract.WitnessCreateContract.class).getOwnerAddress();
           break;
         case AssetIssueContract:
-          owner = contract.getParameter().unpack(org.tron.protos.Contract.AssetIssueContract.class)
+          owner = contract.getParameter().unpack(org.litetokens.protos.Contract.AssetIssueContract.class)
               .getOwnerAddress();
           break;
         case ParticipateAssetIssueContract:
           owner = contract.getParameter()
-              .unpack(org.tron.protos.Contract.ParticipateAssetIssueContract.class)
+              .unpack(org.litetokens.protos.Contract.ParticipateAssetIssueContract.class)
               .getOwnerAddress();
           break;
         case CreateSmartContract:
-          owner = contract.getParameter().unpack(org.tron.protos.Contract.CreateSmartContract.class)
+          owner = contract.getParameter().unpack(org.litetokens.protos.Contract.CreateSmartContract.class)
               .getOwnerAddress();
           break;
         default:
@@ -153,7 +153,7 @@ public class TransactionUtils {
   public static Transaction setTimestamp(Transaction transaction) {
     long currentTime = System.currentTimeMillis();//*1000000 + System.nanoTime()%1000000;
     Transaction.Builder builder = transaction.toBuilder();
-    org.tron.protos.Protocol.Transaction.raw.Builder rowBuilder = transaction.getRawData()
+    org.litetokens.protos.Protocol.Transaction.raw.Builder rowBuilder = transaction.getRawData()
         .toBuilder();
     rowBuilder.setTimestamp(currentTime);
     builder.setRawData(rowBuilder.build());

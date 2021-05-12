@@ -1,4 +1,4 @@
-package org.tron.common.runtime.vm;
+package org.litetokens.common.runtime.vm;
 
 import java.io.File;
 import lombok.extern.slf4j.Slf4j;
@@ -7,31 +7,31 @@ import org.junit.Before;
 import org.junit.Test;
 import org.spongycastle.util.encoders.Hex;
 import org.testng.Assert;
-import org.tron.common.application.ApplicationFactory;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.common.runtime.TVMTestResult;
-import org.tron.common.runtime.TVMTestUtils;
-import org.tron.common.storage.Deposit;
-import org.tron.common.storage.DepositImpl;
-import org.tron.common.utils.FileUtil;
-import org.tron.core.Constant;
-import org.tron.core.Wallet;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.Manager;
-import org.tron.core.exception.ContractExeException;
-import org.tron.core.exception.ContractValidateException;
-import org.tron.core.exception.ReceiptCheckErrException;
-import org.tron.core.exception.VMIllegalException;
-import org.tron.protos.Protocol.AccountType;
-import org.tron.protos.Protocol.Transaction;
-import org.tron.common.runtime.Runtime;
+import org.litetokens.common.application.ApplicationFactory;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.common.runtime.TVMTestResult;
+import org.litetokens.common.runtime.TVMTestUtils;
+import org.litetokens.common.storage.Deposit;
+import org.litetokens.common.storage.DepositImpl;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.core.Constant;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.exception.ContractExeException;
+import org.litetokens.core.exception.ContractValidateException;
+import org.litetokens.core.exception.ReceiptCheckErrException;
+import org.litetokens.core.exception.VMIllegalException;
+import org.litetokens.protos.Protocol.AccountType;
+import org.litetokens.protos.Protocol.Transaction;
+import org.litetokens.common.runtime.Runtime;
 
 @Slf4j
 
 public class StorageTest {
   private Manager manager;
-  private TronApplicationContext context;
+  private LitetokensApplicationContext context;
   private String dbPath = "output_VMStorageTest";
   private DepositImpl deposit;
   private String OWNER_ADDRESS;
@@ -42,7 +42,7 @@ public class StorageTest {
   public void init() {
     Args.setParam(new String[]{"--output-directory", dbPath, "--debug"}, Constant.TEST_CONF);
 
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new LitetokensApplicationContext(DefaultConfig.class);
     OWNER_ADDRESS = Wallet.getAddressPreFixString() + "abd4b9367799eaa3197fecb144eb71de1e049abc";
     manager = context.getBean(Manager.class);
     deposit = DepositImpl.createRoot(manager);
@@ -137,10 +137,10 @@ public class StorageTest {
     long consumeUserResourcePercent = 0;
 
     // deploy contract
-    Transaction trx = TVMTestUtils.generateDeploySmartContractAndGetTransaction(
+    Transaction xlt = TVMTestUtils.generateDeploySmartContractAndGetTransaction(
         contractName, address, ABI, code, value, fee, consumeUserResourcePercent, null);
-    byte[] contractAddress = Wallet.generateContractAddress(trx);
-    runtime = TVMTestUtils.processTransactionAndReturnRuntime(trx, deposit, null);
+    byte[] contractAddress = Wallet.generateContractAddress(xlt);
+    runtime = TVMTestUtils.processTransactionAndReturnRuntime(xlt, deposit, null);
     Assert.assertNull(runtime.getRuntimeError());
 
     // write storage

@@ -1,4 +1,4 @@
-package org.tron.core.db.api.index;
+package org.litetokens.core.db.api.index;
 
 import com.googlecode.cqengine.attribute.SimpleAttribute;
 import com.googlecode.cqengine.persistence.disk.DiskPersistence;
@@ -6,11 +6,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import org.tron.common.utils.ByteArray;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.db.common.WrappedByteArray;
-import org.tron.core.db2.core.ITronChainBase;
-import org.tron.protos.Protocol.Account;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.db.common.WrappedByteArray;
+import org.litetokens.core.db2.core.ILitetokensChainBase;
+import org.litetokens.protos.Protocol.Account;
 
 import javax.annotation.PostConstruct;
 
@@ -23,7 +23,7 @@ public class AccountIndex extends AbstractIndex<AccountCapsule, Account> {
   public static SimpleAttribute<WrappedByteArray, String> Account_ADDRESS;
 
   @Autowired
-  public AccountIndex(@Qualifier("accountStore") final ITronChainBase<AccountCapsule> database) {
+  public AccountIndex(@Qualifier("accountStore") final ILitetokensChainBase<AccountCapsule> database) {
     super(database);
   }
 

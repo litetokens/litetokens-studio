@@ -1,12 +1,12 @@
-package org.tron.core.db2.core;
+package org.litetokens.core.db2.core;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.Map.Entry;
-import org.tron.common.utils.Quitable;
-import org.tron.core.exception.BadItemException;
-import org.tron.core.exception.ItemNotFoundException;
+import org.litetokens.common.utils.Quitable;
+import org.litetokens.core.exception.BadItemException;
+import org.litetokens.core.exception.ItemNotFoundException;
 
-public interface ITronChainBase<T> extends Iterable<Entry<byte[], T>>, Quitable {
+public interface ILitetokensChainBase<T> extends Iterable<Entry<byte[], T>>, Quitable {
 
   /**
    * reset the database.

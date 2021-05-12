@@ -1,18 +1,18 @@
-package org.tron.common.net.udp.message.discover;
+package org.litetokens.common.net.udp.message.discover;
 
-import static org.tron.common.net.udp.message.UdpMessageTypeEnum.DISCOVER_NEIGHBORS;
+import static org.litetokens.common.net.udp.message.UdpMessageTypeEnum.DISCOVER_NEIGHBORS;
 
 import com.google.protobuf.ByteString;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
-import org.tron.common.net.udp.message.Message;
-import org.tron.common.overlay.discover.node.Node;
-import org.tron.common.utils.ByteArray;
-import org.tron.protos.Discover;
-import org.tron.protos.Discover.Endpoint;
-import org.tron.protos.Discover.Neighbours;
-import org.tron.protos.Discover.Neighbours.Builder;
+import org.litetokens.common.net.udp.message.Message;
+import org.litetokens.common.overlay.discover.node.Node;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.protos.Discover;
+import org.litetokens.protos.Discover.Endpoint;
+import org.litetokens.protos.Discover.Neighbours;
+import org.litetokens.protos.Discover.Neighbours.Builder;
 
 @Slf4j
 public class NeighborsMessage extends Message {

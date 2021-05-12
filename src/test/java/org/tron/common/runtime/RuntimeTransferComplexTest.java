@@ -1,6 +1,6 @@
-package org.tron.common.runtime;
+package org.litetokens.common.runtime;
 
-import static org.tron.common.runtime.utils.MUtil.convertToTronAddress;
+import static org.litetokens.common.runtime.utils.MUtil.convertToLitetokensAddress;
 
 import java.io.File;
 import lombok.extern.slf4j.Slf4j;
@@ -8,31 +8,31 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.spongycastle.util.encoders.Hex;
-import org.tron.common.application.Application;
-import org.tron.common.application.ApplicationFactory;
-import org.tron.common.application.TronApplicationContext;
+import org.litetokens.common.application.Application;
+import org.litetokens.common.application.ApplicationFactory;
+import org.litetokens.common.application.LitetokensApplicationContext;
 import org.testng.Assert;
-import org.tron.common.storage.DepositImpl;
-import org.tron.common.utils.FileUtil;
-import org.tron.core.Constant;
-import org.tron.core.Wallet;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.Manager;
-import org.tron.core.exception.ContractExeException;
-import org.tron.core.exception.ContractValidateException;
-import org.tron.core.exception.ReceiptCheckErrException;
-import org.tron.core.exception.VMIllegalException;
-import org.tron.protos.Protocol.AccountType;
-import org.tron.protos.Protocol.Transaction;
-import stest.tron.wallet.common.client.utils.DataWord;
+import org.litetokens.common.storage.DepositImpl;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.core.Constant;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.exception.ContractExeException;
+import org.litetokens.core.exception.ContractValidateException;
+import org.litetokens.core.exception.ReceiptCheckErrException;
+import org.litetokens.core.exception.VMIllegalException;
+import org.litetokens.protos.Protocol.AccountType;
+import org.litetokens.protos.Protocol.Transaction;
+import stest.litetokens.wallet.common.client.utils.DataWord;
 
 @Slf4j
 public class RuntimeTransferComplexTest {
 
   private static Runtime runtime;
   private static Manager dbManager;
-  private static TronApplicationContext context;
+  private static LitetokensApplicationContext context;
   private static Application appT;
   private static DepositImpl deposit;
   private static final String dbPath = "output_RuntimeTransferComplexTest";
@@ -41,7 +41,7 @@ public class RuntimeTransferComplexTest {
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath, "--debug"}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new LitetokensApplicationContext(DefaultConfig.class);
     appT = ApplicationFactory.create(context);
     OWNER_ADDRESS = Wallet.getAddressPreFixString() + "abd4b9367799eaa3197fecb144eb71de1e049abc";
     TRANSFER_TO = Wallet.getAddressPreFixString() + "548794500882809695a8a687866e76d4271a1abc";
@@ -67,7 +67,7 @@ public class RuntimeTransferComplexTest {
    * payable{} }
    */
   @Test
-  public void TransferTrxToContractAccountWhenDeployAContract()
+  public void TransferXltToContractAccountWhenDeployAContract()
       throws ContractExeException, ReceiptCheckErrException, ContractValidateException, VMIllegalException {
 
     String contractName = "TransferWhenDeployContract";
@@ -78,10 +78,10 @@ public class RuntimeTransferComplexTest {
     long fee = 100000000;
     long consumeUserResourcePercent = 0;
 
-    Transaction trx = TVMTestUtils.generateDeploySmartContractAndGetTransaction(
+    Transaction xlt = TVMTestUtils.generateDeploySmartContractAndGetTransaction(
         contractName, address, ABI, code, value, fee, consumeUserResourcePercent, null);
-    byte[] contractAddress = Wallet.generateContractAddress(trx);
-    runtime = TVMTestUtils.processTransactionAndReturnRuntime(trx, deposit, null);
+    byte[] contractAddress = Wallet.generateContractAddress(xlt);
+    runtime = TVMTestUtils.processTransactionAndReturnRuntime(xlt, deposit, null);
     Assert.assertNull(runtime.getRuntimeError());
     Assert.assertEquals(dbManager.getAccountStore().get(contractAddress).getBalance(), 100);
     recoverDeposit();
@@ -93,7 +93,7 @@ public class RuntimeTransferComplexTest {
    */
 
   @Test
-  public void TransferTrxToContractAccountFailIfNotPayable()
+  public void TransferXltToContractAccountFailIfNotPayable()
       throws ContractExeException, ReceiptCheckErrException, ContractValidateException, VMIllegalException {
 
     String contractName = "TransferWhenDeployContract";
@@ -106,10 +106,10 @@ public class RuntimeTransferComplexTest {
     long fee = 100000000;
     long consumeUserResourcePercent = 0;
 
-    Transaction trx = TVMTestUtils.generateDeploySmartContractAndGetTransaction(
+    Transaction xlt = TVMTestUtils.generateDeploySmartContractAndGetTransaction(
         contractName, address, ABI, code, value, fee, consumeUserResourcePercent, null);
-    byte[] contractAddress = Wallet.generateContractAddress(trx);
-    runtime = TVMTestUtils.processTransactionAndReturnRuntime(trx, deposit, null);
+    byte[] contractAddress = Wallet.generateContractAddress(xlt);
+    runtime = TVMTestUtils.processTransactionAndReturnRuntime(xlt, deposit, null);
     Assert.assertNotNull(runtime.getRuntimeError().contains("REVERT"));
     Assert.assertNull(dbManager.getAccountStore().get(contractAddress));
     recoverDeposit();
@@ -121,7 +121,7 @@ public class RuntimeTransferComplexTest {
    * transferTo(address toAddress) public payable{ toAddress.transfer(5); } }
    */
   @Test
-  public void TransferTrxToContractAccountWhenTriggerAContract()
+  public void TransferXltToContractAccountWhenTriggerAContract()
       throws ContractExeException, ReceiptCheckErrException, ContractValidateException, VMIllegalException {
 
     String contractName = "TransferWhenDeployContract";
@@ -277,7 +277,7 @@ public class RuntimeTransferComplexTest {
         .generateTriggerSmartContractAndGetTransaction(msgSenderAddress, callerAddress,
             triggerData4, triggerCallValue, feeLimit);
     runtime = TVMTestUtils.processTransactionAndReturnRuntime(transaction4, deposit, null);
-    byte[] createdAddress = convertToTronAddress(
+    byte[] createdAddress = convertToLitetokensAddress(
         new DataWord(runtime.getResult().getHReturn()).getLast20Bytes());
     Assert.assertNull(runtime.getRuntimeError());
     Assert.assertEquals(dbManager.getAccountStore().get(callerAddress).getBalance(),
@@ -297,7 +297,7 @@ public class RuntimeTransferComplexTest {
         .generateTriggerSmartContractAndGetTransaction(msgSenderAddress, callerAddress,
             triggerData5, triggerCallValue, feeLimit);
     runtime = TVMTestUtils.processTransactionAndReturnRuntime(transaction5, deposit, null);
-    byte[] createdAddress2 = convertToTronAddress(
+    byte[] createdAddress2 = convertToLitetokensAddress(
         new DataWord(runtime.getResult().getHReturn()).getLast20Bytes());
     Assert.assertTrue(Hex.toHexString(new DataWord(createdAddress2).getLast20Bytes())
         .equalsIgnoreCase("0000000000000000000000000000000000000000"));
@@ -319,7 +319,7 @@ public class RuntimeTransferComplexTest {
         .generateTriggerSmartContractAndGetTransaction(msgSenderAddress, callerAddress,
             triggerData6, triggerCallValue, feeLimit);
     runtime = TVMTestUtils.processTransactionAndReturnRuntime(transaction6, deposit, null);
-    byte[] createdAddress3 = convertToTronAddress(
+    byte[] createdAddress3 = convertToLitetokensAddress(
         new DataWord(runtime.getResult().getHReturn()).getLast20Bytes());
     Assert.assertTrue(Hex.toHexString(new DataWord(createdAddress2).getLast20Bytes())
         .equalsIgnoreCase("0000000000000000000000000000000000000000"));

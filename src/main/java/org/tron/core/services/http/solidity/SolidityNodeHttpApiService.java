@@ -1,4 +1,4 @@
-package org.tron.core.services.http.solidity;
+package org.litetokens.core.services.http.solidity;
 
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.jetty.server.Server;
@@ -6,14 +6,14 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tron.common.application.Service;
-import org.tron.core.config.args.Args;
-import org.tron.core.services.http.GetAccountServlet;
-import org.tron.core.services.http.GetAssetIssueListServlet;
-import org.tron.core.services.http.GetBlockByNumServlet;
-import org.tron.core.services.http.GetNowBlockServlet;
-import org.tron.core.services.http.GetPaginatedAssetIssueListServlet;
-import org.tron.core.services.http.ListWitnessesServlet;
+import org.litetokens.common.application.Service;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.services.http.GetAccountServlet;
+import org.litetokens.core.services.http.GetAssetIssueListServlet;
+import org.litetokens.core.services.http.GetBlockByNumServlet;
+import org.litetokens.core.services.http.GetNowBlockServlet;
+import org.litetokens.core.services.http.GetPaginatedAssetIssueListServlet;
+import org.litetokens.core.services.http.ListWitnessesServlet;
 
 @Component
 @Slf4j

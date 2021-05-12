@@ -1,4 +1,4 @@
-package org.tron.common.utils;
+package org.litetokens.common.utils;
 
 public interface Quitable extends AutoCloseable {
 

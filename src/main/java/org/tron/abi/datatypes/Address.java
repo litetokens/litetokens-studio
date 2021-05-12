@@ -1,8 +1,8 @@
-package org.tron.abi.datatypes;
+package org.litetokens.abi.datatypes;
 
 import java.math.BigInteger;
-import org.tron.abi.datatypes.generated.Uint160;
-import org.tron.abi.utils.Numeric;
+import org.litetokens.abi.datatypes.generated.Uint160;
+import org.litetokens.abi.utils.Numeric;
 
 /**
  * Address type, which is equivalent to uint160.

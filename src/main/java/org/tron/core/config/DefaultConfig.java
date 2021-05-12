@@ -1,4 +1,4 @@
-package org.tron.core.config;
+package org.litetokens.core.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,11 +6,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.RevokingDatabase;
-import org.tron.core.db.RevokingStore;
-import org.tron.core.db.api.IndexHelper;
-import org.tron.core.db2.core.SnapshotManager;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.RevokingDatabase;
+import org.litetokens.core.db.RevokingStore;
+import org.litetokens.core.db.api.IndexHelper;
+import org.litetokens.core.db2.core.SnapshotManager;
 
 @Configuration
 @Import(CommonConfig.class)

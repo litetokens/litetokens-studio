@@ -16,7 +16,7 @@
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.core;
+package org.litetokens.core;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -32,32 +32,32 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.api.GrpcAPI.AssetIssueList;
-import org.tron.api.GrpcAPI.BlockList;
-import org.tron.common.crypto.ECKey;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.FileUtil;
-import org.tron.common.utils.Utils;
-import org.tron.core.capsule.AssetIssueCapsule;
-import org.tron.core.capsule.BlockCapsule;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.Manager;
-import org.tron.protos.Contract.AssetIssueContract;
-import org.tron.protos.Contract.TransferContract;
-import org.tron.protos.Protocol.Block;
-import org.tron.protos.Protocol.BlockHeader;
-import org.tron.protos.Protocol.BlockHeader.raw;
-import org.tron.protos.Protocol.Transaction;
-import org.tron.protos.Protocol.Transaction.Contract;
-import org.tron.protos.Protocol.Transaction.Contract.ContractType;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.api.GrpcAPI.AssetIssueList;
+import org.litetokens.api.GrpcAPI.BlockList;
+import org.litetokens.common.crypto.ECKey;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.common.utils.Utils;
+import org.litetokens.core.capsule.AssetIssueCapsule;
+import org.litetokens.core.capsule.BlockCapsule;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.Manager;
+import org.litetokens.protos.Contract.AssetIssueContract;
+import org.litetokens.protos.Contract.TransferContract;
+import org.litetokens.protos.Protocol.Block;
+import org.litetokens.protos.Protocol.BlockHeader;
+import org.litetokens.protos.Protocol.BlockHeader.raw;
+import org.litetokens.protos.Protocol.Transaction;
+import org.litetokens.protos.Protocol.Transaction.Contract;
+import org.litetokens.protos.Protocol.Transaction.Contract.ContractType;
 
 @Slf4j
 public class WalletTest {
 
-  private static TronApplicationContext context;
+  private static LitetokensApplicationContext context;
   private static Wallet wallet;
   private static Manager manager;
   private static String dbPath = "output_wallet_test";
@@ -100,7 +100,7 @@ public class WalletTest {
 
   static {
     Args.setParam(new String[]{"-d", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new LitetokensApplicationContext(DefaultConfig.class);
   }
 
   @BeforeClass

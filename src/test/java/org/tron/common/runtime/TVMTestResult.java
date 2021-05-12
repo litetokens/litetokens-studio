@@ -1,7 +1,7 @@
-package org.tron.common.runtime;
+package org.litetokens.common.runtime;
 
 import lombok.extern.slf4j.Slf4j;
-import org.tron.core.capsule.ReceiptCapsule;
+import org.litetokens.core.capsule.ReceiptCapsule;
 
 @Slf4j
 public class TVMTestResult {

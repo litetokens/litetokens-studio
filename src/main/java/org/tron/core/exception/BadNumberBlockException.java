@@ -1,6 +1,6 @@
-package org.tron.core.exception;
+package org.litetokens.core.exception;
 
-public class BadNumberBlockException extends TronException {
+public class BadNumberBlockException extends LitetokensException {
 
   public BadNumberBlockException() {
     super();

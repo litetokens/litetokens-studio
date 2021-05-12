@@ -1,4 +1,4 @@
-package org.tron.common.overlay.server;
+package org.litetokens.common.overlay.server;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -8,16 +8,16 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TrxProtobufVarint32FrameDecoder extends ByteToMessageDecoder {
+public class XltProtobufVarint32FrameDecoder extends ByteToMessageDecoder {
 
   private final static Logger logger = LoggerFactory
-      .getLogger(TrxProtobufVarint32FrameDecoder.class);
+      .getLogger(XltProtobufVarint32FrameDecoder.class);
 
   private final static int maxMsgLength = 5 * 1024 * 1024;//5M
 
   private Channel channel;
 
-  public TrxProtobufVarint32FrameDecoder(Channel channel) {
+  public XltProtobufVarint32FrameDecoder(Channel channel) {
     this.channel = channel;
   }
 

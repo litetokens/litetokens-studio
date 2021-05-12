@@ -1,4 +1,4 @@
-package org.tron.core.net.node;
+package org.litetokens.core.net.node;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
@@ -22,25 +22,25 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.common.application.Application;
-import org.tron.common.application.ApplicationFactory;
-import org.tron.common.overlay.client.PeerClient;
-import org.tron.common.overlay.server.ChannelManager;
-import org.tron.common.overlay.server.SyncPool;
-import org.tron.common.utils.FileUtil;
-import org.tron.common.utils.ReflectUtils;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.Manager;
-import org.tron.core.net.peer.PeerConnection;
-import org.tron.core.services.RpcApiService;
-import org.tron.core.services.WitnessService;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.common.application.Application;
+import org.litetokens.common.application.ApplicationFactory;
+import org.litetokens.common.overlay.client.PeerClient;
+import org.litetokens.common.overlay.server.ChannelManager;
+import org.litetokens.common.overlay.server.SyncPool;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.common.utils.ReflectUtils;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.net.peer.PeerConnection;
+import org.litetokens.core.services.RpcApiService;
+import org.litetokens.core.services.WitnessService;
 
 @Slf4j
 public abstract class BaseNetTest {
 
-  protected static TronApplicationContext context;
+  protected static LitetokensApplicationContext context;
   protected static NodeImpl node;
   protected RpcApiService rpcApiService;
   protected PeerClient peerClient;
@@ -85,7 +85,7 @@ public abstract class BaseNetTest {
         cfgArgs.setNeedSyncCheck(false);
         cfgArgs.setNodeExternalIp("127.0.0.1");
 
-        context = new TronApplicationContext(DefaultConfig.class);
+        context = new LitetokensApplicationContext(DefaultConfig.class);
 
         if (cfgArgs.isHelp()) {
           logger.info("Here is the help message.");

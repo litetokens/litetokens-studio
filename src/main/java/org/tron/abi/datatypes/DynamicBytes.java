@@ -1,4 +1,4 @@
-package org.tron.abi.datatypes;
+package org.litetokens.abi.datatypes;
 
 /**
  * Dynamically allocated sequence of bytes.

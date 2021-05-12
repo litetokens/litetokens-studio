@@ -1,6 +1,6 @@
-package org.tron.core.net.peer;
+package org.litetokens.core.net.peer;
 
-import static org.tron.core.config.Parameter.NetConstants.MAX_INVENTORY_SIZE_IN_MINUTES;
+import static org.litetokens.core.config.Parameter.NetConstants.MAX_INVENTORY_SIZE_IN_MINUTES;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
@@ -20,15 +20,15 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.tron.common.overlay.message.HelloMessage;
-import org.tron.common.overlay.message.Message;
-import org.tron.common.overlay.server.Channel;
-import org.tron.common.utils.Sha256Hash;
-import org.tron.common.utils.Time;
-import org.tron.core.capsule.BlockCapsule.BlockId;
-import org.tron.core.config.Parameter.NodeConstant;
-import org.tron.core.config.args.Args;
-import org.tron.core.net.node.Item;
+import org.litetokens.common.overlay.message.HelloMessage;
+import org.litetokens.common.overlay.message.Message;
+import org.litetokens.common.overlay.server.Channel;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.common.utils.Time;
+import org.litetokens.core.capsule.BlockCapsule.BlockId;
+import org.litetokens.core.config.Parameter.NodeConstant;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.net.node.Item;
 
 @Slf4j
 @Component
@@ -180,7 +180,7 @@ public class PeerConnection extends Channel {
   public boolean isAdvInvFull() {
     return advObjSpreadToUs.size() > MAX_INVENTORY_SIZE_IN_MINUTES
         * 60
-        * Args.getInstance().getNetMaxTrxPerSecond();
+        * Args.getInstance().getNetMaxXltPerSecond();
   }
 
   public boolean isBanned() {

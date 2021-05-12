@@ -1,4 +1,4 @@
-package org.tron.core.db2.core;
+package org.litetokens.core.db2.core;
 
 public interface ISession extends AutoCloseable {
 

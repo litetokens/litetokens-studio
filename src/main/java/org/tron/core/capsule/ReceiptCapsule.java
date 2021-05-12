@@ -1,13 +1,13 @@
-package org.tron.core.capsule;
+package org.litetokens.core.capsule;
 
-import org.tron.common.utils.Sha256Hash;
-import org.tron.common.utils.StringUtil;
-import org.tron.core.Constant;
-import org.tron.core.db.EnergyProcessor;
-import org.tron.core.db.Manager;
-import org.tron.core.exception.BalanceInsufficientException;
-import org.tron.protos.Protocol.ResourceReceipt;
-import org.tron.protos.Protocol.Transaction.Result.contractResult;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.common.utils.StringUtil;
+import org.litetokens.core.Constant;
+import org.litetokens.core.db.EnergyProcessor;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.exception.BalanceInsufficientException;
+import org.litetokens.protos.Protocol.ResourceReceipt;
+import org.litetokens.protos.Protocol.Transaction.Result.contractResult;
 
 public class ReceiptCapsule {
 

@@ -16,7 +16,7 @@
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.common.overlay.discover;
+package org.litetokens.common.overlay.discover;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
@@ -30,11 +30,11 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tron.common.net.udp.handler.MessageHandler;
-import org.tron.common.net.udp.handler.PacketDecoder;
-import org.tron.common.overlay.discover.node.NodeManager;
-import org.tron.common.overlay.server.WireTrafficStats;
-import org.tron.core.config.args.Args;
+import org.litetokens.common.net.udp.handler.MessageHandler;
+import org.litetokens.common.net.udp.handler.PacketDecoder;
+import org.litetokens.common.overlay.discover.node.NodeManager;
+import org.litetokens.common.overlay.server.WireTrafficStats;
+import org.litetokens.core.config.args.Args;
 
 @Component
 public class DiscoverServer {

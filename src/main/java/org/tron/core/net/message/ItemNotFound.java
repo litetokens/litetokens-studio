@@ -1,13 +1,13 @@
-package org.tron.core.net.message;
+package org.litetokens.core.net.message;
 
-import org.tron.protos.Protocol;
+import org.litetokens.protos.Protocol;
 
-public class ItemNotFound extends TronMessage {
+public class ItemNotFound extends LitetokensMessage {
 
-  private org.tron.protos.Protocol.Items notFound;
+  private org.litetokens.protos.Protocol.Items notFound;
 
   /**
-   * means can not find this block or trx.
+   * means can not find this block or xlt.
    */
   public ItemNotFound() {
     Protocol.Items.Builder itemsBuilder = Protocol.Items.newBuilder();

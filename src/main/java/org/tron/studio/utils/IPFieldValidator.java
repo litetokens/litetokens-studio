@@ -1,9 +1,9 @@
-package org.tron.studio.utils;
+package org.litetokens.studio.utils;
 
 import com.jfoenix.validation.base.ValidatorBase;
 import javafx.beans.DefaultProperty;
 import javafx.scene.control.TextInputControl;
-import org.tron.studio.CONSTANTS;
+import org.litetokens.studio.CONSTANTS;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

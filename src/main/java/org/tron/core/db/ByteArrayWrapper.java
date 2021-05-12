@@ -16,12 +16,12 @@
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.core.db;
+package org.litetokens.core.db;
 
 import java.io.Serializable;
 import java.util.Arrays;
 import org.spongycastle.util.encoders.Hex;
-import org.tron.common.utils.FastByteComparisons;
+import org.litetokens.common.utils.FastByteComparisons;
 
 
 public class ByteArrayWrapper implements Comparable<ByteArrayWrapper>, Serializable {

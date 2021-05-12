@@ -16,7 +16,7 @@
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.common.utils;
+package org.litetokens.common.utils;
 
 
 import java.util.Collection;
@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.google.common.collect.Maps;
-import org.tron.core.db.ByteArrayWrapper;
+import org.litetokens.core.db.ByteArrayWrapper;
 
 
 public class ByteArrayMap<V> implements Map<byte[], V> {

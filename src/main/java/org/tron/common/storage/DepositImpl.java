@@ -1,39 +1,39 @@
-package org.tron.common.storage;
+package org.litetokens.common.storage;
 
-import static org.tron.common.runtime.utils.MUtil.convertToTronAddress;
+import static org.litetokens.common.runtime.utils.MUtil.convertToLitetokensAddress;
 
 import com.google.common.primitives.Longs;
 import com.google.protobuf.ByteString;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicLong;
-import org.tron.common.runtime.vm.DataWord;
-import org.tron.common.runtime.vm.program.Storage;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.StringUtil;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.capsule.BlockCapsule;
-import org.tron.core.capsule.BytesCapsule;
-import org.tron.core.capsule.ContractCapsule;
-import org.tron.core.capsule.ProposalCapsule;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.core.capsule.VotesCapsule;
-import org.tron.core.capsule.WitnessCapsule;
-import org.tron.core.db.AccountStore;
-import org.tron.core.db.AssetIssueStore;
-import org.tron.core.db.BlockStore;
-import org.tron.core.db.CodeStore;
-import org.tron.core.db.ContractStore;
-import org.tron.core.db.DynamicPropertiesStore;
-import org.tron.core.db.Manager;
-import org.tron.core.db.ProposalStore;
-import org.tron.core.db.StorageRowStore;
-import org.tron.core.db.TransactionStore;
-import org.tron.core.db.VotesStore;
-import org.tron.core.db.WitnessStore;
-import org.tron.core.exception.BadItemException;
-import org.tron.core.exception.ItemNotFoundException;
-import org.tron.protos.Protocol;
-import org.tron.protos.Protocol.AccountType;
+import org.litetokens.common.runtime.vm.DataWord;
+import org.litetokens.common.runtime.vm.program.Storage;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.StringUtil;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.capsule.BlockCapsule;
+import org.litetokens.core.capsule.BytesCapsule;
+import org.litetokens.core.capsule.ContractCapsule;
+import org.litetokens.core.capsule.ProposalCapsule;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.core.capsule.VotesCapsule;
+import org.litetokens.core.capsule.WitnessCapsule;
+import org.litetokens.core.db.AccountStore;
+import org.litetokens.core.db.AssetIssueStore;
+import org.litetokens.core.db.BlockStore;
+import org.litetokens.core.db.CodeStore;
+import org.litetokens.core.db.ContractStore;
+import org.litetokens.core.db.DynamicPropertiesStore;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.db.ProposalStore;
+import org.litetokens.core.db.StorageRowStore;
+import org.litetokens.core.db.TransactionStore;
+import org.litetokens.core.db.VotesStore;
+import org.litetokens.core.db.WitnessStore;
+import org.litetokens.core.exception.BadItemException;
+import org.litetokens.core.exception.ItemNotFoundException;
+import org.litetokens.protos.Protocol;
+import org.litetokens.protos.Protocol.AccountType;
 
 public class DepositImpl implements Deposit {
 
@@ -311,7 +311,7 @@ public class DepositImpl implements Deposit {
 
   @Override
   public synchronized void putStorageValue(byte[] address, DataWord key, DataWord value) {
-    address = convertToTronAddress(address);
+    address = convertToLitetokensAddress(address);
     if (getAccount(address) == null) {
       return;
     }
@@ -328,7 +328,7 @@ public class DepositImpl implements Deposit {
 
   @Override
   public synchronized DataWord getStorageValue(byte[] address, DataWord key) {
-    address = convertToTronAddress(address);
+    address = convertToLitetokensAddress(address);
     if (getAccount(address) == null) {
       return null;
     }
@@ -375,18 +375,18 @@ public class DepositImpl implements Deposit {
   }
 
   @Override
-  public TransactionCapsule getTransaction(byte[] trxHash) {
-    Key key = Key.create(trxHash);
+  public TransactionCapsule getTransaction(byte[] xltHash) {
+    Key key = Key.create(xltHash);
     if (transactionCache.containsKey(key)) {
       return transactionCache.get(key).getTransaction();
     }
 
     TransactionCapsule transactionCapsule;
     if (parent != null) {
-      transactionCapsule = parent.getTransaction(trxHash);
+      transactionCapsule = parent.getTransaction(xltHash);
     } else {
       try {
-        transactionCapsule = getTransactionStore().get(trxHash);
+        transactionCapsule = getTransactionStore().get(xltHash);
       } catch (BadItemException e) {
         transactionCapsule = null;
       }

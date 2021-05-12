@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.crypto.zksnark;
+package org.litetokens.common.crypto.zksnark;
 
 /**
  * Implementation of specific cyclic subgroup of points belonging to {@link BN128Fp} <br/>

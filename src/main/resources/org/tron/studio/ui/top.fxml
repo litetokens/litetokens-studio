@@ -7,11 +7,11 @@
 <?import com.jfoenix.controls.JFXRippler?>
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-            fx:id="titlePane" fx:controller="org.tron.studio.ui.TopController">
+            fx:id="titlePane" fx:controller="org.litetokens.studio.ui.TopController">
    <JFXToolbar AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"
                AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" >
        <leftItems>
-           <Label text="Tron Studio"/>
+           <Label text="Litetokens Studio"/>
            <JFXButton styleClass="custom-jfx-button-raised"  text="Dump Layout info" onAction="#dumpLayoutInfo" visible="false"/>
        </leftItems>
        <rightItems>

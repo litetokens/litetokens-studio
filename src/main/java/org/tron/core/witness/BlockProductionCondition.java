@@ -1,4 +1,4 @@
-package org.tron.core.witness;
+package org.litetokens.core.witness;
 
 public enum  BlockProductionCondition {
   PRODUCED,           // Successfully generated block

@@ -1,22 +1,22 @@
-package org.tron.common.overlay.client;
+package org.litetokens.common.overlay.client;
 
 import com.google.protobuf.ByteString;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
-import org.tron.api.GrpcAPI.AssetIssueList;
-import org.tron.api.GrpcAPI.BytesMessage;
-import org.tron.api.GrpcAPI.EmptyMessage;
-import org.tron.api.GrpcAPI.NodeList;
-import org.tron.api.GrpcAPI.NumberMessage;
-import org.tron.api.GrpcAPI.Return;
-import org.tron.api.WalletGrpc;
-import org.tron.protos.Contract;
-import org.tron.protos.Contract.AssetIssueContract;
-import org.tron.protos.Protocol.Account;
-import org.tron.protos.Protocol.Block;
-import org.tron.protos.Protocol.Transaction;
+import org.litetokens.api.GrpcAPI.AssetIssueList;
+import org.litetokens.api.GrpcAPI.BytesMessage;
+import org.litetokens.api.GrpcAPI.EmptyMessage;
+import org.litetokens.api.GrpcAPI.NodeList;
+import org.litetokens.api.GrpcAPI.NumberMessage;
+import org.litetokens.api.GrpcAPI.Return;
+import org.litetokens.api.WalletGrpc;
+import org.litetokens.protos.Contract;
+import org.litetokens.protos.Contract.AssetIssueContract;
+import org.litetokens.protos.Protocol.Account;
+import org.litetokens.protos.Protocol.Block;
+import org.litetokens.protos.Protocol.Transaction;
 
 public class WalletGrpcClient {
 

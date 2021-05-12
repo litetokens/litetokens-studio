@@ -1,10 +1,10 @@
 /*
- * java-tron is free software: you can redistribute it and/or modify
+ * java-litetokens is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * java-tron is distributed in the hope that it will be useful,
+ * java-litetokens is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -13,15 +13,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.core.capsule;
+package org.litetokens.core.capsule;
 
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import java.nio.charset.Charset;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
-import org.tron.protos.Contract.AssetIssueContract;
-import org.tron.protos.Contract.AssetIssueContract.FrozenSupply;
+import org.litetokens.protos.Contract.AssetIssueContract;
+import org.litetokens.protos.Contract.AssetIssueContract.FrozenSupply;
 
 @Slf4j
 public class AssetIssueCapsule implements ProtoCapsule<AssetIssueContract> {
@@ -89,8 +89,8 @@ public class AssetIssueCapsule implements ProtoCapsule<AssetIssueContract> {
     return this.assetIssueContract.getNum();
   }
 
-  public int getTrxNum() {
-    return this.assetIssueContract.getTrxNum();
+  public int getXltNum() {
+    return this.assetIssueContract.getXltNum();
   }
 
   public long getStartTime() {

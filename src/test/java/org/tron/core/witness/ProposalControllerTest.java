@@ -1,4 +1,4 @@
-package org.tron.core.witness;
+package org.litetokens.core.witness;
 
 import com.google.protobuf.ByteString;
 import java.io.File;
@@ -9,30 +9,30 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.tron.common.application.TronApplicationContext;
+import org.litetokens.common.application.LitetokensApplicationContext;
 import org.testng.collections.Lists;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.FileUtil;
-import org.tron.core.Constant;
-import org.tron.core.Wallet;
-import org.tron.core.capsule.ProposalCapsule;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.DynamicPropertiesStore;
-import org.tron.core.db.Manager;
-import org.tron.protos.Protocol.Proposal;
-import org.tron.protos.Protocol.Proposal.State;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.core.Constant;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.capsule.ProposalCapsule;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.DynamicPropertiesStore;
+import org.litetokens.core.db.Manager;
+import org.litetokens.protos.Protocol.Proposal;
+import org.litetokens.protos.Protocol.Proposal.State;
 
 public class ProposalControllerTest {
 
   private static Manager dbManager = new Manager();
-  private static TronApplicationContext context;
+  private static LitetokensApplicationContext context;
   private static String dbPath = "output_proposal_controller_test";
   private static ProposalController proposalController;
 
   static {
     Args.setParam(new String[]{"-d", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new LitetokensApplicationContext(DefaultConfig.class);
   }
 
   @BeforeClass

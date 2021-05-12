@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.runtime.vm.trace;
+package org.litetokens.common.runtime.vm.trace;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -29,8 +29,8 @@ import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongycastle.util.encoders.Hex;
-import org.tron.common.runtime.vm.DataWord;
-import org.tron.common.runtime.vm.OpCode;
+import org.litetokens.common.runtime.vm.DataWord;
+import org.litetokens.common.runtime.vm.OpCode;
 
 public final class Serializers {
 

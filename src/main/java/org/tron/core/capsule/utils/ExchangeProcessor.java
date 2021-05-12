@@ -1,4 +1,4 @@
-package org.tron.core.capsule.utils;
+package org.litetokens.core.capsule.utils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -46,7 +46,7 @@ public class ExchangeProcessor {
     long out = (long) exchangeBalance;
     long newBalance = balance - out;
 
-//    if (isTRX) {
+//    if (isXLT) {
 //      out = Math.round(exchangeBalance / 100000) * 100000;
 //      logger.info("---out: " + out);
 //    }

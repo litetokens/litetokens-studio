@@ -1,8 +1,8 @@
-package org.tron.core.db2.common;
+package org.litetokens.core.db2.common;
 
 import java.util.Arrays;
 import lombok.EqualsAndHashCode;
-import org.tron.core.db.common.WrappedByteArray;
+import org.litetokens.core.db.common.WrappedByteArray;
 
 @EqualsAndHashCode
 public final class Key {

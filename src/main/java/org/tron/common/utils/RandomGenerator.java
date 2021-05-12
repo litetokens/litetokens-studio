@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.tron.common.utils;
+package org.litetokens.common.utils;
 
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;

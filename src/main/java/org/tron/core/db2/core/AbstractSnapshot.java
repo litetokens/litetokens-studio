@@ -1,8 +1,8 @@
-package org.tron.core.db2.core;
+package org.litetokens.core.db2.core;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.tron.core.db2.common.DB;
+import org.litetokens.core.db2.common.DB;
 
 public abstract class AbstractSnapshot<K, V> implements Snapshot {
   @Getter

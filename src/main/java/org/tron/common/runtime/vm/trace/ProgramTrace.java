@@ -15,20 +15,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.runtime.vm.trace;
+package org.litetokens.common.runtime.vm.trace;
 
 import static java.lang.String.format;
-import static org.tron.common.runtime.utils.MUtil.convertToTronAddress;
-import static org.tron.common.runtime.vm.trace.Serializers.serializeFieldsOnly;
-import static org.tron.common.utils.ByteUtil.toHexString;
+import static org.litetokens.common.runtime.utils.MUtil.convertToLitetokensAddress;
+import static org.litetokens.common.runtime.vm.trace.Serializers.serializeFieldsOnly;
+import static org.litetokens.common.utils.ByteUtil.toHexString;
 
 import java.util.ArrayList;
 import java.util.List;
 import org.spongycastle.util.encoders.Hex;
-import org.tron.common.runtime.config.VMConfig;
-import org.tron.common.runtime.vm.DataWord;
-import org.tron.common.runtime.vm.OpCode;
-import org.tron.common.runtime.vm.program.invoke.ProgramInvoke;
+import org.litetokens.common.runtime.config.VMConfig;
+import org.litetokens.common.runtime.vm.DataWord;
+import org.litetokens.common.runtime.vm.OpCode;
+import org.litetokens.common.runtime.vm.program.invoke.ProgramInvoke;
 
 public class ProgramTrace {
 
@@ -43,7 +43,7 @@ public class ProgramTrace {
 
     public ProgramTrace(VMConfig config, ProgramInvoke programInvoke) {
         if (programInvoke != null && config.vmTrace()) {
-            contractAddress = Hex.toHexString(convertToTronAddress(programInvoke.getOwnerAddress().getLast20Bytes()));
+            contractAddress = Hex.toHexString(convertToLitetokensAddress(programInvoke.getOwnerAddress().getLast20Bytes()));
         }
     }
 

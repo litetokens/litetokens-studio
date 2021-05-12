@@ -1,4 +1,4 @@
-package stest.tron.wallet.common.client;
+package stest.litetokens.wallet.common.client;
 
 public interface Parameter {
 

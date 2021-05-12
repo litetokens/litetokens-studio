@@ -16,18 +16,18 @@
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.common.runtime.vm;
+package org.litetokens.common.runtime.vm;
 
-import static org.tron.common.runtime.utils.MUtil.convertToTronAddress;
-import static org.tron.common.utils.BIUtil.addSafely;
-import static org.tron.common.utils.BIUtil.isLessThan;
-import static org.tron.common.utils.BIUtil.isZero;
-import static org.tron.common.utils.ByteUtil.EMPTY_BYTE_ARRAY;
-import static org.tron.common.utils.ByteUtil.bytesToBigInteger;
-import static org.tron.common.utils.ByteUtil.numberOfLeadingZeros;
-import static org.tron.common.utils.ByteUtil.parseBytes;
-import static org.tron.common.utils.ByteUtil.parseWord;
-import static org.tron.common.utils.ByteUtil.stripLeadingZeroes;
+import static org.litetokens.common.runtime.utils.MUtil.convertToLitetokensAddress;
+import static org.litetokens.common.utils.BIUtil.addSafely;
+import static org.litetokens.common.utils.BIUtil.isLessThan;
+import static org.litetokens.common.utils.BIUtil.isZero;
+import static org.litetokens.common.utils.ByteUtil.EMPTY_BYTE_ARRAY;
+import static org.litetokens.common.utils.ByteUtil.bytesToBigInteger;
+import static org.litetokens.common.utils.ByteUtil.numberOfLeadingZeros;
+import static org.litetokens.common.utils.ByteUtil.parseBytes;
+import static org.litetokens.common.utils.ByteUtil.parseWord;
+import static org.litetokens.common.utils.ByteUtil.stripLeadingZeroes;
 
 import com.google.common.primitives.Longs;
 import com.google.protobuf.ByteString;
@@ -39,38 +39,38 @@ import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.tuple.Pair;
 import org.spongycastle.util.encoders.Hex;
-import org.tron.common.crypto.ECKey;
-import org.tron.common.crypto.zksnark.BN128;
-import org.tron.common.crypto.zksnark.BN128Fp;
-import org.tron.common.crypto.zksnark.BN128G1;
-import org.tron.common.crypto.zksnark.BN128G2;
-import org.tron.common.crypto.zksnark.Fp;
-import org.tron.common.crypto.zksnark.PairingCheck;
-import org.tron.common.runtime.vm.program.Program;
-import org.tron.common.runtime.vm.program.ProgramResult;
-import org.tron.common.storage.Deposit;
-import org.tron.common.utils.BIUtil;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.Sha256Hash;
-import org.tron.core.Wallet;
-import org.tron.core.actuator.Actuator;
-import org.tron.core.actuator.ActuatorFactory;
-import org.tron.core.actuator.ProposalApproveActuator;
-import org.tron.core.actuator.ProposalCreateActuator;
-import org.tron.core.actuator.ProposalDeleteActuator;
-import org.tron.core.actuator.VoteWitnessActuator;
-import org.tron.core.actuator.WithdrawBalanceActuator;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.core.exception.ContractExeException;
-import org.tron.core.exception.ContractValidateException;
-import org.tron.protos.Contract;
-import org.tron.protos.Contract.ProposalApproveContract;
-import org.tron.protos.Contract.ProposalCreateContract;
-import org.tron.protos.Contract.ProposalDeleteContract;
-import org.tron.protos.Contract.TransferAssetContract;
-import org.tron.protos.Contract.VoteWitnessContract;
-import org.tron.protos.Contract.WithdrawBalanceContract;
-import org.tron.protos.Protocol.Transaction.Contract.ContractType;
+import org.litetokens.common.crypto.ECKey;
+import org.litetokens.common.crypto.zksnark.BN128;
+import org.litetokens.common.crypto.zksnark.BN128Fp;
+import org.litetokens.common.crypto.zksnark.BN128G1;
+import org.litetokens.common.crypto.zksnark.BN128G2;
+import org.litetokens.common.crypto.zksnark.Fp;
+import org.litetokens.common.crypto.zksnark.PairingCheck;
+import org.litetokens.common.runtime.vm.program.Program;
+import org.litetokens.common.runtime.vm.program.ProgramResult;
+import org.litetokens.common.storage.Deposit;
+import org.litetokens.common.utils.BIUtil;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.actuator.Actuator;
+import org.litetokens.core.actuator.ActuatorFactory;
+import org.litetokens.core.actuator.ProposalApproveActuator;
+import org.litetokens.core.actuator.ProposalCreateActuator;
+import org.litetokens.core.actuator.ProposalDeleteActuator;
+import org.litetokens.core.actuator.VoteWitnessActuator;
+import org.litetokens.core.actuator.WithdrawBalanceActuator;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.core.exception.ContractExeException;
+import org.litetokens.core.exception.ContractValidateException;
+import org.litetokens.protos.Contract;
+import org.litetokens.protos.Contract.ProposalApproveContract;
+import org.litetokens.protos.Contract.ProposalCreateContract;
+import org.litetokens.protos.Contract.ProposalDeleteContract;
+import org.litetokens.protos.Contract.TransferAssetContract;
+import org.litetokens.protos.Contract.VoteWitnessContract;
+import org.litetokens.protos.Contract.WithdrawBalanceContract;
+import org.litetokens.protos.Protocol.Transaction.Contract.ContractType;
 
 /**
  * @author Roman Mandeleil
@@ -95,8 +95,8 @@ public class PrecompiledContracts {
 //  private static final ProposalApproveNative proposalApprove = new ProposalApproveNative();
 //  private static final ProposalCreateNative proposalCreate = new ProposalCreateNative();
 //  private static final ProposalDeleteNative proposalDelete = new ProposalDeleteNative();
-//  private static final ConvertFromTronBytesAddressNative convertFromTronBytesAddress = new ConvertFromTronBytesAddressNative();
-//  private static final ConvertFromTronBase58AddressNative convertFromTronBase58Address = new ConvertFromTronBase58AddressNative();
+//  private static final ConvertFromLitetokensBytesAddressNative convertFromLitetokensBytesAddress = new ConvertFromLitetokensBytesAddressNative();
+//  private static final ConvertFromLitetokensBase58AddressNative convertFromLitetokensBase58Address = new ConvertFromLitetokensBase58AddressNative();
 //  private static final TransferAssetNative transferAsset = new TransferAssetNative();
 //  private static final GetTransferAssetNative getTransferAssetAmount =  new GetTransferAssetNative();
 
@@ -135,9 +135,9 @@ public class PrecompiledContracts {
 //      "0000000000000000000000000000000000000000000000000000000000010006");
 //  private static final DataWord proposalDeleteAddr = new DataWord(
 //      "0000000000000000000000000000000000000000000000000000000000010007");
-//  private static final DataWord convertFromTronBytesAddressAddr = new DataWord(
+//  private static final DataWord convertFromLitetokensBytesAddressAddr = new DataWord(
 //      "0000000000000000000000000000000000000000000000000000000000010008");
-//  private static final DataWord convertFromTronBase58AddressAddr = new DataWord(
+//  private static final DataWord convertFromLitetokensBase58AddressAddr = new DataWord(
 //      "0000000000000000000000000000000000000000000000000000000000010009");
 //  private static final DataWord transferAssetAddr = new DataWord(
 //      "000000000000000000000000000000000000000000000000000000000001000a");
@@ -182,11 +182,11 @@ public class PrecompiledContracts {
 //    if (address.equals(proposalDeleteAddr)) {
 //      return proposalDelete;
 //    }
-//    if (address.equals(convertFromTronBytesAddressAddr)) {
-//      return convertFromTronBytesAddress;
+//    if (address.equals(convertFromLitetokensBytesAddressAddr)) {
+//      return convertFromLitetokensBytesAddress;
 //    }
-//    if (address.equals(convertFromTronBase58AddressAddr)) {
-//      return convertFromTronBase58Address;
+//    if (address.equals(convertFromLitetokensBase58AddressAddr)) {
+//      return convertFromLitetokensBase58Address;
 //    }
 //    if (address.equals(transferAssetAddr)) {
 //      return transferAsset;
@@ -703,7 +703,7 @@ public class PrecompiledContracts {
   public static class VoteWitnessNative extends PrecompiledContract {
 
     @Override
-    // TODO: Please re-implement this function after Tron cost is well designed.
+    // TODO: Please re-implement this function after Litetokens cost is well designed.
     public long getEnergyForData(byte[] data) {
       return 200;
     }
@@ -730,7 +730,7 @@ public class PrecompiledContracts {
           .newBuilder();
       byte[] witnessAddress20 = new byte[20];
       System.arraycopy(witnessAddress, 12, witnessAddress20, 0, 20);
-      voteBuilder.setVoteAddress(ByteString.copyFrom(convertToTronAddress(witnessAddress20)));
+      voteBuilder.setVoteAddress(ByteString.copyFrom(convertToLitetokensAddress(witnessAddress20)));
       voteBuilder.setVoteCount(count);
       builder.addVotes(voteBuilder.build());
       VoteWitnessContract contract = builder.build();
@@ -779,7 +779,7 @@ public class PrecompiledContracts {
   public static class FreezeBalanceNative extends PrecompiledContract {
 
     @Override
-    // TODO: Please re-implement this function after Tron cost is well designed.
+    // TODO: Please re-implement this function after Litetokens cost is well designed.
     public long getEnergyForData(byte[] data) {
       return 200;
     }
@@ -809,10 +809,10 @@ public class PrecompiledContracts {
 //          .setFrozenDuration(ByteArray.toLong(frozenDuration));
 //      FreezeBalanceContract contract = builder.build();
 //
-//      TransactionCapsule trx = new TransactionCapsule(contract, ContractType.FreezeBalanceContract);
+//      TransactionCapsule xlt = new TransactionCapsule(contract, ContractType.FreezeBalanceContract);
 //
 //      final List<Actuator> actuatorList = ActuatorFactory
-//          .createActuator(trx, getDeposit().getDbManager());
+//          .createActuator(xlt, getDeposit().getDbManager());
 //      try {
 //        actuatorList.get(0).validate();
 //        actuatorList.get(0).execute(getResult().getRet());
@@ -841,7 +841,7 @@ public class PrecompiledContracts {
   public static class UnfreezeBalanceNative extends PrecompiledContract {
 
     @Override
-    // TODO: Please re-implement this function after Tron cost is well designed.
+    // TODO: Please re-implement this function after Litetokens cost is well designed.
     public long getEnergyForData(byte[] data) {
       return 200;
     }
@@ -866,11 +866,11 @@ public class PrecompiledContracts {
 //      builder.setOwnerAddress(byteAddress);
 //      UnfreezeBalanceContract contract = builder.build();
 //
-//      TransactionCapsule trx = new TransactionCapsule(contract,
+//      TransactionCapsule xlt = new TransactionCapsule(contract,
 //          ContractType.UnfreezeBalanceContract);
 //
 //      final List<Actuator> actuatorList = ActuatorFactory
-//          .createActuator(trx, getDeposit().getDbManager());
+//          .createActuator(xlt, getDeposit().getDbManager());
 //      try {
 //        actuatorList.get(0).validate();
 //        actuatorList.get(0).execute(getResult().getRet());
@@ -900,7 +900,7 @@ public class PrecompiledContracts {
   public static class WithdrawBalanceNative extends PrecompiledContract {
 
     @Override
-    // TODO: Please re-implement this function after Tron cost is well designed.
+    // TODO: Please re-implement this function after Litetokens cost is well designed.
     public long getEnergyForData(byte[] data) {
       return 200;
     }
@@ -918,11 +918,11 @@ public class PrecompiledContracts {
       builder.setOwnerAddress(byteAddress);
       WithdrawBalanceContract contract = builder.build();
 
-      TransactionCapsule trx = new TransactionCapsule(contract,
+      TransactionCapsule xlt = new TransactionCapsule(contract,
           ContractType.WithdrawBalanceContract);
 
       final List<Actuator> actuatorList = ActuatorFactory
-          .createActuator(trx, getDeposit().getDbManager());
+          .createActuator(xlt, getDeposit().getDbManager());
       WithdrawBalanceActuator withdrawBalanceActuator;
       try {
         if (Objects.isNull(actuatorList) || actuatorList.isEmpty()){
@@ -966,7 +966,7 @@ public class PrecompiledContracts {
   public static class ProposalApproveNative extends PrecompiledContract {
 
     @Override
-    // TODO: Please re-implement this function after Tron cost is well designed.
+    // TODO: Please re-implement this function after Litetokens cost is well designed.
     public long getEnergyForData(byte[] data) {
       return 200;
     }
@@ -995,11 +995,11 @@ public class PrecompiledContracts {
       builder.setIsAddApproval(ByteArray.toInt(isAddApproval) == 1 ? true : false);
       ProposalApproveContract contract = builder.build();
 
-      TransactionCapsule trx = new TransactionCapsule(contract,
+      TransactionCapsule xlt = new TransactionCapsule(contract,
           ContractType.ProposalApproveContract);
 
       final List<Actuator> actuatorList = ActuatorFactory
-          .createActuator(trx, getDeposit().getDbManager());
+          .createActuator(xlt, getDeposit().getDbManager());
       ProposalApproveActuator proposalApproveActuator;
       try {
         if (Objects.isNull(actuatorList) || actuatorList.isEmpty()){
@@ -1042,7 +1042,7 @@ public class PrecompiledContracts {
   public static class ProposalCreateNative extends PrecompiledContract {
 
     @Override
-    // TODO: Please re-implement this function after Tron cost is well designed.
+    // TODO: Please re-implement this function after Litetokens cost is well designed.
     public long getEnergyForData(byte[] data) {
       return 200;
     }
@@ -1079,11 +1079,11 @@ public class PrecompiledContracts {
       ProposalCreateContract contract = builder.build();
 
       long id = 0;
-      TransactionCapsule trx = new TransactionCapsule(contract,
+      TransactionCapsule xlt = new TransactionCapsule(contract,
           ContractType.ProposalCreateContract);
 
       final List<Actuator> actuatorList = ActuatorFactory
-          .createActuator(trx, getDeposit().getDbManager());
+          .createActuator(xlt, getDeposit().getDbManager());
       ProposalCreateActuator proposalCreateActuator;
       try {
         if (Objects.isNull(actuatorList) || actuatorList.isEmpty()){
@@ -1127,7 +1127,7 @@ public class PrecompiledContracts {
   public static class ProposalDeleteNative extends PrecompiledContract {
 
     @Override
-    // TODO: Please re-implement this function after Tron cost is well designed.
+    // TODO: Please re-implement this function after Litetokens cost is well designed.
     public long getEnergyForData(byte[] data) {
       return 200;
     }
@@ -1149,11 +1149,11 @@ public class PrecompiledContracts {
 
       ProposalDeleteContract contract = builder.build();
 
-      TransactionCapsule trx = new TransactionCapsule(contract,
+      TransactionCapsule xlt = new TransactionCapsule(contract,
           ContractType.ProposalDeleteContract);
 
       final List<Actuator> actuatorList = ActuatorFactory
-          .createActuator(trx, getDeposit().getDbManager());
+          .createActuator(xlt, getDeposit().getDbManager());
       ProposalDeleteActuator proposalDeleteActuator;
       try {
         if (Objects.isNull(actuatorList) || actuatorList.isEmpty()){
@@ -1187,17 +1187,17 @@ public class PrecompiledContracts {
   }
 
   /**
-   * Native function for converting bytes32 tron address to solidity address type value. <br/>
+   * Native function for converting bytes32 litetokens address to solidity address type value. <br/>
    * <br/>
    *
-   * Input data[]: <br/> bytes32 tron address <br/>
+   * Input data[]: <br/> bytes32 litetokens address <br/>
    *
    * Output: <br/> Solidity address <br/>
    */
-  public static class ConvertFromTronBytesAddressNative extends PrecompiledContract {
+  public static class ConvertFromLitetokensBytesAddressNative extends PrecompiledContract {
 
     @Override
-    // TODO: Please re-implement this function after Tron cost is well designed.
+    // TODO: Please re-implement this function after Litetokens cost is well designed.
     public long getEnergyForData(byte[] data) {
       return 200;
     }
@@ -1214,17 +1214,17 @@ public class PrecompiledContracts {
   }
 
   /**
-   * Native function for converting Base58String tron address to solidity address type value. <br/>
+   * Native function for converting Base58String litetokens address to solidity address type value. <br/>
    * <br/>
    *
-   * Input data[]: <br/> Base58String tron address <br/>
+   * Input data[]: <br/> Base58String litetokens address <br/>
    *
    * Output: <br/> Solidity address <br/>
    */
-  public static class ConvertFromTronBase58AddressNative extends PrecompiledContract {
+  public static class ConvertFromLitetokensBase58AddressNative extends PrecompiledContract {
 
     @Override
-    // TODO: Please re-implement this function after Tron cost is well designed.
+    // TODO: Please re-implement this function after Litetokens cost is well designed.
     public long getEnergyForData(byte[] data) {
       return 200;
     }
@@ -1285,18 +1285,18 @@ public class PrecompiledContracts {
 //      Contract.TransferAssetContract.Builder builder = Contract.TransferAssetContract
 //          .newBuilder();
 //      builder.setOwnerAddress(ByteString.copyFrom(getCallerAddress()));
-//      builder.setToAddress(ByteString.copyFrom(convertToTronAddress(new DataWord(toAddress).getLast20Bytes())));
+//      builder.setToAddress(ByteString.copyFrom(convertToLitetokensAddress(new DataWord(toAddress).getLast20Bytes())));
 //      builder.setAmount(Longs.fromByteArray(amount));
 //      builder.setAssetName(ByteString.copyFrom(name));
 //
 //
 //      TransferAssetContract contract = builder.build();
 //
-//      TransactionCapsule trx = new TransactionCapsule(contract,
+//      TransactionCapsule xlt = new TransactionCapsule(contract,
 //          ContractType.TransferAssetContract);
 //
 //      final List<Actuator> actuatorList = ActuatorFactory
-//          .createActuator(trx, getDeposit().getDbManager());
+//          .createActuator(xlt, getDeposit().getDbManager());
 //      try {
 //        actuatorList.get(0).validate();
 //        actuatorList.get(0).execute(getResult().getRet());
@@ -1349,7 +1349,7 @@ public class PrecompiledContracts {
       name = ByteArray.subArray(name, 0, length);
 
       long assetBalance = this.getDeposit().
-          getAccount(convertToTronAddress(new DataWord(targetAddress).getLast20Bytes())).
+          getAccount(convertToLitetokensAddress(new DataWord(targetAddress).getLast20Bytes())).
           getAssetMap().get(ByteArray.toStr(name));
 
       return Pair.of(true, new DataWord(Longs.toByteArray(assetBalance)).getData());

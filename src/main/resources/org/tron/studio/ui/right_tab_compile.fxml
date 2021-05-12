@@ -9,7 +9,7 @@
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXListView?>
 <VBox spacing="10" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.tron.studio.ui.RightTabCompileController">
+      fx:controller="org.litetokens.studio.ui.RightTabCompileController">
     <padding>
         <Insets top="10" right="10" bottom="10" left="10"/>
     </padding>

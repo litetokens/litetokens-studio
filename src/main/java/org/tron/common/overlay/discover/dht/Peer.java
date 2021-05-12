@@ -16,12 +16,12 @@
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.common.overlay.discover.dht;
+package org.litetokens.common.overlay.discover.dht;
 
 import java.math.BigInteger;
 import org.spongycastle.util.BigIntegers;
 import org.spongycastle.util.encoders.Hex;
-import org.tron.common.utils.Utils;
+import org.litetokens.common.utils.Utils;
 
 public class Peer {
 

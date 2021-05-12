@@ -1,4 +1,4 @@
-package stest.tron.wallet.common.client.utils;
+package stest.litetokens.wallet.common.client.utils;
 
 /*
  * Copyright 2011 Google Inc.
@@ -31,7 +31,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
-import org.tron.common.utils.ByteArray;
+import org.litetokens.common.utils.ByteArray;
 
 
 /**

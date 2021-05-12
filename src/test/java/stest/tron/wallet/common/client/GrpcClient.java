@@ -1,22 +1,22 @@
-package stest.tron.wallet.common.client;
+package stest.litetokens.wallet.common.client;
 
 import com.google.protobuf.ByteString;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import org.tron.api.GrpcAPI;
-import org.tron.api.GrpcAPI.*;
-import org.tron.api.WalletExtensionGrpc;
-import org.tron.api.WalletGrpc;
-import org.tron.api.WalletSolidityGrpc;
-import org.tron.common.utils.ByteArray;
-import org.tron.protos.Contract;
-import org.tron.protos.Contract.AssetIssueContract;
-import org.tron.protos.Contract.FreezeBalanceContract;
-import org.tron.protos.Contract.UnfreezeBalanceContract;
-import org.tron.protos.Contract.WithdrawBalanceContract;
-import org.tron.protos.Protocol.Account;
-import org.tron.protos.Protocol.Block;
-import org.tron.protos.Protocol.Transaction;
+import org.litetokens.api.GrpcAPI;
+import org.litetokens.api.GrpcAPI.*;
+import org.litetokens.api.WalletExtensionGrpc;
+import org.litetokens.api.WalletGrpc;
+import org.litetokens.api.WalletSolidityGrpc;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.protos.Contract;
+import org.litetokens.protos.Contract.AssetIssueContract;
+import org.litetokens.protos.Contract.FreezeBalanceContract;
+import org.litetokens.protos.Contract.UnfreezeBalanceContract;
+import org.litetokens.protos.Contract.WithdrawBalanceContract;
+import org.litetokens.protos.Protocol.Account;
+import org.litetokens.protos.Protocol.Block;
+import org.litetokens.protos.Protocol.Transaction;
 
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;

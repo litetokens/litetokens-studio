@@ -1,4 +1,4 @@
-package stest.tron.wallet.assetissue;
+package stest.litetokens.wallet.assetissue;
 
 import com.google.protobuf.ByteString;
 import io.grpc.ManagedChannel;
@@ -11,19 +11,19 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
-import org.tron.api.GrpcAPI;
-import org.tron.api.GrpcAPI.AccountNetMessage;
-import org.tron.api.WalletGrpc;
-import org.tron.common.crypto.ECKey;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.Utils;
-import org.tron.core.Wallet;
-import org.tron.protos.Protocol.Account;
-import stest.tron.wallet.common.client.Configuration;
-import stest.tron.wallet.common.client.Parameter.CommonConstant;
-import stest.tron.wallet.common.client.WalletClient;
-import stest.tron.wallet.common.client.utils.Base58;
-import stest.tron.wallet.common.client.utils.PublicMethed;
+import org.litetokens.api.GrpcAPI;
+import org.litetokens.api.GrpcAPI.AccountNetMessage;
+import org.litetokens.api.WalletGrpc;
+import org.litetokens.common.crypto.ECKey;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.Utils;
+import org.litetokens.core.Wallet;
+import org.litetokens.protos.Protocol.Account;
+import stest.litetokens.wallet.common.client.Configuration;
+import stest.litetokens.wallet.common.client.Parameter.CommonConstant;
+import stest.litetokens.wallet.common.client.WalletClient;
+import stest.litetokens.wallet.common.client.utils.Base58;
+import stest.litetokens.wallet.common.client.utils.PublicMethed;
 
 @Slf4j
 public class WalletTestAssetIssue015 {

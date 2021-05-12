@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<CodeArea xmlns:fx="http://javafx.com/fxml" fx:controller="org.tron.studio.ui.CodeAreaController"
+<CodeArea xmlns:fx="http://javafx.com/fxml" fx:controller="org.litetokens.studio.ui.CodeAreaController"
           fx:id="codeArea" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS"
           AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

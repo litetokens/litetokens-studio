@@ -1,4 +1,4 @@
-package stest.tron.wallet.account;
+package stest.litetokens.wallet.account;
 
 import com.google.protobuf.ByteString;
 import io.grpc.ManagedChannel;
@@ -12,19 +12,19 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
-import org.tron.api.GrpcAPI;
-import org.tron.api.GrpcAPI.AccountNetMessage;
-import org.tron.api.WalletGrpc;
-import org.tron.common.crypto.ECKey;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.Utils;
-import org.tron.core.Wallet;
-import org.tron.protos.Contract;
-import org.tron.protos.Protocol.Account;
-import org.tron.protos.Protocol.Transaction;
-import stest.tron.wallet.common.client.Configuration;
-import stest.tron.wallet.common.client.Parameter.CommonConstant;
-import stest.tron.wallet.common.client.utils.PublicMethed;
+import org.litetokens.api.GrpcAPI;
+import org.litetokens.api.GrpcAPI.AccountNetMessage;
+import org.litetokens.api.WalletGrpc;
+import org.litetokens.common.crypto.ECKey;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.Utils;
+import org.litetokens.core.Wallet;
+import org.litetokens.protos.Contract;
+import org.litetokens.protos.Protocol.Account;
+import org.litetokens.protos.Protocol.Transaction;
+import stest.litetokens.wallet.common.client.Configuration;
+import stest.litetokens.wallet.common.client.Parameter.CommonConstant;
+import stest.litetokens.wallet.common.client.utils.PublicMethed;
 
 @Slf4j
 public class WalletTestAccount007 {
@@ -102,7 +102,7 @@ public class WalletTestAccount007 {
     //When creator has no bandwidth, he can't use the free net.
     Assert.assertTrue(afterFreeNet == beforeFreeNet);
 
-    //When the creator has no bandwidth, create a new account should spend 0.1TRX.
+    //When the creator has no bandwidth, create a new account should spend 0.1XLT.
     Assert.assertTrue(beforeBalance - afterBalance == 100000);
   }
 

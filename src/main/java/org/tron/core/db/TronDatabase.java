@@ -1,4 +1,4 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.Iterator;
@@ -6,15 +6,15 @@ import java.util.Map.Entry;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.tron.common.storage.leveldb.LevelDbDataSourceImpl;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.api.IndexHelper;
-import org.tron.core.db2.core.ITronChainBase;
-import org.tron.core.exception.BadItemException;
-import org.tron.core.exception.ItemNotFoundException;
+import org.litetokens.common.storage.leveldb.LevelDbDataSourceImpl;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.api.IndexHelper;
+import org.litetokens.core.db2.core.ILitetokensChainBase;
+import org.litetokens.core.exception.BadItemException;
+import org.litetokens.core.exception.ItemNotFoundException;
 
 @Slf4j
-public abstract class TronDatabase<T> implements ITronChainBase<T> {
+public abstract class LitetokensDatabase<T> implements ILitetokensChainBase<T> {
 
   protected LevelDbDataSourceImpl dbSource;
   @Getter
@@ -23,13 +23,13 @@ public abstract class TronDatabase<T> implements ITronChainBase<T> {
   @Autowired(required = false)
   protected IndexHelper indexHelper;
 
-  protected TronDatabase(String dbName) {
+  protected LitetokensDatabase(String dbName) {
     this.dbName = dbName;
     dbSource = new LevelDbDataSourceImpl(Args.getInstance().getOutputDirectoryByDbName(dbName), dbName);
     dbSource.initDB();
   }
 
-  protected TronDatabase() {
+  protected LitetokensDatabase() {
   }
 
   public LevelDbDataSourceImpl getDbSource() {

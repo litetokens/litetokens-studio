@@ -1,8 +1,8 @@
-package org.tron.common.utils;
+package org.litetokens.common.utils;
 
 import java.util.Optional;
 
-import org.tron.core.db2.core.ISession;
+import org.litetokens.core.db2.core.ISession;
 
 public final class SessionOptional {
 

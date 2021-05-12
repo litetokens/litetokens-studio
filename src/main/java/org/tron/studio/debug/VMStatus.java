@@ -1,12 +1,12 @@
-package org.tron.studio.debug;
+package org.litetokens.studio.debug;
 
 import org.spongycastle.util.encoders.Hex;
-import org.tron.common.runtime.vm.DataWord;
-import org.tron.common.runtime.vm.OpCode;
-import org.tron.common.runtime.vm.program.Memory;
-import org.tron.common.runtime.vm.program.Stack;
-import org.tron.common.runtime.vm.program.Storage;
-import org.tron.common.runtime.vm.trace.OpActions;
+import org.litetokens.common.runtime.vm.DataWord;
+import org.litetokens.common.runtime.vm.OpCode;
+import org.litetokens.common.runtime.vm.program.Memory;
+import org.litetokens.common.runtime.vm.program.Stack;
+import org.litetokens.common.runtime.vm.program.Storage;
+import org.litetokens.common.runtime.vm.trace.OpActions;
 
 import java.math.BigInteger;
 import java.util.ArrayList;

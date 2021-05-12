@@ -1,4 +1,4 @@
-package org.tron.studio.utils;
+package org.litetokens.studio.utils;
 
 import lombok.extern.slf4j.Slf4j;
 import org.fxmisc.richtext.CodeArea;

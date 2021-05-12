@@ -1,8 +1,8 @@
-package org.tron.studio;
+package org.litetokens.studio;
 
-import org.tron.abi.datatypes.Function;
-import org.tron.api.GrpcAPI;
-import org.tron.protos.Protocol;
+import org.litetokens.abi.datatypes.Function;
+import org.litetokens.api.GrpcAPI;
+import org.litetokens.protos.Protocol;
 
 public class TransactionHistoryItem {
 

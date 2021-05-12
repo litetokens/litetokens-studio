@@ -1,32 +1,32 @@
-package org.tron.core.net.node;
+package org.litetokens.core.net.node;
 
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
-import org.tron.common.overlay.message.Message;
-import org.tron.common.utils.Sha256Hash;
-import org.tron.core.capsule.BlockCapsule;
-import org.tron.core.capsule.BlockCapsule.BlockId;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.core.exception.BadBlockException;
-import org.tron.core.exception.BadTransactionException;
-import org.tron.core.exception.NonCommonBlockException;
-import org.tron.core.exception.StoreException;
-import org.tron.core.exception.TronException;
-import org.tron.core.exception.UnLinkedBlockException;
-import org.tron.core.net.message.MessageTypes;
+import org.litetokens.common.overlay.message.Message;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.core.capsule.BlockCapsule;
+import org.litetokens.core.capsule.BlockCapsule.BlockId;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.core.exception.BadBlockException;
+import org.litetokens.core.exception.BadTransactionException;
+import org.litetokens.core.exception.NonCommonBlockException;
+import org.litetokens.core.exception.StoreException;
+import org.litetokens.core.exception.LitetokensException;
+import org.litetokens.core.exception.UnLinkedBlockException;
+import org.litetokens.core.net.message.MessageTypes;
 
 public interface NodeDelegate {
 
   LinkedList<Sha256Hash> handleBlock(BlockCapsule block, boolean syncMode)
       throws BadBlockException, UnLinkedBlockException, InterruptedException, NonCommonBlockException;
 
-  boolean handleTransaction(TransactionCapsule trx) throws BadTransactionException;
+  boolean handleTransaction(TransactionCapsule xlt) throws BadTransactionException;
 
   LinkedList<BlockId> getLostBlockIds(List<BlockId> blockChainSummary) throws StoreException;
 
   Deque<BlockId> getBlockChainSummary(BlockId beginBLockId, Deque<BlockId> blockIds)
-      throws TronException;
+      throws LitetokensException;
 
   Message getData(Sha256Hash msgId, MessageTypes type) throws StoreException;
 

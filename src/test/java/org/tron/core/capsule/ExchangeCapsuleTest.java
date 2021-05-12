@@ -1,4 +1,4 @@
-package org.tron.core.capsule;
+package org.litetokens.core.capsule;
 
 import com.google.protobuf.ByteString;
 import java.io.File;
@@ -8,16 +8,16 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.FileUtil;
-import org.tron.core.Constant;
-import org.tron.core.Wallet;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.Manager;
-import org.tron.core.db.StorageMarket;
-import org.tron.core.exception.ItemNotFoundException;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.core.Constant;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.db.StorageMarket;
+import org.litetokens.core.exception.ItemNotFoundException;
 
 @Slf4j
 public class ExchangeCapsuleTest {
@@ -25,7 +25,7 @@ public class ExchangeCapsuleTest {
   private static Manager dbManager;
   private static StorageMarket storageMarket;
   private static final String dbPath = "output_buy_storage_test";
-  private static TronApplicationContext context;
+  private static LitetokensApplicationContext context;
   private static final String OWNER_ADDRESS;
   private static final String OWNER_ADDRESS_INVALID = "aaaa";
   private static final String OWNER_ACCOUNT_INVALID;
@@ -33,7 +33,7 @@ public class ExchangeCapsuleTest {
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new LitetokensApplicationContext(DefaultConfig.class);
     OWNER_ADDRESS = Wallet.getAddressPreFixString() + "548794500882809695a8a687866e76d4271a1abc";
     OWNER_ACCOUNT_INVALID =
         Wallet.getAddressPreFixString() + "548794500882809695a8a687866e76d4271a3456";

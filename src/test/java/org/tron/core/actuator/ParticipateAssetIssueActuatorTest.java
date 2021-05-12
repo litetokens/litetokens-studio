@@ -1,4 +1,4 @@
-package org.tron.core.actuator;
+package org.litetokens.core.actuator;
 
 import com.google.protobuf.Any;
 import com.google.protobuf.ByteString;
@@ -11,30 +11,30 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.FileUtil;
-import org.tron.core.Constant;
-import org.tron.core.Wallet;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.capsule.AssetIssueCapsule;
-import org.tron.core.capsule.TransactionResultCapsule;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.Manager;
-import org.tron.core.exception.ContractExeException;
-import org.tron.core.exception.ContractValidateException;
-import org.tron.protos.Contract;
-import org.tron.protos.Contract.AssetIssueContract;
-import org.tron.protos.Protocol.AccountType;
-import org.tron.protos.Protocol.Transaction.Result.code;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.core.Constant;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.capsule.AssetIssueCapsule;
+import org.litetokens.core.capsule.TransactionResultCapsule;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.exception.ContractExeException;
+import org.litetokens.core.exception.ContractValidateException;
+import org.litetokens.protos.Contract;
+import org.litetokens.protos.Contract.AssetIssueContract;
+import org.litetokens.protos.Protocol.AccountType;
+import org.litetokens.protos.Protocol.Transaction.Result.code;
 
 public class ParticipateAssetIssueActuatorTest {
 
   private static final Logger logger = LoggerFactory.getLogger("Test");
   private static Manager dbManager;
   private static final String dbPath = "output_participateAsset_test";
-  private static TronApplicationContext context;
+  private static LitetokensApplicationContext context;
   private static final String OWNER_ADDRESS;
   private static final String TO_ADDRESS;
   private static final String THIRD_ADDRESS;
@@ -43,15 +43,15 @@ public class ParticipateAssetIssueActuatorTest {
   private static final long OWNER_BALANCE = 99999;
   private static final long TO_BALANCE = 100001;
   private static final long TOTAL_SUPPLY = 10000000000000L;
-  private static final int TRX_NUM = 2;
+  private static final int XLT_NUM = 2;
   private static final int NUM = 2147483647;
   private static final int VOTE_SCORE = 2;
-  private static final String DESCRIPTION = "TRX";
-  private static final String URL = "https://tron.network";
+  private static final String DESCRIPTION = "XLT";
+  private static final String URL = "https://litetokens.org";
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new LitetokensApplicationContext(DefaultConfig.class);
     OWNER_ADDRESS = Wallet.getAddressPreFixString() + "548794500882809695a8a687866e76d4271a1abc";
     TO_ADDRESS = Wallet.getAddressPreFixString() + "abd4b9367799eaa3197fecb144eb71de1e049abc";
     THIRD_ADDRESS = Wallet.getAddressPreFixString() + "4948c2e8a756d9437037dcd8c7e0c73d560ca38d";
@@ -157,7 +157,7 @@ public class ParticipateAssetIssueActuatorTest {
             .setOwnerAddress(ByteString.copyFrom(ByteArray.fromHexString(TO_ADDRESS)))
             .setName(ByteString.copyFrom(ByteArray.fromString(ASSET_NAME)))
             .setTotalSupply(TOTAL_SUPPLY)
-            .setTrxNum(TRX_NUM)
+            .setXltNum(XLT_NUM)
             .setNum(NUM)
             .setStartTime(startTimestmp)
             .setEndTime(endTimestmp)
@@ -180,7 +180,7 @@ public class ParticipateAssetIssueActuatorTest {
             .setOwnerAddress(ByteString.copyFrom(ByteArray.fromHexString(TO_ADDRESS)))
             .setName(ByteString.copyFrom(ByteArray.fromString(assetName)))
             .setTotalSupply(TOTAL_SUPPLY)
-            .setTrxNum(TRX_NUM)
+            .setXltNum(XLT_NUM)
             .setNum(NUM)
             .setStartTime(startTimestmp)
             .setEndTime(endTimestmp)
@@ -203,7 +203,7 @@ public class ParticipateAssetIssueActuatorTest {
             .setOwnerAddress(ByteString.copyFrom(ByteArray.fromHexString(owner)))
             .setName(ByteString.copyFrom(ByteArray.fromString(ASSET_NAME)))
             .setTotalSupply(TOTAL_SUPPLY)
-            .setTrxNum(TRX_NUM)
+            .setXltNum(XLT_NUM)
             .setNum(NUM)
             .setStartTime(startTimestmp)
             .setEndTime(endTimestmp)
@@ -238,10 +238,10 @@ public class ParticipateAssetIssueActuatorTest {
 
       Assert.assertEquals(owner.getBalance(), OWNER_BALANCE - 1000);
       Assert.assertEquals(toAccount.getBalance(), TO_BALANCE + 1000);
-      Assert.assertEquals(owner.getAssetMap().get(ASSET_NAME).longValue(), (1000L) / TRX_NUM * NUM);
+      Assert.assertEquals(owner.getAssetMap().get(ASSET_NAME).longValue(), (1000L) / XLT_NUM * NUM);
       Assert.assertEquals(
           toAccount.getAssetMap().get(ASSET_NAME).longValue(),
-          TOTAL_SUPPLY - (1000L) / TRX_NUM * NUM);
+          TOTAL_SUPPLY - (1000L) / XLT_NUM * NUM);
     } catch (ContractValidateException e) {
       Assert.assertFalse(e instanceof ContractValidateException);
     } catch (ContractExeException e) {
@@ -321,10 +321,10 @@ public class ParticipateAssetIssueActuatorTest {
       AccountCapsule toAccount =
           dbManager.getAccountStore().get(ByteArray.fromHexString(TO_ADDRESS));
 
-      Assert.assertEquals(owner.getAssetMap().get(ASSET_NAME).longValue(), (999L * NUM) / TRX_NUM);
+      Assert.assertEquals(owner.getAssetMap().get(ASSET_NAME).longValue(), (999L * NUM) / XLT_NUM);
       Assert.assertEquals(
           toAccount.getAssetMap().get(ASSET_NAME).longValue(),
-          TOTAL_SUPPLY - (999L * NUM) / TRX_NUM);
+          TOTAL_SUPPLY - (999L * NUM) / XLT_NUM);
     } catch (ContractValidateException e) {
       Assert.assertFalse(e instanceof ContractValidateException);
     } catch (ContractExeException e) {
@@ -619,9 +619,9 @@ public class ParticipateAssetIssueActuatorTest {
 
       Assert.assertEquals(owner.getBalance(), OWNER_BALANCE - 1000);
       Assert.assertEquals(toAccount.getBalance(), TO_BALANCE + 1000);
-      Assert.assertEquals(owner.getAssetMap().get(assetName).longValue(), (1000L) / TRX_NUM * NUM);
+      Assert.assertEquals(owner.getAssetMap().get(assetName).longValue(), (1000L) / XLT_NUM * NUM);
       Assert.assertEquals(toAccount.getAssetMap().get(assetName).longValue(),
-          TOTAL_SUPPLY - (1000L) / TRX_NUM * NUM);
+          TOTAL_SUPPLY - (1000L) / XLT_NUM * NUM);
     } catch (ContractValidateException e) {
       Assert.assertFalse(e instanceof ContractValidateException);
     } catch (ContractExeException e) {
@@ -644,9 +644,9 @@ public class ParticipateAssetIssueActuatorTest {
 
       Assert.assertEquals(owner.getBalance(), OWNER_BALANCE - 2000);
       Assert.assertEquals(toAccount.getBalance(), TO_BALANCE + 2000);
-      Assert.assertEquals(owner.getAssetMap().get(assetName).longValue(), (1000L) / TRX_NUM * NUM);
+      Assert.assertEquals(owner.getAssetMap().get(assetName).longValue(), (1000L) / XLT_NUM * NUM);
       Assert.assertEquals(toAccount.getAssetMap().get(assetName).longValue(),
-          TOTAL_SUPPLY - (1000L) / TRX_NUM * NUM);
+          TOTAL_SUPPLY - (1000L) / XLT_NUM * NUM);
     } catch (ContractValidateException e) {
       Assert.assertFalse(e instanceof ContractValidateException);
     } catch (ContractExeException e) {
@@ -655,10 +655,10 @@ public class ParticipateAssetIssueActuatorTest {
   }
 
   @Test
-  public void notEnoughTrxTest() {
+  public void notEnoughXltTest() {
     initAssetIssue(dbManager.getDynamicPropertiesStore().getLatestBlockHeaderTimestamp() - 1000,
         dbManager.getDynamicPropertiesStore().getLatestBlockHeaderTimestamp() + 1000);
-    // First, reduce the owner trx balance. Else can't complete this test case.
+    // First, reduce the owner xlt balance. Else can't complete this test case.
     AccountCapsule owner = dbManager.getAccountStore().get(ByteArray.fromHexString(OWNER_ADDRESS));
     owner.setBalance(100);
     dbManager.getAccountStore().put(owner.getAddress().toByteArray(), owner);
@@ -791,7 +791,7 @@ public class ParticipateAssetIssueActuatorTest {
   public void multiplyOverflowTest() {
     initAssetIssue(dbManager.getDynamicPropertiesStore().getLatestBlockHeaderTimestamp() - 1000,
         dbManager.getDynamicPropertiesStore().getLatestBlockHeaderTimestamp() + 1000);
-    // First, increase the owner trx balance. Else can't complete this test case.
+    // First, increase the owner xlt balance. Else can't complete this test case.
     AccountCapsule owner = dbManager.getAccountStore().get(ByteArray.fromHexString(OWNER_ADDRESS));
     owner.setBalance(100000000000000L);
     dbManager.getAccountStore().put(owner.getAddress().toByteArray(), owner);
@@ -828,7 +828,7 @@ public class ParticipateAssetIssueActuatorTest {
   }
 
   /**
-   * exchangeAmount <= 0 trx, throw exception
+   * exchangeAmount <= 0 xlt, throw exception
    */
   @Test
   public void exchangeAmountTest() {
@@ -839,7 +839,7 @@ public class ParticipateAssetIssueActuatorTest {
             .setOwnerAddress(ByteString.copyFrom(ByteArray.fromHexString(TO_ADDRESS)))
             .setName(ByteString.copyFrom(ByteArray.fromString(ASSET_NAME)))
             .setTotalSupply(TOTAL_SUPPLY)
-            .setTrxNum(100)
+            .setXltNum(100)
             .setNum(1)
             .setStartTime(dbManager.getHeadBlockTimeStamp() - 10000)
             .setEndTime(dbManager.getHeadBlockTimeStamp() + 11000000)

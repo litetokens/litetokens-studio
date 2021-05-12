@@ -16,7 +16,7 @@
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.common.overlay.discover.node;
+package org.litetokens.common.overlay.discover.node;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
@@ -40,22 +40,22 @@ import java.util.function.Predicate;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tron.common.net.udp.handler.EventHandler;
-import org.tron.common.net.udp.handler.UdpEvent;
-import org.tron.common.net.udp.message.Message;
-import org.tron.common.net.udp.message.discover.FindNodeMessage;
-import org.tron.common.net.udp.message.discover.NeighborsMessage;
-import org.tron.common.net.udp.message.discover.PingMessage;
-import org.tron.common.net.udp.message.discover.PongMessage;
-import org.tron.common.overlay.discover.DiscoverListener;
-import org.tron.common.overlay.discover.RefreshTask;
-import org.tron.common.overlay.discover.node.NodeHandler.State;
-import org.tron.common.overlay.discover.node.statistics.MessageStatistics;
-import org.tron.common.overlay.discover.node.statistics.NodeStatistics;
-import org.tron.common.overlay.discover.table.NodeTable;
-import org.tron.common.utils.CollectionUtils;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.Manager;
+import org.litetokens.common.net.udp.handler.EventHandler;
+import org.litetokens.common.net.udp.handler.UdpEvent;
+import org.litetokens.common.net.udp.message.Message;
+import org.litetokens.common.net.udp.message.discover.FindNodeMessage;
+import org.litetokens.common.net.udp.message.discover.NeighborsMessage;
+import org.litetokens.common.net.udp.message.discover.PingMessage;
+import org.litetokens.common.net.udp.message.discover.PongMessage;
+import org.litetokens.common.overlay.discover.DiscoverListener;
+import org.litetokens.common.overlay.discover.RefreshTask;
+import org.litetokens.common.overlay.discover.node.NodeHandler.State;
+import org.litetokens.common.overlay.discover.node.statistics.MessageStatistics;
+import org.litetokens.common.overlay.discover.node.statistics.NodeStatistics;
+import org.litetokens.common.overlay.discover.table.NodeTable;
+import org.litetokens.common.utils.CollectionUtils;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.Manager;
 
 @Component
 public class NodeManager implements EventHandler {

@@ -1,16 +1,16 @@
-package org.tron.core.net.message;
+package org.litetokens.core.net.message;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.tron.common.overlay.message.MessageFactory;
-import org.tron.core.exception.P2pException;
+import org.litetokens.common.overlay.message.MessageFactory;
+import org.litetokens.core.exception.P2pException;
 
 /**
  * msg factory.
  */
-public class TronMessageFactory extends MessageFactory {
+public class LitetokensMessageFactory extends MessageFactory {
 
   @Override
-  public TronMessage create(byte[] data) throws Exception {
+  public LitetokensMessage create(byte[] data) throws Exception {
     try {
       byte type = data[0];
       byte[] rawData = ArrayUtils.subarray(data, 1, data.length);
@@ -23,18 +23,18 @@ public class TronMessageFactory extends MessageFactory {
     }
   }
 
-  private TronMessage create(byte type, byte[] packed) throws Exception {
+  private LitetokensMessage create(byte type, byte[] packed) throws Exception {
     MessageTypes receivedTypes = MessageTypes.fromByte(type);
     if (receivedTypes == null) {
       throw new P2pException(P2pException.TypeEnum.NO_SUCH_MESSAGE,
           "type=" + type + ", len=" + packed.length);
     }
     switch (receivedTypes) {
-      case TRX:
+      case XLT:
         return new TransactionMessage(packed);
       case BLOCK:
         return new BlockMessage(packed);
-      case TRXS:
+      case XLTS:
         return new TransactionsMessage(packed);
       case BLOCKS:
         return new BlocksMessage(packed);
@@ -50,7 +50,7 @@ public class TronMessageFactory extends MessageFactory {
         return new ItemNotFound();
       case FETCH_BLOCK_HEADERS:
         return new FetchBlockHeadersMessage(packed);
-      case TRX_INVENTORY:
+      case XLT_INVENTORY:
         return new TransactionInventoryMessage(packed);
       default:
         throw new P2pException(P2pException.TypeEnum.NO_SUCH_MESSAGE,

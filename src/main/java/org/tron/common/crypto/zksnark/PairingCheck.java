@@ -15,13 +15,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.crypto.zksnark;
+package org.litetokens.common.crypto.zksnark;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.tron.common.crypto.zksnark.Params.*;
+import static org.litetokens.common.crypto.zksnark.Params.*;
 
 /**
  * Implementation of a Pairing Check operation over points of two twisted Barreto–Naehrig curves {@link BN128Fp}, {@link BN128Fp2}<br/>

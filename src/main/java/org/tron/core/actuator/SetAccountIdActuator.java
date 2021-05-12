@@ -1,20 +1,20 @@
-package org.tron.core.actuator;
+package org.litetokens.core.actuator;
 
 import com.google.protobuf.Any;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import lombok.extern.slf4j.Slf4j;
-import org.tron.core.Wallet;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.capsule.TransactionResultCapsule;
-import org.tron.core.capsule.utils.TransactionUtil;
-import org.tron.core.db.AccountIdIndexStore;
-import org.tron.core.db.AccountStore;
-import org.tron.core.db.Manager;
-import org.tron.core.exception.ContractExeException;
-import org.tron.core.exception.ContractValidateException;
-import org.tron.protos.Contract.SetAccountIdContract;
-import org.tron.protos.Protocol.Transaction.Result.code;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.capsule.TransactionResultCapsule;
+import org.litetokens.core.capsule.utils.TransactionUtil;
+import org.litetokens.core.db.AccountIdIndexStore;
+import org.litetokens.core.db.AccountStore;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.exception.ContractExeException;
+import org.litetokens.core.exception.ContractValidateException;
+import org.litetokens.protos.Contract.SetAccountIdContract;
+import org.litetokens.protos.Protocol.Transaction.Result.code;
 
 @Slf4j
 public class SetAccountIdActuator extends AbstractActuator {

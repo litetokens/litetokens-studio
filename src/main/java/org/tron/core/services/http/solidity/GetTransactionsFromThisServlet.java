@@ -1,4 +1,4 @@
-package org.tron.core.services.http.solidity;
+package org.litetokens.core.services.http.solidity;
 
 import com.google.protobuf.ByteString;
 import java.io.IOException;
@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tron.api.GrpcAPI.AccountPaginated;
-import org.tron.api.GrpcAPI.TransactionList;
-import org.tron.core.WalletSolidity;
-import org.tron.core.services.http.JsonFormat;
-import org.tron.core.services.http.Util;
+import org.litetokens.api.GrpcAPI.AccountPaginated;
+import org.litetokens.api.GrpcAPI.TransactionList;
+import org.litetokens.core.WalletSolidity;
+import org.litetokens.core.services.http.JsonFormat;
+import org.litetokens.core.services.http.Util;
 
 @Component
 @Slf4j

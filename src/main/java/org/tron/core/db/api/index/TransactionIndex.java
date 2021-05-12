@@ -1,4 +1,4 @@
-package org.tron.core.db.api.index;
+package org.litetokens.core.db.api.index;
 
 import static com.googlecode.cqengine.query.QueryFactory.attribute;
 
@@ -13,11 +13,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import org.tron.common.utils.ByteArray;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.core.db.common.WrappedByteArray;
-import org.tron.core.db2.core.ITronChainBase;
-import org.tron.protos.Protocol.Transaction;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.core.db.common.WrappedByteArray;
+import org.litetokens.core.db2.core.ILitetokensChainBase;
+import org.litetokens.protos.Protocol.Transaction;
 
 @Component
 @Slf4j
@@ -30,7 +30,7 @@ public class TransactionIndex extends AbstractIndex<TransactionCapsule, Transact
 
   @Autowired
   public TransactionIndex(
-      @Qualifier("transactionStore") final ITronChainBase<TransactionCapsule> database) {
+      @Qualifier("transactionStore") final ILitetokensChainBase<TransactionCapsule> database) {
     super(database);
   }
 

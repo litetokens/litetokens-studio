@@ -1,4 +1,4 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
 import com.google.common.collect.Streams;
 import java.util.List;
@@ -7,11 +7,11 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.tron.core.capsule.ProposalCapsule;
-import org.tron.core.exception.ItemNotFoundException;
+import org.litetokens.core.capsule.ProposalCapsule;
+import org.litetokens.core.exception.ItemNotFoundException;
 
 @Component
-public class ProposalStore extends TronStoreWithRevoking<ProposalCapsule> {
+public class ProposalStore extends LitetokensStoreWithRevoking<ProposalCapsule> {
 
   @Autowired
   public ProposalStore(@Value("proposal") String dbName) {

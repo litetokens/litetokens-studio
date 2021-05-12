@@ -1,9 +1,9 @@
-package org.tron.core.net.message;
+package org.litetokens.core.net.message;
 
 import java.util.List;
-import org.tron.common.utils.Sha256Hash;
-import org.tron.protos.Protocol.Inventory;
-import org.tron.protos.Protocol.Inventory.InventoryType;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.protos.Protocol.Inventory;
+import org.litetokens.protos.Protocol.Inventory.InventoryType;
 
 public class FetchInvDataMessage extends InventoryMessage {
 

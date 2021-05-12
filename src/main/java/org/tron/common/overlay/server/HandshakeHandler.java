@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.overlay.server;
+package org.litetokens.common.overlay.server;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -30,15 +30,15 @@ import org.spongycastle.util.encoders.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.tron.common.overlay.discover.node.NodeManager;
-import org.tron.common.overlay.message.DisconnectMessage;
-import org.tron.common.overlay.message.HelloMessage;
-import org.tron.common.overlay.message.P2pMessage;
-import org.tron.common.overlay.message.P2pMessageFactory;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.Manager;
-import org.tron.core.net.peer.PeerConnection;
-import org.tron.protos.Protocol.ReasonCode;
+import org.litetokens.common.overlay.discover.node.NodeManager;
+import org.litetokens.common.overlay.message.DisconnectMessage;
+import org.litetokens.common.overlay.message.HelloMessage;
+import org.litetokens.common.overlay.message.P2pMessage;
+import org.litetokens.common.overlay.message.P2pMessageFactory;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.net.peer.PeerConnection;
+import org.litetokens.protos.Protocol.ReasonCode;
 
 @Component
 @Scope("prototype")

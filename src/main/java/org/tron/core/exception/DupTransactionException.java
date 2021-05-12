@@ -1,6 +1,6 @@
-package org.tron.core.exception;
+package org.litetokens.core.exception;
 
-public class DupTransactionException extends TronException {
+public class DupTransactionException extends LitetokensException {
 
   public DupTransactionException() {
     super();

@@ -15,21 +15,21 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.runtime.vm;
+package org.litetokens.common.runtime.vm;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongycastle.util.encoders.Hex;
-import org.tron.common.runtime.config.VMConfig;
+import org.litetokens.common.runtime.config.VMConfig;
 import java.io.*;
 import java.util.zip.Deflater;
 import java.util.zip.DeflaterOutputStream;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterOutputStream;
-import org.tron.common.runtime.vm.program.InternalTransaction;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.protos.Protocol.Transaction;
-import org.tron.studio.filesystem.VmTraceFileUtil;
+import org.litetokens.common.runtime.vm.program.InternalTransaction;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.protos.Protocol.Transaction;
+import org.litetokens.studio.filesystem.VmTraceFileUtil;
 
 import static java.lang.String.format;
 import static org.apache.commons.codec.binary.Base64.decodeBase64;

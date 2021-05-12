@@ -1,4 +1,4 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
 import com.google.protobuf.ByteString;
 import java.io.File;
@@ -9,30 +9,30 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.FileUtil;
-import org.tron.core.Constant;
-import org.tron.core.capsule.BlockCapsule;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
-import org.tron.core.exception.BadNumberBlockException;
-import org.tron.core.exception.UnLinkedBlockException;
-import org.tron.protos.Protocol.Block;
-import org.tron.protos.Protocol.BlockHeader;
-import org.tron.protos.Protocol.BlockHeader.raw;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.core.Constant;
+import org.litetokens.core.capsule.BlockCapsule;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.exception.BadNumberBlockException;
+import org.litetokens.core.exception.UnLinkedBlockException;
+import org.litetokens.protos.Protocol.Block;
+import org.litetokens.protos.Protocol.BlockHeader;
+import org.litetokens.protos.Protocol.BlockHeader.raw;
 
 @Slf4j
 public class KhaosDatabaseTest {
 
   private static final String dbPath = "output-khaosDatabase-test";
   private static KhaosDatabase khaosDatabase;
-  private static TronApplicationContext context;
+  private static LitetokensApplicationContext context;
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath},
         Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new LitetokensApplicationContext(DefaultConfig.class);
   }
 
   @BeforeClass

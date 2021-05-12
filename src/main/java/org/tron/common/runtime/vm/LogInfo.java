@@ -15,14 +15,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.runtime.vm;
+package org.litetokens.common.runtime.vm;
 
 import com.google.common.collect.Lists;
 import com.google.protobuf.ByteString;
 import java.util.ArrayList;
 import java.util.List;
 import org.spongycastle.util.encoders.Hex;
-import org.tron.protos.Protocol.TransactionInfo.Log;
+import org.litetokens.protos.Protocol.TransactionInfo.Log;
 
 /**
  * @author Roman Mandeleil

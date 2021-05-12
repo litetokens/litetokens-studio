@@ -1,6 +1,6 @@
-package org.tron.core.exception;
+package org.litetokens.core.exception;
 
-public class VMIllegalException extends TronException {
+public class VMIllegalException extends LitetokensException {
 
   public VMIllegalException() {
     super();

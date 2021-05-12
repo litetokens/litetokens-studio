@@ -1,4 +1,4 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
 import java.util.Objects;
 
@@ -8,13 +8,13 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.core.exception.BadItemException;
-import org.tron.core.exception.StoreException;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.core.exception.BadItemException;
+import org.litetokens.core.exception.StoreException;
 
 @Slf4j
 @Component
-public class TransactionStore extends TronStoreWithRevoking<TransactionCapsule> {
+public class TransactionStore extends LitetokensStoreWithRevoking<TransactionCapsule> {
 
   @Autowired
   private TransactionStore(@Value("trans") String dbName) {

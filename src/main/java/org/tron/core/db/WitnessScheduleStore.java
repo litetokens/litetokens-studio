@@ -1,4 +1,4 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
 import com.google.protobuf.ByteString;
 import java.util.ArrayList;
@@ -9,12 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.tron.common.utils.ByteArray;
-import org.tron.core.capsule.BytesCapsule;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.core.capsule.BytesCapsule;
 
 @Slf4j
 @Component
-public class WitnessScheduleStore extends TronStoreWithRevoking<BytesCapsule> {
+public class WitnessScheduleStore extends LitetokensStoreWithRevoking<BytesCapsule> {
 
   private static final byte[] ACTIVE_WITNESSES = "active_witnesses".getBytes();
   private static final byte[] CURRENT_SHUFFLED_WITNESSES = "current_shuffled_witnesses".getBytes();

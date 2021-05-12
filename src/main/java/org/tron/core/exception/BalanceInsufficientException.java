@@ -1,6 +1,6 @@
-package org.tron.core.exception;
+package org.litetokens.core.exception;
 
-public class BalanceInsufficientException extends TronException {
+public class BalanceInsufficientException extends LitetokensException {
 
   public BalanceInsufficientException() {
     super();

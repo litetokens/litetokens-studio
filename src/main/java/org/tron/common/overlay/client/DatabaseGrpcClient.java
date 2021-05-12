@@ -1,12 +1,12 @@
-package org.tron.common.overlay.client;
+package org.litetokens.common.overlay.client;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import org.tron.api.DatabaseGrpc;
-import org.tron.api.GrpcAPI.EmptyMessage;
-import org.tron.api.GrpcAPI.NumberMessage;
-import org.tron.protos.Protocol.Block;
-import org.tron.protos.Protocol.DynamicProperties;
+import org.litetokens.api.DatabaseGrpc;
+import org.litetokens.api.GrpcAPI.EmptyMessage;
+import org.litetokens.api.GrpcAPI.NumberMessage;
+import org.litetokens.protos.Protocol.Block;
+import org.litetokens.protos.Protocol.DynamicProperties;
 
 public class DatabaseGrpcClient {
 

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.runtime.config;
+package org.litetokens.common.runtime.config;
 
 /**
  * For developer only
@@ -24,7 +24,7 @@ public class VMConfig {
 
   public static final int MAX_CODE_LENGTH = 1024 * 1024;
 
-  public static final int MAX_FEE_LIMIT = 1_000_000_000; //1000 trx
+  public static final int MAX_FEE_LIMIT = 1_000_000_000; //1000 xlt
 
   private boolean vmTraceCompressed = false;
   private boolean vmTrace = true;

@@ -16,13 +16,13 @@
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.common.overlay.discover;
+package org.litetokens.common.overlay.discover;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import org.tron.common.overlay.discover.node.NodeManager;
-import org.tron.common.overlay.discover.table.KademliaOptions;
+import org.litetokens.common.overlay.discover.node.NodeManager;
+import org.litetokens.common.overlay.discover.table.KademliaOptions;
 
 public class DiscoveryExecutor {
 

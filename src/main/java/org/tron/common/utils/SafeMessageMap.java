@@ -1,10 +1,10 @@
-package org.tron.common.utils;
+package org.litetokens.common.utils;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-import org.tron.common.overlay.message.Message;
+import org.litetokens.common.overlay.message.Message;
 
 public class SafeMessageMap {
 

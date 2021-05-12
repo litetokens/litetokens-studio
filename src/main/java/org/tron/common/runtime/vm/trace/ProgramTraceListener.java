@@ -15,10 +15,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.runtime.vm.trace;
+package org.litetokens.common.runtime.vm.trace;
 
-import org.tron.common.runtime.vm.DataWord;
-import org.tron.common.runtime.vm.program.listener.ProgramListenerAdaptor;
+import org.litetokens.common.runtime.vm.DataWord;
+import org.litetokens.common.runtime.vm.program.listener.ProgramListenerAdaptor;
 
 public class ProgramTraceListener extends ProgramListenerAdaptor {
 

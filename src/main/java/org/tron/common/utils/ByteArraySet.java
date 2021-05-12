@@ -16,14 +16,14 @@
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.common.utils;
+package org.litetokens.common.utils;
 
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-import org.tron.core.db.ByteArrayWrapper;
+import org.litetokens.core.db.ByteArrayWrapper;
 
 
 public class ByteArraySet implements Set<byte[]> {

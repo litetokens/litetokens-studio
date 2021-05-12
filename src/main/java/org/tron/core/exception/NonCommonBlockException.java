@@ -1,6 +1,6 @@
-package org.tron.core.exception;
+package org.litetokens.core.exception;
 
-public class NonCommonBlockException extends TronException {
+public class NonCommonBlockException extends LitetokensException {
   public NonCommonBlockException() {
     super();
   }

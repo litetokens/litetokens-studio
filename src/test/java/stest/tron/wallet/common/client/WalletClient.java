@@ -1,4 +1,4 @@
-package stest.tron.wallet.common.client;
+package stest.litetokens.wallet.common.client;
 
 
 import com.google.protobuf.ByteString;
@@ -18,33 +18,33 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongycastle.util.encoders.Hex;
-import org.tron.api.GrpcAPI.AccountNetMessage;
-import org.tron.api.GrpcAPI.AssetIssueList;
-import org.tron.api.GrpcAPI.BlockList;
-import org.tron.api.GrpcAPI.NodeList;
-import org.tron.api.GrpcAPI.TransactionList;
-import org.tron.api.GrpcAPI.WitnessList;
-import org.tron.common.crypto.ECKey;
-import org.tron.common.crypto.SymmEncoder;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.FileUtil;
-import org.tron.common.utils.Sha256Hash;
-import org.tron.common.utils.Utils;
-import org.tron.core.exception.CancelException;
-import org.tron.keystore.CipherException;
-import org.tron.protos.Contract;
-import org.tron.protos.Contract.AssetIssueContract;
-import org.tron.protos.Contract.FreezeBalanceContract;
-import org.tron.protos.Contract.UnfreezeBalanceContract;
-import org.tron.protos.Contract.WithdrawBalanceContract;
-import org.tron.protos.Protocol.Account;
-import org.tron.protos.Protocol.AccountType;
-import org.tron.protos.Protocol.Block;
-import org.tron.protos.Protocol.Transaction;
-import org.tron.protos.Protocol.Witness;
-import stest.tron.wallet.common.client.Parameter.CommonConstant;
-import stest.tron.wallet.common.client.utils.Base58;
-import stest.tron.wallet.common.client.utils.TransactionUtils;
+import org.litetokens.api.GrpcAPI.AccountNetMessage;
+import org.litetokens.api.GrpcAPI.AssetIssueList;
+import org.litetokens.api.GrpcAPI.BlockList;
+import org.litetokens.api.GrpcAPI.NodeList;
+import org.litetokens.api.GrpcAPI.TransactionList;
+import org.litetokens.api.GrpcAPI.WitnessList;
+import org.litetokens.common.crypto.ECKey;
+import org.litetokens.common.crypto.SymmEncoder;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.common.utils.Utils;
+import org.litetokens.core.exception.CancelException;
+import org.litetokens.keystore.CipherException;
+import org.litetokens.protos.Contract;
+import org.litetokens.protos.Contract.AssetIssueContract;
+import org.litetokens.protos.Contract.FreezeBalanceContract;
+import org.litetokens.protos.Contract.UnfreezeBalanceContract;
+import org.litetokens.protos.Contract.WithdrawBalanceContract;
+import org.litetokens.protos.Protocol.Account;
+import org.litetokens.protos.Protocol.AccountType;
+import org.litetokens.protos.Protocol.Block;
+import org.litetokens.protos.Protocol.Transaction;
+import org.litetokens.protos.Protocol.Witness;
+import stest.litetokens.wallet.common.client.Parameter.CommonConstant;
+import stest.litetokens.wallet.common.client.utils.Base58;
+import stest.litetokens.wallet.common.client.utils.TransactionUtils;
 
 class AccountComparator implements Comparator {
 
@@ -119,7 +119,7 @@ public class WalletClient {
     }
 
     public static GrpcClient init() {
-        //Config config = org.tron.core.config.Configuration.getByPath("config.conf");
+        //Config config = org.litetokens.core.config.Configuration.getByPath("config.conf");
         Config config = Configuration.getByPath("testng.conf");
         dbPath = config.getString("CityDb.DbPath");
         txtPath = System.getProperty("user.dir") + "/" + config.getString("CityDb.TxtPath");

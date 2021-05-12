@@ -1,9 +1,9 @@
-package org.tron.core.db.api.index;
+package org.litetokens.core.db.api.index;
 
 import com.googlecode.cqengine.query.Query;
 import com.googlecode.cqengine.query.option.QueryOptions;
 import com.googlecode.cqengine.resultset.ResultSet;
-import org.tron.core.db.common.WrappedByteArray;
+import org.litetokens.core.db.common.WrappedByteArray;
 
 public class Index {
 

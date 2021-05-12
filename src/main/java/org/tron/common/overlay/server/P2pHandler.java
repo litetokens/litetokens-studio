@@ -15,10 +15,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.overlay.server;
+package org.litetokens.common.overlay.server;
 
-import static org.tron.common.overlay.message.StaticMessages.PING_MESSAGE;
-import static org.tron.common.overlay.message.StaticMessages.PONG_MESSAGE;
+import static org.litetokens.common.overlay.message.StaticMessages.PING_MESSAGE;
+import static org.litetokens.common.overlay.message.StaticMessages.PONG_MESSAGE;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -29,10 +29,10 @@ import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.tron.common.overlay.discover.node.statistics.MessageStatistics;
-import org.tron.common.overlay.message.DisconnectMessage;
-import org.tron.common.overlay.message.P2pMessage;
-import org.tron.protos.Protocol.ReasonCode;
+import org.litetokens.common.overlay.discover.node.statistics.MessageStatistics;
+import org.litetokens.common.overlay.message.DisconnectMessage;
+import org.litetokens.common.overlay.message.P2pMessage;
+import org.litetokens.protos.Protocol.ReasonCode;
 
 @Slf4j
 @Component

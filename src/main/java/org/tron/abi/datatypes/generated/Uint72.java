@@ -1,7 +1,7 @@
-package org.tron.abi.datatypes.generated;
+package org.litetokens.abi.datatypes.generated;
 
 import java.math.BigInteger;
-import org.tron.abi.datatypes.Uint;
+import org.litetokens.abi.datatypes.Uint;
 
 /**
  * Auto generated code.

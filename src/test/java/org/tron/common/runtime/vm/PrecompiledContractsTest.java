@@ -1,8 +1,8 @@
-package org.tron.common.runtime.vm;
+package org.litetokens.common.runtime.vm;
 
 
 import static junit.framework.TestCase.fail;
-import static org.tron.common.runtime.utils.MUtil.convertToTronAddress;
+import static org.litetokens.common.runtime.utils.MUtil.convertToLitetokensAddress;
 
 import com.google.protobuf.Any;
 import com.google.protobuf.ByteString;
@@ -17,34 +17,34 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.spongycastle.util.Arrays;
 import org.spongycastle.util.encoders.Hex;
-import org.tron.common.application.Application;
-import org.tron.common.application.ApplicationFactory;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.common.runtime.vm.PrecompiledContracts.PrecompiledContract;
-import org.tron.common.runtime.vm.program.ProgramResult;
-import org.tron.common.storage.Deposit;
-import org.tron.common.storage.DepositImpl;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.ByteUtil;
-import org.tron.common.utils.FileUtil;
-import org.tron.common.utils.StringUtil;
-import org.tron.core.Constant;
-import org.tron.core.Wallet;
-import org.tron.core.actuator.FreezeBalanceActuator;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.capsule.ProposalCapsule;
-import org.tron.core.capsule.TransactionResultCapsule;
-import org.tron.core.capsule.WitnessCapsule;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.Manager;
-import org.tron.core.exception.BalanceInsufficientException;
-import org.tron.core.exception.ContractExeException;
-import org.tron.core.exception.ContractValidateException;
-import org.tron.core.exception.ItemNotFoundException;
-import org.tron.protos.Contract;
-import org.tron.protos.Protocol.AccountType;
-import org.tron.protos.Protocol.Proposal.State;
+import org.litetokens.common.application.Application;
+import org.litetokens.common.application.ApplicationFactory;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.common.runtime.vm.PrecompiledContracts.PrecompiledContract;
+import org.litetokens.common.runtime.vm.program.ProgramResult;
+import org.litetokens.common.storage.Deposit;
+import org.litetokens.common.storage.DepositImpl;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.ByteUtil;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.common.utils.StringUtil;
+import org.litetokens.core.Constant;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.actuator.FreezeBalanceActuator;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.capsule.ProposalCapsule;
+import org.litetokens.core.capsule.TransactionResultCapsule;
+import org.litetokens.core.capsule.WitnessCapsule;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.exception.BalanceInsufficientException;
+import org.litetokens.core.exception.ContractExeException;
+import org.litetokens.core.exception.ContractValidateException;
+import org.litetokens.core.exception.ItemNotFoundException;
+import org.litetokens.protos.Contract;
+import org.litetokens.protos.Protocol.AccountType;
+import org.litetokens.protos.Protocol.Proposal.State;
 
 @Slf4j
 public class PrecompiledContractsTest {
@@ -64,12 +64,12 @@ public class PrecompiledContractsTest {
       "0000000000000000000000000000000000000000000000000000000000010006");
   private static final DataWord proposalDeleteAddr = new DataWord(
       "0000000000000000000000000000000000000000000000000000000000010007");
-  private static final DataWord convertFromTronBytesAddressAddr = new DataWord(
+  private static final DataWord convertFromLitetokensBytesAddressAddr = new DataWord(
       "0000000000000000000000000000000000000000000000000000000000010008");
-  private static final DataWord convertFromTronBase58AddressAddr = new DataWord(
+  private static final DataWord convertFromLitetokensBase58AddressAddr = new DataWord(
       "0000000000000000000000000000000000000000000000000000000000010009");
 
-  private static TronApplicationContext context;
+  private static LitetokensApplicationContext context;
   private static Application appT;
   private static Manager dbManager;
   private static final String dbPath = "output_PrecompiledContracts_test";
@@ -78,7 +78,7 @@ public class PrecompiledContractsTest {
   private static final String WITNESS_NAME = "witness";
   private static final String WITNESS_ADDRESS;
   private static final String WITNESS_ADDRESS_BASE = "548794500882809695a8a687866e76d4271a1abc" ;
-  private static final String URL = "https://tron.network";
+  private static final String URL = "https://litetokens.org";
 
   // withdraw
   private static final long initBalance = 10_000_000_000L;
@@ -86,7 +86,7 @@ public class PrecompiledContractsTest {
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath, "--debug"}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new LitetokensApplicationContext(DefaultConfig.class);
     appT = ApplicationFactory.create(context);
     OWNER_ADDRESS = Wallet.getAddressPreFixString() + "abd4b9367799eaa3197fecb144eb71de1e049abc";
     WITNESS_ADDRESS = Wallet.getAddressPreFixString() + WITNESS_ADDRESS_BASE;
@@ -151,7 +151,7 @@ public class PrecompiledContractsTest {
 
   private PrecompiledContract createPrecompiledContract(DataWord addr, String ownerAddress) {
     PrecompiledContract contract = PrecompiledContracts.getContractForAddress(addr);
-    contract.setCallerAddress(convertToTronAddress(Hex.decode(ownerAddress)));
+    contract.setCallerAddress(convertToLitetokensAddress(Hex.decode(ownerAddress)));
     contract.setDeposit(DepositImpl.createRoot(dbManager));
     ProgramResult programResult = new ProgramResult();
     contract.setResult(programResult);
@@ -301,14 +301,14 @@ public class PrecompiledContractsTest {
 
 
   @Test
-  public void convertFromTronBytesAddressNativeTest() {
-//    PrecompiledContract contract = createPrecompiledContract(convertFromTronBytesAddressAddr, WITNESS_ADDRESS);
+  public void convertFromLitetokensBytesAddressNativeTest() {
+//    PrecompiledContract contract = createPrecompiledContract(convertFromLitetokensBytesAddressAddr, WITNESS_ADDRESS);
 //    byte[] solidityAddress = contract.execute(new DataWord(WITNESS_ADDRESS).getData()).getRight();
 //    Assert.assertArrayEquals(solidityAddress,new DataWord(Hex.decode(WITNESS_ADDRESS_BASE)).getData());
   }
 
   //@Test
-  public void convertFromTronBase58AddressNative() {
+  public void convertFromLitetokensBase58AddressNative() {
     // 27WnTihwXsqCqpiNedWvtKCZHsLjDt4Hfmf  TestNet address
     DataWord word1 = new DataWord("3237576e54696877587371437170694e65645776744b435a48734c6a44743448");
     DataWord word2 = new DataWord("666d660000000000000000000000000000000000000000000000000000000000");
@@ -316,7 +316,7 @@ public class PrecompiledContractsTest {
     byte[] data = new byte[35];
     System.arraycopy(word1.getData(),0,data,0, word1.getData().length);
     System.arraycopy(Arrays.copyOfRange(word2.getData(), 0, 3),0,data,word1.getData().length,3);
-    PrecompiledContract contract = createPrecompiledContract(convertFromTronBase58AddressAddr, WITNESS_ADDRESS);
+    PrecompiledContract contract = createPrecompiledContract(convertFromLitetokensBase58AddressAddr, WITNESS_ADDRESS);
 
     byte[] solidityAddress = contract.execute(data).getRight();
     Assert.assertArrayEquals(solidityAddress,new DataWord(Hex.decode(WITNESS_ADDRESS_BASE)).getData());

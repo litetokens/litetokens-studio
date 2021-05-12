@@ -1,4 +1,4 @@
-package org.tron.common.runtime.vm;
+package org.litetokens.common.runtime.vm;
 
 import java.io.File;
 import lombok.extern.slf4j.Slf4j;
@@ -7,30 +7,30 @@ import org.junit.Before;
 import org.junit.Test;
 import org.spongycastle.util.encoders.Hex;
 import org.testng.Assert;
-import org.tron.common.application.Application;
-import org.tron.common.application.ApplicationFactory;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.common.runtime.TVMTestResult;
-import org.tron.common.runtime.TVMTestUtils;
-import org.tron.common.runtime.vm.program.Program.OutOfResourceException;
-import org.tron.common.storage.DepositImpl;
-import org.tron.common.utils.FileUtil;
-import org.tron.core.Constant;
-import org.tron.core.Wallet;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.Manager;
-import org.tron.core.exception.ContractExeException;
-import org.tron.core.exception.ContractValidateException;
-import org.tron.core.exception.ReceiptCheckErrException;
-import org.tron.core.exception.VMIllegalException;
-import org.tron.protos.Protocol.AccountType;
+import org.litetokens.common.application.Application;
+import org.litetokens.common.application.ApplicationFactory;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.common.runtime.TVMTestResult;
+import org.litetokens.common.runtime.TVMTestUtils;
+import org.litetokens.common.runtime.vm.program.Program.OutOfResourceException;
+import org.litetokens.common.storage.DepositImpl;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.core.Constant;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.exception.ContractExeException;
+import org.litetokens.core.exception.ContractValidateException;
+import org.litetokens.core.exception.ReceiptCheckErrException;
+import org.litetokens.core.exception.VMIllegalException;
+import org.litetokens.protos.Protocol.AccountType;
 
 @Slf4j
 public class EnergyWhenTimeoutStyleTest {
 
   private Manager dbManager;
-  private TronApplicationContext context;
+  private LitetokensApplicationContext context;
   private DepositImpl deposit;
   private String dbPath = "output_CPUTimeTest";
   private String OWNER_ADDRESS;
@@ -45,7 +45,7 @@ public class EnergyWhenTimeoutStyleTest {
   public void init() {
     Args.setParam(new String[]{"--output-directory", dbPath},
         Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new LitetokensApplicationContext(DefaultConfig.class);
     AppT = ApplicationFactory.create(context);
     OWNER_ADDRESS = Wallet.getAddressPreFixString() + "abd4b9367799eaa3197fecb144eb71de1e049abc";
     dbManager = context.getBean(Manager.class);

@@ -1,18 +1,18 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
 import java.util.Arrays;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.Sha256Hash;
-import org.tron.core.capsule.BlockCapsule.BlockId;
-import org.tron.core.capsule.BytesCapsule;
-import org.tron.core.exception.ItemNotFoundException;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.core.capsule.BlockCapsule.BlockId;
+import org.litetokens.core.capsule.BytesCapsule;
+import org.litetokens.core.exception.ItemNotFoundException;
 
 @Component
-public class BlockIndexStore extends TronStoreWithRevoking<BytesCapsule> {
+public class BlockIndexStore extends LitetokensStoreWithRevoking<BytesCapsule> {
 
 
   @Autowired

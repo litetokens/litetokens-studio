@@ -1,10 +1,10 @@
 /*
- * java-tron is free software: you can redistribute it and/or modify
+ * java-litetokens is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * java-tron is distributed in the hope that it will be useful,
+ * java-litetokens is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -13,7 +13,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.common.runtime.vm;
+package org.litetokens.common.runtime.vm;
 
 import com.google.protobuf.Any;
 import com.google.protobuf.ByteString;
@@ -23,35 +23,35 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.common.runtime.Runtime;
-import org.tron.common.runtime.TVMTestUtils;
-import org.tron.common.runtime.vm.program.invoke.ProgramInvokeFactoryImpl;
-import org.tron.common.storage.DepositImpl;
-import org.tron.common.utils.FileUtil;
-import org.tron.core.Constant;
-import org.tron.core.Wallet;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.capsule.BlockCapsule;
-import org.tron.core.capsule.ReceiptCapsule;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.Manager;
-import org.tron.core.db.TransactionTrace;
-import org.tron.core.exception.AccountResourceInsufficientException;
-import org.tron.core.exception.ContractExeException;
-import org.tron.core.exception.ContractValidateException;
-import org.tron.core.exception.TooBigTransactionResultException;
-import org.tron.core.exception.TronException;
-import org.tron.core.exception.VMIllegalException;
-import org.tron.protos.Contract.CreateSmartContract;
-import org.tron.protos.Contract.TriggerSmartContract;
-import org.tron.protos.Protocol.AccountType;
-import org.tron.protos.Protocol.Transaction;
-import org.tron.protos.Protocol.Transaction.Contract;
-import org.tron.protos.Protocol.Transaction.Contract.ContractType;
-import org.tron.protos.Protocol.Transaction.raw;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.common.runtime.Runtime;
+import org.litetokens.common.runtime.TVMTestUtils;
+import org.litetokens.common.runtime.vm.program.invoke.ProgramInvokeFactoryImpl;
+import org.litetokens.common.storage.DepositImpl;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.core.Constant;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.capsule.BlockCapsule;
+import org.litetokens.core.capsule.ReceiptCapsule;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.db.TransactionTrace;
+import org.litetokens.core.exception.AccountResourceInsufficientException;
+import org.litetokens.core.exception.ContractExeException;
+import org.litetokens.core.exception.ContractValidateException;
+import org.litetokens.core.exception.TooBigTransactionResultException;
+import org.litetokens.core.exception.LitetokensException;
+import org.litetokens.core.exception.VMIllegalException;
+import org.litetokens.protos.Contract.CreateSmartContract;
+import org.litetokens.protos.Contract.TriggerSmartContract;
+import org.litetokens.protos.Protocol.AccountType;
+import org.litetokens.protos.Protocol.Transaction;
+import org.litetokens.protos.Protocol.Transaction.Contract;
+import org.litetokens.protos.Protocol.Transaction.Contract.ContractType;
+import org.litetokens.protos.Protocol.Transaction.raw;
 
 /**
  * pragma solidity ^0.4.24;
@@ -86,7 +86,7 @@ public class BandWithRuntimeTest {
         },
         "config-test-mainnet.conf"
     );
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new LitetokensApplicationContext(DefaultConfig.class);
   }
 
   /**
@@ -145,9 +145,9 @@ public class BandWithRuntimeTest {
       Transaction transaction = Transaction.newBuilder().setRawData(raw.newBuilder().addContract(
           Contract.newBuilder().setParameter(Any.pack(triggerContract))
               .setType(ContractType.TriggerSmartContract)).setFeeLimit(1000000000)).build();
-      TransactionCapsule trxCap = new TransactionCapsule(transaction);
-      TransactionTrace trace = new TransactionTrace(trxCap, dbManager);
-      dbManager.consumeBandwidth(trxCap, trace);
+      TransactionCapsule xltCap = new TransactionCapsule(transaction);
+      TransactionTrace trace = new TransactionTrace(xltCap, dbManager);
+      dbManager.consumeBandwidth(xltCap, trace);
       BlockCapsule blockCapsule = null;
       DepositImpl deposit = DepositImpl.createRoot(dbManager);
       Runtime runtime = new Runtime(trace, blockCapsule, deposit, new ProgramInvokeFactoryImpl());
@@ -162,7 +162,7 @@ public class BandWithRuntimeTest {
       Assert.assertEquals(45706, trace.getReceipt().getEnergyUsageTotal());
       Assert.assertEquals(45706, energy);
       Assert.assertEquals(totalBalance, balance);
-    } catch (TronException e) {
+    } catch (LitetokensException e) {
       Assert.assertNotNull(e);
     }
   }
@@ -177,10 +177,10 @@ public class BandWithRuntimeTest {
       Transaction transaction = Transaction.newBuilder().setRawData(raw.newBuilder().addContract(
           Contract.newBuilder().setParameter(Any.pack(triggerContract))
               .setType(ContractType.TriggerSmartContract)).setFeeLimit(1000000000)).build();
-      TransactionCapsule trxCap = new TransactionCapsule(transaction);
-      TransactionTrace trace = new TransactionTrace(trxCap, dbManager);
-      dbManager.consumeBandwidth(trxCap, trace);
-      long bandWith = trxCap.getSerializedSize() + Constant.MAX_RESULT_SIZE_IN_TX;
+      TransactionCapsule xltCap = new TransactionCapsule(transaction);
+      TransactionTrace trace = new TransactionTrace(xltCap, dbManager);
+      dbManager.consumeBandwidth(xltCap, trace);
+      long bandWith = xltCap.getSerializedSize() + Constant.MAX_RESULT_SIZE_IN_TX;
       BlockCapsule blockCapsule = null;
       DepositImpl deposit = DepositImpl.createRoot(dbManager);
       Runtime runtime = new Runtime(trace, blockCapsule, deposit, new ProgramInvokeFactoryImpl());
@@ -199,7 +199,7 @@ public class BandWithRuntimeTest {
       Assert.assertEquals(47285000, receipt.getEnergyFee());
       Assert.assertEquals(totalBalance - receipt.getEnergyFee(),
           balance);
-    } catch (TronException e) {
+    } catch (LitetokensException e) {
       Assert.assertNotNull(e);
     }
   }
@@ -219,9 +219,9 @@ public class BandWithRuntimeTest {
     Transaction transaction = Transaction.newBuilder().setRawData(raw.newBuilder().addContract(
         Contract.newBuilder().setParameter(Any.pack(smartContract))
             .setType(ContractType.CreateSmartContract)).setFeeLimit(1000000000)).build();
-    TransactionCapsule trxCap = new TransactionCapsule(transaction);
-    TransactionTrace trace = new TransactionTrace(trxCap, dbManager);
-    dbManager.consumeBandwidth(trxCap, trace);
+    TransactionCapsule xltCap = new TransactionCapsule(transaction);
+    TransactionTrace trace = new TransactionTrace(xltCap, dbManager);
+    dbManager.consumeBandwidth(xltCap, trace);
     BlockCapsule blockCapsule = null;
     DepositImpl deposit = DepositImpl.createRoot(dbManager);
     Runtime runtime = new Runtime(trace, blockCapsule, deposit, new ProgramInvokeFactoryImpl());

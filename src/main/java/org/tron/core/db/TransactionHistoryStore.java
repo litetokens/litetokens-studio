@@ -1,14 +1,14 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.tron.core.capsule.TransactionInfoCapsule;
-import org.tron.core.exception.BadItemException;
+import org.litetokens.core.capsule.TransactionInfoCapsule;
+import org.litetokens.core.exception.BadItemException;
 
 @Component
-public class TransactionHistoryStore extends TronStoreWithRevoking<TransactionInfoCapsule> {
+public class TransactionHistoryStore extends LitetokensStoreWithRevoking<TransactionInfoCapsule> {
 
   @Autowired
   public TransactionHistoryStore(@Value("transactionHistoryStore") String dbName) {

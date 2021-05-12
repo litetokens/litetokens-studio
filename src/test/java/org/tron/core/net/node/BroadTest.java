@@ -1,4 +1,4 @@
-package org.tron.core.net.node;
+package org.litetokens.core.net.node;
 
 import com.google.common.cache.Cache;
 import java.io.File;
@@ -10,39 +10,39 @@ import java.util.concurrent.ExecutorService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.MapUtils;
 import org.junit.*;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.common.application.Application;
-import org.tron.common.application.ApplicationFactory;
-import org.tron.common.overlay.client.PeerClient;
-import org.tron.common.overlay.discover.node.Node;
-import org.tron.common.overlay.message.Message;
-import org.tron.common.overlay.server.Channel;
-import org.tron.common.overlay.server.ChannelManager;
-import org.tron.common.overlay.server.MessageQueue;
-import org.tron.common.overlay.server.SyncPool;
-import org.tron.common.utils.FileUtil;
-import org.tron.common.utils.ReflectUtils;
-import org.tron.common.utils.Sha256Hash;
-import org.tron.core.capsule.BlockCapsule;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.ByteArrayWrapper;
-import org.tron.core.db.Manager;
-import org.tron.core.net.message.BlockMessage;
-import org.tron.core.net.message.MessageTypes;
-import org.tron.core.net.message.TransactionMessage;
-import org.tron.core.net.node.NodeImpl.PriorItem;
-import org.tron.core.net.peer.PeerConnection;
-import org.tron.core.services.RpcApiService;
-import org.tron.core.services.WitnessService;
-import org.tron.protos.Protocol.Block;
-import org.tron.protos.Protocol.Inventory.InventoryType;
-import org.tron.protos.Protocol.Transaction;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.common.application.Application;
+import org.litetokens.common.application.ApplicationFactory;
+import org.litetokens.common.overlay.client.PeerClient;
+import org.litetokens.common.overlay.discover.node.Node;
+import org.litetokens.common.overlay.message.Message;
+import org.litetokens.common.overlay.server.Channel;
+import org.litetokens.common.overlay.server.ChannelManager;
+import org.litetokens.common.overlay.server.MessageQueue;
+import org.litetokens.common.overlay.server.SyncPool;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.common.utils.ReflectUtils;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.core.capsule.BlockCapsule;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.ByteArrayWrapper;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.net.message.BlockMessage;
+import org.litetokens.core.net.message.MessageTypes;
+import org.litetokens.core.net.message.TransactionMessage;
+import org.litetokens.core.net.node.NodeImpl.PriorItem;
+import org.litetokens.core.net.peer.PeerConnection;
+import org.litetokens.core.services.RpcApiService;
+import org.litetokens.core.services.WitnessService;
+import org.litetokens.protos.Protocol.Block;
+import org.litetokens.protos.Protocol.Inventory.InventoryType;
+import org.litetokens.protos.Protocol.Transaction;
 
 @Slf4j
 public class BroadTest {
 
-  private static TronApplicationContext context;
+  private static LitetokensApplicationContext context;
   private static NodeImpl node;
   RpcApiService rpcApiService;
   private static PeerClient peerClient;
@@ -89,7 +89,7 @@ public class BroadTest {
     node.broadcast(transactionMessage);
     ConcurrentHashMap<Sha256Hash, InventoryType> advObjToSpread = ReflectUtils
         .getFieldValue(node, "advObjToSpread");
-    Assert.assertEquals(advObjToSpread.get(transactionMessage.getMessageId()), InventoryType.TRX);
+    Assert.assertEquals(advObjToSpread.get(transactionMessage.getMessageId()), InventoryType.XLT);
     return transactionMessage.getMessageId();
   }
 
@@ -119,9 +119,9 @@ public class BroadTest {
   }
 
   private void removeTheTxAndBlock(Sha256Hash blockId, Sha256Hash transactionId) {
-    Cache<Sha256Hash, TransactionMessage> trxCache = ReflectUtils.getFieldValue(node, "TrxCache");
+    Cache<Sha256Hash, TransactionMessage> xltCache = ReflectUtils.getFieldValue(node, "XltCache");
     Cache<Sha256Hash, BlockMessage> blockCache = ReflectUtils.getFieldValue(node, "BlockCache");
-    trxCache.invalidate(transactionId);
+    xltCache.invalidate(transactionId);
     blockCache.invalidate(blockId);
   }
 
@@ -135,7 +135,7 @@ public class BroadTest {
     logger.info("advObjToFetch:{}", advObjToFetch);
     logger.info("advObjToFetchSize:{}", advObjToFetch.size());
     //Assert.assertEquals(advObjToFetch.get(condition.getBlockId()), InventoryType.BLOCK);
-    //Assert.assertEquals(advObjToFetch.get(condition.getTransactionId()), InventoryType.TRX);
+    //Assert.assertEquals(advObjToFetch.get(condition.getTransactionId()), InventoryType.XLT);
     //To avoid writing the database, manually stop the sending of messages.
     Collection<PeerConnection> activePeers = ReflectUtils.invokeMethod(node, "getActivePeer");
     for (PeerConnection peerConnection : activePeers) {
@@ -149,7 +149,7 @@ public class BroadTest {
     int count = 0;
     for (PeerConnection peerConnection : activePeers) {
       if (peerConnection.getAdvObjWeRequested()
-          .containsKey(new Item(condition.getTransactionId(), InventoryType.TRX))) {
+          .containsKey(new Item(condition.getTransactionId(), InventoryType.XLT))) {
         ++count;
       }
       if (peerConnection.getAdvObjWeRequested()
@@ -162,7 +162,7 @@ public class BroadTest {
         if (message.getType() == MessageTypes.BLOCK) {
           Assert.assertEquals(message.getMessageId(), condition.getBlockId());
         }
-        if (message.getType() == MessageTypes.TRX) {
+        if (message.getType() == MessageTypes.XLT) {
           Assert.assertEquals(message.getMessageId(), condition.getTransactionId());
         }
       }
@@ -193,7 +193,7 @@ public class BroadTest {
         cfgArgs.setNeedSyncCheck(false);
         cfgArgs.setNodeExternalIp("127.0.0.1");
 
-        context = new TronApplicationContext(DefaultConfig.class);
+        context = new LitetokensApplicationContext(DefaultConfig.class);
 
         if (cfgArgs.isHelp()) {
           logger.info("Here is the help message.");

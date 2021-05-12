@@ -1,4 +1,4 @@
-package stest.tron.wallet.exchange;
+package stest.litetokens.wallet.exchange;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -10,21 +10,21 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
-import org.tron.api.GrpcAPI.AccountResourceMessage;
-import org.tron.api.GrpcAPI.ExchangeList;
-import org.tron.api.WalletGrpc;
-import org.tron.common.crypto.ECKey;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.Utils;
-import org.tron.core.Wallet;
-import org.tron.core.db.api.pojo.AssetIssue;
-import org.tron.protos.Protocol.Account;
-import org.tron.protos.Protocol.Exchange;
-import org.tron.protos.Protocol.SmartContract;
-import stest.tron.wallet.common.client.Configuration;
-import stest.tron.wallet.common.client.Parameter.CommonConstant;
-import stest.tron.wallet.common.client.utils.Base58;
-import stest.tron.wallet.common.client.utils.PublicMethed;
+import org.litetokens.api.GrpcAPI.AccountResourceMessage;
+import org.litetokens.api.GrpcAPI.ExchangeList;
+import org.litetokens.api.WalletGrpc;
+import org.litetokens.common.crypto.ECKey;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.Utils;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.db.api.pojo.AssetIssue;
+import org.litetokens.protos.Protocol.Account;
+import org.litetokens.protos.Protocol.Exchange;
+import org.litetokens.protos.Protocol.SmartContract;
+import stest.litetokens.wallet.common.client.Configuration;
+import stest.litetokens.wallet.common.client.Parameter.CommonConstant;
+import stest.litetokens.wallet.common.client.utils.Base58;
+import stest.litetokens.wallet.common.client.utils.PublicMethed;
 
 @Slf4j
 public class WalletExchange001 {
@@ -43,7 +43,7 @@ public class WalletExchange001 {
   private static String name2 = "exchange001_2_" + Long.toString(now);
   private static final long totalSupply = 1000000001L;
   String description = "just-test";
-  String url = "https://github.com/tronprotocol/wallet-cli/";
+  String url = "https://gitub.com/litetokens/wallet-cli/";
 
   ECKey ecKey1 = new ECKey(Utils.getRandom());
   byte[] exchange001Address = ecKey1.getAddress();

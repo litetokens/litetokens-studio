@@ -1,6 +1,6 @@
-package org.tron.core.exception;
+package org.litetokens.core.exception;
 
-public class NonUniqueObjectException extends TronException {
+public class NonUniqueObjectException extends LitetokensException {
 
   public NonUniqueObjectException() {
     super();

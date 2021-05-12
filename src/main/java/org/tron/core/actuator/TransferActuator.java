@@ -1,22 +1,22 @@
-package org.tron.core.actuator;
+package org.litetokens.core.actuator;
 
 import com.google.protobuf.Any;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.Arrays;
 import lombok.extern.slf4j.Slf4j;
-import org.tron.common.storage.Deposit;
-import org.tron.core.Wallet;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.capsule.TransactionResultCapsule;
-import org.tron.core.config.Parameter.ChainConstant;
-import org.tron.core.db.Manager;
-import org.tron.core.exception.BalanceInsufficientException;
-import org.tron.core.exception.ContractExeException;
-import org.tron.core.exception.ContractValidateException;
-import org.tron.protos.Contract.TransferContract;
-import org.tron.protos.Protocol.AccountType;
-import org.tron.protos.Protocol.Transaction.Result.code;
+import org.litetokens.common.storage.Deposit;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.capsule.TransactionResultCapsule;
+import org.litetokens.core.config.Parameter.ChainConstant;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.exception.BalanceInsufficientException;
+import org.litetokens.core.exception.ContractExeException;
+import org.litetokens.core.exception.ContractValidateException;
+import org.litetokens.protos.Contract.TransferContract;
+import org.litetokens.protos.Protocol.AccountType;
+import org.litetokens.protos.Protocol.Transaction.Result.code;
 
 @Slf4j
 public class TransferActuator extends AbstractActuator {
@@ -98,7 +98,7 @@ public class TransferActuator extends AbstractActuator {
     }
 
     if (Arrays.equals(toAddress, ownerAddress)) {
-      throw new ContractValidateException("Cannot transfer trx to yourself.");
+      throw new ContractValidateException("Cannot transfer xlt to yourself.");
     }
 
     AccountCapsule ownerAccount = dbManager.getAccountStore().get(ownerAddress);
@@ -145,7 +145,7 @@ public class TransferActuator extends AbstractActuator {
     }
 
     if (Arrays.equals(toAddress, ownerAddress)) {
-      throw new ContractValidateException("Cannot transfer trx to yourself.");
+      throw new ContractValidateException("Cannot transfer xlt to yourself.");
     }
 
     AccountCapsule ownerAccount = deposit.getAccount(ownerAddress);

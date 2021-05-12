@@ -15,11 +15,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.crypto.zksnark;
+package org.litetokens.common.crypto.zksnark;
 
 import java.math.BigInteger;
 
-import static org.tron.common.crypto.zksnark.Params.P;
+import static org.litetokens.common.crypto.zksnark.Params.P;
 
 /**
  * Arithmetic in F_p, p = 21888242871839275222246405745257275088696311157297823662689037894645226208583

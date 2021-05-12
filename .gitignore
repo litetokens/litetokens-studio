@@ -15,7 +15,7 @@ consensus-logs
 out
 
 # levelDB
-tron-data
+litetokens-data
 database*
 
 # database
@@ -32,8 +32,8 @@ shareddata.*
 # protobuf generated classes
 src/main/gen
 
-src/main/java/org/tron/core/bftconsensus
-src/test/java/org/tron/consensus2
+src/main/java/org.litetokens/core/bftconsensus
+src/test/java/org.litetokens/consensus2
 src/main/java/META-INF/
 src/main/resources/META-INF/
 /bin/

@@ -1,4 +1,4 @@
-package org.tron.core.db.api.index;
+package org.litetokens.core.db.api.index;
 
 import com.googlecode.cqengine.attribute.Attribute;
 import com.googlecode.cqengine.attribute.SimpleAttribute;
@@ -8,11 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import org.tron.common.utils.ByteArray;
-import org.tron.core.capsule.AssetIssueCapsule;
-import org.tron.core.db.common.WrappedByteArray;
-import org.tron.core.db2.core.ITronChainBase;
-import org.tron.protos.Contract.AssetIssueContract;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.core.capsule.AssetIssueCapsule;
+import org.litetokens.core.db.common.WrappedByteArray;
+import org.litetokens.core.db2.core.ILitetokensChainBase;
+import org.litetokens.protos.Contract.AssetIssueContract;
 
 import javax.annotation.PostConstruct;
 
@@ -29,7 +29,7 @@ public class AssetIssueIndex extends AbstractIndex<AssetIssueCapsule, AssetIssue
 
   @Autowired
   public AssetIssueIndex(
-      @Qualifier("assetIssueStore") final ITronChainBase<AssetIssueCapsule> database) {
+      @Qualifier("assetIssueStore") final ILitetokensChainBase<AssetIssueCapsule> database) {
     super(database);
   }
 

@@ -1,4 +1,4 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
 import com.google.protobuf.ByteString;
 import java.util.Objects;
@@ -6,12 +6,12 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.capsule.BytesCapsule;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.capsule.BytesCapsule;
 
 //todo ： need Compatibility test
 @Component
-public class AccountIdIndexStore extends TronStoreWithRevoking<BytesCapsule> {
+public class AccountIdIndexStore extends LitetokensStoreWithRevoking<BytesCapsule> {
 
   @Autowired
   public AccountIdIndexStore(@Value("accountid-index") String dbName) {

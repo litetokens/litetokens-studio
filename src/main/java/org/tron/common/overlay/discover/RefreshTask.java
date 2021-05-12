@@ -16,12 +16,12 @@
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.common.overlay.discover;
+package org.litetokens.common.overlay.discover;
 
 import java.util.ArrayList;
 import java.util.Random;
-import org.tron.common.overlay.discover.node.Node;
-import org.tron.common.overlay.discover.node.NodeManager;
+import org.litetokens.common.overlay.discover.node.Node;
+import org.litetokens.common.overlay.discover.node.NodeManager;
 
 public class RefreshTask extends DiscoverTask {
 

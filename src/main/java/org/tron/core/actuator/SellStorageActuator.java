@@ -1,19 +1,19 @@
-package org.tron.core.actuator;
+package org.litetokens.core.actuator;
 
 import com.google.protobuf.Any;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import lombok.extern.slf4j.Slf4j;
-import org.tron.common.utils.StringUtil;
-import org.tron.core.Wallet;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.capsule.TransactionResultCapsule;
-import org.tron.core.db.Manager;
-import org.tron.core.db.StorageMarket;
-import org.tron.core.exception.ContractExeException;
-import org.tron.core.exception.ContractValidateException;
-import org.tron.protos.Contract.SellStorageContract;
-import org.tron.protos.Protocol.Transaction.Result.code;
+import org.litetokens.common.utils.StringUtil;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.capsule.TransactionResultCapsule;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.db.StorageMarket;
+import org.litetokens.core.exception.ContractExeException;
+import org.litetokens.core.exception.ContractValidateException;
+import org.litetokens.protos.Contract.SellStorageContract;
+import org.litetokens.protos.Protocol.Transaction.Result.code;
 
 @Slf4j
 public class SellStorageActuator extends AbstractActuator {
@@ -99,7 +99,7 @@ public class SellStorageActuator extends AbstractActuator {
     long quantity = storageMarket.trySellStorage(bytes);
     if (quantity <= 1_000_000L) {
       throw new ContractValidateException(
-          "quantity must be larger than 1TRX,current quantity[" + quantity + "]");
+          "quantity must be larger than 1XLT,current quantity[" + quantity + "]");
     }
 
     return true;

@@ -1,7 +1,7 @@
-package org.tron.studio.solc;
+package org.litetokens.studio.solc;
 
-import org.tron.studio.ShareData;
-import org.tron.studio.filesystem.SolidityFileUtil;
+import org.litetokens.studio.ShareData;
+import org.litetokens.studio.filesystem.SolidityFileUtil;
 
 import static java.util.stream.Collectors.toList;
 

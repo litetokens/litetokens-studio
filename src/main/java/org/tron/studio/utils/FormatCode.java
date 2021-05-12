@@ -1,11 +1,11 @@
-package org.tron.studio.utils;
+package org.litetokens.studio.utils;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import org.apache.commons.lang3.StringUtils;
 import org.fxmisc.richtext.CodeArea;
-import org.tron.studio.ShareData;
+import org.litetokens.studio.ShareData;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

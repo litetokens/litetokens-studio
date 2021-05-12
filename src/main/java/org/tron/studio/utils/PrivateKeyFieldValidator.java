@@ -1,10 +1,10 @@
-package org.tron.studio.utils;
+package org.litetokens.studio.utils;
 
 import com.jfoenix.validation.base.ValidatorBase;
 import javafx.beans.DefaultProperty;
 import javafx.scene.control.TextInputControl;
 import org.spongycastle.util.encoders.Hex;
-import org.tron.common.crypto.ECKey;
+import org.litetokens.common.crypto.ECKey;
 
 @DefaultProperty(value = "icon")
 public class PrivateKeyFieldValidator extends ValidatorBase {

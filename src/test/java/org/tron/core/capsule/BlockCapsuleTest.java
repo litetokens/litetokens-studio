@@ -1,4 +1,4 @@
-package org.tron.core.capsule;
+package org.litetokens.core.capsule;
 
 import com.google.protobuf.ByteString;
 import java.io.File;
@@ -7,15 +7,15 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.FileUtil;
-import org.tron.common.utils.Sha256Hash;
-import org.tron.core.Constant;
-import org.tron.core.Wallet;
-import org.tron.core.config.args.Args;
-import org.tron.core.exception.BadItemException;
-import org.tron.protos.Contract.TransferContract;
-import org.tron.protos.Protocol.Transaction.Contract.ContractType;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.core.Constant;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.exception.BadItemException;
+import org.litetokens.protos.Contract.TransferContract;
+import org.litetokens.protos.Protocol.Transaction.Contract.ContractType;
 
 @Slf4j
 public class BlockCapsuleTest {

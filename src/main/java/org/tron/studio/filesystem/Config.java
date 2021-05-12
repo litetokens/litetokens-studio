@@ -1,4 +1,4 @@
-package org.tron.studio.filesystem;
+package org.litetokens.studio.filesystem;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,10 +14,10 @@ import lombok.extern.slf4j.Slf4j;
 //Do not change to public
 @Slf4j(topic = "Config")
 class Config {
-    public static String SOLIDITY_SOURCE_PATH = System.getProperty("user.home") + "/TronStudio/source/";
-    public static String TRACE_PATH = System.getProperty("user.home") + "/TronStudio/trace/";
-    public static String SOLC_PATH = System.getProperty("user.home") + "/TronStudio/compiler/";
-    public static String SAVED_PREFERENCE_PATH = System.getProperty("user.home") + "/TronStudio/record/";
+    public static String SOLIDITY_SOURCE_PATH = System.getProperty("user.home") + "/LitetokensStudio/source/";
+    public static String TRACE_PATH = System.getProperty("user.home") + "/LitetokensStudio/trace/";
+    public static String SOLC_PATH = System.getProperty("user.home") + "/LitetokensStudio/compiler/";
+    public static String SAVED_PREFERENCE_PATH = System.getProperty("user.home") + "/LitetokensStudio/record/";
 
     static {
         {

@@ -1,4 +1,4 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
 import com.typesafe.config.ConfigObject;
 import java.util.HashMap;
@@ -12,13 +12,13 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.tron.core.Wallet;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.db.common.iterator.AccountIterator;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.db.common.iterator.AccountIterator;
 
 @Slf4j
 @Component
-public class AccountStore extends TronStoreWithRevoking<AccountCapsule> {
+public class AccountStore extends LitetokensStoreWithRevoking<AccountCapsule> {
 
   private static Map<String, byte[]> assertsAddress = new HashMap<>(); // key = name , value = address
 
@@ -34,14 +34,14 @@ public class AccountStore extends TronStoreWithRevoking<AccountCapsule> {
   }
 
   /**
-   * Max TRX account.
+   * Max XLT account.
    */
   public AccountCapsule getSun() {
     return getUnchecked(assertsAddress.get("Sun"));
   }
 
   /**
-   * Min TRX account.
+   * Min XLT account.
    */
   public AccountCapsule getBlackhole() {
     return getUnchecked(assertsAddress.get("Blackhole"));

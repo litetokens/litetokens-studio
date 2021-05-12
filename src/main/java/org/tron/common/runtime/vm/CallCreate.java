@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.runtime.vm;
+package org.litetokens.common.runtime.vm;
 
 /**
  * @author Roman Mandeleil

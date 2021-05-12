@@ -1,10 +1,10 @@
 /*
- * java-tron is free software: you can redistribute it and/or modify
+ * java-litetokens is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * java-tron is distributed in the hope that it will be useful,
+ * java-litetokens is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -13,16 +13,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.core.config.args;
+package org.litetokens.core.config.args;
 
 import com.google.protobuf.ByteString;
 import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.tron.common.utils.ByteArray;
-import org.tron.core.Wallet;
-import org.tron.protos.Protocol.AccountType;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.core.Wallet;
+import org.litetokens.protos.Protocol.AccountType;
 
 public class AccountTest {
 
@@ -33,7 +33,7 @@ public class AccountTest {
    */
   @Before
   public void setAccount() {
-    account.setAccountName("tron");
+    account.setAccountName("litetokens");
     account.setAccountType("Normal");
     account
         .setAddress(ByteArray.fromHexString(
@@ -53,9 +53,9 @@ public class AccountTest {
 
   @Test
   public void setAccountNameRight() {
-    account.setAccountName("tron-name");
+    account.setAccountName("litetokens-name");
 
-    byte[] bytes = ByteArray.fromString("tron-name");
+    byte[] bytes = ByteArray.fromString("litetokens-name");
 
     if (ArrayUtils.isNotEmpty(bytes)) {
       ByteString accountName = ByteString.copyFrom(bytes);
@@ -65,7 +65,7 @@ public class AccountTest {
 
   @Test
   public void getAccountName() {
-    byte[] bytes = ByteArray.fromString("tron");
+    byte[] bytes = ByteArray.fromString("litetokens");
 
     if (ArrayUtils.isNotEmpty(bytes)) {
       ByteString accountName = ByteString.copyFrom(bytes);

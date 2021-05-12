@@ -1,6 +1,6 @@
-package org.tron.core.exception;
+package org.litetokens.core.exception;
 
-public class StoreException extends TronException {
+public class StoreException extends LitetokensException {
 
   public StoreException() {
     super();

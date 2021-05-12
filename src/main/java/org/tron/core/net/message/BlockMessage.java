@@ -1,11 +1,11 @@
-package org.tron.core.net.message;
+package org.litetokens.core.net.message;
 
-import org.tron.common.utils.Sha256Hash;
-import org.tron.core.capsule.BlockCapsule;
-import org.tron.core.capsule.BlockCapsule.BlockId;
-import org.tron.core.exception.BadItemException;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.core.capsule.BlockCapsule;
+import org.litetokens.core.capsule.BlockCapsule.BlockId;
+import org.litetokens.core.exception.BadItemException;
 
-public class BlockMessage extends TronMessage {
+public class BlockMessage extends LitetokensMessage {
 
   private BlockCapsule block;
 
@@ -52,6 +52,6 @@ public class BlockMessage extends TronMessage {
   @Override
   public String toString() {
     return new StringBuilder().append(super.toString()).append(block.getBlockId().getString())
-        .append(", trx size: ").append(block.getTransactions().size()).append("\n").toString();
+        .append(", xlt size: ").append(block.getTransactions().size()).append("\n").toString();
   }
 }

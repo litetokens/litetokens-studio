@@ -1,11 +1,11 @@
-package org.tron.core.capsule;
+package org.litetokens.core.capsule;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import lombok.extern.slf4j.Slf4j;
-import org.tron.core.exception.BadItemException;
-import org.tron.protos.Protocol.Transaction;
-import org.tron.protos.Protocol.Transaction.Result;
-import org.tron.protos.Protocol.Transaction.Result.contractResult;
+import org.litetokens.core.exception.BadItemException;
+import org.litetokens.protos.Protocol.Transaction;
+import org.litetokens.protos.Protocol.Transaction.Result;
+import org.litetokens.protos.Protocol.Transaction.Result.contractResult;
 
 @Slf4j
 public class TransactionResultCapsule implements ProtoCapsule<Transaction.Result> {
@@ -15,8 +15,8 @@ public class TransactionResultCapsule implements ProtoCapsule<Transaction.Result
   /**
    * constructor TransactionCapsule.
    */
-  public TransactionResultCapsule(Transaction.Result trxRet) {
-    this.transactionResult = trxRet;
+  public TransactionResultCapsule(Transaction.Result xltRet) {
+    this.transactionResult = xltRet;
   }
 
   public TransactionResultCapsule(byte[] data) throws BadItemException {

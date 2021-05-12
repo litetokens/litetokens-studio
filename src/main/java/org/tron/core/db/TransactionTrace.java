@@ -1,45 +1,45 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
-import static org.tron.common.runtime.vm.program.InternalTransaction.TrxType.TRX_CONTRACT_CALL_TYPE;
-import static org.tron.common.runtime.vm.program.InternalTransaction.TrxType.TRX_CONTRACT_CREATION_TYPE;
-import static org.tron.common.runtime.vm.program.InternalTransaction.TrxType.TRX_PRECOMPILED_TYPE;
+import static org.litetokens.common.runtime.vm.program.InternalTransaction.XltType.XLT_CONTRACT_CALL_TYPE;
+import static org.litetokens.common.runtime.vm.program.InternalTransaction.XltType.XLT_CONTRACT_CREATION_TYPE;
+import static org.litetokens.common.runtime.vm.program.InternalTransaction.XltType.XLT_PRECOMPILED_TYPE;
 
 import java.util.Objects;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
-import org.tron.common.runtime.Runtime;
-import org.tron.common.runtime.vm.program.InternalTransaction;
-import org.tron.common.runtime.vm.program.Program.BadJumpDestinationException;
-import org.tron.common.runtime.vm.program.Program.IllegalOperationException;
-import org.tron.common.runtime.vm.program.Program.JVMStackOverFlowException;
-import org.tron.common.runtime.vm.program.Program.OutOfEnergyException;
-import org.tron.common.runtime.vm.program.Program.OutOfMemoryException;
-import org.tron.common.runtime.vm.program.Program.OutOfResourceException;
-import org.tron.common.runtime.vm.program.Program.PrecompiledContractException;
-import org.tron.common.runtime.vm.program.Program.StackTooLargeException;
-import org.tron.common.runtime.vm.program.Program.StackTooSmallException;
-import org.tron.common.utils.Sha256Hash;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.capsule.ContractCapsule;
-import org.tron.core.capsule.ReceiptCapsule;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.core.config.args.Args;
-import org.tron.core.exception.BalanceInsufficientException;
-import org.tron.core.exception.ContractExeException;
-import org.tron.core.exception.ContractValidateException;
-import org.tron.core.exception.ReceiptCheckErrException;
-import org.tron.core.exception.VMIllegalException;
-import org.tron.protos.Contract.TriggerSmartContract;
-import org.tron.protos.Protocol.Transaction;
-import org.tron.protos.Protocol.Transaction.Contract.ContractType;
-import org.tron.protos.Protocol.Transaction.Result.contractResult;
+import org.litetokens.common.runtime.Runtime;
+import org.litetokens.common.runtime.vm.program.InternalTransaction;
+import org.litetokens.common.runtime.vm.program.Program.BadJumpDestinationException;
+import org.litetokens.common.runtime.vm.program.Program.IllegalOperationException;
+import org.litetokens.common.runtime.vm.program.Program.JVMStackOverFlowException;
+import org.litetokens.common.runtime.vm.program.Program.OutOfEnergyException;
+import org.litetokens.common.runtime.vm.program.Program.OutOfMemoryException;
+import org.litetokens.common.runtime.vm.program.Program.OutOfResourceException;
+import org.litetokens.common.runtime.vm.program.Program.PrecompiledContractException;
+import org.litetokens.common.runtime.vm.program.Program.StackTooLargeException;
+import org.litetokens.common.runtime.vm.program.Program.StackTooSmallException;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.capsule.ContractCapsule;
+import org.litetokens.core.capsule.ReceiptCapsule;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.exception.BalanceInsufficientException;
+import org.litetokens.core.exception.ContractExeException;
+import org.litetokens.core.exception.ContractValidateException;
+import org.litetokens.core.exception.ReceiptCheckErrException;
+import org.litetokens.core.exception.VMIllegalException;
+import org.litetokens.protos.Contract.TriggerSmartContract;
+import org.litetokens.protos.Protocol.Transaction;
+import org.litetokens.protos.Protocol.Transaction.Contract.ContractType;
+import org.litetokens.protos.Protocol.Transaction.Result.contractResult;
 
 @Slf4j(topic = "TransactionTrace")
 public class TransactionTrace {
 
-  private TransactionCapsule trx;
+  private TransactionCapsule xlt;
 
   private ReceiptCapsule receipt;
 
@@ -47,12 +47,12 @@ public class TransactionTrace {
 
   private EnergyProcessor energyProcessor;
 
-  private InternalTransaction.TrxType trxType;
+  private InternalTransaction.XltType xltType;
 
   private long txStartTimeInMs;
 
-  public TransactionCapsule getTrx() {
-    return trx;
+  public TransactionCapsule getXlt() {
+    return xlt;
   }
 
   public enum TimeResultType {
@@ -65,19 +65,19 @@ public class TransactionTrace {
   @Setter
   private TimeResultType timeResultType = TimeResultType.NORMAL;
 
-  public TransactionTrace(TransactionCapsule trx, Manager dbManager) {
-    this.trx = trx;
-    Transaction.Contract.ContractType contractType = this.trx.getInstance().getRawData()
+  public TransactionTrace(TransactionCapsule xlt, Manager dbManager) {
+    this.xlt = xlt;
+    Transaction.Contract.ContractType contractType = this.xlt.getInstance().getRawData()
         .getContract(0).getType();
     switch (contractType.getNumber()) {
       case ContractType.TriggerSmartContract_VALUE:
-        trxType = TRX_CONTRACT_CALL_TYPE;
+        xltType = XLT_CONTRACT_CALL_TYPE;
         break;
       case ContractType.CreateSmartContract_VALUE:
-        trxType = TRX_CONTRACT_CREATION_TYPE;
+        xltType = XLT_CONTRACT_CREATION_TYPE;
         break;
       default:
-        trxType = TRX_PRECOMPILED_TYPE;
+        xltType = XLT_PRECOMPILED_TYPE;
     }
 
     this.dbManager = dbManager;
@@ -87,17 +87,17 @@ public class TransactionTrace {
   }
 
   public boolean needVM() {
-    return this.trxType == TRX_CONTRACT_CALL_TYPE || this.trxType == TRX_CONTRACT_CREATION_TYPE;
+    return this.xltType == XLT_CONTRACT_CALL_TYPE || this.xltType == XLT_CONTRACT_CREATION_TYPE;
   }
 
   //pre transaction check
   public void init() {
     txStartTimeInMs = System.currentTimeMillis();
-    // switch (trxType) {
-    //   case TRX_PRECOMPILED_TYPE:
+    // switch (xltType) {
+    //   case XLT_PRECOMPILED_TYPE:
     //     break;
-    //   case TRX_CONTRACT_CREATION_TYPE:
-    //   case TRX_CONTRACT_CALL_TYPE:
+    //   case XLT_CONTRACT_CREATION_TYPE:
+    //   case XLT_CONTRACT_CALL_TYPE:
     //     // checkForSmartContract();
     //     break;
     //   default:
@@ -126,7 +126,7 @@ public class TransactionTrace {
     runtime.execute();
     runtime.go();
 
-    if (TRX_PRECOMPILED_TYPE != runtime.getTrxType()) {
+    if (XLT_PRECOMPILED_TYPE != runtime.getXltType()) {
       if (contractResult.OUT_OF_TIME
           .equals(receipt.getResult())) {
         setTimeResultType(TimeResultType.OUT_OF_TIME);
@@ -153,14 +153,14 @@ public class TransactionTrace {
     byte[] originAccount;
     byte[] callerAccount;
     long percent = 0;
-    switch (trxType) {
-      case TRX_CONTRACT_CREATION_TYPE:
-        callerAccount = TransactionCapsule.getOwner(trx.getInstance().getRawData().getContract(0));
+    switch (xltType) {
+      case XLT_CONTRACT_CREATION_TYPE:
+        callerAccount = TransactionCapsule.getOwner(xlt.getInstance().getRawData().getContract(0));
         originAccount = callerAccount;
         break;
-      case TRX_CONTRACT_CALL_TYPE:
+      case XLT_CONTRACT_CALL_TYPE:
         TriggerSmartContract callContract = ContractCapsule
-            .getTriggerContractFromTransaction(trx.getInstance());
+            .getTriggerContractFromTransaction(xlt.getInstance());
         callerAccount = callContract.getOwnerAddress().toByteArray();
 
         ContractCapsule contract =
@@ -189,7 +189,7 @@ public class TransactionTrace {
     if (!needVM()) {
       return false;
     }
-    if (!trx.getContractRet().equals(contractResult.OUT_OF_TIME)
+    if (!xlt.getContractRet().equals(contractResult.OUT_OF_TIME)
         && receipt.getResult().equals(contractResult.OUT_OF_TIME)) {
       return true;
     }
@@ -200,13 +200,13 @@ public class TransactionTrace {
     if (!needVM()) {
       return;
     }
-    if (Objects.isNull(trx.getContractRet())) {
+    if (Objects.isNull(xlt.getContractRet())) {
       throw new ReceiptCheckErrException("null resultCode");
     }
-    if (!trx.getContractRet().equals(receipt.getResult())) {
+    if (!xlt.getContractRet().equals(receipt.getResult())) {
       logger.info(
           "this tx resultCode in received block: {}\nthis tx resultCode in self: {}",
-          trx.getContractRet(), receipt.getResult());
+          xlt.getContractRet(), receipt.getResult());
       throw new ReceiptCheckErrException("Different resultCode");
     }
   }

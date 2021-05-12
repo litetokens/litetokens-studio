@@ -1,11 +1,11 @@
-package org.tron.abi.datatypes.generated;
+package org.litetokens.abi.datatypes.generated;
 
 import org.apache.commons.lang3.StringUtils;
 import org.spongycastle.util.encoders.Hex;
-import org.tron.abi.TypeReference;
-import org.tron.abi.datatypes.*;
-import org.tron.common.runtime.utils.MUtil;
-import org.tron.core.Wallet;
+import org.litetokens.abi.TypeReference;
+import org.litetokens.abi.datatypes.*;
+import org.litetokens.common.runtime.utils.MUtil;
+import org.litetokens.core.Wallet;
 
 /**
  * Auto generated code.
@@ -23,7 +23,7 @@ public final class AbiTypes {
                 if (StringUtils.isEmpty(value) || StringUtils.equals(value, "0")) {
                     return new Address(new Uint160(0));
                 }
-                return new Address(Hex.toHexString(MUtil.convertFromTronAddress(Wallet.decodeFromBase58Check(value))));
+                return new Address(Hex.toHexString(MUtil.convertFromLitetokensAddress(Wallet.decodeFromBase58Check(value))));
             case "bool":
                 return new Bool(Boolean.parseBoolean(value));
             case "string":

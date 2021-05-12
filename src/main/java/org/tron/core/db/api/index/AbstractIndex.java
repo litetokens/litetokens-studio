@@ -1,4 +1,4 @@
-package org.tron.core.db.api.index;
+package org.litetokens.core.db.api.index;
 
 import com.google.common.collect.Iterables;
 import com.googlecode.cqengine.ConcurrentIndexedCollection;
@@ -10,16 +10,16 @@ import java.io.File;
 import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.Objects;
-import org.tron.core.capsule.ProtoCapsule;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.api.index.Index.Iface;
-import org.tron.core.db.common.WrappedByteArray;
-import org.tron.core.db.common.WrappedResultSet;
-import org.tron.core.db2.core.ITronChainBase;
+import org.litetokens.core.capsule.ProtoCapsule;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.api.index.Index.Iface;
+import org.litetokens.core.db.common.WrappedByteArray;
+import org.litetokens.core.db.common.WrappedResultSet;
+import org.litetokens.core.db2.core.ILitetokensChainBase;
 
 public abstract class AbstractIndex<E extends ProtoCapsule<T>, T> implements Iface<T> {
 
-  protected ITronChainBase<E> database;
+  protected ILitetokensChainBase<E> database;
   protected ConcurrentIndexedCollection<WrappedByteArray> index;
   private File parent = new File(Args.getInstance().getOutputDirectory() + "index");
   protected File indexPath;
@@ -32,7 +32,7 @@ public abstract class AbstractIndex<E extends ProtoCapsule<T>, T> implements Ifa
     setAttribute();
   }
 
-  public AbstractIndex(ITronChainBase<E> database) {
+  public AbstractIndex(ILitetokensChainBase<E> database) {
     this.database = database;
     String dbName = database.getDbName();
     File parentDir = Paths.get(

@@ -1,4 +1,4 @@
-package org.tron.common.crypto;
+package org.litetokens.common.crypto;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -16,8 +16,8 @@ import java.util.Arrays;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.spongycastle.util.encoders.Hex;
-import org.tron.core.Wallet;
-import org.tron.common.crypto.ECKey.ECDSASignature;
+import org.litetokens.core.Wallet;
+import org.litetokens.common.crypto.ECKey.ECDSASignature;
 
 @Slf4j
 public class ECKeyTest {

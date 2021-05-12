@@ -16,7 +16,7 @@
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.common.crypto.cryptohash;
+package org.litetokens.common.crypto.cryptohash;
 
 public class Keccak512 extends KeccakCore {
 
@@ -24,7 +24,7 @@ public class Keccak512 extends KeccakCore {
    * Create the engine.
    */
   public Keccak512() {
-    super("tron-keccak-512");
+    super("litetokens-keccak-512");
   }
 
   public Digest copy() {

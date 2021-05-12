@@ -1,4 +1,4 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
@@ -18,15 +18,15 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.tron.common.utils.Sha256Hash;
-import org.tron.core.capsule.BlockCapsule;
-import org.tron.core.capsule.BlockCapsule.BlockId;
-import org.tron.core.exception.BadNumberBlockException;
-import org.tron.core.exception.NonCommonBlockException;
-import org.tron.core.exception.UnLinkedBlockException;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.core.capsule.BlockCapsule;
+import org.litetokens.core.capsule.BlockCapsule.BlockId;
+import org.litetokens.core.exception.BadNumberBlockException;
+import org.litetokens.core.exception.NonCommonBlockException;
+import org.litetokens.core.exception.UnLinkedBlockException;
 
 @Component
-public class KhaosDatabase extends TronDatabase {
+public class KhaosDatabase extends LitetokensDatabase {
 
   public static class KhaosBlock {
 

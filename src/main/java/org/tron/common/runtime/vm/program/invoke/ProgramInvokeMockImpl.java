@@ -15,18 +15,18 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.runtime.vm.program.invoke;
+package org.litetokens.common.runtime.vm.program.invoke;
 
 import org.spongycastle.util.encoders.Hex;
-import org.tron.common.crypto.ECKey;
-import org.tron.common.crypto.Hash;
-import org.tron.common.runtime.vm.DataWord;
-import org.tron.common.storage.Deposit;
-import org.tron.common.storage.DepositImpl;
-import org.tron.core.db.BlockStore;
-import org.tron.protos.Protocol;
+import org.litetokens.common.crypto.ECKey;
+import org.litetokens.common.crypto.Hash;
+import org.litetokens.common.runtime.vm.DataWord;
+import org.litetokens.common.storage.Deposit;
+import org.litetokens.common.storage.DepositImpl;
+import org.litetokens.core.db.BlockStore;
+import org.litetokens.protos.Protocol;
 
-// import org.tron.core.db.BlockStoreDummy;
+// import org.litetokens.core.db.BlockStoreDummy;
 
 /**
  * @author Roman Mandeleil

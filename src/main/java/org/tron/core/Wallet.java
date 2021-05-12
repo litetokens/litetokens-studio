@@ -16,7 +16,7 @@
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.core;
+package org.litetokens.core;
 
 import com.google.common.primitives.Longs;
 import com.google.protobuf.ByteString;
@@ -32,86 +32,86 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
-import org.tron.api.GrpcAPI;
-import org.tron.api.GrpcAPI.AccountNetMessage;
-import org.tron.api.GrpcAPI.AccountResourceMessage;
-import org.tron.api.GrpcAPI.Address;
-import org.tron.api.GrpcAPI.AssetIssueList;
-import org.tron.api.GrpcAPI.BlockList;
-import org.tron.api.GrpcAPI.ExchangeList;
-import org.tron.api.GrpcAPI.Node;
-import org.tron.api.GrpcAPI.NodeList;
-import org.tron.api.GrpcAPI.NumberMessage;
-import org.tron.api.GrpcAPI.ProposalList;
-import org.tron.api.GrpcAPI.Return;
-import org.tron.api.GrpcAPI.Return.response_code;
-import org.tron.api.GrpcAPI.TransactionExtention.Builder;
-import org.tron.api.GrpcAPI.WitnessList;
-import org.tron.common.crypto.ECKey;
-import org.tron.common.crypto.Hash;
-import org.tron.common.overlay.discover.node.NodeHandler;
-import org.tron.common.overlay.discover.node.NodeManager;
-import org.tron.common.overlay.message.Message;
-import org.tron.common.runtime.Runtime;
-import org.tron.common.runtime.vm.program.ProgramResult;
-import org.tron.common.runtime.vm.program.invoke.ProgramInvokeFactoryImpl;
-import org.tron.common.storage.DepositImpl;
-import org.tron.common.utils.Base58;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.Sha256Hash;
-import org.tron.common.utils.Utils;
-import org.tron.core.actuator.Actuator;
-import org.tron.core.actuator.ActuatorFactory;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.capsule.AssetIssueCapsule;
-import org.tron.core.capsule.BlockCapsule;
-import org.tron.core.capsule.ContractCapsule;
-import org.tron.core.capsule.ExchangeCapsule;
-import org.tron.core.capsule.ProposalCapsule;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.core.capsule.TransactionResultCapsule;
-import org.tron.core.capsule.WitnessCapsule;
-import org.tron.core.config.Parameter.ChainConstant;
-import org.tron.core.config.Parameter.ChainParameters;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.AccountIdIndexStore;
-import org.tron.core.db.AccountStore;
-import org.tron.core.db.BandwidthProcessor;
-import org.tron.core.db.ContractStore;
-import org.tron.core.db.DynamicPropertiesStore;
-import org.tron.core.db.EnergyProcessor;
-import org.tron.core.db.Manager;
-import org.tron.core.db.PendingManager;
-import org.tron.core.exception.AccountResourceInsufficientException;
-import org.tron.core.exception.BadTransactionException;
-import org.tron.core.exception.ContractExeException;
-import org.tron.core.exception.ContractValidateException;
-import org.tron.core.exception.DupTransactionException;
-import org.tron.core.exception.HeaderNotFound;
-import org.tron.core.exception.StoreException;
-import org.tron.core.exception.TaposException;
-import org.tron.core.exception.TooBigTransactionException;
-import org.tron.core.exception.TransactionExpirationException;
-import org.tron.core.exception.VMIllegalException;
-import org.tron.core.exception.ValidateSignatureException;
-import org.tron.core.net.message.TransactionMessage;
-import org.tron.core.net.node.NodeImpl;
-import org.tron.protos.Contract.AssetIssueContract;
-import org.tron.protos.Contract.CreateSmartContract;
-import org.tron.protos.Contract.TransferContract;
-import org.tron.protos.Contract.TriggerSmartContract;
-import org.tron.protos.Protocol;
-import org.tron.protos.Protocol.Account;
-import org.tron.protos.Protocol.Block;
-import org.tron.protos.Protocol.Exchange;
-import org.tron.protos.Protocol.Proposal;
-import org.tron.protos.Protocol.SmartContract;
-import org.tron.protos.Protocol.SmartContract.ABI;
-import org.tron.protos.Protocol.SmartContract.ABI.Entry.StateMutabilityType;
-import org.tron.protos.Protocol.Transaction;
-import org.tron.protos.Protocol.Transaction.Contract.ContractType;
-import org.tron.protos.Protocol.Transaction.Result.code;
-import org.tron.protos.Protocol.TransactionSign;
+import org.litetokens.api.GrpcAPI;
+import org.litetokens.api.GrpcAPI.AccountNetMessage;
+import org.litetokens.api.GrpcAPI.AccountResourceMessage;
+import org.litetokens.api.GrpcAPI.Address;
+import org.litetokens.api.GrpcAPI.AssetIssueList;
+import org.litetokens.api.GrpcAPI.BlockList;
+import org.litetokens.api.GrpcAPI.ExchangeList;
+import org.litetokens.api.GrpcAPI.Node;
+import org.litetokens.api.GrpcAPI.NodeList;
+import org.litetokens.api.GrpcAPI.NumberMessage;
+import org.litetokens.api.GrpcAPI.ProposalList;
+import org.litetokens.api.GrpcAPI.Return;
+import org.litetokens.api.GrpcAPI.Return.response_code;
+import org.litetokens.api.GrpcAPI.TransactionExtention.Builder;
+import org.litetokens.api.GrpcAPI.WitnessList;
+import org.litetokens.common.crypto.ECKey;
+import org.litetokens.common.crypto.Hash;
+import org.litetokens.common.overlay.discover.node.NodeHandler;
+import org.litetokens.common.overlay.discover.node.NodeManager;
+import org.litetokens.common.overlay.message.Message;
+import org.litetokens.common.runtime.Runtime;
+import org.litetokens.common.runtime.vm.program.ProgramResult;
+import org.litetokens.common.runtime.vm.program.invoke.ProgramInvokeFactoryImpl;
+import org.litetokens.common.storage.DepositImpl;
+import org.litetokens.common.utils.Base58;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.common.utils.Utils;
+import org.litetokens.core.actuator.Actuator;
+import org.litetokens.core.actuator.ActuatorFactory;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.capsule.AssetIssueCapsule;
+import org.litetokens.core.capsule.BlockCapsule;
+import org.litetokens.core.capsule.ContractCapsule;
+import org.litetokens.core.capsule.ExchangeCapsule;
+import org.litetokens.core.capsule.ProposalCapsule;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.core.capsule.TransactionResultCapsule;
+import org.litetokens.core.capsule.WitnessCapsule;
+import org.litetokens.core.config.Parameter.ChainConstant;
+import org.litetokens.core.config.Parameter.ChainParameters;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.AccountIdIndexStore;
+import org.litetokens.core.db.AccountStore;
+import org.litetokens.core.db.BandwidthProcessor;
+import org.litetokens.core.db.ContractStore;
+import org.litetokens.core.db.DynamicPropertiesStore;
+import org.litetokens.core.db.EnergyProcessor;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.db.PendingManager;
+import org.litetokens.core.exception.AccountResourceInsufficientException;
+import org.litetokens.core.exception.BadTransactionException;
+import org.litetokens.core.exception.ContractExeException;
+import org.litetokens.core.exception.ContractValidateException;
+import org.litetokens.core.exception.DupTransactionException;
+import org.litetokens.core.exception.HeaderNotFound;
+import org.litetokens.core.exception.StoreException;
+import org.litetokens.core.exception.TaposException;
+import org.litetokens.core.exception.TooBigTransactionException;
+import org.litetokens.core.exception.TransactionExpirationException;
+import org.litetokens.core.exception.VMIllegalException;
+import org.litetokens.core.exception.ValidateSignatureException;
+import org.litetokens.core.net.message.TransactionMessage;
+import org.litetokens.core.net.node.NodeImpl;
+import org.litetokens.protos.Contract.AssetIssueContract;
+import org.litetokens.protos.Contract.CreateSmartContract;
+import org.litetokens.protos.Contract.TransferContract;
+import org.litetokens.protos.Contract.TriggerSmartContract;
+import org.litetokens.protos.Protocol;
+import org.litetokens.protos.Protocol.Account;
+import org.litetokens.protos.Protocol.Block;
+import org.litetokens.protos.Protocol.Exchange;
+import org.litetokens.protos.Protocol.Proposal;
+import org.litetokens.protos.Protocol.SmartContract;
+import org.litetokens.protos.Protocol.SmartContract.ABI;
+import org.litetokens.protos.Protocol.SmartContract.ABI.Entry.StateMutabilityType;
+import org.litetokens.protos.Protocol.Transaction;
+import org.litetokens.protos.Protocol.Transaction.Contract.ContractType;
+import org.litetokens.protos.Protocol.Transaction.Result.code;
+import org.litetokens.protos.Protocol.TransactionSign;
 
 @Slf4j
 @Component
@@ -227,12 +227,12 @@ public class Wallet {
     return null;
   }
 
-  public static byte[] generateContractAddress(Transaction trx) {
+  public static byte[] generateContractAddress(Transaction xlt) {
 
-    CreateSmartContract contract = ContractCapsule.getSmartContractFromTransaction(trx);
+    CreateSmartContract contract = ContractCapsule.getSmartContractFromTransaction(xlt);
     byte[] ownerAddress = contract.getOwnerAddress().toByteArray();
-    TransactionCapsule trxCap = new TransactionCapsule(trx);
-    byte[] txRawDataHash = trxCap.getTransactionId().getBytes();
+    TransactionCapsule xltCap = new TransactionCapsule(xlt);
+    byte[] txRawDataHash = xltCap.getTransactionId().getBytes();
 
     byte[] combined = new byte[txRawDataHash.length + ownerAddress.length];
     System.arraycopy(txRawDataHash, 0, combined, 0, txRawDataHash.length);
@@ -343,10 +343,10 @@ public class Wallet {
 
   public TransactionCapsule createTransactionCapsule(com.google.protobuf.Message message,
       ContractType contractType) throws ContractValidateException {
-    TransactionCapsule trx = new TransactionCapsule(message, contractType);
+    TransactionCapsule xlt = new TransactionCapsule(message, contractType);
     if (contractType != ContractType.CreateSmartContract
         && contractType != ContractType.TriggerSmartContract) {
-      List<Actuator> actList = ActuatorFactory.createActuator(trx, dbManager);
+      List<Actuator> actList = ActuatorFactory.createActuator(xlt, dbManager);
       for (Actuator act : actList) {
         act.validate();
       }
@@ -355,7 +355,7 @@ public class Wallet {
     if (contractType == ContractType.CreateSmartContract) {
 
       CreateSmartContract contract = ContractCapsule
-          .getSmartContractFromTransaction(trx.getInstance());
+          .getSmartContractFromTransaction(xlt.getInstance());
       long percent = contract.getNewContract().getConsumeUserResourcePercent();
       if (percent < 0 || percent > 100) {
         throw new ContractValidateException("percent must be >= 0 and <= 100");
@@ -370,14 +370,14 @@ public class Wallet {
       } else {
         headBlock = blockList.get(0);
       }
-      trx.setReference(headBlock.getNum(), headBlock.getBlockId().getBytes());
+      xlt.setReference(headBlock.getNum(), headBlock.getBlockId().getBytes());
       long expiration = headBlock.getTimeStamp() + Constant.TRANSACTION_DEFAULT_EXPIRATION_TIME;
-      trx.setExpiration(expiration);
-      trx.setTimestamp();
+      xlt.setExpiration(expiration);
+      xlt.setTimestamp();
     } catch (HeaderNotFound headerNotFound) {
       headerNotFound.printStackTrace();
     }
-    return trx;
+    return xlt;
   }
 
   /**
@@ -387,7 +387,7 @@ public class Wallet {
     GrpcAPI.Return.Builder builder = GrpcAPI.Return.newBuilder();
 
     try {
-      TransactionCapsule trx = new TransactionCapsule(signaturedTransaction);
+      TransactionCapsule xlt = new TransactionCapsule(signaturedTransaction);
       Message message = new TransactionMessage(signaturedTransaction);
 
       if (dbManager.isTooManyPending()) {
@@ -403,16 +403,16 @@ public class Wallet {
         return builder.setResult(false).setCode(response_code.SERVER_BUSY).build();
       }
 
-      if (dbManager.getTransactionIdCache().getIfPresent(trx.getTransactionId()) != null) {
+      if (dbManager.getTransactionIdCache().getIfPresent(xlt.getTransactionId()) != null) {
         logger.debug("This transaction has been processed, discard the transaction");
         return builder.setResult(false).setCode(response_code.DUP_TRANSACTION_ERROR).build();
       } else {
-        dbManager.getTransactionIdCache().put(trx.getTransactionId(), true);
+        dbManager.getTransactionIdCache().put(xlt.getTransactionId(), true);
       }
       if (dbManager.getDynamicPropertiesStore().supportVM()) {
-        trx.resetResult();
+        xlt.resetResult();
       }
-      dbManager.pushTransaction(trx);
+      dbManager.pushTransaction(xlt);
       p2pNode.broadcast(message);
 
       return builder.setResult(true).setCode(response_code.SUCCESS).build();
@@ -466,9 +466,9 @@ public class Wallet {
 
   public TransactionCapsule getTransactionSign(TransactionSign transactionSign) {
     byte[] privateKey = transactionSign.getPrivateKey().toByteArray();
-    TransactionCapsule trx = new TransactionCapsule(transactionSign.getTransaction());
-    trx.sign(privateKey);
-    return trx;
+    TransactionCapsule xlt = new TransactionCapsule(transactionSign.getTransaction());
+    xlt.sign(privateKey);
+    return xlt;
   }
 
   public byte[] pass2Key(byte[] passPhrase) {
@@ -843,7 +843,7 @@ public class Wallet {
 
     nodeHandlerMap.entrySet().stream()
         .forEach(v -> {
-          org.tron.common.overlay.discover.node.Node node = v.getValue().getNode();
+          org.litetokens.common.overlay.discover.node.Node node = v.getValue().getNode();
           nodeListBuilder.addNodes(Node.newBuilder().setAddress(
               Address.newBuilder()
                   .setHost(ByteString.copyFrom(ByteArray.fromString(node.getHost())))
@@ -853,15 +853,15 @@ public class Wallet {
   }
 
   public Transaction deployContract(CreateSmartContract createSmartContract,
-      TransactionCapsule trxCap) {
+      TransactionCapsule xltCap) {
 
     // do nothing, so can add some useful function later
-    // trxcap contract para cacheUnpackValue has value
-    return trxCap.getInstance();
+    // xltcap contract para cacheUnpackValue has value
+    return xltCap.getInstance();
   }
 
   public Transaction triggerContract(TriggerSmartContract triggerSmartContract,
-      TransactionCapsule trxCap, Builder builder,
+      TransactionCapsule xltCap, Builder builder,
       Return.Builder retBuilder)
       throws ContractValidateException, ContractExeException, HeaderNotFound, VMIllegalException {
 
@@ -875,7 +875,7 @@ public class Wallet {
     byte[] selector = getSelector(triggerSmartContract.getData().toByteArray());
 
     if (!isConstant(abi, selector)) {
-      return trxCap.getInstance();
+      return xltCap.getInstance();
     } else {
       if (!Args.getInstance().isSupportConstant()) {
         throw new ContractValidateException("this node don't support constant");
@@ -890,7 +890,7 @@ public class Wallet {
         headBlock = blockCapsuleList.get(0).getInstance();
       }
 
-      Runtime runtime = new Runtime(trxCap.getInstance(), new BlockCapsule(headBlock), deposit,
+      Runtime runtime = new Runtime(xltCap.getInstance(), new BlockCapsule(headBlock), deposit,
           new ProgramInvokeFactoryImpl(), true);
       runtime.execute();
       runtime.go();
@@ -911,8 +911,8 @@ public class Wallet {
         ret.setStatus(0, code.FAILED);
         retBuilder.setMessage(ByteString.copyFromUtf8(runtime.getRuntimeError())).build();
       }
-      trxCap.setResult(ret);
-      return trxCap.getInstance();
+      xltCap.setResult(ret);
+      return xltCap.getInstance();
     }
   }
 

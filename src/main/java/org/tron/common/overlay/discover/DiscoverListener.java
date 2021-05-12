@@ -16,10 +16,10 @@
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.common.overlay.discover;
+package org.litetokens.common.overlay.discover;
 
-import org.tron.common.overlay.discover.node.NodeHandler;
-import org.tron.common.overlay.discover.node.NodeManager;
+import org.litetokens.common.overlay.discover.node.NodeHandler;
+import org.litetokens.common.overlay.discover.node.NodeManager;
 
 /**
  * Allows to handle discovered nodes state changes

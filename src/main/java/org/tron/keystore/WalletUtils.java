@@ -1,4 +1,4 @@
-package org.tron.keystore;
+package org.litetokens.keystore;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -14,8 +14,8 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import org.apache.commons.lang3.StringUtils;
-import org.tron.common.crypto.ECKey;
-import org.tron.common.utils.Utils;
+import org.litetokens.common.crypto.ECKey;
+import org.litetokens.common.utils.Utils;
 
 /**
  * Utility functions for working with Wallet files.

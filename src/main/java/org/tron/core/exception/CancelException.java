@@ -1,6 +1,6 @@
-package org.tron.core.exception;
+package org.litetokens.core.exception;
 
-public class CancelException extends TronException {
+public class CancelException extends LitetokensException {
 
   public CancelException() {
     super();

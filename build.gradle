@@ -13,7 +13,7 @@ plugins {
     id "org.sonarqube" version "2.6"
 }
 
-group 'org.tron'
+group 'org.litetokens'
 version '1.0.0'
 
 apply plugin: 'java'
@@ -26,7 +26,7 @@ apply plugin: 'maven-publish'
 
 sourceCompatibility = 1.8
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
-mainClassName = 'org.tron.studio.MainApplication'
+mainClassName = 'org.litetokens.studio.MainApplication'
 
 publishing {
     publications {
@@ -261,7 +261,7 @@ run {
 }
 
 shadowJar {
-    baseName = 'TronStudio'
+    baseName = 'LitetokensStudio'
     classifier = null
     version = null
 }
@@ -325,5 +325,5 @@ def binaryRelease(taskName, jarName, mainClass) {
 }
 
 artifacts {
-//    archives(binaryRelease('buildTronStudio', 'TronStudio', 'org.tron.studio.TronStudio'))
+//    archives(binaryRelease('buildLitetokensStudio', 'LitetokensStudio', 'org.litetokens.studio.LitetokensStudio'))
 }

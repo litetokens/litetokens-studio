@@ -1,8 +1,8 @@
-package org.tron.abi.datatypes.generated;
+package org.litetokens.abi.datatypes.generated;
 
 import java.util.List;
-import org.tron.abi.datatypes.StaticArray;
-import org.tron.abi.datatypes.Type;
+import org.litetokens.abi.datatypes.StaticArray;
+import org.litetokens.abi.datatypes.Type;
 
 /**
  * Auto generated code.

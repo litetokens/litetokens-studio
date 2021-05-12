@@ -1,10 +1,10 @@
-package org.tron.core.actuator;
+package org.litetokens.core.actuator;
 
 import com.google.protobuf.Any;
-import org.tron.common.storage.Deposit;
-import org.tron.core.capsule.TransactionResultCapsule;
-import org.tron.core.db.Manager;
-import org.tron.core.exception.ContractExeException;
+import org.litetokens.common.storage.Deposit;
+import org.litetokens.core.capsule.TransactionResultCapsule;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.exception.ContractExeException;
 
 public abstract class AbstractActuator implements Actuator {
 

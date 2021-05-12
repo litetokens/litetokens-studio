@@ -1,4 +1,4 @@
-package org.tron.core.capsule;
+package org.litetokens.core.capsule;
 
 public class BlockIdentifierCapsule {
 

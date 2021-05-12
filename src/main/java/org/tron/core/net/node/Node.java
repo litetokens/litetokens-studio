@@ -1,8 +1,8 @@
-package org.tron.core.net.node;
+package org.litetokens.core.net.node;
 
-import org.tron.common.overlay.message.Message;
-import org.tron.common.utils.Quitable;
-import org.tron.common.utils.Sha256Hash;
+import org.litetokens.common.overlay.message.Message;
+import org.litetokens.common.utils.Quitable;
+import org.litetokens.common.utils.Sha256Hash;
 
 public interface Node extends Quitable {
 

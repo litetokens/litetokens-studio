@@ -1,4 +1,4 @@
-package org.tron.core.services.http;
+package org.litetokens.core.services.http;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -6,45 +6,45 @@ import com.google.protobuf.Any;
 import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
-import org.tron.api.GrpcAPI.BlockList;
-import org.tron.api.GrpcAPI.EasyTransferResponse;
-import org.tron.api.GrpcAPI.TransactionExtention;
-import org.tron.api.GrpcAPI.TransactionList;
-import org.tron.common.crypto.Hash;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.Sha256Hash;
-import org.tron.core.Wallet;
-import org.tron.core.capsule.BlockCapsule;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.core.services.http.JsonFormat.ParseException;
-import org.tron.protos.Contract.AccountCreateContract;
-import org.tron.protos.Contract.AccountUpdateContract;
-import org.tron.protos.Contract.AssetIssueContract;
-import org.tron.protos.Contract.CreateSmartContract;
-import org.tron.protos.Contract.ExchangeCreateContract;
-import org.tron.protos.Contract.ExchangeInjectContract;
-import org.tron.protos.Contract.ExchangeTransactionContract;
-import org.tron.protos.Contract.ExchangeWithdrawContract;
-import org.tron.protos.Contract.FreezeBalanceContract;
-import org.tron.protos.Contract.ParticipateAssetIssueContract;
-import org.tron.protos.Contract.ProposalApproveContract;
-import org.tron.protos.Contract.ProposalCreateContract;
-import org.tron.protos.Contract.ProposalDeleteContract;
-import org.tron.protos.Contract.TransferAssetContract;
-import org.tron.protos.Contract.TransferContract;
-import org.tron.protos.Contract.TriggerSmartContract;
-import org.tron.protos.Contract.UnfreezeAssetContract;
-import org.tron.protos.Contract.UnfreezeBalanceContract;
-import org.tron.protos.Contract.UpdateAssetContract;
-import org.tron.protos.Contract.VoteAssetContract;
-import org.tron.protos.Contract.VoteWitnessContract;
-import org.tron.protos.Contract.WithdrawBalanceContract;
-import org.tron.protos.Contract.WitnessCreateContract;
-import org.tron.protos.Contract.WitnessUpdateContract;
-import org.tron.protos.Protocol;
-import org.tron.protos.Protocol.Block;
-import org.tron.protos.Protocol.SmartContract;
-import org.tron.protos.Protocol.Transaction;
+import org.litetokens.api.GrpcAPI.BlockList;
+import org.litetokens.api.GrpcAPI.EasyTransferResponse;
+import org.litetokens.api.GrpcAPI.TransactionExtention;
+import org.litetokens.api.GrpcAPI.TransactionList;
+import org.litetokens.common.crypto.Hash;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.capsule.BlockCapsule;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.core.services.http.JsonFormat.ParseException;
+import org.litetokens.protos.Contract.AccountCreateContract;
+import org.litetokens.protos.Contract.AccountUpdateContract;
+import org.litetokens.protos.Contract.AssetIssueContract;
+import org.litetokens.protos.Contract.CreateSmartContract;
+import org.litetokens.protos.Contract.ExchangeCreateContract;
+import org.litetokens.protos.Contract.ExchangeInjectContract;
+import org.litetokens.protos.Contract.ExchangeTransactionContract;
+import org.litetokens.protos.Contract.ExchangeWithdrawContract;
+import org.litetokens.protos.Contract.FreezeBalanceContract;
+import org.litetokens.protos.Contract.ParticipateAssetIssueContract;
+import org.litetokens.protos.Contract.ProposalApproveContract;
+import org.litetokens.protos.Contract.ProposalCreateContract;
+import org.litetokens.protos.Contract.ProposalDeleteContract;
+import org.litetokens.protos.Contract.TransferAssetContract;
+import org.litetokens.protos.Contract.TransferContract;
+import org.litetokens.protos.Contract.TriggerSmartContract;
+import org.litetokens.protos.Contract.UnfreezeAssetContract;
+import org.litetokens.protos.Contract.UnfreezeBalanceContract;
+import org.litetokens.protos.Contract.UpdateAssetContract;
+import org.litetokens.protos.Contract.VoteAssetContract;
+import org.litetokens.protos.Contract.VoteWitnessContract;
+import org.litetokens.protos.Contract.WithdrawBalanceContract;
+import org.litetokens.protos.Contract.WitnessCreateContract;
+import org.litetokens.protos.Contract.WitnessUpdateContract;
+import org.litetokens.protos.Protocol;
+import org.litetokens.protos.Protocol.Block;
+import org.litetokens.protos.Protocol.SmartContract;
+import org.litetokens.protos.Protocol.Transaction;
 
 
 @Slf4j
@@ -239,9 +239,9 @@ public class Util {
     return jsonObject.toJSONString();
   }
 
-  public static byte[] generateContractAddress(Transaction trx, byte[] ownerAddress) {
+  public static byte[] generateContractAddress(Transaction xlt, byte[] ownerAddress) {
     // get tx hash
-    byte[] txRawDataHash = Sha256Hash.of(trx.getRawData().toByteArray()).getBytes();
+    byte[] txRawDataHash = Sha256Hash.of(xlt.getRawData().toByteArray()).getBytes();
 
     // combine
     byte[] combined = new byte[txRawDataHash.length + ownerAddress.length];

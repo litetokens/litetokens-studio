@@ -1,4 +1,4 @@
-package org.tron.core.db2.core;
+package org.litetokens.core.db2.core;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Streams;
@@ -12,13 +12,13 @@ import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.ArrayUtils;
-import org.tron.common.utils.ByteUtil;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.common.WrappedByteArray;
-import org.tron.core.db2.common.IRevokingDB;
-import org.tron.core.db2.common.LevelDB;
-import org.tron.core.db2.common.Value;
-import org.tron.core.exception.ItemNotFoundException;
+import org.litetokens.common.utils.ByteUtil;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.common.WrappedByteArray;
+import org.litetokens.core.db2.common.IRevokingDB;
+import org.litetokens.core.db2.common.LevelDB;
+import org.litetokens.core.db2.common.Value;
+import org.litetokens.core.exception.ItemNotFoundException;
 
 public class RevokingDBWithCachingNewValue implements IRevokingDB {
   @Setter

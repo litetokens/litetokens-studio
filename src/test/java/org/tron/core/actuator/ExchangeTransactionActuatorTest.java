@@ -1,4 +1,4 @@
-package org.tron.core.actuator;
+package org.litetokens.core.actuator;
 
 import static org.testng.Assert.fail;
 
@@ -13,43 +13,43 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.FileUtil;
-import org.tron.core.Constant;
-import org.tron.core.Wallet;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.capsule.ExchangeCapsule;
-import org.tron.core.capsule.TransactionResultCapsule;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.Manager;
-import org.tron.core.exception.ContractExeException;
-import org.tron.core.exception.ContractValidateException;
-import org.tron.core.exception.ItemNotFoundException;
-import org.tron.protos.Contract;
-import org.tron.protos.Protocol.AccountType;
-import org.tron.protos.Protocol.Transaction.Result.code;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.core.Constant;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.capsule.ExchangeCapsule;
+import org.litetokens.core.capsule.TransactionResultCapsule;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.exception.ContractExeException;
+import org.litetokens.core.exception.ContractValidateException;
+import org.litetokens.core.exception.ItemNotFoundException;
+import org.litetokens.protos.Contract;
+import org.litetokens.protos.Protocol.AccountType;
+import org.litetokens.protos.Protocol.Transaction.Result.code;
 
 @Slf4j
 
 public class ExchangeTransactionActuatorTest {
 
-  private static TronApplicationContext context;
+  private static LitetokensApplicationContext context;
   private static Manager dbManager;
   private static final String dbPath = "output_ExchangeTransaction_test";
   private static final String ACCOUNT_NAME_FIRST = "ownerF";
   private static final String OWNER_ADDRESS_FIRST;
   private static final String ACCOUNT_NAME_SECOND = "ownerS";
   private static final String OWNER_ADDRESS_SECOND;
-  private static final String URL = "https://tron.network";
+  private static final String URL = "https://litetokens.org";
   private static final String OWNER_ADDRESS_INVALID = "aaaa";
   private static final String OWNER_ADDRESS_NOACCOUNT;
   private static final String OWNER_ADDRESS_BALANCENOTSUFFIENT;
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new LitetokensApplicationContext(DefaultConfig.class);
     OWNER_ADDRESS_FIRST =
         Wallet.getAddressPreFixString() + "abd4b9367799eaa3197fecb144eb71de1e049abc";
     OWNER_ADDRESS_SECOND =
@@ -106,7 +106,7 @@ public class ExchangeTransactionActuatorTest {
             1000000,
             "_".getBytes(),
             "abc".getBytes());
-    exchangeCapsule.setBalance(1_000_000_000_000L, 10_000_000L); // 1M TRX == 10M abc
+    exchangeCapsule.setBalance(1_000_000_000_000L, 10_000_000L); // 1M XLT == 10M abc
     ExchangeCapsule exchangeCapsule2 =
         new ExchangeCapsule(
             ByteString.copyFrom(ByteArray.fromHexString(OWNER_ADDRESS_FIRST)),
@@ -149,7 +149,7 @@ public class ExchangeTransactionActuatorTest {
   public void successExchangeTransaction() {
     long exchangeId = 1;
     String tokenId = "_";
-    long quant = 100_000_000L; // use 100 TRX to buy abc
+    long quant = 100_000_000L; // use 100 XLT to buy abc
 
     byte[] ownerAddress = ByteArray.fromHexString(OWNER_ADDRESS_SECOND);
     AccountCapsule accountCapsule = dbManager.getAccountStore().get(ownerAddress);

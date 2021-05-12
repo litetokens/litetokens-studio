@@ -1,4 +1,4 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,19 +20,19 @@ import lombok.Getter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.iq80.leveldb.WriteOptions;
-import org.tron.common.storage.SourceInter;
-import org.tron.common.storage.leveldb.LevelDbDataSourceImpl;
-import org.tron.common.utils.FileUtil;
-import org.tron.common.utils.Utils;
-import org.tron.core.config.args.Args;
-import org.tron.core.db2.common.IRevokingDB;
-import org.tron.core.db2.core.ISession;
-import org.tron.core.db2.core.RevokingDBWithCachingNewValue;
-import org.tron.core.db2.core.RevokingDBWithCachingOldValue;
-import org.tron.core.db2.core.SnapshotManager;
-import org.tron.core.exception.RevokingStoreIllegalStateException;
+import org.litetokens.common.storage.SourceInter;
+import org.litetokens.common.storage.leveldb.LevelDbDataSourceImpl;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.common.utils.Utils;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db2.common.IRevokingDB;
+import org.litetokens.core.db2.core.ISession;
+import org.litetokens.core.db2.core.RevokingDBWithCachingNewValue;
+import org.litetokens.core.db2.core.RevokingDBWithCachingOldValue;
+import org.litetokens.core.db2.core.SnapshotManager;
+import org.litetokens.core.exception.RevokingStoreIllegalStateException;
 
-import static org.tron.core.db2.core.SnapshotManager.simpleDecode;
+import static org.litetokens.core.db2.core.SnapshotManager.simpleDecode;
 
 @Slf4j
 @Getter // only for unit test

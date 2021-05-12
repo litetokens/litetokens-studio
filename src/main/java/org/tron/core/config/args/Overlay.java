@@ -1,4 +1,4 @@
-package org.tron.core.config.args;
+package org.litetokens.core.config.args;
 
 import lombok.Getter;
 import org.apache.commons.lang3.Range;

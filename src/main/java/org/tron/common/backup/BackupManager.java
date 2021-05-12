@@ -1,9 +1,9 @@
-package org.tron.common.backup;
+package org.litetokens.common.backup;
 
-import static org.tron.common.backup.BackupManager.BackupStatusEnum.INIT;
-import static org.tron.common.backup.BackupManager.BackupStatusEnum.MASTER;
-import static org.tron.common.backup.BackupManager.BackupStatusEnum.SLAVER;
-import static org.tron.common.net.udp.message.UdpMessageTypeEnum.BACKUP_KEEP_ALIVE;
+import static org.litetokens.common.backup.BackupManager.BackupStatusEnum.INIT;
+import static org.litetokens.common.backup.BackupManager.BackupStatusEnum.MASTER;
+import static org.litetokens.common.backup.BackupManager.BackupStatusEnum.SLAVER;
+import static org.litetokens.common.net.udp.message.UdpMessageTypeEnum.BACKUP_KEEP_ALIVE;
 
 import io.netty.util.internal.ConcurrentSet;
 import java.net.InetSocketAddress;
@@ -14,12 +14,12 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.tron.common.net.udp.handler.EventHandler;
-import org.tron.common.net.udp.handler.MessageHandler;
-import org.tron.common.net.udp.handler.UdpEvent;
-import org.tron.common.net.udp.message.Message;
-import org.tron.common.net.udp.message.backup.KeepAliveMessage;
-import org.tron.core.config.args.Args;
+import org.litetokens.common.net.udp.handler.EventHandler;
+import org.litetokens.common.net.udp.handler.MessageHandler;
+import org.litetokens.common.net.udp.handler.UdpEvent;
+import org.litetokens.common.net.udp.message.Message;
+import org.litetokens.common.net.udp.message.backup.KeepAliveMessage;
+import org.litetokens.core.config.args.Args;
 
 @Component
 public class BackupManager implements EventHandler{

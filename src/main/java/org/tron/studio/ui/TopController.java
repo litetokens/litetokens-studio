@@ -1,4 +1,4 @@
-package org.tron.studio.ui;
+package org.litetokens.studio.ui;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
@@ -16,14 +16,14 @@ import javafx.fxml.FXMLLoader;
 import java.util.*;
 import lombok.extern.slf4j.Slf4j;
 import org.spongycastle.util.encoders.Hex;
-import org.tron.common.crypto.ECKey;
-import org.tron.core.Wallet;
-import org.tron.studio.MainApplication;
-import org.tron.studio.ShareData;
-import org.tron.studio.utils.IPFieldValidator;
-import org.tron.studio.utils.NetworkNameValidator;
-import org.tron.studio.utils.PortFieldValidator;
-import org.tron.studio.utils.PrivateKeyFieldValidator;
+import org.litetokens.common.crypto.ECKey;
+import org.litetokens.core.Wallet;
+import org.litetokens.studio.MainApplication;
+import org.litetokens.studio.ShareData;
+import org.litetokens.studio.utils.IPFieldValidator;
+import org.litetokens.studio.utils.NetworkNameValidator;
+import org.litetokens.studio.utils.PortFieldValidator;
+import org.litetokens.studio.utils.PrivateKeyFieldValidator;
 
 @Slf4j(topic = "TopController")
 public class TopController {

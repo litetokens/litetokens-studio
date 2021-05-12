@@ -1,25 +1,25 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
 import java.io.File;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.FileUtil;
-import org.tron.core.Constant;
-import org.tron.core.capsule.TransactionInfoCapsule;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
-import org.tron.core.exception.BadItemException;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.core.Constant;
+import org.litetokens.core.capsule.TransactionInfoCapsule;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.exception.BadItemException;
 
 public class TransactionHistoryTest {
 
   private static String dbPath = "output_TransactionHistoryStore_test";
   private static String dbDirectory = "db_TransactionHistoryStore_test";
   private static String indexDirectory = "index_TransactionHistoryStore_test";
-  private static TronApplicationContext context;
+  private static LitetokensApplicationContext context;
   private static TransactionHistoryStore transactionHistoryStore;
   private static final byte[] transactionId = TransactionStoreTest.randomBytes(32);
 
@@ -32,7 +32,7 @@ public class TransactionHistoryTest {
         },
         Constant.TEST_CONF
     );
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new LitetokensApplicationContext(DefaultConfig.class);
   }
 
   @AfterClass

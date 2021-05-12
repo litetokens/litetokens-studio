@@ -1,11 +1,11 @@
-package org.tron.core.net.message;
+package org.litetokens.core.net.message;
 
 import java.util.List;
 import org.apache.commons.collections4.CollectionUtils;
-import org.tron.protos.Protocol.Block;
-import org.tron.protos.Protocol.Items;
+import org.litetokens.protos.Protocol.Block;
+import org.litetokens.protos.Protocol.Items;
 
-public class BlocksMessage extends TronMessage {
+public class BlocksMessage extends LitetokensMessage {
 
   private List<Block> blocks;
 

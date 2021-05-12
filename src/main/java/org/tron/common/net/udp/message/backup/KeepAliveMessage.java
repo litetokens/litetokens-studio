@@ -1,10 +1,10 @@
-package org.tron.common.net.udp.message.backup;
+package org.litetokens.common.net.udp.message.backup;
 
-import static org.tron.common.net.udp.message.UdpMessageTypeEnum.BACKUP_KEEP_ALIVE;
+import static org.litetokens.common.net.udp.message.UdpMessageTypeEnum.BACKUP_KEEP_ALIVE;
 
-import org.tron.common.net.udp.message.Message;
-import org.tron.common.overlay.discover.node.Node;
-import org.tron.protos.Discover;
+import org.litetokens.common.net.udp.message.Message;
+import org.litetokens.common.overlay.discover.node.Node;
+import org.litetokens.protos.Discover;
 
 public class KeepAliveMessage extends Message {
 

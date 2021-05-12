@@ -1,4 +1,4 @@
-package org.tron.core.db2.core;
+package org.litetokens.core.db2.core;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterators;
@@ -7,10 +7,10 @@ import com.google.common.collect.Streams;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import org.tron.core.db.common.WrappedByteArray;
-import org.tron.core.db2.common.HashDB;
-import org.tron.core.db2.common.Key;
-import org.tron.core.db2.common.Value;
+import org.litetokens.core.db.common.WrappedByteArray;
+import org.litetokens.core.db2.common.HashDB;
+import org.litetokens.core.db2.common.Key;
+import org.litetokens.core.db2.common.Value;
 
 public class SnapshotImpl extends AbstractSnapshot<Key, Value> {
 

@@ -1,7 +1,7 @@
-package org.tron.core.net.node;
+package org.litetokens.core.net.node;
 
-import static org.tron.core.config.Parameter.ChainConstant.BLOCK_PRODUCED_INTERVAL;
-import static org.tron.core.config.Parameter.ChainConstant.BLOCK_SIZE;
+import static org.litetokens.core.config.Parameter.ChainConstant.BLOCK_PRODUCED_INTERVAL;
+import static org.litetokens.core.config.Parameter.ChainConstant.BLOCK_SIZE;
 
 import com.google.common.primitives.Longs;
 import java.util.ArrayList;
@@ -12,38 +12,38 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
-import org.tron.common.overlay.message.Message;
-import org.tron.common.utils.Sha256Hash;
-import org.tron.core.capsule.BlockCapsule;
-import org.tron.core.capsule.BlockCapsule.BlockId;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.core.config.Parameter.NodeConstant;
-import org.tron.core.db.Manager;
-import org.tron.core.exception.AccountResourceInsufficientException;
-import org.tron.core.exception.BadBlockException;
-import org.tron.core.exception.BadItemException;
-import org.tron.core.exception.BadNumberBlockException;
-import org.tron.core.exception.BadTransactionException;
-import org.tron.core.exception.ContractExeException;
-import org.tron.core.exception.ContractSizeNotEqualToOneException;
-import org.tron.core.exception.ContractValidateException;
-import org.tron.core.exception.DupTransactionException;
-import org.tron.core.exception.ItemNotFoundException;
-import org.tron.core.exception.NonCommonBlockException;
-import org.tron.core.exception.ReceiptCheckErrException;
-import org.tron.core.exception.StoreException;
-import org.tron.core.exception.TaposException;
-import org.tron.core.exception.TooBigTransactionException;
-import org.tron.core.exception.TooBigTransactionResultException;
-import org.tron.core.exception.TransactionExpirationException;
-import org.tron.core.exception.TronException;
-import org.tron.core.exception.UnLinkedBlockException;
-import org.tron.core.exception.VMIllegalException;
-import org.tron.core.exception.ValidateScheduleException;
-import org.tron.core.exception.ValidateSignatureException;
-import org.tron.core.net.message.BlockMessage;
-import org.tron.core.net.message.MessageTypes;
-import org.tron.core.net.message.TransactionMessage;
+import org.litetokens.common.overlay.message.Message;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.core.capsule.BlockCapsule;
+import org.litetokens.core.capsule.BlockCapsule.BlockId;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.core.config.Parameter.NodeConstant;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.exception.AccountResourceInsufficientException;
+import org.litetokens.core.exception.BadBlockException;
+import org.litetokens.core.exception.BadItemException;
+import org.litetokens.core.exception.BadNumberBlockException;
+import org.litetokens.core.exception.BadTransactionException;
+import org.litetokens.core.exception.ContractExeException;
+import org.litetokens.core.exception.ContractSizeNotEqualToOneException;
+import org.litetokens.core.exception.ContractValidateException;
+import org.litetokens.core.exception.DupTransactionException;
+import org.litetokens.core.exception.ItemNotFoundException;
+import org.litetokens.core.exception.NonCommonBlockException;
+import org.litetokens.core.exception.ReceiptCheckErrException;
+import org.litetokens.core.exception.StoreException;
+import org.litetokens.core.exception.TaposException;
+import org.litetokens.core.exception.TooBigTransactionException;
+import org.litetokens.core.exception.TooBigTransactionResultException;
+import org.litetokens.core.exception.TransactionExpirationException;
+import org.litetokens.core.exception.LitetokensException;
+import org.litetokens.core.exception.UnLinkedBlockException;
+import org.litetokens.core.exception.VMIllegalException;
+import org.litetokens.core.exception.ValidateScheduleException;
+import org.litetokens.core.exception.ValidateSignatureException;
+import org.litetokens.core.net.message.BlockMessage;
+import org.litetokens.core.net.message.MessageTypes;
+import org.litetokens.core.net.message.TransactionMessage;
 
 @Slf4j
 public class NodeDelegateImpl implements NodeDelegate {
@@ -70,9 +70,9 @@ public class NodeDelegateImpl implements NodeDelegate {
       dbManager.preValidateTransactionSign(block);
       dbManager.pushBlock(block);
       if (!syncMode) {
-        List<TransactionCapsule> trx = null;
-        trx = block.getTransactions();
-        return trx.stream()
+        List<TransactionCapsule> xlt = null;
+        xlt = block.getTransactions();
+        return xlt.stream()
             .map(TransactionCapsule::getTransactionId)
             .collect(Collectors.toCollection(LinkedList::new));
       } else {
@@ -111,19 +111,19 @@ public class NodeDelegateImpl implements NodeDelegate {
 
 
   @Override
-  public boolean handleTransaction(TransactionCapsule trx) throws BadTransactionException {
+  public boolean handleTransaction(TransactionCapsule xlt) throws BadTransactionException {
     if (dbManager.getDynamicPropertiesStore().supportVM()) {
-      trx.resetResult();
+      xlt.resetResult();
     }
     logger.debug("handle transaction");
-    if (dbManager.getTransactionIdCache().getIfPresent(trx.getTransactionId()) != null) {
+    if (dbManager.getTransactionIdCache().getIfPresent(xlt.getTransactionId()) != null) {
       logger.warn("This transaction has been processed");
       return false;
     } else {
-      dbManager.getTransactionIdCache().put(trx.getTransactionId(), true);
+      dbManager.getTransactionIdCache().put(xlt.getTransactionId(), true);
     }
     try {
-      dbManager.pushTransaction(trx);
+      dbManager.pushTransaction(xlt);
     } catch (ContractSizeNotEqualToOneException e) {
       logger.info("Contract validate failed" + e.getMessage());
       throw new BadTransactionException();
@@ -209,7 +209,7 @@ public class NodeDelegateImpl implements NodeDelegate {
 
   @Override
   public Deque<BlockId> getBlockChainSummary(BlockId beginBlockId, Deque<BlockId> blockIdsToFetch)
-      throws TronException {
+      throws LitetokensException {
 
     Deque<BlockId> retSummary = new LinkedList<>();
     List<BlockId> blockIds = new ArrayList<>(blockIdsToFetch);
@@ -224,7 +224,7 @@ public class NodeDelegateImpl implements NodeDelegate {
       if (containBlockInMainChain(beginBlockId)) {
         highBlkNum = beginBlockId.getNum();
         if (highBlkNum == 0) {
-          throw new TronException(
+          throw new LitetokensException(
               "This block don't equal my genesis block hash, but it is in my DB, the block id is :"
                   + beginBlockId.getString());
         }
@@ -284,14 +284,14 @@ public class NodeDelegateImpl implements NodeDelegate {
     switch (type) {
       case BLOCK:
         return new BlockMessage(dbManager.getBlockById(hash));
-      case TRX:
+      case XLT:
         TransactionCapsule tx = dbManager.getTransactionStore().get(hash.getBytes());
         if (tx != null) {
           return new TransactionMessage(tx.getData());
         }
         throw new ItemNotFoundException("transaction is not found");
       default:
-        throw new BadItemException("message type not block or trx.");
+        throw new BadItemException("message type not block or xlt.");
     }
   }
 
@@ -344,7 +344,7 @@ public class NodeDelegateImpl implements NodeDelegate {
   public boolean contain(Sha256Hash hash, MessageTypes type) {
     if (type.equals(MessageTypes.BLOCK)) {
       return dbManager.containBlock(hash);
-    } else if (type.equals(MessageTypes.TRX)) {
+    } else if (type.equals(MessageTypes.XLT)) {
       return dbManager.getTransactionStore().has(hash.getBytes());
     }
     return false;

@@ -1,16 +1,16 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
 
 import static java.lang.Long.max;
 
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.core.exception.AccountResourceInsufficientException;
-import org.tron.core.exception.ContractValidateException;
-import org.tron.protos.Protocol.Account.AccountResource;
-import org.tron.protos.Protocol.Transaction.Contract;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.core.exception.AccountResourceInsufficientException;
+import org.litetokens.core.exception.ContractValidateException;
+import org.litetokens.protos.Protocol.Account.AccountResource;
+import org.litetokens.protos.Protocol.Transaction.Contract;
 
 @Slf4j
 public class EnergyProcessor extends ResourceProcessor {
@@ -36,11 +36,11 @@ public class EnergyProcessor extends ResourceProcessor {
   }
 
   @Override
-  public void consume(TransactionCapsule trx,
+  public void consume(TransactionCapsule xlt,
       TransactionTrace trace)
       throws ContractValidateException, AccountResourceInsufficientException {
     List<Contract> contracts =
-        trx.getInstance().getRawData().getContractList();
+        xlt.getInstance().getRawData().getContractList();
 
     for (Contract contract : contracts) {
 
@@ -49,9 +49,9 @@ public class EnergyProcessor extends ResourceProcessor {
 //        continue;
 //      }
       //todo
-//      long energy = trx.getReceipt().getEnergy();
+//      long energy = xlt.getReceipt().getEnergy();
       long energy = 100L;
-      logger.debug("trxId {},energy cost :{}", trx.getTransactionId(), energy);
+      logger.debug("xltId {},energy cost :{}", xlt.getTransactionId(), energy);
       byte[] address = TransactionCapsule.getOwner(contract);
       AccountCapsule accountCapsule = dbManager.getAccountStore().get(address);
       if (accountCapsule == null) {

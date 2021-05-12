@@ -1,4 +1,4 @@
-package org.tron.core.db2.core;
+package org.litetokens.core.db2.core;
 
 import com.google.common.collect.Maps;
 import com.google.common.primitives.Bytes;
@@ -13,16 +13,16 @@ import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.iq80.leveldb.WriteOptions;
-import org.tron.common.storage.leveldb.LevelDbDataSourceImpl;
-import org.tron.common.utils.FileUtil;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.RevokingDatabase;
-import org.tron.core.db.common.WrappedByteArray;
-import org.tron.core.db2.common.DB;
-import org.tron.core.db2.common.IRevokingDB;
-import org.tron.core.db2.common.Key;
-import org.tron.core.db2.common.Value;
-import org.tron.core.exception.RevokingStoreIllegalStateException;
+import org.litetokens.common.storage.leveldb.LevelDbDataSourceImpl;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.RevokingDatabase;
+import org.litetokens.core.db.common.WrappedByteArray;
+import org.litetokens.core.db2.common.DB;
+import org.litetokens.core.db2.common.IRevokingDB;
+import org.litetokens.core.db2.common.Key;
+import org.litetokens.core.db2.common.Value;
+import org.litetokens.core.exception.RevokingStoreIllegalStateException;
 
 @Slf4j
 public class SnapshotManager implements RevokingDatabase {

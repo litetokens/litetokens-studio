@@ -1,4 +1,4 @@
-package org.tron.studio.ui;
+package org.litetokens.studio.ui;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -18,18 +18,18 @@ import org.controlsfx.control.NotificationPane;
 import org.controlsfx.control.Notifications;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.tron.studio.MainApplication;
-import org.tron.studio.ShareData;
-import org.tron.studio.filesystem.SolidityFileUtil;
-import org.tron.studio.solc.CompilationErrorResult;
-import org.tron.studio.solc.CompilationResult;
-import org.tron.studio.solc.SolidityCompiler;
+import org.litetokens.studio.MainApplication;
+import org.litetokens.studio.ShareData;
+import org.litetokens.studio.filesystem.SolidityFileUtil;
+import org.litetokens.studio.solc.CompilationErrorResult;
+import org.litetokens.studio.solc.CompilationResult;
+import org.litetokens.studio.solc.SolidityCompiler;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-import static org.tron.studio.solc.SolidityCompiler.Options.*;
+import static org.litetokens.studio.solc.SolidityCompiler.Options.*;
 
 public class RightTabCompileController implements Initializable {
     static final Logger logger = LoggerFactory.getLogger(RightTabCompileController.class);

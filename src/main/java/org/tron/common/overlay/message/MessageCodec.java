@@ -1,4 +1,4 @@
-package org.tron.common.overlay.message;
+package org.litetokens.common.overlay.message;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -6,10 +6,10 @@ import io.netty.handler.codec.ByteToMessageDecoder;
 import java.util.List;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.tron.common.overlay.server.Channel;
-import org.tron.core.exception.P2pException;
-import org.tron.core.net.message.MessageTypes;
-import org.tron.core.net.message.TronMessageFactory;
+import org.litetokens.common.overlay.server.Channel;
+import org.litetokens.core.exception.P2pException;
+import org.litetokens.core.net.message.MessageTypes;
+import org.litetokens.core.net.message.LitetokensMessageFactory;
 
 @Component
 @Scope("prototype")
@@ -17,7 +17,7 @@ public class MessageCodec extends ByteToMessageDecoder {
 
   private Channel channel;
   private P2pMessageFactory p2pMessageFactory = new P2pMessageFactory();
-  private TronMessageFactory tronMessageFactory = new TronMessageFactory();
+  private LitetokensMessageFactory litetokensMessageFactory = new LitetokensMessageFactory();
 
   @Override
   protected void decode(ChannelHandlerContext ctx, ByteBuf buffer, List<Object> out) throws Exception {
@@ -42,8 +42,8 @@ public class MessageCodec extends ByteToMessageDecoder {
     if (MessageTypes.inP2pRange(type)) {
       return p2pMessageFactory.create(encoded);
     }
-    if (MessageTypes.inTronRange(type)) {
-      return tronMessageFactory.create(encoded);
+    if (MessageTypes.inLitetokensRange(type)) {
+      return litetokensMessageFactory.create(encoded);
     }
     throw new P2pException(P2pException.TypeEnum.NO_SUCH_MESSAGE, "type=" + encoded[0]);
   }

@@ -1,9 +1,9 @@
-package org.tron.core.net.node;
+package org.litetokens.core.net.node;
 
-import static org.tron.core.config.Parameter.ChainConstant.BLOCK_PRODUCED_INTERVAL;
-import static org.tron.core.config.Parameter.NetConstants.MAX_TRX_PER_PEER;
-import static org.tron.core.config.Parameter.NetConstants.MSG_CACHE_DURATION_IN_BLOCKS;
-import static org.tron.core.config.Parameter.NodeConstant.MAX_BLOCKS_SYNC_FROM_ONE_PEER;
+import static org.litetokens.core.config.Parameter.ChainConstant.BLOCK_PRODUCED_INTERVAL;
+import static org.litetokens.core.config.Parameter.NetConstants.MAX_XLT_PER_PEER;
+import static org.litetokens.core.config.Parameter.NetConstants.MSG_CACHE_DURATION_IN_BLOCKS;
+import static org.litetokens.core.config.Parameter.NodeConstant.MAX_BLOCKS_SYNC_FROM_ONE_PEER;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
@@ -35,44 +35,44 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tron.common.overlay.discover.node.statistics.MessageCount;
-import org.tron.common.overlay.message.Message;
-import org.tron.common.overlay.server.Channel.TronState;
-import org.tron.common.overlay.server.SyncPool;
-import org.tron.common.utils.ExecutorLoop;
-import org.tron.common.utils.Sha256Hash;
-import org.tron.common.utils.SlidingWindowCounter;
-import org.tron.common.utils.Time;
-import org.tron.core.capsule.BlockCapsule;
-import org.tron.core.capsule.BlockCapsule.BlockId;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.core.config.Parameter.ChainConstant;
-import org.tron.core.config.Parameter.NetConstants;
-import org.tron.core.config.Parameter.NodeConstant;
-import org.tron.core.config.args.Args;
-import org.tron.core.exception.BadBlockException;
-import org.tron.core.exception.BadTransactionException;
-import org.tron.core.exception.NonCommonBlockException;
-import org.tron.core.exception.StoreException;
-import org.tron.core.exception.TraitorPeerException;
-import org.tron.core.exception.TronException;
-import org.tron.core.exception.UnLinkedBlockException;
-import org.tron.core.net.message.BlockMessage;
-import org.tron.core.net.message.ChainInventoryMessage;
-import org.tron.core.net.message.FetchInvDataMessage;
-import org.tron.core.net.message.InventoryMessage;
-import org.tron.core.net.message.ItemNotFound;
-import org.tron.core.net.message.MessageTypes;
-import org.tron.core.net.message.SyncBlockChainMessage;
-import org.tron.core.net.message.TransactionMessage;
-import org.tron.core.net.message.TransactionsMessage;
-import org.tron.core.net.message.TronMessage;
-import org.tron.core.net.peer.PeerConnection;
-import org.tron.core.net.peer.PeerConnectionDelegate;
-import org.tron.protos.Protocol;
-import org.tron.protos.Protocol.Inventory.InventoryType;
-import org.tron.protos.Protocol.ReasonCode;
-import org.tron.protos.Protocol.Transaction;
+import org.litetokens.common.overlay.discover.node.statistics.MessageCount;
+import org.litetokens.common.overlay.message.Message;
+import org.litetokens.common.overlay.server.Channel.LitetokensState;
+import org.litetokens.common.overlay.server.SyncPool;
+import org.litetokens.common.utils.ExecutorLoop;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.common.utils.SlidingWindowCounter;
+import org.litetokens.common.utils.Time;
+import org.litetokens.core.capsule.BlockCapsule;
+import org.litetokens.core.capsule.BlockCapsule.BlockId;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.core.config.Parameter.ChainConstant;
+import org.litetokens.core.config.Parameter.NetConstants;
+import org.litetokens.core.config.Parameter.NodeConstant;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.exception.BadBlockException;
+import org.litetokens.core.exception.BadTransactionException;
+import org.litetokens.core.exception.NonCommonBlockException;
+import org.litetokens.core.exception.StoreException;
+import org.litetokens.core.exception.TraitorPeerException;
+import org.litetokens.core.exception.LitetokensException;
+import org.litetokens.core.exception.UnLinkedBlockException;
+import org.litetokens.core.net.message.BlockMessage;
+import org.litetokens.core.net.message.ChainInventoryMessage;
+import org.litetokens.core.net.message.FetchInvDataMessage;
+import org.litetokens.core.net.message.InventoryMessage;
+import org.litetokens.core.net.message.ItemNotFound;
+import org.litetokens.core.net.message.MessageTypes;
+import org.litetokens.core.net.message.SyncBlockChainMessage;
+import org.litetokens.core.net.message.TransactionMessage;
+import org.litetokens.core.net.message.TransactionsMessage;
+import org.litetokens.core.net.message.LitetokensMessage;
+import org.litetokens.core.net.peer.PeerConnection;
+import org.litetokens.core.net.peer.PeerConnectionDelegate;
+import org.litetokens.protos.Protocol;
+import org.litetokens.protos.Protocol.Inventory.InventoryType;
+import org.litetokens.protos.Protocol.ReasonCode;
+import org.litetokens.protos.Protocol.Transaction;
 
 @Slf4j
 @Component
@@ -81,9 +81,9 @@ public class NodeImpl extends PeerConnectionDelegate implements Node {
   @Autowired
   private SyncPool pool;
 
-  private MessageCount trxCount = new MessageCount();
+  private MessageCount xltCount = new MessageCount();
 
-  private Cache<Sha256Hash, TransactionMessage> TrxCache = CacheBuilder.newBuilder()
+  private Cache<Sha256Hash, TransactionMessage> XltCache = CacheBuilder.newBuilder()
       .maximumSize(50_000).expireAfterWrite(1, TimeUnit.HOURS).initialCapacity(50_000)
       .recordStats().build();
 
@@ -94,9 +94,9 @@ public class NodeImpl extends PeerConnectionDelegate implements Node {
   private SlidingWindowCounter fetchWaterLine =
       new SlidingWindowCounter(BLOCK_PRODUCED_INTERVAL * MSG_CACHE_DURATION_IN_BLOCKS / 100);
 
-  private int maxTrxsSize = 1_000_000;
+  private int maxXltsSize = 1_000_000;
 
-  private int maxTrxsCnt = 100;
+  private int maxXltsCnt = 100;
 
   @Getter
   class PriorItem implements java.lang.Comparable<PriorItem> {
@@ -194,10 +194,10 @@ public class NodeImpl extends PeerConnectionDelegate implements Node {
 
   private ScheduledExecutorService logExecutor = Executors.newSingleThreadScheduledExecutor();
 
-  private ExecutorService trxsHandlePool = Executors
+  private ExecutorService xltsHandlePool = Executors
       .newFixedThreadPool(Args.getInstance().getValidateSignThreadNum(),
           new ThreadFactoryBuilder()
-              .setNameFormat("TrxsHandlePool-%d").build());
+              .setNameFormat("XltsHandlePool-%d").build());
 
   private Queue<BlockId> freshBlockId = new ConcurrentLinkedQueue<BlockId>() {
     @Override
@@ -274,15 +274,15 @@ public class NodeImpl extends PeerConnectionDelegate implements Node {
   private volatile boolean isFetchSyncActive = false;
 
   @Override
-  public void onMessage(PeerConnection peer, TronMessage msg) {
+  public void onMessage(PeerConnection peer, LitetokensMessage msg) {
     switch (msg.getType()) {
       case BLOCK:
         onHandleBlockMessage(peer, (BlockMessage) msg);
         break;
-      case TRX:
+      case XLT:
         onHandleTransactionMessage(peer, (TransactionMessage) msg);
         break;
-      case TRXS:
+      case XLTS:
         onHandleTransactionsMessage(peer, (TransactionsMessage) msg);
         break;
       case SYNC_BLOCK_CHAIN:
@@ -326,8 +326,8 @@ public class NodeImpl extends PeerConnectionDelegate implements Node {
       BlockCache.put(msg.getMessageId(), (BlockMessage) msg);
       type = InventoryType.BLOCK;
     } else if (msg instanceof TransactionMessage) {
-      TrxCache.put(msg.getMessageId(), (TransactionMessage) msg);
-      type = InventoryType.TRX;
+      XltCache.put(msg.getMessageId(), (TransactionMessage) msg);
+      type = InventoryType.XLT;
     } else {
       return;
     }
@@ -341,7 +341,7 @@ public class NodeImpl extends PeerConnectionDelegate implements Node {
     pool.init(this);
     isAdvertiseActive = true;
     isFetchActive = true;
-    activeTronPump();
+    activeLitetokensPump();
   }
 
   @Override
@@ -349,7 +349,7 @@ public class NodeImpl extends PeerConnectionDelegate implements Node {
     getActivePeer().forEach(peer -> disconnectPeer(peer, ReasonCode.REQUESTED));
   }
 
-  private void activeTronPump() {
+  private void activeLitetokensPump() {
     loopAdvertiseInv = new ExecutorLoop<>(2, 10, b -> {
       for (PeerConnection peer : getActivePeer()) {
         if (!peer.isNeedSyncFromUs()) {
@@ -470,7 +470,7 @@ public class NodeImpl extends PeerConnectionDelegate implements Node {
       }
       filterActivePeer.stream()
           .filter(peer -> peer.getAdvObjSpreadToUs().containsKey(hash)
-              && sendPackage.getSize(peer) < MAX_TRX_PER_PEER)
+              && sendPackage.getSize(peer) < MAX_XLT_PER_PEER)
           .sorted(Comparator.comparingInt(peer -> sendPackage.getSize(peer)))
           .findFirst().ifPresent(peer -> {
         sendPackage.add(idToFetch, peer);
@@ -498,8 +498,8 @@ public class NodeImpl extends PeerConnectionDelegate implements Node {
       advObjToSpread.clear();
     }
     for (InventoryType type : spread.values()) {
-      if (type == InventoryType.TRX) {
-        trxCount.add();
+      if (type == InventoryType.XLT) {
+        xltCount.add();
       }
     }
     getActivePeer().stream()
@@ -618,7 +618,7 @@ public class NodeImpl extends PeerConnectionDelegate implements Node {
 
   private void onHandleInventoryMessage(PeerConnection peer, InventoryMessage msg) {
     for (Sha256Hash id : msg.getHashList()) {
-      if (msg.getInventoryType().equals(InventoryType.TRX) && TrxCache.getIfPresent(id) != null) {
+      if (msg.getInventoryType().equals(InventoryType.XLT) && XltCache.getIfPresent(id) != null) {
         logger.info("{} {} from peer {} Already exist.", msg.getInventoryType(), id,
             peer.getNode().getHost());
         continue;
@@ -638,8 +638,8 @@ public class NodeImpl extends PeerConnectionDelegate implements Node {
           && !peer.isNeedSyncFromPeer()
           && !peer.isNeedSyncFromUs()) {
 
-        //avoid TRX flood attack here.
-        if (msg.getInventoryType().equals(InventoryType.TRX)
+        //avoid XLT flood attack here.
+        if (msg.getInventoryType().equals(InventoryType.XLT)
             && (peer.isAdvInvFull() || isFlooded())) {
           logger.warn("A peer is flooding us, stop handle inv, the peer is: " + peer);
           return;
@@ -649,7 +649,7 @@ public class NodeImpl extends PeerConnectionDelegate implements Node {
         if (!requested[0]) {
           PriorItem targetPriorItem = this.advObjToFetch.get(id);
           if (targetPriorItem != null) {
-            //another peer tell this trx to us, refresh its time.
+            //another peer tell this xlt to us, refresh its time.
             targetPriorItem.refreshTime();
           } else {
             fetchWaterLine.increase();
@@ -664,7 +664,7 @@ public class NodeImpl extends PeerConnectionDelegate implements Node {
   private boolean isFlooded() {
     return fetchWaterLine.totalCount()
         > BLOCK_PRODUCED_INTERVAL
-        * Args.getInstance().getNetMaxTrxPerSecond()
+        * Args.getInstance().getNetMaxXltPerSecond()
         * MSG_CACHE_DURATION_IN_BLOCKS
         / 1000;
   }
@@ -722,11 +722,11 @@ public class NodeImpl extends PeerConnectionDelegate implements Node {
     synchronized (freshBlockId) {
       if (!freshBlockId.contains(block.getBlockId())) {
         try {
-          LinkedList<Sha256Hash> trxIds = null;
-          trxIds = del.handleBlock(block, false);
+          LinkedList<Sha256Hash> xltIds = null;
+          xltIds = del.handleBlock(block, false);
           freshBlockId.offer(block.getBlockId());
 
-          trxIds.forEach(trxId -> advObjToFetch.remove(trxId));
+          xltIds.forEach(xltId -> advObjToFetch.remove(xltId));
 
           getActivePeer().stream()
               .filter(p -> p.getAdvObjSpreadToUs().containsKey(block.getBlockId()))
@@ -809,30 +809,30 @@ public class NodeImpl extends PeerConnectionDelegate implements Node {
     });
   }
 
-  synchronized boolean isTrxExist(TransactionMessage trxMsg) {
-    if (TrxCache.getIfPresent(trxMsg.getMessageId()) != null) {
+  synchronized boolean isXltExist(TransactionMessage xltMsg) {
+    if (XltCache.getIfPresent(xltMsg.getMessageId()) != null) {
       return true;
     }
-    TrxCache.put(trxMsg.getMessageId(), trxMsg);
+    XltCache.put(xltMsg.getMessageId(), xltMsg);
     return false;
   }
 
-  private void onHandleTransactionMessage(PeerConnection peer, TransactionMessage trxMsg) {
+  private void onHandleTransactionMessage(PeerConnection peer, TransactionMessage xltMsg) {
     try {
-      Item item = new Item(trxMsg.getMessageId(), InventoryType.TRX);
+      Item item = new Item(xltMsg.getMessageId(), InventoryType.XLT);
       if (!peer.getAdvObjWeRequested().containsKey(item)) {
         throw new TraitorPeerException("We don't send fetch request to" + peer);
       }
       peer.getAdvObjWeRequested().remove(item);
-      if (isTrxExist(trxMsg)) {
-        logger.info("Trx {} from Peer {} already processed.", trxMsg.getMessageId(),
+      if (isXltExist(xltMsg)) {
+        logger.info("Xlt {} from Peer {} already processed.", xltMsg.getMessageId(),
             peer.getNode().getHost());
         return;
       }
-      TransactionCapsule transactionCapsule = trxMsg.getTransactionCapsule();
+      TransactionCapsule transactionCapsule = xltMsg.getTransactionCapsule();
 
       if (del.handleTransaction(transactionCapsule)) {
-        broadcast(trxMsg);
+        broadcast(xltMsg);
       }
     } catch (TraitorPeerException e) {
       logger.error(e.getMessage());
@@ -844,7 +844,7 @@ public class NodeImpl extends PeerConnectionDelegate implements Node {
 
   private void onHandleTransactionsMessage(PeerConnection peer, TransactionsMessage msg) {
     for (Transaction trans : msg.getTransactions().getTransactionsList()) {
-      trxsHandlePool
+      xltsHandlePool
           .submit(() -> onHandleTransactionMessage(peer, new TransactionMessage(trans)));
     }
   }
@@ -861,7 +861,7 @@ public class NodeImpl extends PeerConnectionDelegate implements Node {
   }
 
   private void onHandleSyncBlockChainMessage(PeerConnection peer, SyncBlockChainMessage syncMsg) {
-    peer.setTronState(TronState.SYNCING);
+    peer.setLitetokensState(LitetokensState.SYNCING);
     BlockId headBlockId = del.getHeadBlockId();
     long remainNum = 0;
     LinkedList<BlockId> blockIds = new LinkedList<>();
@@ -914,19 +914,19 @@ public class NodeImpl extends PeerConnectionDelegate implements Node {
 
   private boolean checkFetchInvDataMsg(PeerConnection peer, FetchInvDataMessage fetchInvDataMsg) {
     MessageTypes type = fetchInvDataMsg.getInvMessageType();
-    if (type == MessageTypes.TRX) {
-      int elementCount = peer.getNodeStatistics().messageStatistics.tronInTrxFetchInvDataElement
+    if (type == MessageTypes.XLT) {
+      int elementCount = peer.getNodeStatistics().messageStatistics.litetokensInXltFetchInvDataElement
           .getCount(10);
-      int maxCount = trxCount.getCount(60);
+      int maxCount = xltCount.getCount(60);
       if (elementCount > maxCount) {
         logger.warn(
-            "Check FetchInvDataMsg failed: Peer {} request count {} in 10s gt trx count {} generate in 60s",
+            "Check FetchInvDataMsg failed: Peer {} request count {} in 10s gt xlt count {} generate in 60s",
             peer.getInetAddress(), elementCount, maxCount);
         return false;
       }
       for (Sha256Hash hash : fetchInvDataMsg.getHashList()) {
         if (!peer.getAdvObjWeSpread().containsKey(hash)) {
-          logger.warn("Check FetchInvDataMsg failed: Peer {} get trx {} we not spread.",
+          logger.warn("Check FetchInvDataMsg failed: Peer {} get xlt {} we not spread.",
               peer.getInetAddress(), hash);
           return false;
         }
@@ -940,9 +940,9 @@ public class NodeImpl extends PeerConnectionDelegate implements Node {
         }
       }
       if (isAdv) {
-        MessageCount tronOutAdvBlock = peer.getNodeStatistics().messageStatistics.tronOutAdvBlock;
-        tronOutAdvBlock.add(fetchInvDataMsg.getHashList().size());
-        int outBlockCountIn1min = tronOutAdvBlock.getCount(60);
+        MessageCount litetokensOutAdvBlock = peer.getNodeStatistics().messageStatistics.litetokensOutAdvBlock;
+        litetokensOutAdvBlock.add(fetchInvDataMsg.getHashList().size());
+        int outBlockCountIn1min = litetokensOutAdvBlock.getCount(60);
         int producedBlockIn2min = 120_000 / ChainConstant.BLOCK_PRODUCED_INTERVAL;
         if (outBlockCountIn1min > producedBlockIn2min) {
           logger
@@ -997,7 +997,7 @@ public class NodeImpl extends PeerConnectionDelegate implements Node {
       if (type == MessageTypes.BLOCK) {
         msg = BlockCache.getIfPresent(hash);
       } else {
-        msg = TrxCache.getIfPresent(hash);
+        msg = XltCache.getIfPresent(hash);
       }
 
       if (msg == null) {
@@ -1018,7 +1018,7 @@ public class NodeImpl extends PeerConnectionDelegate implements Node {
         transactions.add(((TransactionMessage) msg).getTransactionCapsule().getInstance());
         size += ((TransactionMessage) msg).getTransactionCapsule().getInstance()
             .getSerializedSize();
-        if (transactions.size() % maxTrxsCnt == 0 || size > maxTrxsSize) {
+        if (transactions.size() % maxXltsCnt == 0 || size > maxXltsSize) {
           peer.sendMessage(new TransactionsMessage(transactions));
           transactions = Lists.newArrayList();
           size = 0;
@@ -1277,7 +1277,7 @@ public class NodeImpl extends PeerConnectionDelegate implements Node {
       peer.setSyncChainRequested(
           new Pair<>(chainSummary, System.currentTimeMillis()));
       peer.sendMessage(new SyncBlockChainMessage((LinkedList<BlockId>) chainSummary));
-    } catch (TronException e) {
+    } catch (LitetokensException e) {
       logger.error("Peer {} sync next batch chainIds failed, error: {}", peer.getNode().getHost(),
           e.getMessage());
       disconnectPeer(peer, ReasonCode.FORKED);
@@ -1287,10 +1287,10 @@ public class NodeImpl extends PeerConnectionDelegate implements Node {
   @Override
   public void onConnectPeer(PeerConnection peer) {
     if (peer.getHelloMessage().getHeadBlockId().getNum() > del.getHeadBlockId().getNum()) {
-      peer.setTronState(TronState.SYNCING);
+      peer.setLitetokensState(LitetokensState.SYNCING);
       startSyncWithPeer(peer);
     } else {
-      peer.setTronState(TronState.SYNC_COMPLETED);
+      peer.setLitetokensState(LitetokensState.SYNC_COMPLETED);
     }
   }
 
@@ -1319,7 +1319,7 @@ public class NodeImpl extends PeerConnectionDelegate implements Node {
 
   public void shutDown() {
     logExecutor.shutdown();
-    trxsHandlePool.shutdown();
+    xltsHandlePool.shutdown();
     disconnectInactiveExecutor.shutdown();
     cleanInventoryExecutor.shutdown();
     broadPool.shutdown();

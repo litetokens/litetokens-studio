@@ -1,4 +1,4 @@
-package org.tron.core.witness;
+package org.litetokens.core.witness;
 
 import com.google.common.collect.Maps;
 import com.google.protobuf.ByteString;
@@ -16,20 +16,20 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.joda.time.DateTime;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.StringUtil;
-import org.tron.common.utils.Time;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.capsule.BlockCapsule;
-import org.tron.core.capsule.VotesCapsule;
-import org.tron.core.capsule.WitnessCapsule;
-import org.tron.core.config.Parameter.ChainConstant;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.AccountStore;
-import org.tron.core.db.Manager;
-import org.tron.core.db.VotesStore;
-import org.tron.core.db.WitnessStore;
-import org.tron.core.exception.HeaderNotFound;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.StringUtil;
+import org.litetokens.common.utils.Time;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.capsule.BlockCapsule;
+import org.litetokens.core.capsule.VotesCapsule;
+import org.litetokens.core.capsule.WitnessCapsule;
+import org.litetokens.core.config.Parameter.ChainConstant;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.AccountStore;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.db.VotesStore;
+import org.litetokens.core.db.WitnessStore;
+import org.litetokens.core.exception.HeaderNotFound;
 
 @Slf4j
 public class WitnessController {

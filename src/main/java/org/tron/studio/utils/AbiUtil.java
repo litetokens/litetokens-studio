@@ -1,11 +1,11 @@
-package org.tron.studio.utils;
+package org.litetokens.studio.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.spongycastle.util.encoders.Hex;
-import org.tron.common.crypto.Hash;
-import org.tron.common.runtime.vm.DataWord;
-import org.tron.studio.walletserver.WalletClient;
+import org.litetokens.common.crypto.Hash;
+import org.litetokens.common.runtime.vm.DataWord;
+import org.litetokens.studio.walletserver.WalletClient;
 
 import java.io.IOException;
 import java.security.InvalidParameterException;

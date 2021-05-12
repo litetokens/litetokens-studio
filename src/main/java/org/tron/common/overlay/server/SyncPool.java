@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.overlay.server;
+package org.litetokens.common.overlay.server;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
@@ -37,14 +37,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-import org.tron.common.overlay.client.PeerClient;
-import org.tron.common.overlay.discover.node.Node;
-import org.tron.common.overlay.discover.node.NodeHandler;
-import org.tron.common.overlay.discover.node.NodeManager;
-import org.tron.common.overlay.discover.node.statistics.NodeStatistics;
-import org.tron.core.config.args.Args;
-import org.tron.core.net.peer.PeerConnection;
-import org.tron.core.net.peer.PeerConnectionDelegate;
+import org.litetokens.common.overlay.client.PeerClient;
+import org.litetokens.common.overlay.discover.node.Node;
+import org.litetokens.common.overlay.discover.node.NodeHandler;
+import org.litetokens.common.overlay.discover.node.NodeManager;
+import org.litetokens.common.overlay.discover.node.statistics.NodeStatistics;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.net.peer.PeerConnection;
+import org.litetokens.core.net.peer.PeerConnectionDelegate;
 
 @Component
 public class SyncPool {

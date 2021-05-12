@@ -1,7 +1,7 @@
-package org.tron.core.db.common.iterator;
+package org.litetokens.core.db.common.iterator;
 
-import org.tron.core.capsule.BlockCapsule;
-import org.tron.core.exception.BadItemException;
+import org.litetokens.core.capsule.BlockCapsule;
+import org.litetokens.core.exception.BadItemException;
 
 import java.util.Iterator;
 import java.util.Map.Entry;

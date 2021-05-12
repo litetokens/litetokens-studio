@@ -1,4 +1,4 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
 import com.google.protobuf.ByteString;
 import java.util.Arrays;
@@ -9,16 +9,16 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.Sha256Hash;
-import org.tron.core.capsule.BytesCapsule;
-import org.tron.core.config.Parameter;
-import org.tron.core.config.Parameter.ChainConstant;
-import org.tron.core.config.args.Args;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.core.capsule.BytesCapsule;
+import org.litetokens.core.config.Parameter;
+import org.litetokens.core.config.Parameter.ChainConstant;
+import org.litetokens.core.config.args.Args;
 
 @Slf4j
 @Component
-public class DynamicPropertiesStore extends TronStoreWithRevoking<BytesCapsule> {
+public class DynamicPropertiesStore extends LitetokensStoreWithRevoking<BytesCapsule> {
 
   private static final byte[] LATEST_BLOCK_HEADER_TIMESTAMP = "latest_block_header_timestamp"
       .getBytes();
@@ -311,7 +311,7 @@ public class DynamicPropertiesStore extends TronStoreWithRevoking<BytesCapsule> 
     try {
       this.getCreateAccountFee();
     } catch (IllegalArgumentException e) {
-      this.saveCreateAccountFee(100_000L); // 0.1TRX
+      this.saveCreateAccountFee(100_000L); // 0.1XLT
     }
 
     try {
@@ -880,9 +880,9 @@ public class DynamicPropertiesStore extends TronStoreWithRevoking<BytesCapsule> 
             () -> new IllegalArgumentException("not found TOTAL_CREATE_WITNESS_COST"));
   }
 
-  public void saveTotalStoragePool(long trx) {
+  public void saveTotalStoragePool(long xlt) {
     this.put(TOTAL_STORAGE_POOL,
-        new BytesCapsule(ByteArray.fromLong(trx)));
+        new BytesCapsule(ByteArray.fromLong(xlt)));
   }
 
   public long getTotalStoragePool() {
@@ -893,9 +893,9 @@ public class DynamicPropertiesStore extends TronStoreWithRevoking<BytesCapsule> 
             () -> new IllegalArgumentException("not found TOTAL_STORAGE_POOL"));
   }
 
-  public void saveTotalStorageTax(long trx) {
+  public void saveTotalStorageTax(long xlt) {
     this.put(TOTAL_STORAGE_TAX,
-        new BytesCapsule(ByteArray.fromLong(trx)));
+        new BytesCapsule(ByteArray.fromLong(xlt)));
   }
 
   public long getTotalStorageTax() {
@@ -1160,14 +1160,14 @@ public class DynamicPropertiesStore extends TronStoreWithRevoking<BytesCapsule> 
     );
   }
 
-  //The unit is trx
+  //The unit is xlt
   public void addTotalNetWeight(long amount) {
     long totalNetWeight = getTotalNetWeight();
     totalNetWeight += amount;
     saveTotalNetWeight( totalNetWeight );
   }
 
-  //The unit is trx
+  //The unit is xlt
   public void addTotalEnergyWeight(long amount) {
     long totalEnergyWeight = getTotalEnergyWeight();
     totalEnergyWeight += amount;

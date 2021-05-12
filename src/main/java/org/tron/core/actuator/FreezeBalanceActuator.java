@@ -1,20 +1,20 @@
-package org.tron.core.actuator;
+package org.litetokens.core.actuator;
 
 import com.google.protobuf.Any;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import lombok.extern.slf4j.Slf4j;
-import org.tron.common.utils.StringUtil;
-import org.tron.core.Wallet;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.capsule.TransactionResultCapsule;
-import org.tron.core.db.Manager;
-import org.tron.core.exception.ContractExeException;
-import org.tron.core.exception.ContractValidateException;
-import org.tron.protos.Contract.FreezeBalanceContract;
-import org.tron.protos.Protocol.Account.AccountResource;
-import org.tron.protos.Protocol.Account.Frozen;
-import org.tron.protos.Protocol.Transaction.Result.code;
+import org.litetokens.common.utils.StringUtil;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.capsule.TransactionResultCapsule;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.exception.ContractExeException;
+import org.litetokens.core.exception.ContractValidateException;
+import org.litetokens.protos.Contract.FreezeBalanceContract;
+import org.litetokens.protos.Protocol.Account.AccountResource;
+import org.litetokens.protos.Protocol.Account.Frozen;
+import org.litetokens.protos.Protocol.Transaction.Result.code;
 
 @Slf4j
 public class FreezeBalanceActuator extends AbstractActuator {
@@ -141,7 +141,7 @@ public class FreezeBalanceActuator extends AbstractActuator {
       throw new ContractValidateException("frozenBalance must be positive");
     }
     if (frozenBalance < 1_000_000L) {
-      throw new ContractValidateException("frozenBalance must be more than 1TRX");
+      throw new ContractValidateException("frozenBalance must be more than 1XLT");
     }
 
     int frozenCount = accountCapsule.getFrozenCount();

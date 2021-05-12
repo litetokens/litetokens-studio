@@ -1,4 +1,4 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
 import java.util.List;
 import java.util.Map.Entry;
@@ -10,11 +10,11 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.tron.core.capsule.WitnessCapsule;
+import org.litetokens.core.capsule.WitnessCapsule;
 
 @Slf4j
 @Component
-public class WitnessStore extends TronStoreWithRevoking<WitnessCapsule> {
+public class WitnessStore extends LitetokensStoreWithRevoking<WitnessCapsule> {
 
   @Autowired
   protected WitnessStore(@Value("witness") String dbName) {

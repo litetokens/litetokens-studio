@@ -1,11 +1,11 @@
-package org.tron.common.runtime.vm;
+package org.litetokens.common.runtime.vm;
 
-import static org.tron.common.crypto.Hash.sha3;
-import static org.tron.common.runtime.utils.MUtil.convertToTronAddress;
-import static org.tron.common.runtime.vm.OpCode.CALL;
-import static org.tron.common.runtime.vm.OpCode.PUSH1;
-import static org.tron.common.runtime.vm.OpCode.REVERT;
-import static org.tron.common.utils.ByteUtil.EMPTY_BYTE_ARRAY;
+import static org.litetokens.common.crypto.Hash.sha3;
+import static org.litetokens.common.runtime.utils.MUtil.convertToLitetokensAddress;
+import static org.litetokens.common.runtime.vm.OpCode.CALL;
+import static org.litetokens.common.runtime.vm.OpCode.PUSH1;
+import static org.litetokens.common.runtime.vm.OpCode.REVERT;
+import static org.litetokens.common.utils.ByteUtil.EMPTY_BYTE_ARRAY;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -13,12 +13,12 @@ import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.spongycastle.util.encoders.Hex;
 import org.springframework.util.StringUtils;
-import org.tron.common.runtime.config.VMConfig;
-import org.tron.common.runtime.vm.program.Program;
-import org.tron.common.runtime.vm.program.Program.JVMStackOverFlowException;
-import org.tron.common.runtime.vm.program.Program.OutOfEnergyException;
-import org.tron.common.runtime.vm.program.Program.OutOfResourceException;
-import org.tron.common.runtime.vm.program.Stack;
+import org.litetokens.common.runtime.config.VMConfig;
+import org.litetokens.common.runtime.vm.program.Program;
+import org.litetokens.common.runtime.vm.program.Program.JVMStackOverFlowException;
+import org.litetokens.common.runtime.vm.program.Program.OutOfEnergyException;
+import org.litetokens.common.runtime.vm.program.Program.OutOfResourceException;
+import org.litetokens.common.runtime.vm.program.Stack;
 
 @Slf4j(topic = "VM")
 public class VM {
@@ -1302,7 +1302,7 @@ public class VM {
   }
 
   private boolean isDeadAccount(Program program, DataWord address) {
-    return program.getContractState().getAccount(convertToTronAddress(address.getLast20Bytes()))
+    return program.getContractState().getAccount(convertToLitetokensAddress(address.getLast20Bytes()))
         == null;
   }
 

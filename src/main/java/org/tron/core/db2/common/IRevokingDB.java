@@ -1,8 +1,8 @@
-package org.tron.core.db2.common;
+package org.litetokens.core.db2.common;
 
 import java.util.Map;
 import java.util.Set;
-import org.tron.core.exception.ItemNotFoundException;
+import org.litetokens.core.exception.ItemNotFoundException;
 
 public interface IRevokingDB extends Iterable<Map.Entry<byte[], byte[]>> {
   void put(byte[] key, byte[] newValue);

@@ -1,11 +1,11 @@
-package org.tron.core.net.node;
+package org.litetokens.core.net.node;
 
-import static org.tron.core.net.message.MessageTypes.P2P_DISCONNECT;
-import static org.tron.core.net.message.MessageTypes.P2P_HELLO;
-import static org.tron.protos.Protocol.ReasonCode.DUPLICATE_PEER;
-import static org.tron.protos.Protocol.ReasonCode.FORKED;
-import static org.tron.protos.Protocol.ReasonCode.INCOMPATIBLE_CHAIN;
-import static org.tron.protos.Protocol.ReasonCode.INCOMPATIBLE_VERSION;
+import static org.litetokens.core.net.message.MessageTypes.P2P_DISCONNECT;
+import static org.litetokens.core.net.message.MessageTypes.P2P_HELLO;
+import static org.litetokens.protos.Protocol.ReasonCode.DUPLICATE_PEER;
+import static org.litetokens.protos.Protocol.ReasonCode.FORKED;
+import static org.litetokens.protos.Protocol.ReasonCode.INCOMPATIBLE_CHAIN;
+import static org.litetokens.protos.Protocol.ReasonCode.INCOMPATIBLE_VERSION;
 
 import com.google.common.cache.CacheBuilder;
 import io.netty.buffer.ByteBuf;
@@ -27,20 +27,20 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
-import org.tron.common.overlay.discover.node.Node;
-import org.tron.common.overlay.message.DisconnectMessage;
-import org.tron.common.overlay.message.HelloMessage;
-import org.tron.common.overlay.message.Message;
-import org.tron.common.overlay.message.P2pMessage;
-import org.tron.common.overlay.message.P2pMessageFactory;
-import org.tron.common.utils.FileUtil;
-import org.tron.common.utils.ReflectUtils;
-import org.tron.core.capsule.BlockCapsule;
-import org.tron.core.capsule.BlockCapsule.BlockId;
-import org.tron.core.config.args.Args;
-import org.tron.core.net.message.BlockMessage;
-import org.tron.core.net.peer.PeerConnection;
-import org.tron.protos.Protocol.Block;
+import org.litetokens.common.overlay.discover.node.Node;
+import org.litetokens.common.overlay.message.DisconnectMessage;
+import org.litetokens.common.overlay.message.HelloMessage;
+import org.litetokens.common.overlay.message.Message;
+import org.litetokens.common.overlay.message.P2pMessage;
+import org.litetokens.common.overlay.message.P2pMessageFactory;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.common.utils.ReflectUtils;
+import org.litetokens.core.capsule.BlockCapsule;
+import org.litetokens.core.capsule.BlockCapsule.BlockId;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.net.message.BlockMessage;
+import org.litetokens.core.net.peer.PeerConnection;
+import org.litetokens.protos.Protocol.Block;
 
 @Slf4j
 public class TcpNetTest extends BaseNetTest {

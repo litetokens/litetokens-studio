@@ -15,10 +15,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.runtime.vm.trace;
+package org.litetokens.common.runtime.vm.trace;
 
 import java.math.BigInteger;
-import org.tron.common.runtime.vm.OpCode;
+import org.litetokens.common.runtime.vm.OpCode;
 
 public class Op {
 

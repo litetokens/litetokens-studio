@@ -1,7 +1,7 @@
-package org.tron.abi;
+package org.litetokens.abi;
 
 import java.util.List;
-import org.tron.abi.datatypes.Type;
+import org.litetokens.abi.datatypes.Type;
 
 /**
  * Persisted solidity event parameters.

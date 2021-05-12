@@ -1,24 +1,24 @@
-package org.tron.core.net.message;
+package org.litetokens.core.net.message;
 
-import org.tron.common.utils.Sha256Hash;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.core.exception.BadItemException;
-import org.tron.protos.Protocol.Transaction;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.core.exception.BadItemException;
+import org.litetokens.protos.Protocol.Transaction;
 
-public class TransactionMessage extends TronMessage {
+public class TransactionMessage extends LitetokensMessage {
 
   private TransactionCapsule transactionCapsule;
 
   public TransactionMessage(byte[] data) throws BadItemException {
     this.transactionCapsule = new TransactionCapsule(data);
     this.data = data;
-    this.type = MessageTypes.TRX.asByte();
+    this.type = MessageTypes.XLT.asByte();
   }
 
-  public TransactionMessage(Transaction trx) {
-    this.transactionCapsule = new TransactionCapsule(trx);
-    this.type = MessageTypes.TRX.asByte();
-    this.data = trx.toByteArray();
+  public TransactionMessage(Transaction xlt) {
+    this.transactionCapsule = new TransactionCapsule(xlt);
+    this.type = MessageTypes.XLT.asByte();
+    this.data = xlt.toByteArray();
   }
 
   @Override

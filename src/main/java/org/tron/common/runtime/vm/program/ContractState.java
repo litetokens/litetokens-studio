@@ -15,26 +15,26 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.runtime.vm.program;
+package org.litetokens.common.runtime.vm.program;
 
-import org.tron.common.runtime.vm.DataWord;
-import org.tron.common.runtime.vm.program.invoke.ProgramInvoke;
-import org.tron.common.runtime.vm.program.listener.ProgramListener;
-import org.tron.common.runtime.vm.program.listener.ProgramListenerAware;
-import org.tron.common.storage.Deposit;
-import org.tron.common.storage.Key;
-import org.tron.common.storage.Value;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.capsule.BlockCapsule;
-import org.tron.core.capsule.BytesCapsule;
-import org.tron.core.capsule.ContractCapsule;
-import org.tron.core.capsule.ProposalCapsule;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.core.capsule.VotesCapsule;
-import org.tron.core.capsule.WitnessCapsule;
-import org.tron.core.db.Manager;
-import org.tron.protos.Protocol;
-import org.tron.protos.Protocol.AccountType;
+import org.litetokens.common.runtime.vm.DataWord;
+import org.litetokens.common.runtime.vm.program.invoke.ProgramInvoke;
+import org.litetokens.common.runtime.vm.program.listener.ProgramListener;
+import org.litetokens.common.runtime.vm.program.listener.ProgramListenerAware;
+import org.litetokens.common.storage.Deposit;
+import org.litetokens.common.storage.Key;
+import org.litetokens.common.storage.Value;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.capsule.BlockCapsule;
+import org.litetokens.core.capsule.BytesCapsule;
+import org.litetokens.core.capsule.ContractCapsule;
+import org.litetokens.core.capsule.ProposalCapsule;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.core.capsule.VotesCapsule;
+import org.litetokens.core.capsule.WitnessCapsule;
+import org.litetokens.core.db.Manager;
+import org.litetokens.protos.Protocol;
+import org.litetokens.protos.Protocol.AccountType;
 
 public class ContractState implements Deposit, ProgramListenerAware {
 
@@ -221,8 +221,8 @@ public class ContractState implements Deposit, ProgramListenerAware {
   }
 
   @Override
-  public TransactionCapsule getTransaction(byte[] trxHash) {
-    return this.deposit.getTransaction(trxHash);
+  public TransactionCapsule getTransaction(byte[] xltHash) {
+    return this.deposit.getTransaction(xltHash);
   }
 
   @Override

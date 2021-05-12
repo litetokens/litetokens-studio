@@ -1,4 +1,4 @@
-package org.tron.core.db.common;
+package org.litetokens.core.db.common;
 
 import lombok.Getter;
 import lombok.Value;

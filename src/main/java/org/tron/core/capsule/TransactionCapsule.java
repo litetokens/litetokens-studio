@@ -1,10 +1,10 @@
 /*
- * java-tron is free software: you can redistribute it and/or modify
+ * java-litetokens is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * java-tron is distributed in the hope that it will be useful,
+ * java-litetokens is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -13,13 +13,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.core.capsule;
+package org.litetokens.core.capsule;
 
-import static org.tron.protos.Contract.AssetIssueContract;
-import static org.tron.protos.Contract.VoteAssetContract;
-import static org.tron.protos.Contract.VoteWitnessContract;
-import static org.tron.protos.Contract.WitnessCreateContract;
-import static org.tron.protos.Contract.WitnessUpdateContract;
+import static org.litetokens.protos.Contract.AssetIssueContract;
+import static org.litetokens.protos.Contract.VoteAssetContract;
+import static org.litetokens.protos.Contract.VoteWitnessContract;
+import static org.litetokens.protos.Contract.WitnessCreateContract;
+import static org.litetokens.protos.Contract.WitnessUpdateContract;
 
 import com.google.protobuf.Any;
 import com.google.protobuf.ByteString;
@@ -33,52 +33,52 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
-import org.tron.common.crypto.ECKey;
-import org.tron.common.crypto.ECKey.ECDSASignature;
-import org.tron.common.runtime.Runtime;
-import org.tron.common.runtime.vm.program.Program.BadJumpDestinationException;
-import org.tron.common.runtime.vm.program.Program.IllegalOperationException;
-import org.tron.common.runtime.vm.program.Program.JVMStackOverFlowException;
-import org.tron.common.runtime.vm.program.Program.OutOfEnergyException;
-import org.tron.common.runtime.vm.program.Program.OutOfMemoryException;
-import org.tron.common.runtime.vm.program.Program.OutOfResourceException;
-import org.tron.common.runtime.vm.program.Program.PrecompiledContractException;
-import org.tron.common.runtime.vm.program.Program.StackTooLargeException;
-import org.tron.common.runtime.vm.program.Program.StackTooSmallException;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.Sha256Hash;
-import org.tron.core.Wallet;
-import org.tron.core.db.AccountStore;
-import org.tron.core.db.TransactionTrace;
-import org.tron.core.exception.BadItemException;
-import org.tron.core.exception.ValidateSignatureException;
-import org.tron.protos.Contract;
-import org.tron.protos.Contract.AccountCreateContract;
-import org.tron.protos.Contract.AccountUpdateContract;
-import org.tron.protos.Contract.CreateSmartContract;
-import org.tron.protos.Contract.ExchangeCreateContract;
-import org.tron.protos.Contract.ExchangeInjectContract;
-import org.tron.protos.Contract.ExchangeTransactionContract;
-import org.tron.protos.Contract.ExchangeWithdrawContract;
-import org.tron.protos.Contract.FreezeBalanceContract;
-import org.tron.protos.Contract.ParticipateAssetIssueContract;
-import org.tron.protos.Contract.ProposalApproveContract;
-import org.tron.protos.Contract.ProposalCreateContract;
-import org.tron.protos.Contract.ProposalDeleteContract;
-import org.tron.protos.Contract.SetAccountIdContract;
-import org.tron.protos.Contract.TransferAssetContract;
-import org.tron.protos.Contract.TransferContract;
-import org.tron.protos.Contract.TriggerSmartContract;
-import org.tron.protos.Contract.UnfreezeAssetContract;
-import org.tron.protos.Contract.UnfreezeBalanceContract;
-import org.tron.protos.Contract.UpdateAssetContract;
-import org.tron.protos.Contract.UpdateSettingContract;
-import org.tron.protos.Contract.WithdrawBalanceContract;
-import org.tron.protos.Protocol.Transaction;
-import org.tron.protos.Protocol.Transaction.Contract.ContractType;
-import org.tron.protos.Protocol.Transaction.Result;
-import org.tron.protos.Protocol.Transaction.Result.contractResult;
-import org.tron.protos.Protocol.Transaction.raw;
+import org.litetokens.common.crypto.ECKey;
+import org.litetokens.common.crypto.ECKey.ECDSASignature;
+import org.litetokens.common.runtime.Runtime;
+import org.litetokens.common.runtime.vm.program.Program.BadJumpDestinationException;
+import org.litetokens.common.runtime.vm.program.Program.IllegalOperationException;
+import org.litetokens.common.runtime.vm.program.Program.JVMStackOverFlowException;
+import org.litetokens.common.runtime.vm.program.Program.OutOfEnergyException;
+import org.litetokens.common.runtime.vm.program.Program.OutOfMemoryException;
+import org.litetokens.common.runtime.vm.program.Program.OutOfResourceException;
+import org.litetokens.common.runtime.vm.program.Program.PrecompiledContractException;
+import org.litetokens.common.runtime.vm.program.Program.StackTooLargeException;
+import org.litetokens.common.runtime.vm.program.Program.StackTooSmallException;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.db.AccountStore;
+import org.litetokens.core.db.TransactionTrace;
+import org.litetokens.core.exception.BadItemException;
+import org.litetokens.core.exception.ValidateSignatureException;
+import org.litetokens.protos.Contract;
+import org.litetokens.protos.Contract.AccountCreateContract;
+import org.litetokens.protos.Contract.AccountUpdateContract;
+import org.litetokens.protos.Contract.CreateSmartContract;
+import org.litetokens.protos.Contract.ExchangeCreateContract;
+import org.litetokens.protos.Contract.ExchangeInjectContract;
+import org.litetokens.protos.Contract.ExchangeTransactionContract;
+import org.litetokens.protos.Contract.ExchangeWithdrawContract;
+import org.litetokens.protos.Contract.FreezeBalanceContract;
+import org.litetokens.protos.Contract.ParticipateAssetIssueContract;
+import org.litetokens.protos.Contract.ProposalApproveContract;
+import org.litetokens.protos.Contract.ProposalCreateContract;
+import org.litetokens.protos.Contract.ProposalDeleteContract;
+import org.litetokens.protos.Contract.SetAccountIdContract;
+import org.litetokens.protos.Contract.TransferAssetContract;
+import org.litetokens.protos.Contract.TransferContract;
+import org.litetokens.protos.Contract.TriggerSmartContract;
+import org.litetokens.protos.Contract.UnfreezeAssetContract;
+import org.litetokens.protos.Contract.UnfreezeBalanceContract;
+import org.litetokens.protos.Contract.UpdateAssetContract;
+import org.litetokens.protos.Contract.UpdateSettingContract;
+import org.litetokens.protos.Contract.WithdrawBalanceContract;
+import org.litetokens.protos.Protocol.Transaction;
+import org.litetokens.protos.Protocol.Transaction.Contract.ContractType;
+import org.litetokens.protos.Protocol.Transaction.Result;
+import org.litetokens.protos.Protocol.Transaction.Result.contractResult;
+import org.litetokens.protos.Protocol.Transaction.raw;
 
 @Slf4j
 public class TransactionCapsule implements ProtoCapsule<Transaction> {
@@ -89,13 +89,13 @@ public class TransactionCapsule implements ProtoCapsule<Transaction> {
 
   @Getter
   @Setter
-  private TransactionTrace trxTrace;
+  private TransactionTrace xltTrace;
 
   /**
    * constructor TransactionCapsule.
    */
-  public TransactionCapsule(Transaction trx) {
-    this.transaction = trx;
+  public TransactionCapsule(Transaction xlt) {
+    this.transaction = xlt;
   }
 
   /**
@@ -412,7 +412,7 @@ public class TransactionCapsule implements ProtoCapsule<Transaction> {
 
   // todo mv this static function to capsule util
   public static long getCallValue(Transaction.Contract contract) {
-    int energyForTrx;
+    int energyForXlt;
     try {
       Any contractParameter = contract.getParameter();
       long callValue;

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.overlay.discover.table;
+package org.litetokens.common.overlay.discover.table;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.slf4j.LoggerFactory;
-import org.tron.common.overlay.discover.node.Node;
+import org.litetokens.common.overlay.discover.node.Node;
 
 /**
  * Created by kest on 5/25/15.

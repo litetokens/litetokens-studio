@@ -1,4 +1,4 @@
-package org.tron.common.overlay.client;
+package org.litetokens.common.overlay.client;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -16,12 +16,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-import org.tron.common.overlay.discover.node.Node;
-import org.tron.common.overlay.discover.node.NodeHandler;
-import org.tron.common.overlay.server.TronChannelInitializer;
-import org.tron.core.config.args.Args;
-import org.tron.core.net.node.NodeImpl;
-import org.tron.protos.Protocol.ReasonCode;
+import org.litetokens.common.overlay.discover.node.Node;
+import org.litetokens.common.overlay.discover.node.NodeHandler;
+import org.litetokens.common.overlay.server.LitetokensChannelInitializer;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.net.node.NodeImpl;
+import org.litetokens.protos.Protocol.ReasonCode;
 
 @Component
 public class PeerClient {
@@ -43,7 +43,7 @@ public class PeerClient {
 
       @Override
       public Thread newThread(Runnable r) {
-        return new Thread(r, "TronJClientWorker-" + cnt.getAndIncrement());
+        return new Thread(r, "LitetokensJClientWorker-" + cnt.getAndIncrement());
       }
     });
   }
@@ -76,10 +76,10 @@ public class PeerClient {
 
     logger.info("connect peer {} {} {}", host, port, remoteId);
 
-    TronChannelInitializer tronChannelInitializer = ctx
-        .getBean(TronChannelInitializer.class, remoteId);
-    tronChannelInitializer.setPeerDiscoveryMode(discoveryMode);
-    tronChannelInitializer.setNodeImpl(node);
+    LitetokensChannelInitializer litetokensChannelInitializer = ctx
+        .getBean(LitetokensChannelInitializer.class, remoteId);
+    litetokensChannelInitializer.setPeerDiscoveryMode(discoveryMode);
+    litetokensChannelInitializer.setNodeImpl(node);
 
     Bootstrap b = new Bootstrap();
     b.group(workerGroup);
@@ -90,7 +90,7 @@ public class PeerClient {
     b.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, Args.getInstance().getNodeConnectionTimeout());
     b.remoteAddress(host, port);
 
-    b.handler(tronChannelInitializer);
+    b.handler(litetokensChannelInitializer);
 
     // Start the client.
     return b.connect();

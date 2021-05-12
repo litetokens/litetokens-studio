@@ -1,4 +1,4 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -16,43 +16,43 @@ import org.joda.time.DateTime;
 import org.spongycastle.util.encoders.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tron.abi.EventEncoder;
-import org.tron.abi.FunctionReturnDecoder;
-import org.tron.abi.TypeReference;
-import org.tron.abi.datatypes.BytesType;
-import org.tron.abi.datatypes.Event;
-import org.tron.abi.datatypes.Type;
-import org.tron.abi.datatypes.generated.AbiTypes;
-import org.tron.common.overlay.discover.node.Node;
-import org.tron.common.runtime.Runtime;
-import org.tron.common.runtime.vm.program.invoke.ProgramInvokeFactoryImpl;
-import org.tron.common.storage.DepositImpl;
-import org.tron.common.utils.*;
-import org.tron.core.Constant;
-import org.tron.core.Wallet;
-import org.tron.core.capsule.*;
-import org.tron.core.capsule.BlockCapsule.BlockId;
-import org.tron.core.capsule.utils.BlockUtil;
-import org.tron.core.config.Parameter.ChainConstant;
-import org.tron.core.config.args.Args;
-import org.tron.core.config.args.GenesisBlock;
-import org.tron.core.db.KhaosDatabase.KhaosBlock;
-import org.tron.core.db2.core.ISession;
-import org.tron.core.db2.core.ITronChainBase;
-import org.tron.core.exception.*;
-import org.tron.core.witness.ProposalController;
-import org.tron.core.witness.WitnessController;
-import org.tron.protos.Protocol;
-import org.tron.protos.Protocol.AccountType;
-import org.tron.protos.Protocol.Block;
+import org.litetokens.abi.EventEncoder;
+import org.litetokens.abi.FunctionReturnDecoder;
+import org.litetokens.abi.TypeReference;
+import org.litetokens.abi.datatypes.BytesType;
+import org.litetokens.abi.datatypes.Event;
+import org.litetokens.abi.datatypes.Type;
+import org.litetokens.abi.datatypes.generated.AbiTypes;
+import org.litetokens.common.overlay.discover.node.Node;
+import org.litetokens.common.runtime.Runtime;
+import org.litetokens.common.runtime.vm.program.invoke.ProgramInvokeFactoryImpl;
+import org.litetokens.common.storage.DepositImpl;
+import org.litetokens.common.utils.*;
+import org.litetokens.core.Constant;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.capsule.*;
+import org.litetokens.core.capsule.BlockCapsule.BlockId;
+import org.litetokens.core.capsule.utils.BlockUtil;
+import org.litetokens.core.config.Parameter.ChainConstant;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.config.args.GenesisBlock;
+import org.litetokens.core.db.KhaosDatabase.KhaosBlock;
+import org.litetokens.core.db2.core.ISession;
+import org.litetokens.core.db2.core.ILitetokensChainBase;
+import org.litetokens.core.exception.*;
+import org.litetokens.core.witness.ProposalController;
+import org.litetokens.core.witness.WitnessController;
+import org.litetokens.protos.Protocol;
+import org.litetokens.protos.Protocol.AccountType;
+import org.litetokens.protos.Protocol.Block;
 
 import javax.annotation.PostConstruct;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
-import static org.tron.core.config.Parameter.ChainConstant.SOLIDIFIED_THRESHOLD;
-import static org.tron.core.config.Parameter.NodeConstant.MAX_TRANSACTION_PENDING;
+import static org.litetokens.core.config.Parameter.ChainConstant.SOLIDIFIED_THRESHOLD;
+import static org.litetokens.core.config.Parameter.NodeConstant.MAX_TRANSACTION_PENDING;
 
 
 @Slf4j (topic = "Manager")
@@ -521,13 +521,13 @@ public class Manager {
   /**
    * push transaction into pending.
    */
-  public boolean pushTransaction(final TransactionCapsule trx)
+  public boolean pushTransaction(final TransactionCapsule xlt)
       throws ValidateSignatureException, ContractValidateException, ContractExeException,
       AccountResourceInsufficientException, DupTransactionException, TaposException,
       TooBigTransactionException, TransactionExpirationException,
       ReceiptCheckErrException, VMIllegalException, TooBigTransactionResultException {
 
-    if (!trx.validateSignature()) {
+    if (!xlt.validateSignature()) {
       throw new ValidateSignatureException("trans sig validate failed");
     }
 
@@ -537,8 +537,8 @@ public class Manager {
       }
 
       try (ISession tmpSession = revokingStore.buildSession()) {
-        processTransaction(trx, null);
-        pendingTransactions.add(trx);
+        processTransaction(xlt, null);
+        pendingTransactions.add(xlt);
         tmpSession.merge();
       }
     }
@@ -546,10 +546,10 @@ public class Manager {
   }
 
 
-  public void consumeBandwidth(TransactionCapsule trx, TransactionTrace trace)
+  public void consumeBandwidth(TransactionCapsule xlt, TransactionTrace trace)
       throws ContractValidateException, AccountResourceInsufficientException, TooBigTransactionResultException {
     BandwidthProcessor processor = new BandwidthProcessor(this);
-    processor.consume(trx, trace);
+    processor.consume(xlt, trace);
   }
 
 
@@ -904,33 +904,33 @@ public class Manager {
   /**
    * Process transaction.
    */
-  public boolean processTransaction(final TransactionCapsule trxCap, BlockCapsule blockCap)
+  public boolean processTransaction(final TransactionCapsule xltCap, BlockCapsule blockCap)
       throws ValidateSignatureException, ContractValidateException, ContractExeException,
       AccountResourceInsufficientException, TransactionExpirationException, TooBigTransactionException, TooBigTransactionResultException,
       DupTransactionException, TaposException, ReceiptCheckErrException, VMIllegalException {
-    if (trxCap == null) {
+    if (xltCap == null) {
       return false;
     }
 
-    validateTapos(trxCap);
-    validateCommon(trxCap);
+    validateTapos(xltCap);
+    validateCommon(xltCap);
 
-    if (trxCap.getInstance().getRawData().getContractList().size() != 1) {
+    if (xltCap.getInstance().getRawData().getContractList().size() != 1) {
       throw new ContractSizeNotEqualToOneException(
           "act size should be exactly 1, this is extend feature");
     }
-    forkController.hardFork(trxCap);
+    forkController.hardFork(xltCap);
 
-    validateDup(trxCap);
+    validateDup(xltCap);
 
-    if (!trxCap.validateSignature()) {
+    if (!xltCap.validateSignature()) {
       throw new ValidateSignatureException("trans sig validate failed");
     }
 
-    TransactionTrace trace = new TransactionTrace(trxCap, this);
-    trxCap.setTrxTrace(trace);
+    TransactionTrace trace = new TransactionTrace(xltCap, this);
+    xltCap.setXltTrace(trace);
 
-    consumeBandwidth(trxCap, trace);
+    consumeBandwidth(xltCap, trace);
 
     DepositImpl deposit = DepositImpl.createRoot(this);
     Runtime runtime = new Runtime(trace, blockCap, deposit, new ProgramInvokeFactoryImpl());
@@ -944,7 +944,7 @@ public class Manager {
       trace.setResult(runtime);
       if (!blockCap.getInstance().getBlockHeader().getWitnessSignature().isEmpty()) {
         if (trace.checkNeedRetry()) {
-          String txId = Hex.toHexString(trxCap.getTransactionId().getBytes());
+          String txId = Hex.toHexString(xltCap.getTransactionId().getBytes());
           logger.info("Retry for tx id: {}", txId);
           deposit = DepositImpl.createRoot(this);
           runtime = new Runtime(trace, blockCap, deposit, new ProgramInvokeFactoryImpl());
@@ -961,17 +961,17 @@ public class Manager {
     trace.finalization(runtime);
     if (Objects.nonNull(blockCap)) {
       if (getDynamicPropertiesStore().supportVM()) {
-        trxCap.setResult(runtime);
+        xltCap.setResult(runtime);
       }
     }
-    transactionStore.put(trxCap.getTransactionId().getBytes(), trxCap);
+    transactionStore.put(xltCap.getTransactionId().getBytes(), xltCap);
 
     ReceiptCapsule traceReceipt = trace.getReceipt();
 
     TransactionInfoCapsule transactionInfo = TransactionInfoCapsule
-        .buildInstance(trxCap, blockCap, runtime, traceReceipt);
+        .buildInstance(xltCap, blockCap, runtime, traceReceipt);
 
-    transactionHistoryStore.put(trxCap.getTransactionId().getBytes(), transactionInfo);
+    transactionHistoryStore.put(xltCap.getTransactionId().getBytes(), transactionInfo);
 
     if (Objects.nonNull(blockCap)) {
       sendEventLog(runtime.getResult().getContractAddress(),
@@ -980,7 +980,7 @@ public class Manager {
     return true;
   }
 
-  private void sendEventLog(byte[] contractAddress, List<org.tron.protos.Protocol.TransactionInfo.Log> logList, Block block, TransactionInfoCapsule transactionInfoCapsule) {
+  private void sendEventLog(byte[] contractAddress, List<org.litetokens.protos.Protocol.TransactionInfo.Log> logList, Block block, TransactionInfoCapsule transactionInfoCapsule) {
     if (block == null || block.getBlockHeader().getWitnessSignature().isEmpty()) {
       return;
     }
@@ -1110,7 +1110,7 @@ public class Manager {
       throw new IllegalArgumentException("generate block timestamp is invalid.");
     }
 
-    long postponedTrxCount = 0;
+    long postponedXltCount = 0;
 
     final BlockCapsule blockCapsule =
         new BlockCapsule(number + 1, preHash, when, witnessCapsule.getAddress());
@@ -1120,7 +1120,7 @@ public class Manager {
 
     Iterator iterator = pendingTransactions.iterator();
     while (iterator.hasNext()) {
-      TransactionCapsule trx = (TransactionCapsule) iterator.next();
+      TransactionCapsule xlt = (TransactionCapsule) iterator.next();
       if (DateTime.now().getMillis() - when
           > ChainConstant.BLOCK_PRODUCED_INTERVAL * 0.5
           * Args.getInstance().getBlockProducedTimeOut()
@@ -1129,17 +1129,17 @@ public class Manager {
         break;
       }
       // check the block size
-      if ((blockCapsule.getInstance().getSerializedSize() + trx.getSerializedSize() + 3)
+      if ((blockCapsule.getInstance().getSerializedSize() + xlt.getSerializedSize() + 3)
           > ChainConstant.BLOCK_SIZE) {
-        postponedTrxCount++;
+        postponedXltCount++;
         continue;
       }
       // apply transaction
       try (ISession tmpSeesion = revokingStore.buildSession()) {
-        processTransaction(trx, blockCapsule);
+        processTransaction(xlt, blockCapsule);
         tmpSeesion.merge();
         // push into block
-        blockCapsule.addTransaction(trx);
+        blockCapsule.addTransaction(xlt);
         iterator.remove();
       } catch (ContractExeException e) {
         logger.info("contract not processed during execute");
@@ -1178,13 +1178,13 @@ public class Manager {
 
     session.reset();
 
-    if (postponedTrxCount > 0) {
-      logger.info("{} transactions over the block size limit", postponedTrxCount);
+    if (postponedXltCount > 0) {
+      logger.info("{} transactions over the block size limit", postponedXltCount);
     }
 
     logger.debug(
-        "postponedTrxCount[" + postponedTrxCount + "],TrxLeft[" + pendingTransactions.size()
-            + "],repushTrxCount[" + repushTransactions.size() + "]");
+        "postponedXltCount[" + postponedXltCount + "],XltLeft[" + pendingTransactions.size()
+            + "],repushXltCount[" + repushTransactions.size() + "]");
     blockCapsule.setMerkleRoot();
     blockCapsule.sign(privateKey);
 
@@ -1365,7 +1365,7 @@ public class Manager {
 
   /**
    * @param block the block update signed witness. set witness who signed block the 1. the latest
-   * block num 2. pay the trx to witness. 3. the latest slot num.
+   * block num 2. pay the xlt to witness. 3. the latest slot num.
    */
   public void updateSignedWitness(BlockCapsule block) {
     // TODO: add verification
@@ -1469,7 +1469,7 @@ public class Manager {
     logger.debug("******** end to close db ********");
   }
 
-  private void closeOneStore(ITronChainBase database) {
+  private void closeOneStore(ILitetokensChainBase database) {
     logger.debug("******** begin to close " + database.getName() + " ********");
     try {
       database.close();
@@ -1497,18 +1497,18 @@ public class Manager {
 
   private static class ValidateSignTask implements Callable<Boolean> {
 
-    private TransactionCapsule trx;
+    private TransactionCapsule xlt;
     private CountDownLatch countDownLatch;
 
-    ValidateSignTask(TransactionCapsule trx, CountDownLatch countDownLatch) {
-      this.trx = trx;
+    ValidateSignTask(TransactionCapsule xlt, CountDownLatch countDownLatch) {
+      this.xlt = xlt;
       this.countDownLatch = countDownLatch;
     }
 
     @Override
     public Boolean call() throws ValidateSignatureException {
       try {
-        trx.validateSignature();
+        xlt.validateSignature();
       } catch (ValidateSignatureException e) {
         throw e;
       } finally {

@@ -1,4 +1,4 @@
-package org.tron.core.services;
+package org.litetokens.core.services;
 
 import com.google.common.base.Preconditions;
 import com.google.protobuf.ByteString;
@@ -17,79 +17,79 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tron.api.DatabaseGrpc.DatabaseImplBase;
-import org.tron.api.GrpcAPI;
-import org.tron.api.GrpcAPI.AccountNetMessage;
-import org.tron.api.GrpcAPI.AccountPaginated;
-import org.tron.api.GrpcAPI.AccountResourceMessage;
-import org.tron.api.GrpcAPI.Address;
-import org.tron.api.GrpcAPI.AddressPrKeyPairMessage;
-import org.tron.api.GrpcAPI.AssetIssueList;
-import org.tron.api.GrpcAPI.BlockExtention;
-import org.tron.api.GrpcAPI.BlockLimit;
-import org.tron.api.GrpcAPI.BlockList;
-import org.tron.api.GrpcAPI.BlockListExtention;
-import org.tron.api.GrpcAPI.BlockReference;
-import org.tron.api.GrpcAPI.BytesMessage;
-import org.tron.api.GrpcAPI.EasyTransferByPrivateMessage;
-import org.tron.api.GrpcAPI.EasyTransferMessage;
-import org.tron.api.GrpcAPI.EasyTransferResponse;
-import org.tron.api.GrpcAPI.EmptyMessage;
-import org.tron.api.GrpcAPI.ExchangeList;
-import org.tron.api.GrpcAPI.Node;
-import org.tron.api.GrpcAPI.NodeList;
-import org.tron.api.GrpcAPI.NumberMessage;
-import org.tron.api.GrpcAPI.PaginatedMessage;
-import org.tron.api.GrpcAPI.ProposalList;
-import org.tron.api.GrpcAPI.Return;
-import org.tron.api.GrpcAPI.Return.response_code;
-import org.tron.api.GrpcAPI.TransactionExtention;
-import org.tron.api.GrpcAPI.TransactionList;
-import org.tron.api.GrpcAPI.TransactionListExtention;
-import org.tron.api.GrpcAPI.WitnessList;
-import org.tron.api.WalletExtensionGrpc;
-import org.tron.api.WalletGrpc.WalletImplBase;
-import org.tron.api.WalletSolidityGrpc.WalletSolidityImplBase;
-import org.tron.common.application.Service;
-import org.tron.common.crypto.ECKey;
-import org.tron.common.overlay.discover.node.NodeHandler;
-import org.tron.common.overlay.discover.node.NodeManager;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.Sha256Hash;
-import org.tron.common.utils.StringUtil;
-import org.tron.common.utils.Utils;
-import org.tron.core.Wallet;
-import org.tron.core.WalletSolidity;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.capsule.BlockCapsule;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.core.capsule.WitnessCapsule;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.BandwidthProcessor;
-import org.tron.core.db.Manager;
-import org.tron.core.exception.ContractValidateException;
-import org.tron.core.exception.StoreException;
-import org.tron.core.exception.VMIllegalException;
-import org.tron.protos.Contract;
-import org.tron.protos.Contract.AccountCreateContract;
-import org.tron.protos.Contract.AssetIssueContract;
-import org.tron.protos.Contract.ParticipateAssetIssueContract;
-import org.tron.protos.Contract.TransferAssetContract;
-import org.tron.protos.Contract.TransferContract;
-import org.tron.protos.Contract.UnfreezeAssetContract;
-import org.tron.protos.Contract.UpdateSettingContract;
-import org.tron.protos.Contract.VoteWitnessContract;
-import org.tron.protos.Contract.WitnessCreateContract;
-import org.tron.protos.Protocol;
-import org.tron.protos.Protocol.Account;
-import org.tron.protos.Protocol.Block;
-import org.tron.protos.Protocol.DynamicProperties;
-import org.tron.protos.Protocol.Exchange;
-import org.tron.protos.Protocol.Proposal;
-import org.tron.protos.Protocol.Transaction;
-import org.tron.protos.Protocol.Transaction.Contract.ContractType;
-import org.tron.protos.Protocol.TransactionInfo;
-import org.tron.protos.Protocol.TransactionSign;
+import org.litetokens.api.DatabaseGrpc.DatabaseImplBase;
+import org.litetokens.api.GrpcAPI;
+import org.litetokens.api.GrpcAPI.AccountNetMessage;
+import org.litetokens.api.GrpcAPI.AccountPaginated;
+import org.litetokens.api.GrpcAPI.AccountResourceMessage;
+import org.litetokens.api.GrpcAPI.Address;
+import org.litetokens.api.GrpcAPI.AddressPrKeyPairMessage;
+import org.litetokens.api.GrpcAPI.AssetIssueList;
+import org.litetokens.api.GrpcAPI.BlockExtention;
+import org.litetokens.api.GrpcAPI.BlockLimit;
+import org.litetokens.api.GrpcAPI.BlockList;
+import org.litetokens.api.GrpcAPI.BlockListExtention;
+import org.litetokens.api.GrpcAPI.BlockReference;
+import org.litetokens.api.GrpcAPI.BytesMessage;
+import org.litetokens.api.GrpcAPI.EasyTransferByPrivateMessage;
+import org.litetokens.api.GrpcAPI.EasyTransferMessage;
+import org.litetokens.api.GrpcAPI.EasyTransferResponse;
+import org.litetokens.api.GrpcAPI.EmptyMessage;
+import org.litetokens.api.GrpcAPI.ExchangeList;
+import org.litetokens.api.GrpcAPI.Node;
+import org.litetokens.api.GrpcAPI.NodeList;
+import org.litetokens.api.GrpcAPI.NumberMessage;
+import org.litetokens.api.GrpcAPI.PaginatedMessage;
+import org.litetokens.api.GrpcAPI.ProposalList;
+import org.litetokens.api.GrpcAPI.Return;
+import org.litetokens.api.GrpcAPI.Return.response_code;
+import org.litetokens.api.GrpcAPI.TransactionExtention;
+import org.litetokens.api.GrpcAPI.TransactionList;
+import org.litetokens.api.GrpcAPI.TransactionListExtention;
+import org.litetokens.api.GrpcAPI.WitnessList;
+import org.litetokens.api.WalletExtensionGrpc;
+import org.litetokens.api.WalletGrpc.WalletImplBase;
+import org.litetokens.api.WalletSolidityGrpc.WalletSolidityImplBase;
+import org.litetokens.common.application.Service;
+import org.litetokens.common.crypto.ECKey;
+import org.litetokens.common.overlay.discover.node.NodeHandler;
+import org.litetokens.common.overlay.discover.node.NodeManager;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.common.utils.StringUtil;
+import org.litetokens.common.utils.Utils;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.WalletSolidity;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.capsule.BlockCapsule;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.core.capsule.WitnessCapsule;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.BandwidthProcessor;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.exception.ContractValidateException;
+import org.litetokens.core.exception.StoreException;
+import org.litetokens.core.exception.VMIllegalException;
+import org.litetokens.protos.Contract;
+import org.litetokens.protos.Contract.AccountCreateContract;
+import org.litetokens.protos.Contract.AssetIssueContract;
+import org.litetokens.protos.Contract.ParticipateAssetIssueContract;
+import org.litetokens.protos.Contract.TransferAssetContract;
+import org.litetokens.protos.Contract.TransferContract;
+import org.litetokens.protos.Contract.UnfreezeAssetContract;
+import org.litetokens.protos.Contract.UpdateSettingContract;
+import org.litetokens.protos.Contract.VoteWitnessContract;
+import org.litetokens.protos.Contract.WitnessCreateContract;
+import org.litetokens.protos.Protocol;
+import org.litetokens.protos.Protocol.Account;
+import org.litetokens.protos.Protocol.Block;
+import org.litetokens.protos.Protocol.DynamicProperties;
+import org.litetokens.protos.Protocol.Exchange;
+import org.litetokens.protos.Protocol.Proposal;
+import org.litetokens.protos.Protocol.Transaction;
+import org.litetokens.protos.Protocol.Transaction.Contract.ContractType;
+import org.litetokens.protos.Protocol.TransactionInfo;
+import org.litetokens.protos.Protocol.TransactionSign;
 
 @Component
 @Slf4j
@@ -167,13 +167,13 @@ public class RpcApiService implements Service {
     if (transaction == null) {
       return null;
     }
-    TransactionExtention.Builder trxExtBuilder = TransactionExtention.newBuilder();
+    TransactionExtention.Builder xltExtBuilder = TransactionExtention.newBuilder();
     Return.Builder retBuilder = Return.newBuilder();
-    trxExtBuilder.setTransaction(transaction);
-    trxExtBuilder.setTxid(Sha256Hash.of(transaction.getRawData().toByteArray()).getByteString());
+    xltExtBuilder.setTransaction(transaction);
+    xltExtBuilder.setTxid(Sha256Hash.of(transaction.getRawData().toByteArray()).getByteString());
     retBuilder.setResult(true).setCode(response_code.SUCCESS);
-    trxExtBuilder.setResult(retBuilder);
-    return trxExtBuilder.build();
+    xltExtBuilder.setResult(retBuilder);
+    return xltExtBuilder.build();
   }
 
   private BlockExtention block2Extention(Block block) {
@@ -197,8 +197,8 @@ public class RpcApiService implements Service {
   private class DatabaseApi extends DatabaseImplBase {
 
     @Override
-    public void getBlockReference(org.tron.api.GrpcAPI.EmptyMessage request,
-        io.grpc.stub.StreamObserver<org.tron.api.GrpcAPI.BlockReference> responseObserver) {
+    public void getBlockReference(org.litetokens.api.GrpcAPI.EmptyMessage request,
+        io.grpc.stub.StreamObserver<org.litetokens.api.GrpcAPI.BlockReference> responseObserver) {
       long headBlockNum = dbManager.getDynamicPropertiesStore()
           .getLatestBlockHeaderNumber();
       byte[] blockHeaderHash = dbManager.getDynamicPropertiesStore()
@@ -551,12 +551,12 @@ public class RpcApiService implements Service {
 
     private void createTransactionExtention(Message request, ContractType contractType,
         StreamObserver<TransactionExtention> responseObserver) {
-      TransactionExtention.Builder trxExtBuilder = TransactionExtention.newBuilder();
+      TransactionExtention.Builder xltExtBuilder = TransactionExtention.newBuilder();
       Return.Builder retBuilder = Return.newBuilder();
       try {
-        TransactionCapsule trx = createTransactionCapsule(request, contractType);
-        trxExtBuilder.setTransaction(trx.getInstance());
-        trxExtBuilder.setTxid(trx.getTransactionId().getByteString());
+        TransactionCapsule xlt = createTransactionCapsule(request, contractType);
+        xltExtBuilder.setTransaction(xlt.getInstance());
+        xltExtBuilder.setTxid(xlt.getTransactionId().getByteString());
         retBuilder.setResult(true).setCode(response_code.SUCCESS);
       } catch (ContractValidateException e) {
         retBuilder.setResult(false).setCode(response_code.CONTRACT_VALIDATE_ERROR)
@@ -567,8 +567,8 @@ public class RpcApiService implements Service {
             .setMessage(ByteString.copyFromUtf8(e.getClass() + " : " + e.getMessage()));
         logger.info("exception caught" + e.getMessage());
       }
-      trxExtBuilder.setResult(retBuilder);
-      responseObserver.onNext(trxExtBuilder.build());
+      xltExtBuilder.setResult(retBuilder);
+      responseObserver.onNext(xltExtBuilder.build());
       responseObserver.onCompleted();
     }
 
@@ -588,20 +588,20 @@ public class RpcApiService implements Service {
     @Override
     public void getTransactionSign2(TransactionSign req,
         StreamObserver<TransactionExtention> responseObserver) {
-      TransactionExtention.Builder trxExtBuilder = TransactionExtention.newBuilder();
+      TransactionExtention.Builder xltExtBuilder = TransactionExtention.newBuilder();
       Return.Builder retBuilder = Return.newBuilder();
       try {
-        TransactionCapsule trx = wallet.getTransactionSign(req);
-        trxExtBuilder.setTransaction(trx.getInstance());
-        trxExtBuilder.setTxid(trx.getTransactionId().getByteString());
+        TransactionCapsule xlt = wallet.getTransactionSign(req);
+        xltExtBuilder.setTransaction(xlt.getInstance());
+        xltExtBuilder.setTxid(xlt.getTransactionId().getByteString());
         retBuilder.setResult(true).setCode(response_code.SUCCESS);
       } catch (Exception e) {
         retBuilder.setResult(false).setCode(response_code.OTHER_ERROR)
             .setMessage(ByteString.copyFromUtf8(e.getClass() + " : " + e.getMessage()));
         logger.info("exception caught" + e.getMessage());
       }
-      trxExtBuilder.setResult(retBuilder);
-      responseObserver.onNext(trxExtBuilder.build());
+      xltExtBuilder.setResult(retBuilder);
+      responseObserver.onNext(xltExtBuilder.build());
       responseObserver.onCompleted();
     }
 
@@ -723,8 +723,8 @@ public class RpcApiService implements Service {
 
       int votesCount = req.getVotesCount();
       Preconditions.checkArgument(votesCount <= 0, "VotesCount[" + votesCount + "] <= 0");
-      Preconditions.checkArgument(account.getTronPower() < votesCount,
-          "tron power[" + account.getTronPower() + "] <  VotesCount[" + votesCount + "]");
+      Preconditions.checkArgument(account.getLitetokensPower() < votesCount,
+          "litetokens power[" + account.getLitetokensPower() + "] <  VotesCount[" + votesCount + "]");
 
       req.getVotesList().forEach(vote -> {
         ByteString voteAddress = vote.getVoteAddress();
@@ -1063,7 +1063,7 @@ public class RpcApiService implements Service {
 
       nodeHandlerMap.entrySet().stream()
           .forEach(v -> {
-            org.tron.common.overlay.discover.node.Node node = v.getValue().getNode();
+            org.litetokens.common.overlay.discover.node.Node node = v.getValue().getNode();
             nodeListBuilder.addNodes(Node.newBuilder().setAddress(
                 Address.newBuilder()
                     .setHost(ByteString.copyFrom(ByteArray.fromString(node.getHost())))
@@ -1276,7 +1276,7 @@ public class RpcApiService implements Service {
     }
 
     @Override
-    public void deployContract(org.tron.protos.Contract.CreateSmartContract request,
+    public void deployContract(org.litetokens.protos.Contract.CreateSmartContract request,
         io.grpc.stub.StreamObserver<TransactionExtention> responseObserver) {
       createTransactionExtention(request, ContractType.CreateSmartContract, responseObserver);
     }
@@ -1304,33 +1304,33 @@ public class RpcApiService implements Service {
     @Override
     public void triggerContract(Contract.TriggerSmartContract request,
         StreamObserver<TransactionExtention> responseObserver) {
-      TransactionExtention.Builder trxExtBuilder = TransactionExtention.newBuilder();
+      TransactionExtention.Builder xltExtBuilder = TransactionExtention.newBuilder();
       Return.Builder retBuilder = Return.newBuilder();
       try {
-        TransactionCapsule trxCap = createTransactionCapsule(request,
+        TransactionCapsule xltCap = createTransactionCapsule(request,
             ContractType.TriggerSmartContract);
-        Transaction trx = wallet.triggerContract(request, trxCap, trxExtBuilder, retBuilder);
-        trxExtBuilder.setTransaction(trx);
-        trxExtBuilder.setTxid(trxCap.getTransactionId().getByteString());
+        Transaction xlt = wallet.triggerContract(request, xltCap, xltExtBuilder, retBuilder);
+        xltExtBuilder.setTransaction(xlt);
+        xltExtBuilder.setTxid(xltCap.getTransactionId().getByteString());
         retBuilder.setResult(true).setCode(response_code.SUCCESS);
-        trxExtBuilder.setResult(retBuilder);
+        xltExtBuilder.setResult(retBuilder);
       } catch (ContractValidateException | VMIllegalException e) {
         retBuilder.setResult(false).setCode(response_code.CONTRACT_VALIDATE_ERROR)
             .setMessage(ByteString.copyFromUtf8("contract validate error : " + e.getMessage()));
-        trxExtBuilder.setResult(retBuilder);
+        xltExtBuilder.setResult(retBuilder);
         logger.warn("ContractValidateException: {}", e.getMessage());
       } catch (RuntimeException e) {
         retBuilder.setResult(false).setCode(response_code.CONTRACT_EXE_ERROR)
             .setMessage(ByteString.copyFromUtf8(e.getClass() + " : " + e.getMessage()));
-        trxExtBuilder.setResult(retBuilder);
+        xltExtBuilder.setResult(retBuilder);
         logger.warn("When run constant call in VM, have RuntimeException: " + e.getMessage());
       } catch (Exception e) {
         retBuilder.setResult(false).setCode(response_code.OTHER_ERROR)
             .setMessage(ByteString.copyFromUtf8(e.getClass() + " : " + e.getMessage()));
-        trxExtBuilder.setResult(retBuilder);
+        xltExtBuilder.setResult(retBuilder);
         logger.warn("unknown exception caught: " + e.getMessage(), e);
       } finally {
-        responseObserver.onNext(trxExtBuilder.build());
+        responseObserver.onNext(xltExtBuilder.build());
         responseObserver.onCompleted();
       }
     }

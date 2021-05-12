@@ -1,8 +1,8 @@
-package org.tron.core.actuator;
+package org.litetokens.core.actuator;
 
-import static org.tron.core.actuator.ActuatorConstant.ACCOUNT_EXCEPTION_STR;
-import static org.tron.core.actuator.ActuatorConstant.NOT_EXIST_STR;
-import static org.tron.core.actuator.ActuatorConstant.WITNESS_EXCEPTION_STR;
+import static org.litetokens.core.actuator.ActuatorConstant.ACCOUNT_EXCEPTION_STR;
+import static org.litetokens.core.actuator.ActuatorConstant.NOT_EXIST_STR;
+import static org.litetokens.core.actuator.ActuatorConstant.WITNESS_EXCEPTION_STR;
 
 import com.google.common.math.LongMath;
 import com.google.protobuf.Any;
@@ -11,23 +11,23 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.Iterator;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
-import org.tron.common.storage.Deposit;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.StringUtil;
-import org.tron.core.Wallet;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.capsule.TransactionResultCapsule;
-import org.tron.core.capsule.VotesCapsule;
-import org.tron.core.config.Parameter.ChainConstant;
-import org.tron.core.db.AccountStore;
-import org.tron.core.db.Manager;
-import org.tron.core.db.VotesStore;
-import org.tron.core.db.WitnessStore;
-import org.tron.core.exception.ContractExeException;
-import org.tron.core.exception.ContractValidateException;
-import org.tron.protos.Contract.VoteWitnessContract;
-import org.tron.protos.Contract.VoteWitnessContract.Vote;
-import org.tron.protos.Protocol.Transaction.Result.code;
+import org.litetokens.common.storage.Deposit;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.StringUtil;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.capsule.TransactionResultCapsule;
+import org.litetokens.core.capsule.VotesCapsule;
+import org.litetokens.core.config.Parameter.ChainConstant;
+import org.litetokens.core.db.AccountStore;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.db.VotesStore;
+import org.litetokens.core.db.WitnessStore;
+import org.litetokens.core.exception.ContractExeException;
+import org.litetokens.core.exception.ContractValidateException;
+import org.litetokens.protos.Contract.VoteWitnessContract;
+import org.litetokens.protos.Contract.VoteWitnessContract.Vote;
+import org.litetokens.protos.Protocol.Transaction.Result.code;
 
 @Slf4j
 public class VoteWitnessActuator extends AbstractActuator {
@@ -133,12 +133,12 @@ public class VoteWitnessActuator extends AbstractActuator {
             ACCOUNT_EXCEPTION_STR + readableOwnerAddress + NOT_EXIST_STR);
       }
 
-      long tronPower = accountCapsule.getTronPower();
+      long litetokensPower = accountCapsule.getLitetokensPower();
 
-      sum = LongMath.checkedMultiply(sum, 1000000L); //trx -> drop. The vote count is based on TRX
-      if (sum > tronPower) {
+      sum = LongMath.checkedMultiply(sum, 1000000L); //xlt -> drop. The vote count is based on XLT
+      if (sum > litetokensPower) {
         throw new ContractValidateException(
-            "The total number of votes[" + sum + "] is greater than the tronPower[" + tronPower
+            "The total number of votes[" + sum + "] is greater than the litetokensPower[" + litetokensPower
                 + "]");
       }
     } catch (ArithmeticException e) {

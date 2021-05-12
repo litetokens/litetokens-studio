@@ -1,12 +1,12 @@
-package org.tron.studio.ui;
+package org.litetokens.studio.ui;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import lombok.extern.slf4j.Slf4j;
-import org.tron.api.GrpcAPI.AccountResourceMessage;
-import org.tron.protos.Protocol;
-import org.tron.studio.ShareData;
+import org.litetokens.api.GrpcAPI.AccountResourceMessage;
+import org.litetokens.protos.Protocol;
+import org.litetokens.studio.ShareData;
 
 import java.math.BigDecimal;
 import java.util.concurrent.Executors;

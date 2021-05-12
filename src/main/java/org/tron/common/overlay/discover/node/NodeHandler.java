@@ -16,7 +16,7 @@
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.common.overlay.discover.node;
+package org.litetokens.common.overlay.discover.node;
 
 import java.net.InetSocketAddress;
 import java.util.List;
@@ -24,14 +24,14 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongycastle.util.encoders.Hex;
-import org.tron.common.net.udp.handler.UdpEvent;
-import org.tron.common.net.udp.message.Message;
-import org.tron.common.net.udp.message.discover.FindNodeMessage;
-import org.tron.common.net.udp.message.discover.NeighborsMessage;
-import org.tron.common.net.udp.message.discover.PingMessage;
-import org.tron.common.net.udp.message.discover.PongMessage;
-import org.tron.common.overlay.discover.node.statistics.NodeStatistics;
-import org.tron.core.config.args.Args;
+import org.litetokens.common.net.udp.handler.UdpEvent;
+import org.litetokens.common.net.udp.message.Message;
+import org.litetokens.common.net.udp.message.discover.FindNodeMessage;
+import org.litetokens.common.net.udp.message.discover.NeighborsMessage;
+import org.litetokens.common.net.udp.message.discover.PingMessage;
+import org.litetokens.common.net.udp.message.discover.PongMessage;
+import org.litetokens.common.overlay.discover.node.statistics.NodeStatistics;
+import org.litetokens.core.config.args.Args;
 
 /**
  * The instance of this class responsible for discovery messages exchange with the specified Node It

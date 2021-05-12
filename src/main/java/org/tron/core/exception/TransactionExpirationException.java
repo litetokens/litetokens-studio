@@ -1,6 +1,6 @@
-package org.tron.core.exception;
+package org.litetokens.core.exception;
 
-public class TransactionExpirationException extends TronException {
+public class TransactionExpirationException extends LitetokensException {
 
     public TransactionExpirationException() {
         super();

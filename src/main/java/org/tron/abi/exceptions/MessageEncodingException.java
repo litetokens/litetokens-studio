@@ -1,4 +1,4 @@
-package org.tron.abi.exceptions;
+package org.litetokens.abi.exceptions;
 
 /**
  * Encoding exception.

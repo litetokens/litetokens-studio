@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.runtime.vm;
+package org.litetokens.common.runtime.vm;
 
 import static java.lang.Math.ceil;
 import static org.junit.Assert.assertArrayEquals;
@@ -24,7 +24,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.Arrays;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
-import org.tron.common.runtime.vm.program.Memory;
+import org.litetokens.common.runtime.vm.program.Memory;
 import org.junit.Test;
 import org.spongycastle.util.encoders.Hex;
 

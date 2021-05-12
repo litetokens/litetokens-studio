@@ -15,27 +15,27 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.runtime.vm.program.invoke;
+package org.litetokens.common.runtime.vm.program.invoke;
 
-import static org.tron.common.runtime.vm.program.InternalTransaction.TrxType.TRX_CONTRACT_CALL_TYPE;
-import static org.tron.common.runtime.vm.program.InternalTransaction.TrxType.TRX_CONTRACT_CREATION_TYPE;
+import static org.litetokens.common.runtime.vm.program.InternalTransaction.XltType.XLT_CONTRACT_CALL_TYPE;
+import static org.litetokens.common.runtime.vm.program.InternalTransaction.XltType.XLT_CONTRACT_CREATION_TYPE;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.tron.common.runtime.vm.DataWord;
-import org.tron.common.runtime.vm.program.InternalTransaction;
-import org.tron.common.runtime.vm.program.InternalTransaction.ExecutorType;
-import org.tron.common.runtime.vm.program.Program;
-import org.tron.common.storage.Deposit;
-import org.tron.common.utils.ByteUtil;
-import org.tron.core.Wallet;
-import org.tron.core.capsule.ContractCapsule;
-import org.tron.core.exception.ContractValidateException;
-import org.tron.protos.Contract;
-import org.tron.protos.Contract.CreateSmartContract;
-import org.tron.protos.Protocol.Block;
-import org.tron.protos.Protocol.Transaction;
+import org.litetokens.common.runtime.vm.DataWord;
+import org.litetokens.common.runtime.vm.program.InternalTransaction;
+import org.litetokens.common.runtime.vm.program.InternalTransaction.ExecutorType;
+import org.litetokens.common.runtime.vm.program.Program;
+import org.litetokens.common.storage.Deposit;
+import org.litetokens.common.utils.ByteUtil;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.capsule.ContractCapsule;
+import org.litetokens.core.exception.ContractValidateException;
+import org.litetokens.protos.Contract;
+import org.litetokens.protos.Contract.CreateSmartContract;
+import org.litetokens.protos.Protocol.Block;
+import org.litetokens.protos.Protocol.Transaction;
 
 /**
  * @author Roman Mandeleil
@@ -48,7 +48,7 @@ public class ProgramInvokeFactoryImpl implements ProgramInvokeFactory {
 
   // Invocation by the wire tx
   @Override
-  public ProgramInvoke createProgramInvoke(InternalTransaction.TrxType trxType,
+  public ProgramInvoke createProgramInvoke(InternalTransaction.XltType xltType,
       ExecutorType executorType, Transaction tx, Block block, Deposit deposit, long vmStartInUs,
       long vmShouldEndInUs, long energyLimit) throws ContractValidateException {
     byte[] contractAddress;
@@ -60,7 +60,7 @@ public class ProgramInvokeFactoryImpl implements ProgramInvokeFactory {
     long timestamp = 0L;
     long number = -1L;
 
-    if (trxType == TRX_CONTRACT_CREATION_TYPE) {
+    if (xltType == XLT_CONTRACT_CREATION_TYPE) {
       CreateSmartContract contract = ContractCapsule.getSmartContractFromTransaction(tx);
       contractAddress = Wallet.generateContractAddress(tx);
       ownerAddress = contract.getOwnerAddress().toByteArray();
@@ -86,7 +86,7 @@ public class ProgramInvokeFactoryImpl implements ProgramInvokeFactory {
           lastHash, coinbase, timestamp, number, deposit, vmStartInUs, vmShouldEndInUs,
           energyLimit);
 
-    } else if (trxType == TRX_CONTRACT_CALL_TYPE) {
+    } else if (xltType == XLT_CONTRACT_CALL_TYPE) {
       Contract.TriggerSmartContract contract = ContractCapsule
           .getTriggerContractFromTransaction(tx);
       /***         ADDRESS op       ***/
@@ -118,7 +118,7 @@ public class ProgramInvokeFactoryImpl implements ProgramInvokeFactory {
       // byte[] data = tx.isContractCreation() ? ByteUtil.EMPTY_BYTE_ARRAY : nullToEmpty(tx.getData());
       data = contract.getData().toByteArray();
 
-      // dropLimit = contract.getTrxEnergyLimitInUs().toByteArray();
+      // dropLimit = contract.getXltEnergyLimitInUs().toByteArray();
       switch (executorType) {
         case ET_CONSTANT_TYPE:
           break;

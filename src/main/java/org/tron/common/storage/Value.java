@@ -1,19 +1,19 @@
-package org.tron.common.storage;
+package org.litetokens.common.storage;
 
 import java.util.Arrays;
 import org.apache.commons.lang3.ArrayUtils;
-import org.tron.common.utils.ByteArray;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.capsule.AssetIssueCapsule;
-import org.tron.core.capsule.BlockCapsule;
-import org.tron.core.capsule.BytesCapsule;
-import org.tron.core.capsule.CodeCapsule;
-import org.tron.core.capsule.ContractCapsule;
-import org.tron.core.capsule.ProposalCapsule;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.core.capsule.VotesCapsule;
-import org.tron.core.capsule.WitnessCapsule;
-import org.tron.core.exception.BadItemException;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.capsule.AssetIssueCapsule;
+import org.litetokens.core.capsule.BlockCapsule;
+import org.litetokens.core.capsule.BytesCapsule;
+import org.litetokens.core.capsule.CodeCapsule;
+import org.litetokens.core.capsule.ContractCapsule;
+import org.litetokens.core.capsule.ProposalCapsule;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.core.capsule.VotesCapsule;
+import org.litetokens.core.capsule.WitnessCapsule;
+import org.litetokens.core.exception.BadItemException;
 
 public class Value {
 

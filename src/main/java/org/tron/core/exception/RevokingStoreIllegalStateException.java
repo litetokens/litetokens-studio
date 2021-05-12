@@ -1,6 +1,6 @@
-package org.tron.core.exception;
+package org.litetokens.core.exception;
 
-public class RevokingStoreIllegalStateException extends TronRuntimeException {
+public class RevokingStoreIllegalStateException extends LitetokensRuntimeException {
 
   /**
    * Constructs an RevokingStoreIllegalStateException with no detail message. A detail message is a

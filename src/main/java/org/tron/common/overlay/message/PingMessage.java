@@ -1,7 +1,7 @@
-package org.tron.common.overlay.message;
+package org.litetokens.common.overlay.message;
 
 import org.spongycastle.util.encoders.Hex;
-import org.tron.core.net.message.MessageTypes;
+import org.litetokens.core.net.message.MessageTypes;
 
 public class PingMessage extends P2pMessage {
 

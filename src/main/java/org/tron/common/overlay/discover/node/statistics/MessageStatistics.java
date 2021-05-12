@@ -1,12 +1,12 @@
-package org.tron.common.overlay.discover.node.statistics;
+package org.litetokens.common.overlay.discover.node.statistics;
 
 import lombok.extern.slf4j.Slf4j;
-import org.tron.common.net.udp.message.UdpMessageTypeEnum;
-import org.tron.common.overlay.message.Message;
-import org.tron.core.net.message.FetchInvDataMessage;
-import org.tron.core.net.message.InventoryMessage;
-import org.tron.core.net.message.MessageTypes;
-import org.tron.core.net.message.TransactionsMessage;
+import org.litetokens.common.net.udp.message.UdpMessageTypeEnum;
+import org.litetokens.common.overlay.message.Message;
+import org.litetokens.core.net.message.FetchInvDataMessage;
+import org.litetokens.core.net.message.InventoryMessage;
+import org.litetokens.core.net.message.MessageTypes;
+import org.litetokens.core.net.message.TransactionsMessage;
 
 @Slf4j
 public class MessageStatistics {
@@ -31,43 +31,43 @@ public class MessageStatistics {
   public final MessageCount p2pInDisconnect = new MessageCount();
   public final MessageCount p2pOutDisconnect = new MessageCount();
 
-  //tcp tron
-  public final MessageCount tronInMessage = new MessageCount();
-  public final MessageCount tronOutMessage = new MessageCount();
+  //tcp litetokens
+  public final MessageCount litetokensInMessage = new MessageCount();
+  public final MessageCount litetokensOutMessage = new MessageCount();
 
-  public final MessageCount tronInSyncBlockChain = new MessageCount();
-  public final MessageCount tronOutSyncBlockChain = new MessageCount();
-  public final MessageCount tronInBlockChainInventory = new MessageCount();
-  public final MessageCount tronOutBlockChainInventory = new MessageCount();
+  public final MessageCount litetokensInSyncBlockChain = new MessageCount();
+  public final MessageCount litetokensOutSyncBlockChain = new MessageCount();
+  public final MessageCount litetokensInBlockChainInventory = new MessageCount();
+  public final MessageCount litetokensOutBlockChainInventory = new MessageCount();
 
-  public final MessageCount tronInTrxInventory = new MessageCount();
-  public final MessageCount tronOutTrxInventory = new MessageCount();
-  public final MessageCount tronInTrxInventoryElement = new MessageCount();
-  public final MessageCount tronOutTrxInventoryElement = new MessageCount();
+  public final MessageCount litetokensInXltInventory = new MessageCount();
+  public final MessageCount litetokensOutXltInventory = new MessageCount();
+  public final MessageCount litetokensInXltInventoryElement = new MessageCount();
+  public final MessageCount litetokensOutXltInventoryElement = new MessageCount();
 
-  public final MessageCount tronInBlockInventory = new MessageCount();
-  public final MessageCount tronOutBlockInventory = new MessageCount();
-  public final MessageCount tronInBlockInventoryElement = new MessageCount();
-  public final MessageCount tronOutBlockInventoryElement = new MessageCount();
+  public final MessageCount litetokensInBlockInventory = new MessageCount();
+  public final MessageCount litetokensOutBlockInventory = new MessageCount();
+  public final MessageCount litetokensInBlockInventoryElement = new MessageCount();
+  public final MessageCount litetokensOutBlockInventoryElement = new MessageCount();
 
-  public final MessageCount tronInTrxFetchInvData = new MessageCount();
-  public final MessageCount tronOutTrxFetchInvData = new MessageCount();
-  public final MessageCount tronInTrxFetchInvDataElement = new MessageCount();
-  public final MessageCount tronOutTrxFetchInvDataElement = new MessageCount();
+  public final MessageCount litetokensInXltFetchInvData = new MessageCount();
+  public final MessageCount litetokensOutXltFetchInvData = new MessageCount();
+  public final MessageCount litetokensInXltFetchInvDataElement = new MessageCount();
+  public final MessageCount litetokensOutXltFetchInvDataElement = new MessageCount();
 
-  public final MessageCount tronInBlockFetchInvData = new MessageCount();
-  public final MessageCount tronOutBlockFetchInvData = new MessageCount();
-  public final MessageCount tronInBlockFetchInvDataElement = new MessageCount();
-  public final MessageCount tronOutBlockFetchInvDataElement = new MessageCount();
+  public final MessageCount litetokensInBlockFetchInvData = new MessageCount();
+  public final MessageCount litetokensOutBlockFetchInvData = new MessageCount();
+  public final MessageCount litetokensInBlockFetchInvDataElement = new MessageCount();
+  public final MessageCount litetokensOutBlockFetchInvDataElement = new MessageCount();
 
 
-  public final MessageCount tronInTrx = new MessageCount();
-  public final MessageCount tronOutTrx = new MessageCount();
-  public final MessageCount tronInTrxs = new MessageCount();
-  public final MessageCount tronOutTrxs = new MessageCount();
-  public final MessageCount tronInBlock = new MessageCount();
-  public final MessageCount tronOutBlock = new MessageCount();
-  public final MessageCount tronOutAdvBlock = new MessageCount();
+  public final MessageCount litetokensInXlt = new MessageCount();
+  public final MessageCount litetokensOutXlt = new MessageCount();
+  public final MessageCount litetokensInXlts = new MessageCount();
+  public final MessageCount litetokensOutXlts = new MessageCount();
+  public final MessageCount litetokensInBlock = new MessageCount();
+  public final MessageCount litetokensOutBlock = new MessageCount();
+  public final MessageCount litetokensOutAdvBlock = new MessageCount();
 
   public void addUdpInMessage(UdpMessageTypeEnum type) {
     addUdpMessage(type, true);
@@ -123,9 +123,9 @@ public class MessageStatistics {
   private void addTcpMessage(Message msg, boolean flag) {
 
     if (flag) {
-      tronInMessage.add();
+      litetokensInMessage.add();
     } else {
-      tronOutMessage.add();
+      litetokensOutMessage.add();
     }
 
     switch (msg.getType()) {
@@ -159,36 +159,36 @@ public class MessageStatistics {
         break;
       case SYNC_BLOCK_CHAIN:
         if (flag) {
-          tronInSyncBlockChain.add();
+          litetokensInSyncBlockChain.add();
         } else {
-          tronOutSyncBlockChain.add();
+          litetokensOutSyncBlockChain.add();
         }
         break;
       case BLOCK_CHAIN_INVENTORY:
         if (flag) {
-          tronInBlockChainInventory.add();
+          litetokensInBlockChainInventory.add();
         } else {
-          tronOutBlockChainInventory.add();
+          litetokensOutBlockChainInventory.add();
         }
         break;
       case INVENTORY:
         InventoryMessage inventoryMessage = (InventoryMessage) msg;
         int inventorySize = inventoryMessage.getInventory().getIdsCount();
         if (flag) {
-          if (inventoryMessage.getInvMessageType() == MessageTypes.TRX) {
-            tronInTrxInventory.add();
-            tronInTrxInventoryElement.add(inventorySize);
+          if (inventoryMessage.getInvMessageType() == MessageTypes.XLT) {
+            litetokensInXltInventory.add();
+            litetokensInXltInventoryElement.add(inventorySize);
           } else {
-            tronInBlockInventory.add();
-            tronInBlockInventoryElement.add(inventorySize);
+            litetokensInBlockInventory.add();
+            litetokensInBlockInventoryElement.add(inventorySize);
           }
         } else {
-          if (inventoryMessage.getInvMessageType() == MessageTypes.TRX) {
-            tronOutTrxInventory.add();
-            tronOutTrxInventoryElement.add(inventorySize);
+          if (inventoryMessage.getInvMessageType() == MessageTypes.XLT) {
+            litetokensOutXltInventory.add();
+            litetokensOutXltInventoryElement.add(inventorySize);
           } else {
-            tronOutBlockInventory.add();
-            tronOutBlockInventoryElement.add(inventorySize);
+            litetokensOutBlockInventory.add();
+            litetokensOutBlockInventoryElement.add(inventorySize);
           }
         }
         break;
@@ -196,45 +196,45 @@ public class MessageStatistics {
         FetchInvDataMessage fetchInvDataMessage = (FetchInvDataMessage) msg;
         int fetchSize = fetchInvDataMessage.getInventory().getIdsCount();
         if (flag) {
-          if (fetchInvDataMessage.getInvMessageType() == MessageTypes.TRX) {
-            tronInTrxFetchInvData.add();
-            tronInTrxFetchInvDataElement.add(fetchSize);
+          if (fetchInvDataMessage.getInvMessageType() == MessageTypes.XLT) {
+            litetokensInXltFetchInvData.add();
+            litetokensInXltFetchInvDataElement.add(fetchSize);
           } else {
-            tronInBlockFetchInvData.add();
-            tronInBlockFetchInvDataElement.add(fetchSize);
+            litetokensInBlockFetchInvData.add();
+            litetokensInBlockFetchInvDataElement.add(fetchSize);
           }
         } else {
-          if (fetchInvDataMessage.getInvMessageType() == MessageTypes.TRX) {
-            tronOutTrxFetchInvData.add();
-            tronOutTrxFetchInvDataElement.add(fetchSize);
+          if (fetchInvDataMessage.getInvMessageType() == MessageTypes.XLT) {
+            litetokensOutXltFetchInvData.add();
+            litetokensOutXltFetchInvDataElement.add(fetchSize);
           } else {
-            tronOutBlockFetchInvData.add();
-            tronOutBlockFetchInvDataElement.add(fetchSize);
+            litetokensOutBlockFetchInvData.add();
+            litetokensOutBlockFetchInvDataElement.add(fetchSize);
           }
         }
         break;
-      case TRXS:
+      case XLTS:
         TransactionsMessage transactionsMessage = (TransactionsMessage) msg;
         if (flag) {
-          tronInTrxs.add();
-          tronInTrx.add(transactionsMessage.getTransactions().getTransactionsCount());
+          litetokensInXlts.add();
+          litetokensInXlt.add(transactionsMessage.getTransactions().getTransactionsCount());
         } else {
-          tronOutTrxs.add();
-          tronOutTrx.add(transactionsMessage.getTransactions().getTransactionsCount());
+          litetokensOutXlts.add();
+          litetokensOutXlt.add(transactionsMessage.getTransactions().getTransactionsCount());
         }
         break;
-      case TRX:
+      case XLT:
         if (flag) {
-          tronInMessage.add();
+          litetokensInMessage.add();
         } else {
-          tronOutMessage.add();
+          litetokensOutMessage.add();
         }
         break;
       case BLOCK:
         if (flag) {
-          tronInBlock.add();
+          litetokensInBlock.add();
         }
-        tronOutBlock.add();
+        litetokensOutBlock.add();
         break;
       default:
         break;

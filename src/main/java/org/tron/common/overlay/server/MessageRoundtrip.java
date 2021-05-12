@@ -15,9 +15,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.overlay.server;
+package org.litetokens.common.overlay.server;
 
-import org.tron.common.overlay.message.Message;
+import org.litetokens.common.overlay.message.Message;
 
 /**
  * Utility wraps around a message to keep track of the number of times it has been offered This

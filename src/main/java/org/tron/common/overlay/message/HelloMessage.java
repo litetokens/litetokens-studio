@@ -1,14 +1,14 @@
-package org.tron.common.overlay.message;
+package org.litetokens.common.overlay.message;
 
 import com.google.protobuf.ByteString;
-import org.tron.common.overlay.discover.node.Node;
-import org.tron.common.utils.ByteArray;
-import org.tron.core.capsule.BlockCapsule;
-import org.tron.core.config.args.Args;
-import org.tron.core.net.message.MessageTypes;
-import org.tron.protos.Discover.Endpoint;
-import org.tron.protos.Protocol;
-import org.tron.protos.Protocol.HelloMessage.Builder;
+import org.litetokens.common.overlay.discover.node.Node;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.core.capsule.BlockCapsule;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.net.message.MessageTypes;
+import org.litetokens.protos.Discover.Endpoint;
+import org.litetokens.protos.Protocol;
+import org.litetokens.protos.Protocol.HelloMessage.Builder;
 
 public class HelloMessage extends P2pMessage {
 

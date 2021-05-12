@@ -1,4 +1,4 @@
-package stest.tron.wallet.common.client.utils;
+package stest.litetokens.wallet.common.client.utils;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -15,35 +15,35 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongycastle.util.encoders.Hex;
 import org.testng.Assert;
-import org.tron.api.GrpcAPI;
-import org.tron.api.GrpcAPI.AccountNetMessage;
-import org.tron.api.GrpcAPI.AccountResourceMessage;
-import org.tron.api.GrpcAPI.BytesMessage;
-import org.tron.api.GrpcAPI.EmptyMessage;
-import org.tron.api.GrpcAPI.ExchangeList;
-import org.tron.api.GrpcAPI.Return;
-import org.tron.api.GrpcAPI.Return.response_code;
-import org.tron.api.GrpcAPI.TransactionExtention;
-import org.tron.api.WalletGrpc;
-import org.tron.api.WalletSolidityGrpc;
-import org.tron.common.crypto.ECKey;
-import org.tron.common.crypto.Hash;
-import org.tron.common.utils.ByteArray;
-import org.tron.core.Wallet;
-import org.tron.protos.Contract;
-import org.tron.protos.Contract.CreateSmartContract;
-import org.tron.protos.Contract.UpdateSettingContract;
-import org.tron.protos.Protocol;
-import org.tron.protos.Protocol.Account;
-import org.tron.protos.Protocol.Block;
-import org.tron.protos.Protocol.Exchange;
-import org.tron.protos.Protocol.SmartContract;
-import org.tron.protos.Protocol.Transaction;
-import org.tron.protos.Protocol.Transaction.Result;
-import org.tron.protos.Protocol.TransactionInfo;
-import stest.tron.wallet.common.client.Parameter.CommonConstant;
-import stest.tron.wallet.common.client.WalletClient;
-import stest.tron.wallet.common.client.utils.AbiUtil;
+import org.litetokens.api.GrpcAPI;
+import org.litetokens.api.GrpcAPI.AccountNetMessage;
+import org.litetokens.api.GrpcAPI.AccountResourceMessage;
+import org.litetokens.api.GrpcAPI.BytesMessage;
+import org.litetokens.api.GrpcAPI.EmptyMessage;
+import org.litetokens.api.GrpcAPI.ExchangeList;
+import org.litetokens.api.GrpcAPI.Return;
+import org.litetokens.api.GrpcAPI.Return.response_code;
+import org.litetokens.api.GrpcAPI.TransactionExtention;
+import org.litetokens.api.WalletGrpc;
+import org.litetokens.api.WalletSolidityGrpc;
+import org.litetokens.common.crypto.ECKey;
+import org.litetokens.common.crypto.Hash;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.core.Wallet;
+import org.litetokens.protos.Contract;
+import org.litetokens.protos.Contract.CreateSmartContract;
+import org.litetokens.protos.Contract.UpdateSettingContract;
+import org.litetokens.protos.Protocol;
+import org.litetokens.protos.Protocol.Account;
+import org.litetokens.protos.Protocol.Block;
+import org.litetokens.protos.Protocol.Exchange;
+import org.litetokens.protos.Protocol.SmartContract;
+import org.litetokens.protos.Protocol.Transaction;
+import org.litetokens.protos.Protocol.Transaction.Result;
+import org.litetokens.protos.Protocol.TransactionInfo;
+import stest.litetokens.wallet.common.client.Parameter.CommonConstant;
+import stest.litetokens.wallet.common.client.WalletClient;
+import stest.litetokens.wallet.common.client.utils.AbiUtil;
 
 
 
@@ -57,7 +57,7 @@ public class PublicMethed {
   //private WalletSolidityGrpc.WalletSolidityBlockingStub blockingStubSolidity = null;
 
   public static Boolean createAssetIssue(byte[] address, String name, Long totalSupply,
-      Integer trxNum, Integer icoNum, Long startTime, Long endTime, Integer voteScore,
+      Integer xltNum, Integer icoNum, Long startTime, Long endTime, Integer voteScore,
       String description, String url, Long freeAssetNetLimit, Long publicFreeAssetNetLimit,
       Long fronzenAmount, Long frozenDay, String priKey,
       WalletGrpc.WalletBlockingStub blockingStubFull) {
@@ -76,7 +76,7 @@ public class PublicMethed {
       builder.setOwnerAddress(ByteString.copyFrom(address));
       builder.setName(ByteString.copyFrom(name.getBytes()));
       builder.setTotalSupply(totalSupply);
-      builder.setTrxNum(trxNum);
+      builder.setXltNum(xltNum);
       builder.setNum(icoNum);
       builder.setStartTime(startTime);
       builder.setEndTime(endTime);
@@ -952,7 +952,7 @@ public class PublicMethed {
     TransactionExtention transactionExtention = blockingStubFull
         .deployContract(contractDeployContract);
     if (transactionExtention == null || !transactionExtention.getResult().getResult()) {
-      System.out.println("RPC create trx failed!");
+      System.out.println("RPC create xlt failed!");
       if (transactionExtention != null) {
         System.out.println("Code = " + transactionExtention.getResult().getCode());
         System.out
@@ -1073,7 +1073,7 @@ public class PublicMethed {
     TransactionExtention transactionExtention = blockingStubFull
         .deployContract(contractDeployContract);
     if (transactionExtention == null || !transactionExtention.getResult().getResult()) {
-      System.out.println("RPC create trx failed!");
+      System.out.println("RPC create xlt failed!");
       if (transactionExtention != null) {
         System.out.println("Code = " + transactionExtention.getResult().getCode());
         System.out
@@ -1272,14 +1272,14 @@ public class PublicMethed {
     }
   }
 
-  public static byte[] generateContractAddress(Transaction trx, byte[] owneraddress) {
+  public static byte[] generateContractAddress(Transaction xlt, byte[] owneraddress) {
 
     // get owner address
-    // this address should be as same as the onweraddress in trx, DONNOT modify it
+    // this address should be as same as the onweraddress in xlt, DONNOT modify it
     byte[] ownerAddress = owneraddress;
 
     // get tx hash
-    byte[] txRawDataHash = Sha256Hash.of(trx.getRawData().toByteArray()).getBytes();
+    byte[] txRawDataHash = Sha256Hash.of(xlt.getRawData().toByteArray()).getBytes();
 
     // combine
     byte[] combined = new byte[txRawDataHash.length + ownerAddress.length];
@@ -1345,7 +1345,7 @@ public class PublicMethed {
     TransactionExtention transactionExtention = blockingStubFull
         .updateSetting(updateSettingContract);
     if (transactionExtention == null || !transactionExtention.getResult().getResult()) {
-      System.out.println("RPC create trx failed!");
+      System.out.println("RPC create xlt failed!");
       if (transactionExtention != null) {
         System.out.println("Code = " + transactionExtention.getResult().getCode());
         System.out
@@ -1416,7 +1416,7 @@ public class PublicMethed {
     Contract.TriggerSmartContract triggerContract = builder.build();
     TransactionExtention transactionExtention = blockingStubFull.triggerContract(triggerContract);
     if (transactionExtention == null || !transactionExtention.getResult().getResult()) {
-      System.out.println("RPC create call trx failed!");
+      System.out.println("RPC create call xlt failed!");
       System.out.println("Code = " + transactionExtention.getResult().getCode());
       System.out
           .println("Message = " + transactionExtention.getResult().getMessage().toStringUtf8());
@@ -1809,7 +1809,7 @@ public class PublicMethed {
     TransactionExtention transactionExtention = blockingStubFull
         .deployContract(contractDeployContract);
     if (transactionExtention == null || !transactionExtention.getResult().getResult()) {
-      System.out.println("RPC create trx failed!");
+      System.out.println("RPC create xlt failed!");
       if (transactionExtention != null) {
         System.out.println("Code = " + transactionExtention.getResult().getCode());
         System.out

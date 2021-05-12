@@ -1,10 +1,10 @@
 /*
- * java-tron is free software: you can redistribute it and/or modify
+ * java-litetokens is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * java-tron is distributed in the hope that it will be useful,
+ * java-litetokens is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -13,7 +13,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.core.actuator;
+package org.litetokens.core.actuator;
 
 import static junit.framework.TestCase.fail;
 
@@ -26,53 +26,53 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.FileUtil;
-import org.tron.core.Constant;
-import org.tron.core.Wallet;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.capsule.AssetIssueCapsule;
-import org.tron.core.capsule.TransactionResultCapsule;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.Manager;
-import org.tron.core.exception.ContractExeException;
-import org.tron.core.exception.ContractValidateException;
-import org.tron.protos.Contract;
-import org.tron.protos.Contract.AssetIssueContract;
-import org.tron.protos.Protocol.AccountType;
-import org.tron.protos.Protocol.Transaction.Result.code;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.core.Constant;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.capsule.AssetIssueCapsule;
+import org.litetokens.core.capsule.TransactionResultCapsule;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.exception.ContractExeException;
+import org.litetokens.core.exception.ContractValidateException;
+import org.litetokens.protos.Contract;
+import org.litetokens.protos.Contract.AssetIssueContract;
+import org.litetokens.protos.Protocol.AccountType;
+import org.litetokens.protos.Protocol.Transaction.Result.code;
 
 @Slf4j
 public class TransferAssetActuatorTest {
 
-  private static TronApplicationContext context;
+  private static LitetokensApplicationContext context;
   private static Manager dbManager;
   private static Any contract;
   private static final String dbPath = "output_transferasset_test";
-  private static final String ASSET_NAME = "trx";
+  private static final String ASSET_NAME = "xlt";
   private static final String OWNER_ADDRESS;
   private static final String TO_ADDRESS;
   private static final String NOT_EXIT_ADDRESS;
   private static final long OWNER_ASSET_BALANCE = 99999;
   private static final String ownerAsset_ADDRESS;
-  private static final String ownerASSET_NAME = "trxtest";
+  private static final String ownerASSET_NAME = "xlttest";
   private static final long OWNER_ASSET_Test_BALANCE = 99999;
   private static final String OWNER_ADDRESS_INVALID = "cccc";
   private static final String TO_ADDRESS_INVALID = "dddd";
   private static final long TOTAL_SUPPLY = 10L;
-  private static final int TRX_NUM = 10;
+  private static final int XLT_NUM = 10;
   private static final int NUM = 1;
   private static final long START_TIME = 1;
   private static final long END_TIME = 2;
   private static final int VOTE_SCORE = 2;
-  private static final String DESCRIPTION = "TRX";
-  private static final String URL = "https://tron.network";
+  private static final String DESCRIPTION = "XLT";
+  private static final String URL = "https://litetokens.org";
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new LitetokensApplicationContext(DefaultConfig.class);
     OWNER_ADDRESS = Wallet.getAddressPreFixString() + "abd4b9367799eaa3197fecb144eb71de1e049150";
     TO_ADDRESS = Wallet.getAddressPreFixString() + "548794500882809695a8a687866e76d4271a146a";
     NOT_EXIT_ADDRESS = Wallet.getAddressPreFixString() + "B56446E617E924805E4D6CA021D341FEF6E2013B";
@@ -110,7 +110,7 @@ public class TransferAssetActuatorTest {
             .setOwnerAddress(ByteString.copyFrom(ByteArray.fromHexString(OWNER_ADDRESS)))
             .setName(ByteString.copyFrom(ByteArray.fromString(ASSET_NAME)))
             .setTotalSupply(TOTAL_SUPPLY)
-            .setTrxNum(TRX_NUM)
+            .setXltNum(XLT_NUM)
             .setNum(NUM)
             .setStartTime(START_TIME)
             .setEndTime(END_TIME)
@@ -135,7 +135,7 @@ public class TransferAssetActuatorTest {
             .setOwnerAddress(ByteString.copyFrom(ByteArray.fromHexString(OWNER_ADDRESS)))
             .setName(ByteString.copyFrom(ByteArray.fromString(assetName)))
             .setTotalSupply(TOTAL_SUPPLY)
-            .setTrxNum(TRX_NUM)
+            .setXltNum(XLT_NUM)
             .setNum(NUM)
             .setStartTime(START_TIME)
             .setEndTime(END_TIME)
@@ -521,7 +521,7 @@ public class TransferAssetActuatorTest {
             .setOwnerAddress(ByteString.copyFrom(ByteArray.fromHexString(ownerAsset_ADDRESS)))
             .setName(ByteString.copyFrom(ByteArray.fromString(ownerASSET_NAME)))
             .setTotalSupply(TOTAL_SUPPLY)
-            .setTrxNum(TRX_NUM)
+            .setXltNum(XLT_NUM)
             .setNum(NUM)
             .setStartTime(START_TIME)
             .setEndTime(END_TIME)

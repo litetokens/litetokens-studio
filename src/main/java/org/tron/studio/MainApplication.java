@@ -1,4 +1,4 @@
-package org.tron.studio;
+package org.litetokens.studio;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.svg.SVGGlyphLoader;
@@ -23,14 +23,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.model.StyleSpansBuilder;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.tron.common.application.ApplicationFactory;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.core.Constant;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
-import org.tron.core.services.RpcApiService;
-import org.tron.core.services.WitnessService;
-import org.tron.core.services.http.FullNodeHttpApiService;
+import org.litetokens.common.application.ApplicationFactory;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.core.Constant;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.services.RpcApiService;
+import org.litetokens.core.services.WitnessService;
+import org.litetokens.core.services.http.FullNodeHttpApiService;
 
 import javafx.stage.Popup;
 import javafx.geometry.Insets;
@@ -60,7 +60,7 @@ public class MainApplication extends Application {
   public Stage primaryStage;
 
   public static Args cfgArgs;
-  public static org.tron.common.application.Application appT;
+  public static org.litetokens.common.application.Application appT;
 
   public static void main(String[] args) {
     Args.setParam(args, Constant.TESTNET_CONF);
@@ -101,7 +101,7 @@ public class MainApplication extends Application {
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
-            File fXmlFile = new File(Paths.get(System.getProperty("user.home"), "TronStudio", "record", "network.xml").toString());
+            File fXmlFile = new File(Paths.get(System.getProperty("user.home"), "LitetokensStudio", "record", "network.xml").toString());
             StreamResult result = new StreamResult(fXmlFile);
 
             // Output to console for testing
@@ -142,7 +142,7 @@ public class MainApplication extends Application {
     new Thread(MainApplication::startFullNode).start();
 
     Parent root = FXMLLoader.load(getClass().getResource("application.fxml"));
-    primaryStage.setTitle("Tron Studio");
+    primaryStage.setTitle("Litetokens Studio");
     primaryStage.getIcons().add(new Image(MainApplication.class.getResourceAsStream("/images/icon.png")));
 
     Screen screen = Screen.getPrimary();
@@ -168,7 +168,7 @@ public class MainApplication extends Application {
 
     DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
     beanFactory.setAllowCircularReferences(false);
-    TronApplicationContext context = new TronApplicationContext(
+    LitetokensApplicationContext context = new LitetokensApplicationContext(
         beanFactory);
     context.register(DefaultConfig.class);
     context.refresh();
@@ -203,7 +203,7 @@ public class MainApplication extends Application {
   }
 
 
-  public static void shutdown(final org.tron.common.application.Application app) {
+  public static void shutdown(final org.litetokens.common.application.Application app) {
     System.out.println("********register application shutdown hook********");
     Runtime.getRuntime().addShutdownHook(new Thread(app::shutdown));
       logger.info("stopped");

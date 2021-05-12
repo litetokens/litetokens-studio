@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.tron.studio.utils;
+package org.litetokens.studio.utils;
 
 import org.apache.commons.lang3.ArrayUtils;
 

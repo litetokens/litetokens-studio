@@ -16,7 +16,7 @@
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.common.overlay.message;
+package org.litetokens.common.overlay.message;
 
 public abstract class P2pMessage extends Message {
 

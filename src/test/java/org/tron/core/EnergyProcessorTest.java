@@ -1,4 +1,4 @@
-package org.tron.core;
+package org.litetokens.core;
 
 import com.google.protobuf.ByteString;
 import java.io.File;
@@ -8,31 +8,31 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.FileUtil;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.EnergyProcessor;
-import org.tron.core.db.Manager;
-import org.tron.protos.Contract;
-import org.tron.protos.Contract.AssetIssueContract;
-import org.tron.protos.Protocol.AccountType;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.EnergyProcessor;
+import org.litetokens.core.db.Manager;
+import org.litetokens.protos.Contract;
+import org.litetokens.protos.Contract.AssetIssueContract;
+import org.litetokens.protos.Protocol.AccountType;
 
 @Slf4j
 public class EnergyProcessorTest {
 
   private static Manager dbManager;
   private static final String dbPath = "EnergyProcessorTest";
-  private static TronApplicationContext context;
+  private static LitetokensApplicationContext context;
   private static final String ASSET_NAME;
   private static final String CONTRACT_PROVIDER_ADDRESS;
   private static final String USER_ADDRESS;
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new LitetokensApplicationContext(DefaultConfig.class);
     ASSET_NAME = "test_token";
     CONTRACT_PROVIDER_ADDRESS =
         Wallet.getAddressPreFixString() + "548794500882809695a8a687866e76d4271a1abc";

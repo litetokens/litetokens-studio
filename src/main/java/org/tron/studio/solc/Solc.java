@@ -15,9 +15,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.studio.solc;
+package org.litetokens.studio.solc;
 
-import org.tron.studio.filesystem.SolcFileUtil;
+import org.litetokens.studio.filesystem.SolcFileUtil;
 
 import java.io.File;
 import java.io.IOException;

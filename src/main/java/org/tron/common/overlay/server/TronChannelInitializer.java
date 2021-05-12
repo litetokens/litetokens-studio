@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.overlay.server;
+package org.litetokens.common.overlay.server;
 
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelInitializer;
@@ -28,8 +28,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.tron.core.net.node.NodeImpl;
-import org.tron.core.net.peer.PeerConnection;
+import org.litetokens.core.net.node.NodeImpl;
+import org.litetokens.core.net.peer.PeerConnection;
 
 /**
  * @author Roman Mandeleil
@@ -37,9 +37,9 @@ import org.tron.core.net.peer.PeerConnection;
  */
 @Component
 @Scope("prototype")
-public class TronChannelInitializer extends ChannelInitializer<NioSocketChannel> {
+public class LitetokensChannelInitializer extends ChannelInitializer<NioSocketChannel> {
 
-  private static final Logger logger = LoggerFactory.getLogger("TronChannelInitializer");
+  private static final Logger logger = LoggerFactory.getLogger("LitetokensChannelInitializer");
 
   @Autowired
   private ApplicationContext ctx;
@@ -53,7 +53,7 @@ public class TronChannelInitializer extends ChannelInitializer<NioSocketChannel>
 
   private boolean peerDiscoveryMode = false;
 
-  public TronChannelInitializer(String remoteId) {
+  public LitetokensChannelInitializer(String remoteId) {
     this.remoteId = remoteId;
   }
 

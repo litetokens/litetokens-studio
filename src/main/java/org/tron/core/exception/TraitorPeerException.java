@@ -1,6 +1,6 @@
-package org.tron.core.exception;
+package org.litetokens.core.exception;
 
-public class TraitorPeerException extends TronException {
+public class TraitorPeerException extends LitetokensException {
 
   public TraitorPeerException() {
     super();

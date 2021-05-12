@@ -1,10 +1,10 @@
 /*
- * java-tron is free software: you can redistribute it and/or modify
+ * java-litetokens is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * java-tron is distributed in the hope that it will be useful,
+ * java-litetokens is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -13,9 +13,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.core;
+package org.litetokens.core;
 
-import org.tron.common.utils.ByteArray;
+import org.litetokens.common.utils.ByteArray;
 
 public class Constant {
 
@@ -50,7 +50,7 @@ public class Constant {
   public static final long MEM_LIMIT_IN_ONE_TX_OF_SMART_CONTRACT = 32 * 1024 * 1024L; // 32MB
   public static final long MAX_CPU_TIME_OF_ONE_TX = 50000; // 50 ms = 50000 us
   public static final long STORAGE_LIMIT_IN_ONE_TX_OF_SMART_CONTRACT = 32 * 1024 * 1024L; // 32MB
-  public static final long SUN_PER_ENERGY = 100; // 1 us = 100 DROP = 100 * 10^-6 TRX
+  public static final long SUN_PER_ENERGY = 100; // 1 us = 100 DROP = 100 * 10^-6 XLT
   public static final long MAX_ENERGY_IN_TX = 3000000; // ref: 1 us = 1 energy
   public static final long MAX_RESULT_SIZE_IN_TX = 64; // max 8 * 8 items in result
   public static final long MAX_CONSUME_USER_RESOURCE_PERCENT = 100L;

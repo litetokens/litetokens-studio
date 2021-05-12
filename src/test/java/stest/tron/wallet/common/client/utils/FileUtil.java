@@ -1,4 +1,4 @@
-package stest.tron.wallet.common.client.utils;
+package stest.litetokens.wallet.common.client.utils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

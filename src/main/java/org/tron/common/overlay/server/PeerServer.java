@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.overlay.server;
+package org.litetokens.common.overlay.server;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -30,8 +30,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-import org.tron.core.config.args.Args;
-import org.tron.core.net.node.NodeImpl;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.net.node.NodeImpl;
 
 @Component
 public class PeerServer {
@@ -42,7 +42,7 @@ public class PeerServer {
 
   private ApplicationContext ctx;
 
-  public TronChannelInitializer tronChannelInitializer;
+  public LitetokensChannelInitializer litetokensChannelInitializer;
 
   private boolean listening;
 
@@ -62,9 +62,9 @@ public class PeerServer {
 
     bossGroup = new NioEventLoopGroup(1);
     workerGroup = new NioEventLoopGroup(args.getTcpNettyWorkThreadNum());
-    tronChannelInitializer = ctx.getBean(TronChannelInitializer.class, "");
+    litetokensChannelInitializer = ctx.getBean(LitetokensChannelInitializer.class, "");
 
-    tronChannelInitializer.setNodeImpl(p2pNode);
+    litetokensChannelInitializer.setNodeImpl(p2pNode);
 
     try {
       ServerBootstrap b = new ServerBootstrap();
@@ -77,7 +77,7 @@ public class PeerServer {
       b.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, this.args.getNodeConnectionTimeout());
 
       b.handler(new LoggingHandler());
-      b.childHandler(tronChannelInitializer);
+      b.childHandler(litetokensChannelInitializer);
 
       // Start the client.
       logger.info("TCP listener started, bind port {}", port);

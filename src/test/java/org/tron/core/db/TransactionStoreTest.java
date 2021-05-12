@@ -1,4 +1,4 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
 import com.google.protobuf.ByteString;
 import java.io.File;
@@ -7,22 +7,22 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.FileUtil;
-import org.tron.core.Constant;
-import org.tron.core.Wallet;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
-import org.tron.core.exception.BadItemException;
-import org.tron.protos.Contract.AccountCreateContract;
-import org.tron.protos.Contract.TransferContract;
-import org.tron.protos.Contract.VoteWitnessContract;
-import org.tron.protos.Contract.VoteWitnessContract.Vote;
-import org.tron.protos.Contract.WitnessCreateContract;
-import org.tron.protos.Protocol.AccountType;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.core.Constant;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.exception.BadItemException;
+import org.litetokens.protos.Contract.AccountCreateContract;
+import org.litetokens.protos.Contract.TransferContract;
+import org.litetokens.protos.Contract.VoteWitnessContract;
+import org.litetokens.protos.Contract.VoteWitnessContract.Vote;
+import org.litetokens.protos.Contract.WitnessCreateContract;
+import org.litetokens.protos.Protocol.AccountType;
 
 public class TransactionStoreTest {
 
@@ -30,13 +30,13 @@ public class TransactionStoreTest {
   private static String dbDirectory = "db_TransactionStore_test";
   private static String indexDirectory = "index_TransactionStore_test";
   private static TransactionStore transactionStore;
-  private static TronApplicationContext context;
+  private static LitetokensApplicationContext context;
   private static final byte[] key1 = TransactionStoreTest.randomBytes(21);
   private static Manager dbManager;
   private static final byte[] key2 = TransactionStoreTest.randomBytes(21);
 
 
-  private static final String URL = "https://tron.network";
+  private static final String URL = "https://litetokens.org";
 
   private static final String ACCOUNT_NAME = "ownerF";
   private static final String OWNER_ADDRESS =
@@ -57,7 +57,7 @@ public class TransactionStoreTest {
         },
         Constant.TEST_CONF
     );
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new LitetokensApplicationContext(DefaultConfig.class);
   }
 
   /**

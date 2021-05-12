@@ -1,11 +1,11 @@
-package org.tron.studio.utils;
+package org.litetokens.studio.utils;
 
 import javafx.concurrent.Task;
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.model.StyleSpans;
 import org.fxmisc.richtext.model.StyleSpansBuilder;
 import org.reactfx.Subscription;
-import org.tron.studio.ShareData;
+import org.litetokens.studio.ShareData;
 
 import java.time.Duration;
 import java.util.Collection;

@@ -1,4 +1,4 @@
-package org.tron.core.services.http;
+package org.litetokens.core.services.http;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.protobuf.ByteString;
@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tron.common.utils.ByteArray;
-import org.tron.core.Wallet;
-import org.tron.protos.Protocol.Proposal;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.core.Wallet;
+import org.litetokens.protos.Protocol.Proposal;
 
 @Component
 @Slf4j

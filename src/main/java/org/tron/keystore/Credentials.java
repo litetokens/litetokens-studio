@@ -1,7 +1,7 @@
-package org.tron.keystore;
+package org.litetokens.keystore;
 
-import org.tron.common.crypto.ECKey;
-import org.tron.common.utils.ByteArray;
+import org.litetokens.common.crypto.ECKey;
+import org.litetokens.common.utils.ByteArray;
 
 /**
  * Credentials wrapper.
@@ -25,7 +25,7 @@ public class Credentials {
     }
 
     public static Credentials create(ECKey ecKeyPair) {
-        String address = org.tron.core.Wallet.encode58Check(ecKeyPair.getAddress());
+        String address = org.litetokens.core.Wallet.encode58Check(ecKeyPair.getAddress());
         return new Credentials(ecKeyPair, address);
     }
 

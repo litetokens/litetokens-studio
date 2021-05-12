@@ -1,4 +1,4 @@
-package org.tron.common.overlay.server;
+package org.litetokens.common.overlay.server;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,12 +12,12 @@ import javax.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.tron.common.overlay.discover.node.statistics.NodeStatistics;
-import org.tron.common.utils.CollectionUtils;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.Manager;
-import org.tron.core.net.peer.PeerConnection;
-import org.tron.protos.Protocol.ReasonCode;
+import org.litetokens.common.overlay.discover.node.statistics.NodeStatistics;
+import org.litetokens.common.utils.CollectionUtils;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.net.peer.PeerConnection;
+import org.litetokens.protos.Protocol.ReasonCode;
 
 @Slf4j
 @Service

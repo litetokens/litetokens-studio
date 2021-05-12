@@ -1,4 +1,4 @@
-package org.tron.studio.walletserver;
+package org.litetokens.studio.walletserver;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -10,23 +10,23 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongycastle.util.encoders.Hex;
-import org.tron.api.GrpcAPI;
-import org.tron.api.GrpcAPI.*;
-import org.tron.common.crypto.ECKey;
-import org.tron.common.crypto.Hash;
-import org.tron.common.utils.Base58;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.Sha256Hash;
-import org.tron.core.exception.CancelException;
-import org.tron.keystore.CipherException;
-import org.tron.protos.Contract;
-import org.tron.protos.Contract.*;
-import org.tron.protos.Protocol.*;
-import org.tron.protos.Protocol.Transaction.Result;
-import org.tron.studio.ShareData;
-import org.tron.studio.utils.CheckStrength;
-import org.tron.studio.utils.Parameter.CommonConstant;
-import org.tron.studio.utils.TransactionUtils;
+import org.litetokens.api.GrpcAPI;
+import org.litetokens.api.GrpcAPI.*;
+import org.litetokens.common.crypto.ECKey;
+import org.litetokens.common.crypto.Hash;
+import org.litetokens.common.utils.Base58;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.core.exception.CancelException;
+import org.litetokens.keystore.CipherException;
+import org.litetokens.protos.Contract;
+import org.litetokens.protos.Contract.*;
+import org.litetokens.protos.Protocol.*;
+import org.litetokens.protos.Protocol.Transaction.Result;
+import org.litetokens.studio.ShareData;
+import org.litetokens.studio.utils.CheckStrength;
+import org.litetokens.studio.utils.Parameter.CommonConstant;
+import org.litetokens.studio.utils.TransactionUtils;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -1120,14 +1120,14 @@ public class WalletClient {
     return builder.build();
   }
 
-  public byte[] generateContractAddress(Transaction trx) {
+  public byte[] generateContractAddress(Transaction xlt) {
 
     // get owner address
-    // this address should be as same as the onweraddress in trx, DONNOT modify it
+    // this address should be as same as the onweraddress in xlt, DONNOT modify it
     byte[] ownerAddress = getAddress();
 
     // get tx hash
-    byte[] txRawDataHash = Sha256Hash.of(trx.getRawData().toByteArray()).getBytes();
+    byte[] txRawDataHash = Sha256Hash.of(xlt.getRawData().toByteArray()).getBytes();
 
     // combine
     byte[] combined = new byte[txRawDataHash.length + ownerAddress.length];
@@ -1146,7 +1146,7 @@ public class WalletClient {
 
     TransactionExtention transactionExtention = rpcCli.updateSetting(updateSettingContract);
     if (transactionExtention == null || !transactionExtention.getResult().getResult()) {
-      System.out.println("RPC create trx failed!");
+      System.out.println("RPC create xlt failed!");
       if (transactionExtention != null) {
         System.out.println("Code = " + transactionExtention.getResult().getCode());
         System.out
@@ -1168,7 +1168,7 @@ public class WalletClient {
 
     TransactionExtention transactionExtention = rpcCli.deployContract(contractDeployContract);
     if (transactionExtention == null || !transactionExtention.getResult().getResult()) {
-      System.out.println("RPC create trx failed!");
+      System.out.println("RPC create xlt failed!");
       if (transactionExtention != null) {
         System.out.println("Code = " + transactionExtention.getResult().getCode());
         System.out
@@ -1211,7 +1211,7 @@ public class WalletClient {
     TransactionExtention transactionExtention = rpcCli.triggerContract(triggerContract);
     lastTransactionExtention = transactionExtention;
     if (transactionExtention == null || !transactionExtention.getResult().getResult()) {
-      System.out.println("RPC create call trx failed!");
+      System.out.println("RPC create call xlt failed!");
       System.out.println("Code = " + transactionExtention.getResult().getCode());
       System.out
           .println("Message = " + transactionExtention.getResult().getMessage().toStringUtf8());

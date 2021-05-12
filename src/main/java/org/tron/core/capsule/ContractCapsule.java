@@ -1,10 +1,10 @@
 /*
- * java-tron is free software: you can redistribute it and/or modify
+ * java-litetokens is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * java-tron is distributed in the hope that it will be useful,
+ * java-litetokens is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -13,16 +13,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.core.capsule;
+package org.litetokens.core.capsule;
 
 import com.google.protobuf.Any;
 import com.google.protobuf.InvalidProtocolBufferException;
 import lombok.extern.slf4j.Slf4j;
-import org.tron.common.utils.Sha256Hash;
-import org.tron.protos.Contract.CreateSmartContract;
-import org.tron.protos.Contract.TriggerSmartContract;
-import org.tron.protos.Protocol.SmartContract;
-import org.tron.protos.Protocol.Transaction;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.protos.Contract.CreateSmartContract;
+import org.litetokens.protos.Contract.TriggerSmartContract;
+import org.litetokens.protos.Protocol.SmartContract;
+import org.litetokens.protos.Protocol.Transaction;
 
 @Slf4j
 public class ContractCapsule implements ProtoCapsule<SmartContract> {
@@ -44,9 +44,9 @@ public class ContractCapsule implements ProtoCapsule<SmartContract> {
     }
   }
 
-  public static CreateSmartContract getSmartContractFromTransaction(Transaction trx) {
+  public static CreateSmartContract getSmartContractFromTransaction(Transaction xlt) {
     try {
-      Any any = trx.getRawData().getContract(0).getParameter();
+      Any any = xlt.getRawData().getContract(0).getParameter();
       CreateSmartContract createSmartContract = any.unpack(CreateSmartContract.class);
       return createSmartContract;
     } catch (InvalidProtocolBufferException e) {
@@ -54,9 +54,9 @@ public class ContractCapsule implements ProtoCapsule<SmartContract> {
     }
   }
 
-  public static TriggerSmartContract getTriggerContractFromTransaction(Transaction trx) {
+  public static TriggerSmartContract getTriggerContractFromTransaction(Transaction xlt) {
     try {
-      Any any = trx.getRawData().getContract(0).getParameter();
+      Any any = xlt.getRawData().getContract(0).getParameter();
       TriggerSmartContract contractTriggerContract = any.unpack(TriggerSmartContract.class);
       return contractTriggerContract;
     } catch (InvalidProtocolBufferException e) {

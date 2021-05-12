@@ -1,4 +1,4 @@
-package org.tron.core.net.message;
+package org.litetokens.core.net.message;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,11 +7,11 @@ public enum MessageTypes {
 
   FIRST(0x00),
 
-  TRX(0x01),
+  XLT(0x01),
 
   BLOCK(0x02),
 
-  TRXS(0x03),
+  XLTS(0x03),
 
   BLOCKS(0x04),
 
@@ -31,7 +31,7 @@ public enum MessageTypes {
 
   BLOCK_INVENTORY(0x12),
 
-  TRX_INVENTORY(0x13),
+  XLT_INVENTORY(0x13),
 
   P2P_HELLO(0x20),
 
@@ -81,15 +81,15 @@ public enum MessageTypes {
     return code <= P2P_PONG.asByte() && code >= P2P_HELLO.asByte();
   }
 
-  public static boolean inTronRange(byte code) {
-    return code <= TRX_INVENTORY.asByte() && code >= FIRST.asByte();
+  public static boolean inLitetokensRange(byte code) {
+    return code <= XLT_INVENTORY.asByte() && code >= FIRST.asByte();
   }
 
   @Override
   public String toString() {
     switch (type) {
       case 1:
-        return "TRX";
+        return "XLT";
       case 2:
         return "BLOCK";
       case 6:

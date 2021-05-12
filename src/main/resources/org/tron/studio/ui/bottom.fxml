@@ -4,7 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
-<HBox spacing="10" xmlns:fx="http://javafx.com/fxml" fx:controller="org.tron.studio.ui.BottomController">
+<HBox spacing="10" xmlns:fx="http://javafx.com/fxml" fx:controller="org.litetokens.studio.ui.BottomController">
     <padding>
         <Insets top="10" right="10" bottom="10" left="10"/>
     </padding>

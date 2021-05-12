@@ -1,4 +1,4 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
 import com.google.common.collect.Streams;
 import lombok.extern.slf4j.Slf4j;
@@ -6,12 +6,12 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.tron.core.capsule.ContractCapsule;
-import org.tron.protos.Protocol.SmartContract;
+import org.litetokens.core.capsule.ContractCapsule;
+import org.litetokens.protos.Protocol.SmartContract;
 
 @Slf4j
 @Component
-public class ContractStore extends TronStoreWithRevoking<ContractCapsule> {
+public class ContractStore extends LitetokensStoreWithRevoking<ContractCapsule> {
 
   @Autowired
   private ContractStore(@Value("contract") String dbName) {
@@ -43,8 +43,8 @@ public class ContractStore extends TronStoreWithRevoking<ContractCapsule> {
   /**
    * find a transaction  by it's id.
    */
-  public byte[] findContractByHash(byte[] trxHash) {
-    return revokingDB.getUnchecked(trxHash);
+  public byte[] findContractByHash(byte[] xltHash) {
+    return revokingDB.getUnchecked(xltHash);
   }
 
   /**

@@ -1,16 +1,16 @@
-package org.tron.core.exception;
+package org.litetokens.core.exception;
 
-public class TronException extends Exception {
+public class LitetokensException extends Exception {
 
-  public TronException() {
+  public LitetokensException() {
     super();
   }
 
-  public TronException(String message) {
+  public LitetokensException(String message) {
     super(message);
   }
 
-  public TronException(String message, Throwable cause) {
+  public LitetokensException(String message, Throwable cause) {
     super(message, cause);
   }
 

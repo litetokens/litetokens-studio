@@ -15,15 +15,15 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.runtime.vm;
+package org.litetokens.common.runtime.vm;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import org.spongycastle.util.Arrays;
 import org.spongycastle.util.encoders.Hex;
-import org.tron.common.utils.ByteUtil;
-import org.tron.common.utils.FastByteComparisons;
-import org.tron.core.db.ByteArrayWrapper;
+import org.litetokens.common.utils.ByteUtil;
+import org.litetokens.common.utils.FastByteComparisons;
+import org.litetokens.core.db.ByteArrayWrapper;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;

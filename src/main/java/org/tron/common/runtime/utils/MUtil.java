@@ -1,12 +1,12 @@
-package org.tron.common.runtime.utils;
+package org.litetokens.common.runtime.utils;
 
 import java.util.Arrays;
 import org.spongycastle.util.encoders.Hex;
-import org.tron.common.crypto.Hash;
-import org.tron.common.storage.Deposit;
-import org.tron.core.Wallet;
-import org.tron.core.actuator.TransferActuator;
-import org.tron.core.exception.ContractValidateException;
+import org.litetokens.common.crypto.Hash;
+import org.litetokens.common.storage.Deposit;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.actuator.TransferActuator;
+import org.litetokens.core.exception.ContractValidateException;
 
 public class MUtil {
 
@@ -35,7 +35,7 @@ public class MUtil {
     deposit.addBalance(address, -amount);
   }
 
-  public static byte[] convertToTronAddress(byte[] address) {
+  public static byte[] convertToLitetokensAddress(byte[] address) {
     if (address.length == 20) {
       byte[] newAddress = new byte[21];
       byte[] temp = new byte[]{Wallet.getAddressPreFixByte()};
@@ -46,7 +46,7 @@ public class MUtil {
     return address;
   }
 
-  public static byte[] convertFromTronAddress(byte[] address) {
+  public static byte[] convertFromLitetokensAddress(byte[] address) {
     if (address.length == 21) {
       byte[] newAddress = new byte[20];
       System.arraycopy(address, 1, newAddress, 0, 20);

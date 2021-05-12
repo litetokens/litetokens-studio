@@ -1,4 +1,4 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
 import com.google.common.collect.Maps;
 import com.google.protobuf.ByteString;
@@ -11,55 +11,55 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.common.crypto.ECKey;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.FileUtil;
-import org.tron.common.utils.Sha256Hash;
-import org.tron.common.utils.Utils;
-import org.tron.core.Constant;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.capsule.BlockCapsule;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.core.capsule.WitnessCapsule;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
-import org.tron.core.exception.AccountResourceInsufficientException;
-import org.tron.core.exception.BadBlockException;
-import org.tron.core.exception.BadItemException;
-import org.tron.core.exception.BadNumberBlockException;
-import org.tron.core.exception.ContractExeException;
-import org.tron.core.exception.ContractValidateException;
-import org.tron.core.exception.DupTransactionException;
-import org.tron.core.exception.HeaderNotFound;
-import org.tron.core.exception.ItemNotFoundException;
-import org.tron.core.exception.NonCommonBlockException;
-import org.tron.core.exception.ReceiptCheckErrException;
-import org.tron.core.exception.TaposException;
-import org.tron.core.exception.TooBigTransactionException;
-import org.tron.core.exception.TooBigTransactionResultException;
-import org.tron.core.exception.TransactionExpirationException;
-import org.tron.core.exception.UnLinkedBlockException;
-import org.tron.core.exception.VMIllegalException;
-import org.tron.core.exception.ValidateScheduleException;
-import org.tron.core.exception.ValidateSignatureException;
-import org.tron.core.witness.WitnessController;
-import org.tron.protos.Contract.TransferContract;
-import org.tron.protos.Protocol.Account;
-import org.tron.protos.Protocol.Transaction.Contract.ContractType;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.common.crypto.ECKey;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.common.utils.Utils;
+import org.litetokens.core.Constant;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.capsule.BlockCapsule;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.core.capsule.WitnessCapsule;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.exception.AccountResourceInsufficientException;
+import org.litetokens.core.exception.BadBlockException;
+import org.litetokens.core.exception.BadItemException;
+import org.litetokens.core.exception.BadNumberBlockException;
+import org.litetokens.core.exception.ContractExeException;
+import org.litetokens.core.exception.ContractValidateException;
+import org.litetokens.core.exception.DupTransactionException;
+import org.litetokens.core.exception.HeaderNotFound;
+import org.litetokens.core.exception.ItemNotFoundException;
+import org.litetokens.core.exception.NonCommonBlockException;
+import org.litetokens.core.exception.ReceiptCheckErrException;
+import org.litetokens.core.exception.TaposException;
+import org.litetokens.core.exception.TooBigTransactionException;
+import org.litetokens.core.exception.TooBigTransactionResultException;
+import org.litetokens.core.exception.TransactionExpirationException;
+import org.litetokens.core.exception.UnLinkedBlockException;
+import org.litetokens.core.exception.VMIllegalException;
+import org.litetokens.core.exception.ValidateScheduleException;
+import org.litetokens.core.exception.ValidateSignatureException;
+import org.litetokens.core.witness.WitnessController;
+import org.litetokens.protos.Contract.TransferContract;
+import org.litetokens.protos.Protocol.Account;
+import org.litetokens.protos.Protocol.Transaction.Contract.ContractType;
 
 @Slf4j
 public class ManagerTest {
 
   private static Manager dbManager;
-  private static TronApplicationContext context;
+  private static LitetokensApplicationContext context;
   private static BlockCapsule blockCapsule2;
   private static String dbPath = "output_manager_test";
 
   @Before
   public void init() {
     Args.setParam(new String[]{"-d", dbPath, "-w"}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new LitetokensApplicationContext(DefaultConfig.class);
 
     dbManager = context.getBean(Manager.class);
 
@@ -112,13 +112,13 @@ public class ManagerTest {
             .setOwnerAddress(ByteString.copyFromUtf8("aaa"))
             .setToAddress(ByteString.copyFromUtf8("bbb"))
             .build();
-    TransactionCapsule trx = new TransactionCapsule(tc, ContractType.TransferContract);
+    TransactionCapsule xlt = new TransactionCapsule(tc, ContractType.TransferContract);
     if (dbManager.getDynamicPropertiesStore().getLatestBlockHeaderNumber() == 0) {
       dbManager.pushBlock(blockCapsule);
       Assert.assertEquals(1, dbManager.getDynamicPropertiesStore().getLatestBlockHeaderNumber());
-      dbManager.setBlockReference(trx);
+      dbManager.setBlockReference(xlt);
       Assert.assertEquals(1,
-          ByteArray.toInt(trx.getInstance().getRawData().getRefBlockBytes().toByteArray()));
+          ByteArray.toInt(xlt.getInstance().getRawData().getRefBlockBytes().toByteArray()));
     }
 
     while (dbManager.getDynamicPropertiesStore().getLatestBlockHeaderNumber() > 0) {
@@ -127,9 +127,9 @@ public class ManagerTest {
 
     dbManager.pushBlock(blockCapsule);
     Assert.assertEquals(1, dbManager.getDynamicPropertiesStore().getLatestBlockHeaderNumber());
-    dbManager.setBlockReference(trx);
+    dbManager.setBlockReference(xlt);
     Assert.assertEquals(1,
-        ByteArray.toInt(trx.getInstance().getRawData().getRefBlockBytes().toByteArray()));
+        ByteArray.toInt(xlt.getInstance().getRawData().getRefBlockBytes().toByteArray()));
   }
 
   @Test
@@ -177,15 +177,15 @@ public class ManagerTest {
     logger.info("------------");
     WitnessCapsule witnessCapsulef =
         new WitnessCapsule(
-            ByteString.copyFrom(ByteArray.fromHexString("0x0011")), "www.tron.net/first");
+            ByteString.copyFrom(ByteArray.fromHexString("0x0011")), "www.litetokens.net/first");
     witnessCapsulef.setIsJobs(true);
     WitnessCapsule witnessCapsules =
         new WitnessCapsule(
-            ByteString.copyFrom(ByteArray.fromHexString("0x0012")), "www.tron.net/second");
+            ByteString.copyFrom(ByteArray.fromHexString("0x0012")), "www.litetokens.net/second");
     witnessCapsules.setIsJobs(true);
     WitnessCapsule witnessCapsulet =
         new WitnessCapsule(
-            ByteString.copyFrom(ByteArray.fromHexString("0x0013")), "www.tron.net/three");
+            ByteString.copyFrom(ByteArray.fromHexString("0x0013")), "www.litetokens.net/three");
     witnessCapsulet.setIsJobs(false);
 
     dbManager

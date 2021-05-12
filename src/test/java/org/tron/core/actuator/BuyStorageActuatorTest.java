@@ -1,4 +1,4 @@
-package org.tron.core.actuator;
+package org.litetokens.core.actuator;
 
 import com.google.protobuf.Any;
 import com.google.protobuf.ByteString;
@@ -9,29 +9,29 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.FileUtil;
-import org.tron.core.Constant;
-import org.tron.core.Wallet;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.capsule.TransactionResultCapsule;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.Parameter.ChainConstant;
-import org.tron.core.config.args.Args;
-import org.tron.core.db.Manager;
-import org.tron.core.exception.ContractExeException;
-import org.tron.core.exception.ContractValidateException;
-import org.tron.protos.Contract;
-import org.tron.protos.Protocol.AccountType;
-import org.tron.protos.Protocol.Transaction.Result.code;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.core.Constant;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.capsule.TransactionResultCapsule;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.Parameter.ChainConstant;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.core.db.Manager;
+import org.litetokens.core.exception.ContractExeException;
+import org.litetokens.core.exception.ContractValidateException;
+import org.litetokens.protos.Contract;
+import org.litetokens.protos.Protocol.AccountType;
+import org.litetokens.protos.Protocol.Transaction.Result.code;
 
 @Slf4j
 public class BuyStorageActuatorTest {
 
   private static Manager dbManager;
   private static final String dbPath = "output_buy_storage_test";
-  private static TronApplicationContext context;
+  private static LitetokensApplicationContext context;
   private static final String OWNER_ADDRESS;
   private static final String OWNER_ADDRESS_INVALID = "aaaa";
   private static final String OWNER_ACCOUNT_INVALID;
@@ -39,7 +39,7 @@ public class BuyStorageActuatorTest {
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new LitetokensApplicationContext(DefaultConfig.class);
     OWNER_ADDRESS = Wallet.getAddressPreFixString() + "548794500882809695a8a687866e76d4271a1abc";
     OWNER_ACCOUNT_INVALID =
         Wallet.getAddressPreFixString() + "548794500882809695a8a687866e76d4271a3456";
@@ -107,7 +107,7 @@ public class BuyStorageActuatorTest {
     Assert.assertEquals(currentPool, 100_000_000_000000L);
     Assert.assertEquals(currentReserved, 128L * 1024 * 1024 * 1024);
 
-    long quant = 2_000_000_000_000L; // 2 million trx
+    long quant = 2_000_000_000_000L; // 2 million xlt
     BuyStorageActuator actuator = new BuyStorageActuator(
         getContract(OWNER_ADDRESS, quant), dbManager);
     TransactionResultCapsule ret = new TransactionResultCapsule();
@@ -139,7 +139,7 @@ public class BuyStorageActuatorTest {
     Assert.assertEquals(currentPool, 100_000_000_000000L);
     Assert.assertEquals(currentReserved, 128L * 1024 * 1024 * 1024);
 
-    long quant = 1_000_000_000_000L; // 1 million trx
+    long quant = 1_000_000_000_000L; // 1 million xlt
 
     BuyStorageActuator actuator = new BuyStorageActuator(
         getContract(OWNER_ADDRESS, quant), dbManager);
@@ -191,7 +191,7 @@ public class BuyStorageActuatorTest {
 //    Assert.assertEquals(currentPool, 100_000_000_000000L);
 //    Assert.assertEquals(currentReserved, 128L * 1024 * 1024 * 1024);
 //
-//    long quant = 1_000_000_000_000L; // 2 million trx
+//    long quant = 1_000_000_000_000L; // 2 million xlt
 //
 //    BuyStorageActuator actuator = new BuyStorageActuator(
 //        getContract(OWNER_ADDRESS, quant), dbManager);
@@ -260,7 +260,7 @@ public class BuyStorageActuatorTest {
   }
 
   @Test
-  public void buyLessThan1Trx() {
+  public void buyLessThan1Xlt() {
     long quant = 200_000L;
     BuyStorageActuator actuator = new BuyStorageActuator(
         getContract(OWNER_ADDRESS, quant), dbManager);
@@ -272,7 +272,7 @@ public class BuyStorageActuatorTest {
 
     } catch (ContractValidateException e) {
       Assert.assertTrue(e instanceof ContractValidateException);
-      Assert.assertEquals("quantity must be larger than 1TRX", e.getMessage());
+      Assert.assertEquals("quantity must be larger than 1XLT", e.getMessage());
     } catch (ContractExeException e) {
       Assert.assertFalse(e instanceof ContractExeException);
     }
@@ -285,7 +285,7 @@ public class BuyStorageActuatorTest {
     Assert.assertEquals(currentPool, 100_000_000_000000L);
     Assert.assertEquals(currentReserved, 128L * 1024 * 1024 * 1024);
 
-    long quant = 9_000_000_000_000_000L; // 9 billion trx
+    long quant = 9_000_000_000_000_000L; // 9 billion xlt
 
     BuyStorageActuator actuator = new BuyStorageActuator(
         getContract(OWNER_ADDRESS, quant), dbManager);

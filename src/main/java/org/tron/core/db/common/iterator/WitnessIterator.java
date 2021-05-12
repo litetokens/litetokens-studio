@@ -1,6 +1,6 @@
-package org.tron.core.db.common.iterator;
+package org.litetokens.core.db.common.iterator;
 
-import org.tron.core.capsule.WitnessCapsule;
+import org.litetokens.core.capsule.WitnessCapsule;
 
 import java.util.Iterator;
 import java.util.Map.Entry;

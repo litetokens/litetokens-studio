@@ -1,4 +1,4 @@
-package org.tron.studio;
+package org.litetokens.studio;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -9,10 +9,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.LineNumberFactory;
-import org.tron.studio.filesystem.SolidityFileUtil;
-import org.tron.studio.utils.SolidityHighlight;
-import org.tron.studio.utils.AutoCompletion;
-import org.tron.studio.utils.FormatCode;
+import org.litetokens.studio.filesystem.SolidityFileUtil;
+import org.litetokens.studio.utils.SolidityHighlight;
+import org.litetokens.studio.utils.AutoCompletion;
+import org.litetokens.studio.utils.FormatCode;
 
 import javax.annotation.PostConstruct;
 import java.io.*;

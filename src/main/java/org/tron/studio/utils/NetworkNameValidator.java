@@ -1,8 +1,8 @@
-package org.tron.studio.utils;
+package org.litetokens.studio.utils;
 import com.jfoenix.validation.base.ValidatorBase;
 import javafx.beans.DefaultProperty;
 import javafx.scene.control.TextInputControl;
-import org.tron.studio.ShareData;
+import org.litetokens.studio.ShareData;
 
 
 public class NetworkNameValidator extends ValidatorBase {

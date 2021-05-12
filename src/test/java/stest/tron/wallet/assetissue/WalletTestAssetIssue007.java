@@ -1,4 +1,4 @@
-package stest.tron.wallet.assetissue;
+package stest.litetokens.wallet.assetissue;
 
 import com.google.protobuf.ByteString;
 import io.grpc.ManagedChannel;
@@ -14,24 +14,24 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
-import org.tron.api.GrpcAPI;
-import org.tron.api.GrpcAPI.AccountNetMessage;
-import org.tron.api.GrpcAPI.NumberMessage;
-import org.tron.api.GrpcAPI.Return;
-import org.tron.api.WalletGrpc;
-import org.tron.common.crypto.ECKey;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.Utils;
-import org.tron.core.Wallet;
-import org.tron.protos.Contract;
-import org.tron.protos.Protocol.Account;
-import org.tron.protos.Protocol.Block;
-import org.tron.protos.Protocol.Transaction;
-import stest.tron.wallet.common.client.Configuration;
-import stest.tron.wallet.common.client.Parameter.CommonConstant;
-import stest.tron.wallet.common.client.utils.Base58;
-import stest.tron.wallet.common.client.utils.PublicMethed;
-import stest.tron.wallet.common.client.utils.TransactionUtils;
+import org.litetokens.api.GrpcAPI;
+import org.litetokens.api.GrpcAPI.AccountNetMessage;
+import org.litetokens.api.GrpcAPI.NumberMessage;
+import org.litetokens.api.GrpcAPI.Return;
+import org.litetokens.api.WalletGrpc;
+import org.litetokens.common.crypto.ECKey;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.Utils;
+import org.litetokens.core.Wallet;
+import org.litetokens.protos.Contract;
+import org.litetokens.protos.Protocol.Account;
+import org.litetokens.protos.Protocol.Block;
+import org.litetokens.protos.Protocol.Transaction;
+import stest.litetokens.wallet.common.client.Configuration;
+import stest.litetokens.wallet.common.client.Parameter.CommonConstant;
+import stest.litetokens.wallet.common.client.utils.Base58;
+import stest.litetokens.wallet.common.client.utils.PublicMethed;
+import stest.litetokens.wallet.common.client.utils.TransactionUtils;
 
 @Slf4j
 public class WalletTestAssetIssue007 {
@@ -48,7 +48,7 @@ public class WalletTestAssetIssue007 {
   private static final long totalSupply = now;
   private static final long sendAmount = 10000000000L;
   private static final long netCostMeasure = 200L;
-  private static final Integer trxNum = 1;
+  private static final Integer xltNum = 1;
   private static final Integer icoNum = 1;
 
   Long freeAssetNetLimit = 10000L;
@@ -100,7 +100,7 @@ public class WalletTestAssetIssue007 {
     Long start = System.currentTimeMillis() + 2000;
     Long end = System.currentTimeMillis() + 1000000000;
     Assert.assertTrue(PublicMethed
-        .createAssetIssue(asset007Address, name, totalSupply, trxNum, icoNum, start, end, 1, description,
+        .createAssetIssue(asset007Address, name, totalSupply, xltNum, icoNum, start, end, 1, description,
             url, freeAssetNetLimit, publicFreeAssetNetLimit, 1L, 1L, testKeyForAssetIssue007,
             blockingStubFull));
 
@@ -166,7 +166,7 @@ public class WalletTestAssetIssue007 {
     participateInfo = PublicMethed.queryAccount(participateAssetCreateKey,blockingStubFull);
     final Long afterBalance = participateInfo.getBalance();
 
-    Assert.assertTrue(beforeBalance  - trxNum*1*icoNum  >= afterBalance);
+    Assert.assertTrue(beforeBalance  - xltNum*1*icoNum  >= afterBalance);
   }
 
   @AfterClass(enabled = false)

@@ -15,24 +15,24 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.runtime.vm.program;
+package org.litetokens.common.runtime.vm.program;
 
 import static org.apache.commons.lang3.ArrayUtils.isEmpty;
 import static org.apache.commons.lang3.ArrayUtils.nullToEmpty;
-import static org.tron.common.utils.ByteUtil.EMPTY_BYTE_ARRAY;
+import static org.litetokens.common.utils.ByteUtil.EMPTY_BYTE_ARRAY;
 
 import com.google.common.primitives.Longs;
 import java.util.Arrays;
-import org.tron.common.crypto.Hash;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.protos.Protocol.Transaction;
+import org.litetokens.common.crypto.Hash;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.protos.Protocol.Transaction;
 
 public class InternalTransaction {
 
   private Transaction transaction;
   private byte[] hash;
   private byte[] parentHash;
-  /* the amount of trx to transfer (calculated as sun) */
+  /* the amount of xlt to transfer (calculated as sun) */
   private long value;
 
   /* the address of the destination account
@@ -53,11 +53,11 @@ public class InternalTransaction {
   private byte[] protoEncoded;
 
 
-  public enum TrxType {
-    TRX_PRECOMPILED_TYPE,
-    TRX_CONTRACT_CREATION_TYPE,
-    TRX_CONTRACT_CALL_TYPE,
-    TRX_UNKNOWN_TYPE,
+  public enum XltType {
+    XLT_PRECOMPILED_TYPE,
+    XLT_CONTRACT_CREATION_TYPE,
+    XLT_CONTRACT_CALL_TYPE,
+    XLT_UNKNOWN_TYPE,
   }
 
   public enum ExecutorType {
@@ -71,9 +71,9 @@ public class InternalTransaction {
   /**
    * Construct an un-encoded InternalTransaction
    */
-  public InternalTransaction(Transaction trx) {
-    this.transaction = trx;
-    this.protoEncoded = (new TransactionCapsule(trx)).getData();
+  public InternalTransaction(Transaction xlt) {
+    this.transaction = xlt;
+    this.protoEncoded = (new TransactionCapsule(xlt)).getData();
     this.nonce = 0;
   }
 

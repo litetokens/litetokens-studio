@@ -1,4 +1,4 @@
-package org.tron.program;
+package org.litetokens.program;
 
 import com.beust.jcommander.JCommander;
 import java.io.File;
@@ -7,14 +7,14 @@ import java.util.Scanner;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.tron.common.crypto.ECKey;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.Utils;
-import org.tron.core.Constant;
-import org.tron.core.config.args.Args;
-import org.tron.keystore.CipherException;
-import org.tron.keystore.Credentials;
-import org.tron.keystore.WalletUtils;
+import org.litetokens.common.crypto.ECKey;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.Utils;
+import org.litetokens.core.Constant;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.keystore.CipherException;
+import org.litetokens.keystore.Credentials;
+import org.litetokens.keystore.WalletUtils;
 
 
 public class KeystoreFactory {

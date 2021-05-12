@@ -1,4 +1,4 @@
-package org.tron.core.net;
+package org.litetokens.core.net;
 
 import java.io.File;
 import lombok.extern.slf4j.Slf4j;
@@ -7,19 +7,19 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
-import org.tron.common.application.TronApplicationContext;
+import org.litetokens.common.application.LitetokensApplicationContext;
 import org.testng.collections.Lists;
-import org.tron.common.net.udp.message.discover.FindNodeMessage;
-import org.tron.common.net.udp.message.Message;
-import org.tron.common.net.udp.message.discover.NeighborsMessage;
-import org.tron.common.net.udp.message.discover.PingMessage;
-import org.tron.common.net.udp.message.discover.PongMessage;
-import org.tron.common.overlay.discover.node.Node;
-import org.tron.common.overlay.discover.node.NodeManager;
-import org.tron.common.overlay.discover.RefreshTask;
-import org.tron.common.utils.FileUtil;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
+import org.litetokens.common.net.udp.message.discover.FindNodeMessage;
+import org.litetokens.common.net.udp.message.Message;
+import org.litetokens.common.net.udp.message.discover.NeighborsMessage;
+import org.litetokens.common.net.udp.message.discover.PingMessage;
+import org.litetokens.common.net.udp.message.discover.PongMessage;
+import org.litetokens.common.overlay.discover.node.Node;
+import org.litetokens.common.overlay.discover.node.NodeManager;
+import org.litetokens.common.overlay.discover.RefreshTask;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -45,7 +45,7 @@ public class UdpTest {
       cfgArgs.getSeedNode().setIpList(Lists.newArrayList());
       cfgArgs.setNodeP2pVersion(100);
       cfgArgs.setNodeListenPort(10001);
-      context = new TronApplicationContext(DefaultConfig.class);
+      context = new LitetokensApplicationContext(DefaultConfig.class);
     }).start();
   }
 

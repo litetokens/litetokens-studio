@@ -1,6 +1,6 @@
-package org.tron.core.exception;
+package org.litetokens.core.exception;
 
-public class VMMemoryOverflowException extends TronException {
+public class VMMemoryOverflowException extends LitetokensException {
 
   public VMMemoryOverflowException() {
     super("VM memory overflow");

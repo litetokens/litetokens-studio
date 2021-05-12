@@ -1,4 +1,4 @@
-package org.tron.core.capsule;
+package org.litetokens.core.capsule;
 
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.tron.common.runtime.Runtime;
-import org.tron.common.runtime.vm.LogInfo;
-import org.tron.common.runtime.vm.program.ProgramResult;
-import org.tron.core.exception.BadItemException;
-import org.tron.protos.Protocol.TransactionInfo;
-import org.tron.protos.Protocol.TransactionInfo.Log;
-import org.tron.protos.Protocol.TransactionInfo.code;
+import org.litetokens.common.runtime.Runtime;
+import org.litetokens.common.runtime.vm.LogInfo;
+import org.litetokens.common.runtime.vm.program.ProgramResult;
+import org.litetokens.core.exception.BadItemException;
+import org.litetokens.protos.Protocol.TransactionInfo;
+import org.litetokens.protos.Protocol.TransactionInfo.Log;
+import org.litetokens.protos.Protocol.TransactionInfo.code;
 
 @Slf4j
 public class TransactionInfoCapsule implements ProtoCapsule<TransactionInfo> {
@@ -23,8 +23,8 @@ public class TransactionInfoCapsule implements ProtoCapsule<TransactionInfo> {
   /**
    * constructor TransactionCapsule.
    */
-  public TransactionInfoCapsule(TransactionInfo trxRet) {
-    this.transactionInfo = trxRet;
+  public TransactionInfoCapsule(TransactionInfo xltRet) {
+    this.transactionInfo = xltRet;
   }
 
   public TransactionInfoCapsule(byte[] data) throws BadItemException {
@@ -140,7 +140,7 @@ public class TransactionInfoCapsule implements ProtoCapsule<TransactionInfo> {
     return this.transactionInfo;
   }
 
-  public static TransactionInfoCapsule buildInstance(TransactionCapsule trxCap, BlockCapsule block,
+  public static TransactionInfoCapsule buildInstance(TransactionCapsule xltCap, BlockCapsule block,
       Runtime runtime, ReceiptCapsule traceReceipt) {
 
     TransactionInfo.Builder builder = TransactionInfo.newBuilder();
@@ -151,7 +151,7 @@ public class TransactionInfoCapsule implements ProtoCapsule<TransactionInfo> {
       builder.setResult(code.FAILED);
       builder.setResMessage(ByteString.copyFromUtf8(runtime.getRuntimeError()));
     }
-    builder.setId(ByteString.copyFrom(trxCap.getTransactionId().getBytes()));
+    builder.setId(ByteString.copyFrom(xltCap.getTransactionId().getBytes()));
 
     ProgramResult programResult = runtime.getResult();
     long fee =

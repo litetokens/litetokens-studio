@@ -1,4 +1,4 @@
-package org.tron.common.overlay.message;
+package org.litetokens.common.overlay.message;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -6,8 +6,8 @@ import java.util.Arrays;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.tron.common.utils.Sha256Hash;
-import org.tron.core.net.message.MessageTypes;
+import org.litetokens.common.utils.Sha256Hash;
+import org.litetokens.core.net.message.MessageTypes;
 
 public abstract class Message {
 

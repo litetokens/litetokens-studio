@@ -1,4 +1,4 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
 import com.google.protobuf.ByteString;
 
@@ -8,21 +8,21 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.tron.common.application.TronApplicationContext;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.FileUtil;
-import org.tron.core.Constant;
-import org.tron.core.capsule.AccountCapsule;
-import org.tron.core.config.DefaultConfig;
-import org.tron.core.config.args.Args;
-import org.tron.protos.Protocol.AccountType;
+import org.litetokens.common.application.LitetokensApplicationContext;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.common.utils.FileUtil;
+import org.litetokens.core.Constant;
+import org.litetokens.core.capsule.AccountCapsule;
+import org.litetokens.core.config.DefaultConfig;
+import org.litetokens.core.config.args.Args;
+import org.litetokens.protos.Protocol.AccountType;
 
 public class AccountStoreTest {
 
   private static String dbPath = "output_AccountStore_test";
   private static String dbDirectory = "db_AccountStore_test";
   private static String indexDirectory = "index_AccountStore_test";
-  private static TronApplicationContext context;
+  private static LitetokensApplicationContext context;
   private static AccountStore accountStore;
   private static final byte[] data = TransactionStoreTest.randomBytes(32);
   private static byte[] address = TransactionStoreTest.randomBytes(32);
@@ -37,7 +37,7 @@ public class AccountStoreTest {
         },
         Constant.TEST_CONF
     );
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new LitetokensApplicationContext(DefaultConfig.class);
   }
 
   @AfterClass

@@ -1,6 +1,6 @@
-package org.tron.abi.datatypes.generated;
+package org.litetokens.abi.datatypes.generated;
 
-import org.tron.abi.datatypes.Bytes;
+import org.litetokens.abi.datatypes.Bytes;
 
 /**
  * Auto generated code.

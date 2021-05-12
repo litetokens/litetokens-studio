@@ -1,11 +1,11 @@
-package org.tron.core.capsule;
+package org.litetokens.core.capsule;
 
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import lombok.extern.slf4j.Slf4j;
-import org.tron.common.crypto.ECKey;
-import org.tron.common.utils.ByteArray;
-import org.tron.protos.Protocol.Witness;
+import org.litetokens.common.crypto.ECKey;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.protos.Protocol.Witness;
 
 @Slf4j
 public class WitnessCapsule implements ProtoCapsule<Witness>, Comparable<WitnessCapsule> {

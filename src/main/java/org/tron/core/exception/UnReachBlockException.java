@@ -1,6 +1,6 @@
-package org.tron.core.exception;
+package org.litetokens.core.exception;
 
-public class UnReachBlockException extends TronException {
+public class UnReachBlockException extends LitetokensException {
 
   public UnReachBlockException() {
     super();

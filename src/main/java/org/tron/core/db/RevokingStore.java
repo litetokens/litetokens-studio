@@ -1,4 +1,4 @@
-package org.tron.core.db;
+package org.litetokens.core.db;
 
 public class RevokingStore extends AbstractRevokingStore {
 

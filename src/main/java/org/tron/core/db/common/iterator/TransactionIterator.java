@@ -1,9 +1,9 @@
-package org.tron.core.db.common.iterator;
+package org.litetokens.core.db.common.iterator;
 
 import java.util.Iterator;
 import java.util.Map.Entry;
-import org.tron.core.capsule.TransactionCapsule;
-import org.tron.core.exception.BadItemException;
+import org.litetokens.core.capsule.TransactionCapsule;
+import org.litetokens.core.exception.BadItemException;
 
 public class TransactionIterator extends AbstractIterator<TransactionCapsule> {
 

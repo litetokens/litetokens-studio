@@ -13,7 +13,7 @@
  * library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.common.utils;
+package org.litetokens.common.utils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

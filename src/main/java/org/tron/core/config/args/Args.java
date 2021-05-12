@@ -1,4 +1,4 @@
-package org.tron.core.config.args;
+package org.litetokens.core.config.args;
 
 import static java.lang.Math.max;
 import static java.lang.Math.min;
@@ -34,18 +34,18 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.spongycastle.util.encoders.Hex;
 import org.springframework.stereotype.Component;
-import org.tron.common.crypto.ECKey;
-import org.tron.common.overlay.discover.node.Node;
-import org.tron.common.utils.ByteArray;
-import org.tron.core.Constant;
-import org.tron.core.Wallet;
-import org.tron.core.config.Configuration;
-import org.tron.core.config.Parameter.ChainConstant;
-import org.tron.core.config.Parameter.NetConstants;
-import org.tron.core.db.AccountStore;
-import org.tron.keystore.CipherException;
-import org.tron.keystore.Credentials;
-import org.tron.keystore.WalletUtils;
+import org.litetokens.common.crypto.ECKey;
+import org.litetokens.common.overlay.discover.node.Node;
+import org.litetokens.common.utils.ByteArray;
+import org.litetokens.core.Constant;
+import org.litetokens.core.Wallet;
+import org.litetokens.core.config.Configuration;
+import org.litetokens.core.config.Parameter.ChainConstant;
+import org.litetokens.core.config.Parameter.NetConstants;
+import org.litetokens.core.db.AccountStore;
+import org.litetokens.keystore.CipherException;
+import org.litetokens.keystore.Credentials;
+import org.litetokens.keystore.WalletUtils;
 
 @Slf4j
 @NoArgsConstructor
@@ -205,7 +205,7 @@ public class Args {
   @Setter
   private String p2pNodeId;
 
-  //If you are running a solidity node for java tron, this flag is set to true
+  //If you are running a solidity node for java litetokens, this flag is set to true
   @Getter
   @Setter
   private boolean solidityNode = false;
@@ -245,7 +245,7 @@ public class Args {
 
   @Getter
   @Setter
-  private long netMaxTrxPerSecond;
+  private long netMaxXltPerSecond;
 
   @Getter
   @Setter
@@ -594,8 +594,8 @@ public class Args {
     INSTANCE.blockProducedTimeOut = config.hasPath("node.blockProducedTimeOut") ?
         config.getInt("node.blockProducedTimeOut") : ChainConstant.BLOCK_PRODUCED_TIME_OUT;
 
-    INSTANCE.netMaxTrxPerSecond = config.hasPath("node.netMaxTrxPerSecond") ?
-        config.getInt("node.netMaxTrxPerSecond") : NetConstants.NET_MAX_TRX_PER_SECOND;
+    INSTANCE.netMaxXltPerSecond = config.hasPath("node.netMaxXltPerSecond") ?
+        config.getInt("node.netMaxXltPerSecond") : NetConstants.NET_MAX_XLT_PER_SECOND;
 
     INSTANCE.maxConnectionAgeInMillis = config.hasPath("node.rpc.maxConnectionAgeInMillis") ?
         config.getLong("node.rpc.maxConnectionAgeInMillis") : Long.MAX_VALUE;

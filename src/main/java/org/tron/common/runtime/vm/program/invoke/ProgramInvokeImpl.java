@@ -15,15 +15,15 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.tron.common.runtime.vm.program.invoke;
+package org.litetokens.common.runtime.vm.program.invoke;
 
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
-import org.tron.common.runtime.vm.DataWord;
-import org.tron.common.storage.Deposit;
-import org.tron.core.db.BlockStore;
+import org.litetokens.common.runtime.vm.DataWord;
+import org.litetokens.common.storage.Deposit;
+import org.litetokens.core.db.BlockStore;
 
 @Slf4j
 public class ProgramInvokeImpl implements ProgramInvoke {

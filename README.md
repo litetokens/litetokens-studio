@@ -1,5 +1,5 @@
 ## Litetokens Studio
-LitetokensStudio is an IDE to develop/deploy/debug smart contract based on TVM.
+LitetokensStudio is an IDE to develop/deploy/debug smart contract based on LVM.
 
 ## Disable auto complete:
 change studio.autocomplete to false in src/main/resources/studio.properties

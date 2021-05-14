@@ -14,8 +14,8 @@ import java.util.stream.Stream;
 @Slf4j(topic = "SolidityFileUtil")
 public class SolcFileUtil {
 
-    private static final String SOLC_RESOURCE_FILE = "/bin/" + getOS() + "/solc";
-    private static final String SOLC_FILE = Config.SOLC_PATH + "/solc";
+    private static final String SOLC_RESOURCE_FILE = "/bin/" + getOS() + "/solc.exe";
+    private static final String SOLC_FILE = Config.SOLC_PATH + "/solc.exe";
 
     private static String getOS() {
         String osName = System.getProperty("os.name").toLowerCase();

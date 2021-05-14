@@ -536,7 +536,7 @@ public class PublicMethed {
   /*  public static byte[] addPreFix(byte[] address) {
   Wallet.setAddressPreFixByte(CommonConstant.ADD_PRE_FIX_BYTE_MAINNET);
   Config config = Configuration.getByPath("testng.conf");
-  byte ADD_PRE_FIX_BYTE_MAINNET = (byte) 0x41;   //41 + address
+  byte ADD_PRE_FIX_BYTE_MAINNET = (byte) 0x30;   //30 + address
   byte ADD_PRE_FIX_BYTE_TESTNET = (byte) 0xa0;   //a0 + address
   byte[] preFix = new byte[1];
   if (config.hasPath("net.type") && "mainnet".equalsIgnoreCase(config.getString("net.type"))) {

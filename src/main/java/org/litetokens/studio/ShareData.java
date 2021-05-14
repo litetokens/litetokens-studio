@@ -63,11 +63,11 @@ public class ShareData {
 
     @Getter
     @Setter
-    public static int localRpcPort = 16669;
+    public static int localRpcPort = 17779;
 
     @Getter
     @Setter
-    public static String testNetRpcIp = "47.254.144.25";
+    public static String testNetRpcIp = "149.28.72.3";
 
     @Getter
     @Setter
@@ -75,7 +75,7 @@ public class ShareData {
 
     @Getter
     @Setter
-    public static String mainNetRpcIp = "54.236.37.243";
+    public static String mainNetRpcIp = "149.28.72.3";
 
     @Getter
     @Setter

@@ -34,18 +34,18 @@ import org.springframework.context.annotation.PropertySource;
 public class ShareData {
 
     private static final String[] testAccountAddress = {
-            "TAbzgkG8p3yF5aywKVgq9AaAu6hvF2JrVC",
-            "TVdyt1s88BdiCjKt6K2YuoSmpWScZYK1QF",
-            "TCNVmGtkfknHpKSZXepZDXRowHF7kosxcv",
-            "TMmmvwvkBPBv3Gkw9cGKbZ8PLznYkTu3ep",
-            "TBJHZu4Sm86aWHtt6VF6KQSzot8vKTuTKx"
+            "LL1J63ZJN5WQdhY9zofQzCEEmyfUKGNnSt",
+            "LepKYAcpmiG3VtQtjyNsDzgMdfoMjNGmDd",
+            "LLZeRDCp7aQzdX9pGFwG29NZpKKuoSMpYu",
+            "LgMPE9TnSyx6pQ27JY2Z1wS4FrSuDD7UFT",
+            "Lf5mbtivajjs2onvfC9CDd83RNsaoPak8z"
     };
     private static final String[] testAccountPrivateKey = {
-            "af7c83e40cc67a355852b44051fc9e34452375ae569d5c18dd62e3859b9be229",
-            "e901ef62b241b6f1577fd6ea34ef8b1c4b3ddee1e3c051b9e63f5ff729ad47a1",
-            "3a54ba30e3ee41b602eca8fb3a3ca1f99f49a3d3ab5d8d646a2ccdd3ffd9c21d",
-            "8e3edc3c34c6355cd1b2f0f11a672cddca4468da933813e052e38c93a971798a",
-            "7b0b316f60cf3954f0c54c292001f6b59f4a80328a04feafef539f0824ba5078"
+            "a2ebbdda09a2bc1c083b2b38c0bcd238293d51f98b51f3ccc5ac1f3ec06ab16b",
+            "e5a02406388e02d1a3ac7f4be6fa3213bbf01d65e8ca3fbb90dc3c9b750b5aba",
+            "d424eff5c2974fd0fa942dcc07819fe24b1f0f5c197014d91efa49ef9ef5f70d",
+            "96ce60f7c745b288073b368281e053f744fc50cafd04888c9c46364115f56488",
+            "90066dc6917a94b94f15eb36af1b49b8492980594e24aa429dfa05ea11b4dbff"
     };
     public static class NetWorkEnvironment {
         public String url;

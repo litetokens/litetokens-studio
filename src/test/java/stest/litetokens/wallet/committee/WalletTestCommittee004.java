@@ -203,7 +203,7 @@ public class WalletTestCommittee004 {
     Assert.assertTrue(getChainParameters.get()
         .getChainParameter(1).getValue() == 9999000000L);
     Assert.assertTrue(getChainParameters.get().getChainParameter(4)
-        .getValue() == 1024000000L);
+        .getValue() == 1024000000000L);
     Assert.assertTrue(getChainParameters.get().getChainParameter(7).getValue() == 0);
     Assert.assertTrue(getChainParameters.get().getChainParameter(8).getValue() == 1);
 

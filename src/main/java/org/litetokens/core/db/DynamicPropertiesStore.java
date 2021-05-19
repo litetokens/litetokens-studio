@@ -335,13 +335,13 @@ public class DynamicPropertiesStore extends LitetokensStoreWithRevoking<BytesCap
     try {
       this.getAssetIssueFee();
     } catch (IllegalArgumentException e) {
-      this.saveAssetIssueFee(1024000000L);
+      this.saveAssetIssueFee(1024000000000L);
     }
 
     try {
       this.getExchangeCreateFee();
     } catch (IllegalArgumentException e) {
-      this.saveExchangeCreateFee(1024000000L);
+      this.saveExchangeCreateFee(1024000000000L);
     }
 
     try {

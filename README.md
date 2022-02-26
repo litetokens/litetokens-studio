@@ -23,4 +23,4 @@ cd  build/libs
 java -jar LitetokensStudio.jar
 ```
 ## Compile contract Nullpointer quick fix:
- https://gitub.com/tronprotocol/tron-studio/issues/8 
+ https://github.com/tronprotocol/tron-studio/issues/8 
